@@ -55,6 +55,9 @@ disallow_untyped_defs = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+# The suite uses plain functions only. Disabling class collection stops pytest
+# trying to collect domain types such as TestingEvidence as test classes.
+python_classes = []
 markers = [
     "network: test needs real network access; excluded from CI",
 ]
