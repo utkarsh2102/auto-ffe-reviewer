@@ -1,0 +1,63 @@
+# auto-ffe-reviewer configuration.
+# Every value here can be overridden by an FFE_* environment variable (see src/ffe/config.py).
+
+[launchpad]
+instance      = "production"
+distribution  = "ubuntu"
+release_team  = "ubuntu-release"
+user_agent    = "auto-ffe-reviewer/0.1 (+https://launchpad.net/~ubuntu-release)"
+# Statuses considered "still open" when polling the review queue.
+open_statuses = [
+    "New", "Incomplete", "Confirmed", "Triaged", "In Progress", "Fix Committed",
+]
+
+[discovery]
+# Secondary sweep: bugs that look like FFes but are not subscribed to the release team.
+# Surfaced as a process gap, never acted upon.
+secondary_sweep      = true
+title_pattern        = "^\\s*\\[?\\s*FFe\\s*\\]?\\s*[:\\-]?\\s"
+search_text          = "FFe"
+
+[timeouts]
+# (connect, read) seconds. Every outbound call is bounded; see docs/security.md.
+connect          = 5
+read             = 30
+read_large       = 60
+subprocess       = 120
+llm              = 300
+max_run_seconds  = 1200
+
+[cache]
+release_calendar_ttl = 86400   # 24h
+seeds_ttl            = 21600   # 6h
+rdepends_ttl         = 21600   # 6h
+launchpad_ttl        = 900     # 15m
+evidence_ttl         = 21600   # 6h
+raw_blob_max_bytes   = 262144  # 256 KiB, then truncate and flag
+
+[budget]
+min_llm_interval_per_bug_seconds = 1800
+max_llm_runs_per_bug_per_day     = 6
+max_llm_runs_per_run             = 10
+review_max_age_days              = 7      # freshness sweep
+
+[llm]
+harness     = "claude-code"    # FFE_LLM_HARNESS: claude-code | openai-compat | null | replay
+model       = ""               # FFE_LLM_MODEL; empty means the harness default
+temperature = 0.0
+max_output_tokens = 2000
+max_repair_attempts = 2
+
+[learning]
+enabled            = true
+max_active_lessons = 15
+max_prompt_chars   = 6000
+
+[sanitize]
+max_description_chars = 12000
+max_comment_chars     = 4000
+max_total_chars       = 40000
+
+[dashboard]
+title    = "FFe Reviewer"
+base_url = ""   # set to the GitHub Pages URL once the remote exists
