@@ -1,0 +1,73 @@
+# Ubuntu images, and who owns the consequences when one of them breaks.
+#
+# This drives the flavour rules in policy/rubric/50-flavour-rules.md. The
+# distinction that matters for an FFe:
+#
+#   * A change confined to one flavour's image is that flavour's call to make.
+#     Their lead owns the product and the fallout, and the Release Team does not
+#     need to repeat the risk analysis.
+#   * A change touching a core image, or two or more flavours, is not any single
+#     flavour's call, and the other affected teams need to have acknowledged it.
+#
+# Image names are the flavour keys used by the seeded-packages index at
+# qa.ubuntuwire.org. Launchpad team names were verified against the API on
+# 2026-09-20; correct them here rather than in code if they change.
+
+[core]
+# Canonical-published images. A change landing on one of these is core Ubuntu
+# impact, never flavour-scoped, regardless of which other images it touches.
+images = [
+    "ubuntu",
+    "ubuntu-server",
+    "ubuntu-base",
+    "ubuntu-mini-iso",
+    "ubuntu-wsl",
+    "ubuntu-core-installer",
+]
+
+# Community flavours. `team` is the Launchpad team whose members can speak for
+# the flavour when acknowledging a change.
+
+[flavours.kubuntu]
+name = "Kubuntu"
+team = "kubuntu-dev"
+council = "kubuntu-council"
+
+[flavours.xubuntu]
+name = "Xubuntu"
+team = "xubuntu-dev"
+
+[flavours.lubuntu]
+name = "Lubuntu"
+team = "lubuntu-dev"
+
+[flavours.ubuntu-mate]
+name = "Ubuntu MATE"
+team = "ubuntu-mate-dev"
+
+[flavours.ubuntu-budgie]
+name = "Ubuntu Budgie"
+team = "ubuntubudgie-dev"
+
+[flavours.ubuntustudio]
+name = "Ubuntu Studio"
+team = "ubuntustudio-dev"
+
+[flavours.ubuntukylin]
+name = "Ubuntu Kylin"
+team = "ubuntukylin-members"
+
+[flavours.ubuntucinnamon]
+name = "Ubuntu Cinnamon"
+team = "ubuntucinnamon-dev"
+
+[flavours.edubuntu]
+name = "Edubuntu"
+team = "edubuntu-dev"
+
+[flavours.ubuntu-unity]
+name = "Ubuntu Unity"
+# No Launchpad team confirmed: ~ubuntu-unity-dev does not exist. Until this is
+# filled in, an acknowledgement from this flavour cannot be attributed to a
+# team, so it will be reported as unverified rather than silently accepted.
+team = ""
