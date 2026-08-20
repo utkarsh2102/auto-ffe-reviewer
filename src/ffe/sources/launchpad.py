@@ -32,6 +32,7 @@ from urllib.parse import quote, urlencode
 
 from ffe.config import Settings
 from ffe.models import (
+    ArchiveInfo,
     BugComment,
     BugFacts,
     BugTask,
@@ -349,6 +350,77 @@ class LaunchpadClient:
             status=FactStatus.OK,
             provenance=bug.provenance,
         )
+
+    # -- archive standing --------------------------------------------------- #
+
+    def published_source(self, source: str, series: str) -> Fact[ArchiveInfo]:
+        """Current publication of a source package, and the binaries it builds.
+
+        The binary list is what makes the seed lookup possible: the seeded
+        index is keyed by binary, and a source rarely shares its name with the
+        binary that actually matters. Looking up only "curl" would miss
+        libcurl4t64, which is the package almost everything actually depends on.
+
+        Component is worth having in its own right -- main and restricted are
+        Canonical-supported, universe is not, and that bears on how much a
+        regression costs.
+        """
+        query = urlencode(
+            {
+                "ws.op": "getPublishedSources",
+                "source_name": source,
+                "exact_match": "true",
+                "distro_series": f"{self.api}/{self.settings.launchpad.distribution}/{series}",
+                "status": "Published",
+                "order_by_date": "true",
+            }
+        )
+        distro = self.settings.launchpad.distribution
+        fact = self._get(
+            f"{self.api}/{distro}/+archive/primary?{query}", source="archive", ttl=3600
+        )
+        if not fact.ok or fact.value is None:
+            return Fact(value=None, status=fact.status, provenance=fact.provenance, note=fact.note)
+
+        entries = fact.value.get("entries", [])
+        if not entries:
+            return Fact(
+                value=ArchiveInfo(source=source, in_archive=False),
+                status=FactStatus.OK,
+                provenance=fact.provenance,
+                note=f"{source} has no published source in {series}",
+            )
+
+        publication = entries[0]
+        binaries = self._binaries_for(str(publication.get("self_link", "")))
+        return Fact(
+            value=ArchiveInfo(
+                source=source,
+                in_archive=True,
+                version=str(publication.get("source_package_version", "")),
+                component=str(publication.get("component_name", "")),
+                pocket=str(publication.get("pocket", "")),
+                binaries=binaries,
+            ),
+            status=FactStatus.OK,
+            provenance=fact.provenance,
+        )
+
+    def _binaries_for(self, publication_url: str) -> tuple[str, ...]:
+        """Binary package names built by a source publication.
+
+        Debug symbol packages are dropped: they are never seeded and never
+        depended on, so they would only add noise to the seed lookup.
+        """
+        if not publication_url:
+            return ()
+        entries, _ = self._collection(
+            f"{publication_url}?ws.op=getPublishedBinaries", source="binaries", ttl=3600
+        )
+        names = {
+            str(e.get("binary_package_name", "")) for e in entries if e.get("binary_package_name")
+        }
+        return tuple(sorted(n for n in names if not n.endswith("-dbgsym")))
 
     # -- PPA verification --------------------------------------------------- #
 

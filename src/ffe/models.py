@@ -325,12 +325,34 @@ class RdepInfo:
 
 
 @dataclass(frozen=True, slots=True)
+class ArchiveInfo:
+    """A source package's current standing in the archive.
+
+    Component matters in its own right: main and restricted are
+    Canonical-supported, universe is not, which bears on what a regression
+    costs. The binary list is what makes the seed lookup possible at all,
+    since that index is keyed by binary name.
+    """
+
+    source: str
+    in_archive: bool
+    version: str = ""
+    component: str = ""  # main / universe / restricted / multiverse
+    pocket: str = ""  # Release / Proposed / Updates
+    binaries: tuple[str, ...] = ()
+
+    @property
+    def in_main(self) -> bool:
+        return self.component in {"main", "restricted"}
+
+
+@dataclass(frozen=True, slots=True)
 class PackageFacts:
     name: str
+    archive: Fact[ArchiveInfo]
     seeds: Fact[SeedInfo]
     rdepends: Fact[RdepInfo]
     build_rdepends: Fact[RdepInfo]
-    in_archive: Fact[bool]
 
 
 # --------------------------------------------------------------------------- #
