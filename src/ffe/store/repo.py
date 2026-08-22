@@ -172,15 +172,26 @@ class Store:
 
     # -- archive ------------------------------------------------------------ #
 
-    def archive_record(self, record: ReviewRecord) -> Path:
+    def archive_record(
+        self,
+        record: ReviewRecord,
+        *,
+        our_last_assessment: dict[str, Any] | None = None,
+        our_last_risk: dict[str, Any] | None = None,
+    ) -> Path:
         """Move a decided bug out of the active set.
 
         The pairing of our last recommendation with the team's decision is what
-        makes the learning loop and the agreement metric possible, so the record
-        is kept in full rather than reduced to a verdict.
+        makes the learning loop and the agreement metric possible, so both are
+        kept in full rather than reduced to a verdict.
         """
+        payload = to_jsonable(record)
+        assert isinstance(payload, dict)
+        payload["our_last_assessment"] = our_last_assessment
+        payload["our_last_risk"] = our_last_risk
+
         path = self.archive_dir / f"{record.evidence.bug.id}.json"
-        self._write_json(path, to_jsonable(record))
+        self._write_json(path, payload)
         return path
 
     def archived(self) -> list[dict[str, Any]]:

@@ -26,12 +26,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from ffe.models import BugFacts, Decision, HumanDecision, HumanOutcome
-from ffe.sources.launchpad import STATUS_TO_DECISION
+from ffe.sources.launchpad import STATUS_TO_DECISION, UNDECIDED_STATUSES
 from ffe.util.clock import utc_iso
-
-# Statuses that mean nobody has ruled yet. Listed positively so an unfamiliar
-# status is treated as undecided rather than silently read as an approval.
-UNDECIDED_STATUSES = frozenset({"New", "Confirmed", "Unknown", ""})
 
 
 def decision_from_status(status: str) -> HumanDecision | None:

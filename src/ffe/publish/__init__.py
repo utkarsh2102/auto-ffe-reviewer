@@ -1,0 +1,1 @@
+"""Generating the static dashboard."""

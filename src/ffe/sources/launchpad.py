@@ -47,9 +47,12 @@ from ffe.util.hashing import sha256_hex
 SOURCE_ID = "launchpad"
 IMPACT = "cannot read the bug from Launchpad"
 
-# Bug statuses that keep a request in play. A bug the team has finished with
-# has left the queue anyway, so this mostly guards the secondary sweep.
+# Bug statuses that keep a request in play, i.e. not closed.
 OPEN_STATUSES = ("New", "Incomplete", "Confirmed", "Triaged", "In Progress", "Fix Committed")
+
+# Statuses meaning nobody has ruled yet. Listed positively so an unfamiliar
+# status reads as undecided rather than being silently taken for an approval.
+UNDECIDED_STATUSES = frozenset({"New", "Confirmed", "Unknown", ""})
 
 # Final status to decision. This is the team's actual convention: approve by
 # setting Triaged and unsubscribing, and the bug then moves on to Fix
@@ -228,23 +231,34 @@ class LaunchpadClient:
             ),
         )
 
-    def ffe_sweep(self) -> Fact[tuple[BugRef, ...]]:
+    def ffe_sweep(self, *, created_since: str | None = None) -> Fact[tuple[BugRef, ...]]:
         """Bugs that read like FFes, whether or not anyone is reviewing them.
 
         Recall net for the queue, and the source of process-gap reporting: a
         request that looks like an FFe but has nobody subscribed is not going
         to be reviewed, because it is in no one's list.
+
+        `created_since` bounds this to the current cycle. Without it the search
+        surfaces FFe bugs filed a decade ago and never closed, which are not a
+        process gap for the release in development and would bury the few that
+        are.
         """
-        url = self._search_url(search_text=self.settings.discovery.search_text)
+        params = {"search_text": self.settings.discovery.search_text}
+        if created_since:
+            params["created_since"] = created_since
+        url = self._search_url(**params)
         entries, page = self._collection(url, source="sweep", max_pages=3)
         if not page.ok:
             return Fact(value=None, status=page.status, provenance=page.provenance, note=page.note)
 
         pattern = re.compile(self.settings.discovery.title_pattern, re.I)
+        # Only bugs nobody has ruled on. A Triaged FFe with the team
+        # unsubscribed is not a gap -- it is the normal end state of a request
+        # that was approved, and listing those would bury the few that matter.
         refs = tuple(
             ref
             for ref in self._to_refs(entries, DiscoverySignal.TITLE_SWEEP)
-            if pattern.search(ref.title) and ref.status in OPEN_STATUSES
+            if pattern.search(ref.title) and ref.status in UNDECIDED_STATUSES
         )
         return Fact(value=refs, status=FactStatus.OK, provenance=page.provenance)
 
