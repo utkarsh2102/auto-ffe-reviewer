@@ -13,6 +13,12 @@ from pathlib import Path
 
 import pytest
 
+# Imported here, before the socket guard below can patch anything. `ssl`
+# subclasses socket.socket at import time, so a module importing requests
+# lazily inside a guarded test would otherwise fail on the patched stub rather
+# than on the behaviour under test.
+import requests  # noqa: F401
+
 FIXTURES = Path(__file__).parent / "fixtures"
 
 

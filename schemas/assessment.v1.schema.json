@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ubuntu/auto-ffe-reviewer/schemas/assessment.v1.schema.json",
+  "title": "FFe review assessment",
+  "description": "The only part of a review record produced by a language model. Everything else is gathered deterministically. Enums are closed and strings are bounded so a model cannot widen the vocabulary or pad the output.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decision", "confidence", "summary", "reasoning"],
+  "properties": {
+    "decision": {
+      "description": "The recommendation. Advisory only: a human Release Team member decides.",
+      "type": "string",
+      "enum": ["APPROVE", "REJECT", "NEEDS_INFORMATION"]
+    },
+    "confidence": {
+      "description": "How far the evidence supports the recommendation, not how the model feels about it.",
+      "type": "string",
+      "enum": ["HIGH", "MEDIUM", "LOW"]
+    },
+    "summary": {
+      "description": "One sentence a reviewer can read at a glance.",
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 280
+    },
+    "reasoning": {
+      "description": "Between three and six points, each citing the evidence it rests on.",
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["point"],
+        "properties": {
+          "point": { "type": "string", "minLength": 5, "maxLength": 300 },
+          "evidence_refs": {
+            "description": "JSON pointers into the evidence bundle. Checked; an unresolvable pointer invalidates the response.",
+            "type": "array",
+            "maxItems": 6,
+            "items": { "type": "string", "maxLength": 200 }
+          }
+        }
+      }
+    },
+    "missing_information": {
+      "description": "Non-empty if and only if the decision is NEEDS_INFORMATION. Each entry actionable.",
+      "type": "array",
+      "maxItems": 8,
+      "items": { "type": "string", "minLength": 3, "maxLength": 300 }
+    },
+    "conditions": {
+      "description": "Conditions under which an approval would hold.",
+      "type": "array",
+      "maxItems": 6,
+      "items": { "type": "string", "minLength": 3, "maxLength": 300 }
+    },
+    "flags": {
+      "description": "Closed vocabulary. A model may not invent a flag.",
+      "type": "array",
+      "maxItems": 8,
+      "items": {
+        "type": "string",
+        "enum": [
+          "CORE_PACKAGE",
+          "LARGE_BLAST_RADIUS",
+          "MULTI_FLAVOUR_ACK_OUTSTANDING",
+          "SINGLE_FLAVOUR_OWNED",
+          "NO_TESTING_EVIDENCE",
+          "LATE_IN_CYCLE",
+          "LTS_TARGET",
+          "EVIDENCE_INCOMPLETE",
+          "SUSPECTED_PROMPT_INJECTION",
+          "WEAK_RATIONALE",
+          "CONSIDER_SRU_INSTEAD"
+        ]
+      }
+    },
+    "precedents_applied": {
+      "description": "Ids of learned precedents relied on. Each must be one that was supplied.",
+      "type": "array",
+      "maxItems": 4,
+      "items": { "type": "string", "maxLength": 80 }
+    },
+    "disagreement_with_deterministic": {
+      "description": "Required when contradicting a deterministic gate or floor; null otherwise.",
+      "type": ["string", "null"],
+      "maxLength": 400
+    }
+  }
+}
