@@ -1,0 +1,32 @@
+# The review policy, as an ordered set of Markdown parts.
+#
+# Bundled deterministically into a single system prompt, hashed, and delivered
+# explicitly to whichever LLM harness is configured. Order is fixed here rather
+# than inferred from filenames so it is reviewable in a diff.
+#
+# `version` must be bumped whenever any part changes. CI enforces this: the
+# policy hash is an input to the review key, so an unversioned edit would
+# silently re-review the whole open queue with no record of what changed.
+
+version = "1.0.0"
+
+# Hash of the bundled policy at the above version. CI recomputes this and fails
+# if it does not match, which makes editing the rubric a deliberate, versioned
+# act rather than something that quietly re-reviews the whole open queue.
+# Regenerate with: python -m ffe.cli policy-hash
+policy_hash = "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea"
+
+parts = [
+    "SKILL.md",
+    "rubric/00-role-and-scope.md",
+    "rubric/10-release-context.md",
+    "rubric/20-blast-radius.md",
+    "rubric/30-regression-potential.md",
+    "rubric/40-testing-evidence.md",
+    "rubric/50-flavour-rules.md",
+    "rubric/60-value-vs-risk.md",
+    "rubric/70-decision-boundaries.md",
+    "rubric/80-output-contract.md",
+    "rubric/90-untrusted-input.md",
+    "rubric/95-precedents.md",
+]
