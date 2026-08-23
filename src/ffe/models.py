@@ -24,7 +24,7 @@ from typing import Any, Generic, TypeVar
 T = TypeVar("T")
 
 SCHEMA_VERSION = "1.0.0"
-RISK_ALGORITHM_VERSION = "risk/1.0.0"
+RISK_ALGORITHM_VERSION = "risk/1.1.0"
 
 
 # --------------------------------------------------------------------------- #

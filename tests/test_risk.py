@@ -147,13 +147,36 @@ def test_unknown_seeding_is_scored_cautiously_not_as_unseeded() -> None:
     assert "cautiously" in _component(unknown, "seeded_reach").rationale
 
 
-def test_main_carries_more_weight_than_universe() -> None:
-    _, main = _full(in_main=True)
-    _, universe = _full(in_main=False)
+def test_main_carries_more_weight_than_universe_when_it_has_reach() -> None:
+    _, main = _full(in_main=True, is_core=True, max_rdeps=50)
+    _, universe = _full(in_main=False, is_core=True, max_rdeps=50)
     assert (
         _component(main, "archive_standing").points
         > _component(universe, "archive_standing").points
     )
+
+
+def test_being_in_main_counts_for_little_when_nothing_depends_on_it() -> None:
+    """A support commitment on a package nobody ships is not a release risk.
+
+    Reach is already scored by seeded_reach and dependency_reach, so counting
+    the component again on a leaf counts the same thing twice. `hello` is in
+    main; a change to it is not consequential.
+    """
+    _, leaf = _full(in_main=True, is_core=False, max_rdeps=0, seeded_flavours=())
+    _, universe_leaf = _full(in_main=False, is_core=False, max_rdeps=0)
+
+    assert (
+        _component(leaf, "archive_standing").points
+        == _component(universe_leaf, "archive_standing").points
+    )
+    assert "little practical risk" in _component(leaf, "archive_standing").rationale
+
+
+def test_reach_must_be_known_before_it_can_discount_main() -> None:
+    """An unknown reach is not a small one."""
+    _, unknown = _full(in_main=True, seeds_known=False, rdeps_known=False)
+    assert _component(unknown, "archive_standing").points == 10
 
 
 # --------------------------------------------------------------------------- #

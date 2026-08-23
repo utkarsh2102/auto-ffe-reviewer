@@ -223,14 +223,43 @@ def _dependency_reach(signals: Signals) -> RiskComponent:
 
 
 def _archive_standing(signals: Signals) -> RiskComponent:
-    """Whether this is Canonical-supported material."""
+    """Whether this is Canonical-supported material, and whether that bites.
+
+    Being in main carries a support commitment, but the risk that commitment
+    represents scales with reach -- and reach is already scored above. A main
+    package that ships on no image and that nothing depends on would otherwise
+    be counted as consequential twice over, on the strength of its component
+    alone. `hello` is in main; a change to it is not a release risk.
+    """
     refs = ("/evidence/packages",)
+
     if signals.in_main is None:
         return RiskComponent(
             name="archive_standing",
             points=round(ARCHIVE_STANDING_MAX * 0.5),
             max_points=ARCHIVE_STANDING_MAX,
             rationale="could not determine the archive component",
+            evidence_refs=refs,
+        )
+
+    # "Reaches nothing" is only assertable when both lookups succeeded.
+    reaches_nothing = (
+        signals.seeds_known
+        and signals.rdeps_known
+        and not signals.is_core
+        and not signals.seeded_flavours
+        and (signals.max_rdeps or 0) <= 2
+    )
+
+    if signals.in_main and reaches_nothing:
+        return RiskComponent(
+            name="archive_standing",
+            points=round(ARCHIVE_STANDING_MAX * 0.3),
+            max_points=ARCHIVE_STANDING_MAX,
+            rationale=(
+                "in main, but on no image and with almost nothing depending on it, "
+                "so the support commitment carries little practical risk"
+            ),
             evidence_refs=refs,
         )
     if signals.in_main:
