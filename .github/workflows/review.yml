@@ -1,0 +1,142 @@
+name: Review FFe queue
+
+# Discovers Feature Freeze Exception requests awaiting the Release Team,
+# gathers evidence, produces advisory recommendations, and publishes the
+# dashboard. It never writes to Launchpad and never decides anything.
+#
+# Scheduled every half hour rather than hourly because GitHub's scheduler
+# skews and drops runs under load; twice the attempts gets roughly hourly
+# coverage in practice. Every stage is idempotent, so a missed or duplicated
+# run costs nothing.
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Re-review even where nothing has changed"
+        type: boolean
+        default: false
+      no_llm:
+        description: "Gather evidence only, consult no model"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+# Never cancel a run in progress: it may be midway through writing state, and
+# the next run would rather start from a consistent tree than a truncated one.
+concurrency:
+  group: ffe-review
+  cancel-in-progress: false
+
+env:
+  STATE_BRANCH: state
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      - name: Check out the state branch
+        # Bot output lives on an orphan branch. Keeping it off main means code
+        # pull requests never conflict with review data, and `git log main`
+        # stays a history of the code rather than of the queue.
+        run: |
+          git fetch origin "$STATE_BRANCH" --depth=1 2>/dev/null || true
+          if git rev-parse --verify "origin/$STATE_BRANCH" >/dev/null 2>&1; then
+            git worktree add .ffe-state "origin/$STATE_BRANCH"
+          else
+            git worktree add --detach .ffe-state
+            git -C .ffe-state checkout --orphan "$STATE_BRANCH"
+            git -C .ffe-state rm -rf . >/dev/null 2>&1 || true
+          fi
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install Ubuntu tooling
+        # distro-info-data supplies release dates and the LTS flag offline.
+        # ubuntu-dev-tools is not on the hot path -- the evidence layer fetches
+        # the same endpoints directly, because those tools set no timeout and
+        # were observed hanging -- but it is here for the optional cross-check.
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends distro-info-data ubuntu-dev-tools
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+
+      - name: Install Claude Code
+        if: ${{ !inputs.no_llm }}
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Review the queue
+        env:
+          # Secrets are unavailable to fork pull requests, and this workflow
+          # does not run on them, but the guard is explicit rather than assumed.
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          FFE_LLM_HARNESS: ${{ vars.FFE_LLM_HARNESS || 'claude-code' }}
+          FFE_LLM_MODEL: ${{ vars.FFE_LLM_MODEL }}
+          FFE_STATE_DIR: .ffe-state
+          FFE_CACHE_DIR: .ffe-cache
+        run: |
+          ffe run \
+            ${{ inputs.force && '--force' || '' }} \
+            ${{ (inputs.no_llm || !secrets.ANTHROPIC_API_KEY) && '--no-llm' || '' }}
+
+      - name: Commit the results
+        working-directory: .ffe-state
+        run: |
+          git config user.name "ffe-reviewer[bot]"
+          git config user.email "ffe-reviewer@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "nothing changed"
+            exit 0
+          fi
+          git commit -m "Review run ${{ github.run_number }}
+
+          $(git diff --cached --name-only | grep -c '^reviews/' || echo 0) review record(s) updated.
+          Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+          # The scheduler can overlap runs; rebase and retry rather than
+          # failing, since state is append-mostly and conflicts are rare.
+          for attempt in 1 2 3; do
+            if git push origin "HEAD:$STATE_BRANCH"; then
+              exit 0
+            fi
+            git fetch origin "$STATE_BRANCH"
+            git rebase "origin/$STATE_BRANCH" || git rebase --abort
+            sleep $((attempt * 5))
+          done
+          echo "could not push state after three attempts" >&2
+          exit 1
+
+      - name: Upload the dashboard
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .ffe-state/site
+
+  deploy:
+    needs: review
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

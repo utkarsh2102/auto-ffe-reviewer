@@ -21,6 +21,8 @@ dev = [
     "mypy>=1.8",
     "types-requests",
     "types-jsonschema",
+    "pyyaml",
+    "types-PyYAML",
 ]
 
 [project.scripts]

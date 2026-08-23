@@ -1,0 +1,53 @@
+name: CI
+
+# Runs on every push and pull request, including from forks. It uses no
+# secrets and touches no network, so a fork PR gets the same signal a branch
+# does -- which is the point: a contributor should be able to tell whether
+# their change is good without anyone granting them access to anything.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e '.[dev]'
+
+      - name: Lint
+        run: |
+          ruff check src tests
+          ruff format --check src tests
+
+      - name: Type-check
+        run: mypy src/ffe
+
+      - name: Test
+        # The suite blocks sockets and needs no API key, so this is the whole
+        # signal: if it passes here it passes anywhere.
+        run: pytest -q
+
+      - name: Check the review policy is versioned
+        # The policy hash feeds the review key. An unrecorded edit would
+        # silently re-review the entire open queue, so CI insists the hash in
+        # policy/manifest.toml matches the policy on disk.
+        run: pytest -q tests/test_policy.py -k policy_hash
