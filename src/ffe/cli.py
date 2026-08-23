@@ -269,6 +269,10 @@ def _print_summary(summary: RunSummary) -> None:
     print(f"  unchanged        {len(summary.skipped_unchanged)}")
     print(f"  decided by team  {len(summary.archived)} {summary.archived or ''}")
     print(f"  model calls      {summary.llm_calls}")
+    if summary.lessons_learned:
+        print(
+            f"  precedents       {len(summary.lessons_learned)} learned {summary.lessons_learned}"
+        )
     if summary.deferred_budget:
         print(f"  deferred         {summary.deferred_budget} (budget)")
     if summary.process_gaps:
@@ -321,6 +325,39 @@ def cmd_policy_hash(args: argparse.Namespace, settings: Settings) -> int:
     print(f"policy_hash {policy.policy_hash}")
     print(f"parts       {len(policy.parts)}")
     print(f"characters  {len(policy.text)}")
+    return 0
+
+
+def cmd_learn(args: argparse.Namespace, settings: Settings) -> int:
+    """Extract precedents from decisions that differed from our advice."""
+    pipeline = _pipeline(settings, use_llm=True)
+    store = Store(settings.state_dir)
+
+    from ffe.learning.detect import find_disagreements, learnable
+
+    already = frozenset(
+        int(lesson.get("source_bug", 0)) for lesson in store.lessons(active_only=False)
+    )
+    disagreements = find_disagreements(store, already_learned=already)
+    candidates = learnable(disagreements)
+
+    print(f"{len(disagreements)} disagreement(s) not yet learned from")
+    print(f"{len(candidates)} with an explanation from a Release Team member")
+    if args.dry_run:
+        for item in candidates:
+            print(
+                f"  LP #{item.bug_id}: we said {item.our_decision}, team said {item.human_decision}"
+            )
+        return 0
+
+    learned = pipeline.learn(limit=args.limit)
+    if not learned:
+        print("no precedents extracted")
+        return 0
+    for lesson in learned:
+        print(f"\nlearned {lesson['lesson_id']} from LP #{lesson['source_bug']}")
+        print(f"  {lesson['lesson']}")
+        print(f'  {lesson["rationale_author"]}: "{lesson["rationale_quote"]}"')
     return 0
 
 
@@ -425,6 +462,11 @@ def build_parser() -> argparse.ArgumentParser:
     calendar = sub.add_parser("calendar", help="show where a release is in its cycle")
     calendar.add_argument("--series", help="codename or version; default is the devel series")
     calendar.set_defaults(func=cmd_calendar)
+
+    learn = sub.add_parser("learn", help="extract precedents from Release Team decisions")
+    learn.add_argument("--limit", type=int, default=5)
+    learn.add_argument("--dry-run", action="store_true", help="show candidates without extracting")
+    learn.set_defaults(func=cmd_learn)
 
     lessons = sub.add_parser("lessons", help="list or retire learned precedents")
     lessons.add_argument("--all", action="store_true", help="include retired lessons")

@@ -23,6 +23,9 @@ from ffe.evidence.builder import build as build_evidence
 from ffe.evidence.builder import with_fingerprint
 from ffe.evidence.fingerprint import fingerprint as compute_fingerprint
 from ffe.evidence.fingerprint import review_key as compute_review_key
+from ffe.learning.detect import find_disagreements, learnable
+from ffe.learning.extract import extract as extract_lesson
+from ffe.learning.select import select as select_lessons
 from ffe.llm.base import HarnessError, LLMHarness, LLMRequest
 from ffe.llm.contract import repair_prompt, validate
 from ffe.llm.prompt import PolicyBundle, render_precedents, render_request
@@ -64,6 +67,7 @@ class RunSummary:
     skipped_unchanged: list[int] = field(default_factory=list)
     archived: list[int] = field(default_factory=list)
     deferred_budget: list[int] = field(default_factory=list)
+    lessons_learned: list[str] = field(default_factory=list)
     llm_calls: int = 0
     errors: list[str] = field(default_factory=list)
     unavailable_sources: list[str] = field(default_factory=list)
@@ -133,6 +137,12 @@ class Pipeline:
                 self._handle_departed(bug_id, state, summary)
             except Exception as exc:
                 summary.errors.append(f"bug {bug_id} (departed): {exc}")
+
+        if not only:
+            try:
+                summary.lessons_learned = [str(lesson["lesson_id"]) for lesson in self.learn()]
+            except Exception as exc:  # learning must never break a review run
+                summary.errors.append(f"learning: {exc}")
 
         summary.unavailable_sources = sorted({u.source_id for u in self.ctx.unavailable})
         summary.finished_at = utc_iso()
@@ -288,7 +298,14 @@ class Pipeline:
     ) -> tuple[Assessment | None, ReviewStatus, HarnessProvenance | None]:
         """Ask for a judgement, validate it, and retry a bounded number of times."""
         assert self.harness is not None
-        lessons = self.store.lessons()
+        # Only precedents that fit this request, capped. Forty loosely-related
+        # ones are worse than three apt ones, because the apt ones stop
+        # standing out.
+        lessons = select_lessons(
+            self.store.lessons(),
+            derive_signals(bundle),
+            max_lessons=self.settings.learning.max_active_lessons,
+        )
         known = frozenset(str(lesson.get("lesson_id", "")) for lesson in lessons)
 
         rendered = render_request(
@@ -376,6 +393,35 @@ class Pipeline:
                 id=info.id, model=info.model, attempts=attempts, latency_ms=latency, usage=usage
             ),
         )
+
+    # -- learning ----------------------------------------------------------- #
+
+    def learn(self, *, limit: int = 5) -> list[dict[str, Any]]:
+        """Extract precedents from decisions that differed from our advice.
+
+        Only disagreements, and only where a Release Team member explained
+        themselves. Agreement teaches nothing beyond "keep doing that", and a
+        precedent invented from a comment that explained nothing would be
+        applied to future requests as though it meant something.
+        """
+        if not self.settings.learning.enabled or self.harness is None:
+            return []
+
+        already = frozenset(
+            int(lesson.get("source_bug", 0)) for lesson in self.store.lessons(active_only=False)
+        )
+        candidates = learnable(find_disagreements(self.store, already_learned=already))
+
+        learned: list[dict[str, Any]] = []
+        for disagreement in candidates[:limit]:
+            lesson = extract_lesson(
+                self.harness, disagreement, timeout_s=self.settings.timeouts.llm
+            )
+            if lesson is None:
+                continue
+            self.store.write_lesson(lesson)
+            learned.append(lesson)
+        return learned
 
     # -- departure ---------------------------------------------------------- #
 

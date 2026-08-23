@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ubuntu/auto-ffe-reviewer/schemas/lesson.v1.schema.json",
+  "title": "Learned precedent",
+  "description": "One precedent drawn from a case where a recommendation differed from the Release Team's decision. Precedents record observed practice and never outrank the review policy.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["situation", "lesson", "rationale_quote", "rationale_author", "confidence"],
+  "properties": {
+    "situation": {
+      "description": "The circumstances, general enough to recognise again but specific enough to mean something.",
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 400
+    },
+    "lesson": {
+      "description": "What the decision reveals about how the team weighs this kind of request. Empty when the comments explained nothing.",
+      "type": "string",
+      "maxLength": 400
+    },
+    "rationale_quote": {
+      "description": "Verbatim text from a Release Team comment. Shown to reviewers as the evidence for the precedent, so it must be checkable.",
+      "type": "string",
+      "maxLength": 600
+    },
+    "rationale_author": {
+      "description": "Launchpad username of the Release Team member quoted.",
+      "type": "string",
+      "maxLength": 80
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["HIGH", "MEDIUM", "LOW"]
+    },
+    "applies_when": {
+      "description": "Facets used to find this precedent again. Fewer keys means it applies more widely.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ffe_kind": {
+          "type": "string",
+          "enum": ["sync", "merge", "new-upstream", "new-package", "feature-change", "transition", "seed-change"]
+        },
+        "seeded": { "type": "boolean" },
+        "is_core": { "type": "boolean" },
+        "is_lts": { "type": "boolean" },
+        "flavour_impact": {
+          "type": "string",
+          "enum": ["CORE", "SINGLE_FLAVOUR", "MULTI_FLAVOUR", "UNSEEDED"]
+        },
+        "risk_band": { "type": "string", "enum": ["LOW", "MODERATE", "HIGH", "SEVERE"] },
+        "phase": {
+          "type": "string",
+          "enum": ["FEATURE_FREEZE", "UI_FREEZE", "BETA_FREEZE", "BETA", "KERNEL_FREEZE", "FINAL_FREEZE"]
+        }
+      }
+    }
+  }
+}
