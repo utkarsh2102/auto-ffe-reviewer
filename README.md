@@ -60,6 +60,14 @@ Full detail in [docs/running-locally.md](docs/running-locally.md).
 | `web/` | Static dashboard, no build step |
 | `tests/` | Offline suite; no network, no API key required |
 
+## Status
+
+Runs end to end against live Launchpad, the live seeded-packages index and the
+live reverse-dependency service. Roughly 600 tests, all offline.
+
+Not yet exercised: a real model call in CI, which needs an API key, and the
+dashboard in a browser.
+
 ## Licence
 
 GPL-3.0-or-later. Unofficial community tool, not affiliated with or endorsed by Canonical Ltd.
