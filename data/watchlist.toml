@@ -1,0 +1,23 @@
+# Bugs to review regardless of how discovery found them.
+#
+# Discovery is normally exact: the bugs subscribed to ~ubuntu-release are the
+# team's own queue. This is the escape hatch for when that is not enough --
+# a request filed without subscribing the team, one being tracked ahead of a
+# formal request, or a bug the sweep's title matching misses.
+#
+# Adding an entry does not subscribe anyone to anything, and does not mark a
+# bug as approved, rejected or reviewed. It only means "gather evidence for
+# this one too".
+#
+# Entries are expected to be temporary. Once the team is subscribed, discovery
+# picks the bug up on its own and the entry can go.
+
+[watchlist]
+bugs = []
+
+# Example:
+#
+# [[watchlist.notes]]
+# bug = 2164597
+# reason = "Go 1.27 transition; tracked ahead of the formal request"
+# added = "2026-09-21"

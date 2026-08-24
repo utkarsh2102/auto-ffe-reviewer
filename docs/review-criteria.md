@@ -47,6 +47,14 @@ many packages depend on it — those come from Ubuntu tooling and arrive as
 evidence. The policy governs judgement; `src/ffe/` governs fact-finding. Anything
 the model could get wrong about the archive is something it is never asked.
 
+Two curated files in `data/` sit alongside the derived evidence, and both only
+ever raise how a package is treated. `criticality.toml` lists packages the
+evidence would understate -- grub2 and shim matter because a regression leaves
+a machine unbootable, which no dependency graph records and no SRU can reach.
+`watchlist.toml` is an escape hatch for a request the queue has not picked up.
+Neither can make anything look safer; if the derived evidence overstates
+something, the evidence is what to fix.
+
 Some conclusions do not need judgement at all, and those are hard-coded in
 `src/ffe/risk/gates.py` — for instance, that a change with nothing anyone can
 check is not ready to review, whatever a model might make of how reasonable the

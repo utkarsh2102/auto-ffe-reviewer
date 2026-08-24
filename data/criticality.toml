@@ -1,0 +1,50 @@
+# Packages whose importance the evidence would understate.
+#
+# Criticality is normally derived, not declared: a package is treated as
+# critical because it is seeded on a core image, or has hundreds of reverse
+# dependencies, or sits in main. That is deliberate, and this file is not a way
+# around it.
+#
+# It exists for the cases where the derivation is genuinely blind. The seeded
+# index has been observed serving incomplete data, and some packages matter for
+# reasons no dependency graph records -- a regression in the installer or the
+# bootloader is not survivable, however few packages depend on it.
+#
+# Adding an entry raises the floor on how a package is treated; it never lowers
+# it. If you find yourself wanting to mark something as *less* important than
+# the evidence suggests, the evidence is probably right.
+#
+# Every entry needs a reason, so a future reader can tell whether it still
+# applies.
+
+[always_core]
+# Treated as core regardless of what the seed index currently says.
+packages = [
+    "linux",
+    "linux-meta",
+    "grub2",
+    "shim",
+    "shim-signed",
+    "systemd",
+    "glibc",
+    "dpkg",
+    "apt",
+    "ubiquity",
+    "subiquity",
+    "casper",
+]
+reason = """
+Boot, init, package management and installation. A regression in any of these
+can leave a machine unbootable or un-upgradeable, which no SRU can reach. They
+are all normally seeded anyway -- this is insurance against an incomplete seed
+index, not a substitute for it.
+"""
+
+[unrecoverable_failure]
+# Packages where the plausible failure mode cannot be fixed after release.
+packages = ["grub2", "shim", "shim-signed", "linux", "casper", "ubiquity", "subiquity"]
+reason = """
+Failure prevents the system booting or installing far enough to apply a fix.
+Regression potential should be read as severe for these whatever the change
+looks like in isolation.
+"""

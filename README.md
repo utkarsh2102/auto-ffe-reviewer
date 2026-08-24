@@ -58,6 +58,8 @@ Full detail in [docs/running-locally.md](docs/running-locally.md).
 | `src/ffe/risk/` | Deterministic scoring and hard gates — runs with no LLM at all |
 | `src/ffe/llm/` | Harness abstraction and the output contract |
 | `web/` | Static dashboard, no build step |
+| `data/` | Curated overrides: flavour ownership, criticality, watchlist |
+| `schemas/` | Versioned contracts for records, assessments and precedents |
 | `tests/` | Offline suite; no network, no API key required |
 
 ## Status

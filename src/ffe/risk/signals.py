@@ -22,6 +22,7 @@ from ffe.models import (
     FlavourImpact,
     ReleaseType,
 )
+from ffe.risk.criticality import Criticality, load_criticality
 
 # Phases at or after which the archive is effectively closed to new features.
 LATE_PHASES = ("BETA_FREEZE", "BETA", "KERNEL_FREEZE", "FINAL_FREEZE", "FINAL_RELEASE")
@@ -80,6 +81,10 @@ class Signals:
     acked_by: tuple[str, ...] = ()
     requesting_flavour: str | None = None
 
+    # Curated overrides (see ffe.risk.criticality)
+    core_by_override: bool = False
+    unrecoverable_packages: tuple[str, ...] = ()
+
     # Meta
     injection_signal_count: int = 0
     unavailable_sources: tuple[str, ...] = ()
@@ -90,8 +95,9 @@ def _checkable(state: EvidenceState) -> bool:
     return state in (EvidenceState.FOUND_VERIFIED, EvidenceState.FOUND_UNVERIFIED)
 
 
-def derive(bundle: EvidenceBundle) -> Signals:
+def derive(bundle: EvidenceBundle, *, criticality: Criticality | None = None) -> Signals:
     """Reduce a bundle to its decision-bearing signals."""
+    criticality = criticality or load_criticality()
     context = bundle.release_context.value if bundle.release_context.ok else None
 
     phase = context.phase if context else "UNKNOWN"
@@ -131,6 +137,15 @@ def derive(bundle: EvidenceBundle) -> Signals:
             in_main = bool(in_main) or package.archive.value.in_main
             in_archive = bool(in_archive) or package.archive.value.in_archive
 
+    # Curated overrides only ever raise the floor. A package listed as always
+    # core is treated as core even where the seed index says otherwise, which
+    # matters because that index has been seen serving incomplete data.
+    packages = bundle.subject.packages
+    core_by_override = criticality.is_always_core(packages)
+    if core_by_override:
+        is_core = True
+        seeds_known = True
+
     testing = bundle.testing
     return Signals(
         release_type=context.release_type if context else None,
@@ -165,6 +180,8 @@ def derive(bundle: EvidenceBundle) -> Signals:
         ack_required_from=bundle.flavours.ack_required_from,
         acked_by=tuple(sorted({a.flavour for a in bundle.flavours.acks})),
         requesting_flavour=bundle.flavours.requesting_flavour,
+        core_by_override=core_by_override,
+        unrecoverable_packages=criticality.unrecoverable_failure(packages),
         injection_signal_count=len(bundle.injection_signals),
         unavailable_sources=tuple(sorted({u.source_id for u in bundle.unavailable})),
     )

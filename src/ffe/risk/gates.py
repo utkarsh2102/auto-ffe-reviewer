@@ -44,6 +44,7 @@ def evaluate(signals: Signals, assessment: RiskAssessment) -> RiskAssessment:
         _flavour_ack_outstanding(signals),
         _after_final_freeze(signals),
         _before_feature_freeze(signals),
+        _unrecoverable_failure(signals),
         _injection_detected(signals),
         _evidence_unavailable(signals),
     ]
@@ -205,6 +206,29 @@ def _before_feature_freeze(signals: Signals) -> Gate:
             else "the target release is past Feature Freeze"
         ),
         evidence_refs=("/evidence/release_context",),
+    )
+
+
+def _unrecoverable_failure(signals: Signals) -> Gate:
+    """Some failures cannot be fixed after release.
+
+    An SRU can reach most regressions. It cannot reach a machine that will not
+    boot, or an image that will not install -- the fix has no way in. Flagged
+    rather than floored, because the change may still be right and the team may
+    still want it; they should simply know which kind of risk they are taking.
+    """
+    triggered = bool(signals.unrecoverable_packages)
+    return Gate(
+        id="unrecoverable_failure_mode",
+        triggered=triggered,
+        effect=GateEffect.FLAG,
+        rationale=(
+            f"{', '.join(signals.unrecoverable_packages)}: a regression here can prevent "
+            "booting or installing, which no SRU can reach"
+            if triggered
+            else "a regression here would be fixable by an SRU"
+        ),
+        evidence_refs=("/evidence/subject",),
     )
 
 

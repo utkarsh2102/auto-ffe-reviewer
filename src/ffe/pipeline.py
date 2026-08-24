@@ -33,6 +33,7 @@ from ffe.models import (
     SCHEMA_VERSION,
     Assessment,
     BugFacts,
+    DiscoverySignal,
     EvidenceBundle,
     HarnessProvenance,
     ReviewProvenance,
@@ -47,6 +48,7 @@ from ffe.sources.base import SourceContext
 from ffe.sources.launchpad import BugRef, LaunchpadClient
 from ffe.sources.release_calendar import development_series, load_series
 from ffe.sources.seeds import FlavourConfig, load_flavours
+from ffe.sources.watchlist import load_watchlist
 from ffe.store.repo import BugState, State, Store, touch_seen
 from ffe.util.clock import now, utc_iso
 from ffe.util.hashing import digest
@@ -112,6 +114,22 @@ class Pipeline:
             return summary
 
         queue = {ref.id: ref for ref in queue_fact.value}
+
+        # Anything on the watchlist is reviewed too, unless it is already in
+        # the queue on its own account. Being listed does not subscribe anyone
+        # to anything -- it only means "gather evidence for this one as well".
+        for bug_id in load_watchlist():
+            if bug_id not in queue:
+                queue[bug_id] = BugRef(
+                    id=bug_id,
+                    title="",
+                    status="",
+                    target="",
+                    date_last_updated="",
+                    web_link=f"{self.settings.launchpad.web_root}/bugs/{bug_id}",
+                    discovered_via=DiscoverySignal.WATCHLIST,
+                )
+
         if only:
             queue = {k: v for k, v in queue.items() if k in only}
         summary.queue_size = len(queue)

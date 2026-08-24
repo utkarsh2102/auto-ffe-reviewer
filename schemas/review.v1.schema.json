@@ -1,0 +1,239 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ubuntu/auto-ffe-reviewer/schemas/review.v1.schema.json",
+  "title": "FFe review record",
+  "description": "One immutable review of one bug at one point in time. The four blocks are kept apart deliberately: `bug` is untrusted input, `evidence` is fact with provenance, `risk` is deterministic judgement, and `assessment` is the only part a language model produced. A record with no assessment is still a complete and useful record.",
+  "type": "object",
+  "required": ["schema_version", "record_id", "status", "evidence", "risk", "provenance"],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "record_id": { "type": "string" },
+
+    "status": {
+      "description": "Why this record looks the way it does. Only REVIEWED carries a model assessment.",
+      "type": "string",
+      "enum": [
+        "REVIEWED",
+        "EVIDENCE_ONLY",
+        "LLM_UNAVAILABLE",
+        "LLM_OUTPUT_INVALID",
+        "SUPERSEDED_BY_HUMAN",
+        "DEFERRED_BUDGET"
+      ]
+    },
+
+    "evidence": {
+      "description": "Everything gathered from Ubuntu tooling and Launchpad. Every value carries provenance.",
+      "type": "object",
+      "required": ["bug", "subject", "release_context"],
+      "properties": {
+        "bug": {
+          "description": "Untrusted input, written by whoever filed or commented on the bug.",
+          "type": "object",
+          "required": ["id", "title", "description_sha"],
+          "properties": {
+            "id": { "type": "integer" },
+            "url": { "type": "string" },
+            "title": { "type": "string" },
+            "description": { "type": "string" },
+            "description_sha": { "type": "string" },
+            "reporter": { "type": "string" },
+            "tags": { "type": "array", "items": { "type": "string" } },
+            "message_count": { "type": "integer" },
+            "release_team_subscribed": { "type": "boolean" },
+            "discovered_via": {
+              "type": "string",
+              "enum": ["release-team-queue", "title-sweep", "watchlist"]
+            }
+          }
+        },
+        "subject": {
+          "description": "What the request is for, as parsed. Packages come from Launchpad tasks, never from the title.",
+          "type": "object",
+          "properties": {
+            "packages": { "type": "array", "items": { "type": "string" } },
+            "target_series": { "type": ["string", "null"] },
+            "ffe_kind": { "type": "string" },
+            "derivation": { "type": "string" }
+          }
+        },
+        "release_context": { "$ref": "#/$defs/fact" },
+        "packages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name"],
+            "properties": {
+              "name": { "type": "string" },
+              "archive": { "$ref": "#/$defs/fact" },
+              "seeds": { "$ref": "#/$defs/fact" },
+              "rdepends": { "$ref": "#/$defs/fact" },
+              "build_rdepends": { "$ref": "#/$defs/fact" }
+            }
+          }
+        },
+        "testing": {
+          "description": "What the developer supplied. Only FOUND_* states count toward the testing requirement.",
+          "type": "object",
+          "properties": {
+            "ppa": { "$ref": "#/$defs/evidenceState" },
+            "build": { "$ref": "#/$defs/evidenceState" },
+            "autopkgtest": { "$ref": "#/$defs/evidenceState" },
+            "test_output": { "$ref": "#/$defs/evidenceState" },
+            "corroborated": { "type": "boolean" },
+            "unverified_claims": { "type": "array", "items": { "type": "string" } },
+            "items": { "type": "array" }
+          }
+        },
+        "flavours": {
+          "type": "object",
+          "properties": {
+            "impact": {
+              "type": "string",
+              "enum": ["CORE", "MULTI_FLAVOUR", "SINGLE_FLAVOUR", "UNSEEDED"]
+            },
+            "affected_flavours": { "type": "array", "items": { "type": "string" } },
+            "ack_required_from": { "type": "array", "items": { "type": "string" } },
+            "acks": { "type": "array" }
+          }
+        },
+        "injection_signals": {
+          "description": "Passages resembling an attempt to steer the reviewer. Reported, never acted on.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pattern_id": { "type": "string" },
+              "excerpt": { "type": "string" },
+              "location": { "type": "string" }
+            }
+          }
+        },
+        "unavailable": {
+          "description": "Sources that could not be consulted, and what each one blinds us to.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["source_id", "reason", "impact"],
+            "properties": {
+              "source_id": { "type": "string" },
+              "reason": { "type": "string" },
+              "impact": { "type": "string" }
+            }
+          }
+        },
+        "fingerprint": { "type": "string" }
+      }
+    },
+
+    "risk": {
+      "description": "Deterministic. Computed without any model, and usable on its own.",
+      "type": "object",
+      "required": ["algorithm_version", "score", "band"],
+      "properties": {
+        "algorithm_version": { "type": "string" },
+        "score": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "band": { "type": "string", "enum": ["LOW", "MODERATE", "HIGH", "SEVERE"] },
+        "components": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "points", "max_points", "rationale"],
+            "properties": {
+              "name": { "type": "string" },
+              "points": { "type": "integer" },
+              "max_points": { "type": "integer" },
+              "rationale": {
+                "description": "Why these points. A band without reasoning cannot be disagreed with.",
+                "type": "string",
+                "minLength": 1
+              },
+              "evidence_refs": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "gates": { "type": "array" },
+        "decision_floor": {
+          "description": "The assessment may not be more permissive than this. Never APPROVE.",
+          "type": ["string", "null"],
+          "enum": ["REJECT", "NEEDS_INFORMATION", null]
+        },
+        "confidence_ceiling": { "type": "string", "enum": ["HIGH", "MEDIUM", "LOW"] }
+      }
+    },
+
+    "assessment": {
+      "description": "The only model-produced part, and nullable. See assessment.v1.schema.json.",
+      "type": ["object", "null"]
+    },
+
+    "human": {
+      "description": "What the Release Team decided, once they have. Detected from the bug leaving the queue plus its final status.",
+      "type": "object",
+      "properties": {
+        "decided": { "type": "boolean" },
+        "decision": {
+          "type": ["string", "null"],
+          "enum": ["APPROVED", "REJECTED", "NEEDS_INFORMATION", null]
+        },
+        "final_status": { "type": ["string", "null"] },
+        "detected_at": { "type": ["string", "null"] },
+        "left_queue_at": { "type": ["string", "null"] }
+      }
+    },
+
+    "provenance": {
+      "description": "Enough to reconstruct why this record says what it says.",
+      "type": "object",
+      "required": ["tool_version", "policy_version", "policy_hash", "review_key", "generated_at"],
+      "properties": {
+        "tool_version": { "type": "string" },
+        "policy_version": { "type": "string" },
+        "policy_hash": { "type": "string" },
+        "lessons_hash": { "type": "string" },
+        "risk_algorithm_version": { "type": "string" },
+        "review_key": { "type": "string" },
+        "generated_at": { "type": "string" },
+        "run_id": { "type": "string" },
+        "harness": { "type": ["object", "null"] }
+      }
+    }
+  },
+
+  "$defs": {
+    "evidenceState": {
+      "type": "string",
+      "enum": ["FOUND_VERIFIED", "FOUND_UNVERIFIED", "CLAIMED_ONLY", "ABSENT"]
+    },
+    "fact": {
+      "description": "A value with the story of how we came to believe it. status is not a bool: 'checked, and it is false' and 'could not check' must stay distinct, because only the second lowers confidence.",
+      "type": "object",
+      "required": ["status", "provenance"],
+      "properties": {
+        "value": {},
+        "status": {
+          "type": "string",
+          "enum": ["OK", "UNAVAILABLE", "NOT_APPLICABLE", "ERROR"]
+        },
+        "note": { "type": ["string", "null"] },
+        "provenance": {
+          "type": "object",
+          "required": ["source_id", "method", "locator", "checked_at"],
+          "properties": {
+            "source_id": { "type": "string" },
+            "method": {
+              "type": "string",
+              "enum": ["http_get", "subprocess", "lp_api", "computed", "static"]
+            },
+            "locator": { "type": "string" },
+            "checked_at": { "type": "string" },
+            "raw_ref": { "type": ["string", "null"] },
+            "cache": { "type": "string", "enum": ["fresh", "cached", "stale", "none"] },
+            "duration_ms": { "type": "integer" },
+            "raw_truncated": { "type": "boolean" }
+          }
+        }
+      }
+    }
+  }
+}
