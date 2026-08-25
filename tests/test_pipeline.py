@@ -513,3 +513,29 @@ def test_each_source_can_fail_independently(make_ctx, tmp_path: Path, failing: s
 
     assert summary.reviewed == [2167691]
     assert store.latest_record(2167691) is not None
+
+
+def test_a_bug_named_on_the_command_line_is_reviewed(make_ctx, tmp_path: Path) -> None:  # type: ignore[no-untyped-def]
+    """Asking for a specific bug must review it, even with an empty queue.
+
+    An empty queue is the normal state once the team is caught up, and
+    `ffe review --bug N` previously narrowed the queue rather than adding to
+    it, so it silently did nothing in exactly the situation where a reviewer
+    would reach for it.
+    """
+    pipeline, store, _ = _pipeline(make_ctx, tmp_path, routes=_queue_routes(queued=False))
+    with frozen_at("2026-09-20T12:00:00Z"):
+        summary = pipeline.run(only=(2167691,))
+
+    assert summary.queue_size == 1
+    assert summary.reviewed == [2167691]
+    assert store.latest_record(2167691) is not None
+
+
+def test_naming_a_bug_does_not_pull_in_the_rest_of_the_queue(make_ctx, tmp_path: Path) -> None:  # type: ignore[no-untyped-def]
+    pipeline, _store, _ = _pipeline(make_ctx, tmp_path, routes=_queue_routes(queued=True))
+    with frozen_at("2026-09-20T12:00:00Z"):
+        summary = pipeline.run(only=(2167691,))
+
+    assert summary.queue_size == 1
+    assert summary.reviewed == [2167691]

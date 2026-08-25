@@ -118,17 +118,13 @@ class Pipeline:
         # Anything on the watchlist is reviewed too, unless it is already in
         # the queue on its own account. Being listed does not subscribe anyone
         # to anything -- it only means "gather evidence for this one as well".
-        for bug_id in load_watchlist():
+        # Bugs named explicitly on the command line are added the same way:
+        # asking for a specific bug should review that bug, including when the
+        # queue is empty, which is the normal state once the team is caught up.
+        requested = set(only) | set(load_watchlist())
+        for bug_id in sorted(requested):
             if bug_id not in queue:
-                queue[bug_id] = BugRef(
-                    id=bug_id,
-                    title="",
-                    status="",
-                    target="",
-                    date_last_updated="",
-                    web_link=f"{self.settings.launchpad.web_root}/bugs/{bug_id}",
-                    discovered_via=DiscoverySignal.WATCHLIST,
-                )
+                queue[bug_id] = self._named_bug(bug_id)
 
         if only:
             queue = {k: v for k, v in queue.items() if k in only}
@@ -167,6 +163,18 @@ class Pipeline:
         self.store.save_state(state)
         self.store.write_run(self.run_id, summary.as_dict())
         return summary
+
+    def _named_bug(self, bug_id: int) -> BugRef:
+        """A queue entry for a bug asked for by name rather than found."""
+        return BugRef(
+            id=bug_id,
+            title="",
+            status="",
+            target="",
+            date_last_updated="",
+            web_link=f"{self.settings.launchpad.web_root}/bugs/{bug_id}",
+            discovered_via=DiscoverySignal.WATCHLIST,
+        )
 
     # -- discovery ---------------------------------------------------------- #
 
