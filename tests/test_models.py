@@ -163,6 +163,26 @@ def test_a_verified_ppa_does_corroborate() -> None:
     assert TestingEvidence(build=EvidenceState.FOUND_UNVERIFIED).corroborated is True
 
 
+def test_corroborated_survives_serialisation() -> None:
+    """Regression: it used to be a property, and properties do not serialise.
+
+    to_jsonable walks dataclass fields, so as a property this vanished from
+    every stored record, and the dashboard read the absent key as "no testing
+    evidence" for every bug -- including ones with a verified PPA.
+    """
+    evidence = TestingEvidence(ppa=EvidenceState.FOUND_VERIFIED)
+    assert to_jsonable(evidence)["corroborated"] is True
+
+    absent = TestingEvidence()
+    assert to_jsonable(absent)["corroborated"] is False
+
+
+def test_corroborated_cannot_be_set_out_of_step_with_the_states() -> None:
+    """Derived on construction, so an incorrect value cannot be passed in."""
+    lying = TestingEvidence(ppa=EvidenceState.ABSENT, corroborated=True)
+    assert lying.corroborated is False
+
+
 def test_absent_evidence_is_not_corroborated() -> None:
     assert TestingEvidence().corroborated is False
 

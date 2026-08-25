@@ -373,6 +373,16 @@ class TestingItem:
     source: str = ""  # "description" or "comment #N"
 
 
+# States meaning a human could go and look at the thing. Prose never
+# qualifies, however confidently it is written.
+CHECKABLE_STATES = (EvidenceState.FOUND_VERIFIED, EvidenceState.FOUND_UNVERIFIED)
+
+
+def is_corroborated(*states: EvidenceState) -> bool:
+    """Whether any of these is something a reviewer could actually go and check."""
+    return any(state in CHECKABLE_STATES for state in states)
+
+
 @dataclass(frozen=True, slots=True)
 class TestingEvidence:
     items: tuple[TestingItem, ...] = ()
@@ -382,12 +392,19 @@ class TestingEvidence:
     test_output: EvidenceState = EvidenceState.ABSENT
     unverified_claims: tuple[str, ...] = ()
 
-    @property
-    def corroborated(self) -> bool:
-        """True only when something checkable exists -- prose never qualifies."""
-        checkable = (EvidenceState.FOUND_VERIFIED, EvidenceState.FOUND_UNVERIFIED)
-        return any(
-            s in checkable for s in (self.ppa, self.build, self.autopkgtest, self.test_output)
+    # A stored field rather than a derived property. As a property this was
+    # invisible to to_jsonable, which serialises fields only, so it vanished
+    # from every record and the dashboard read the missing key as "no testing
+    # evidence" for every bug regardless of the truth.
+    corroborated: bool = False
+
+    def __post_init__(self) -> None:
+        # Derived on construction rather than on demand, so there is no way to
+        # build one of these with the flag out of step with the states.
+        object.__setattr__(
+            self,
+            "corroborated",
+            is_corroborated(self.ppa, self.build, self.autopkgtest, self.test_output),
         )
 
 
