@@ -3,7 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="redirect.js"></script>
+<script>
+  if (!location.pathname.endsWith("/")) {
+    location.replace(location.pathname + "/" + location.search + location.hash);
+  }
+</script>
 <!--
   Strict CSP. GitHub Pages cannot set headers, so this meta tag is the whole
   policy. It matters here because the page renders text taken from Launchpad
@@ -11,7 +15,7 @@
   not ship with the page.
 -->
 <meta http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'">
+      content="default-src 'self'; script-src 'self' 'sha256-3XDATlF2wRwxgktr+SpGQ63tp0cpWqIIGT3qDt8y+is='; style-src 'self'; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'">
 <title>FFe Reviewer</title>
 <meta name="description" content="Feature Freeze Exception triage for the Ubuntu Release Team.">
 <link rel="stylesheet" href="style.css">
