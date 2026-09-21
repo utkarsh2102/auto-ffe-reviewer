@@ -1,0 +1,16 @@
+{
+  "bugs": [],
+  "counts": {
+    "approve": 0,
+    "awaiting_flavour_ack": 0,
+    "evidence_incomplete": 0,
+    "high_risk": 0,
+    "needs_attention": 0,
+    "needs_information": 0,
+    "no_recommendation": 0,
+    "no_testing_evidence": 0,
+    "open": 0,
+    "reject": 0
+  },
+  "version": 1
+}
