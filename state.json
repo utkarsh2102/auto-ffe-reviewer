@@ -1,5 +1,24 @@
 {
-  "bugs": {},
-  "updated_at": "2026-09-21T08:50:35Z",
+  "bugs": {
+    "2167149": {
+      "bug_id": 2167149,
+      "confidence": null,
+      "date_last_message": "2026-09-21T15:11:43.373628+00:00",
+      "date_last_updated": "2026-09-21T15:11:44.232822+00:00",
+      "decision": null,
+      "discovered_via": "release-team-queue",
+      "fingerprint": "sha256:0647d7bbdedc2bbe3312a3f8f7e661e001a44032a328f6034c0142e8629cfab5",
+      "in_queue": true,
+      "last_evidence_at": "2026-09-21T15:50:02Z",
+      "last_review_at": "",
+      "last_seen_at": "2026-09-21T15:49:59Z",
+      "llm_runs_date": "",
+      "llm_runs_today": 0,
+      "message_count": 3,
+      "review_key": "sha256:2529e22258312525e1e4116923cf32c041f74cdf58b3f283816268a521581222",
+      "status": "New"
+    }
+  },
+  "updated_at": "2026-09-21T15:50:02Z",
   "version": 1
 }

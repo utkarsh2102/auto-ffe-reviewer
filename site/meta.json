@@ -2,16 +2,16 @@
   "counts": {
     "approve": 0,
     "awaiting_flavour_ack": 0,
-    "evidence_incomplete": 0,
+    "evidence_incomplete": 1,
     "high_risk": 0,
-    "needs_attention": 0,
+    "needs_attention": 1,
     "needs_information": 0,
-    "no_recommendation": 0,
+    "no_recommendation": 1,
     "no_testing_evidence": 0,
-    "open": 0,
+    "open": 1,
     "reject": 0
   },
-  "generated_at": "2026-09-21T08:50:35Z",
+  "generated_at": "2026-09-21T15:50:02Z",
   "harness": "claude-code",
   "release_team": "ubuntu-release",
   "title": "FFe Reviewer"

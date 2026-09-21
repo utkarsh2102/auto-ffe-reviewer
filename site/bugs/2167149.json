@@ -1,0 +1,463 @@
+{
+  "history": [
+    {
+      "confidence": null,
+      "decision": null,
+      "fingerprint": "sha256:0647d7bbdedc2bbe3312a3f8f7e661e001a44032a328f6034c0142e8629cfab5",
+      "generated_at": "2026-09-21T15:50:02Z",
+      "risk_score": 44,
+      "status": "EVIDENCE_ONLY"
+    }
+  ],
+  "record": {
+    "assessment": null,
+    "evidence": {
+      "bug": {
+        "comments": [
+          {
+            "author": "himax16",
+            "author_is_release_team": false,
+            "content": "[Summary and rationale]\n\nPlease grant a Feature Freeze Exception to update magnum-capi-helm from\n1.2.0-3 to 1.4.0-0ubuntu1 in Ubuntu 26.10 (Stonking).\n\nmagnum-capi-helm is the OpenStack Magnum driver that provisions Kubernetes\nclusters via Cluster API and Helm. Stonking targets OpenStack 2026.2\nHibiscus (magnum 22.0.0 is in stonking-proposed). The version in the\narchive, 1.2.0 (October 2024), is significantly older.\n\nUpstream 1.3.0 and 1.4.0 were released on 2025-07-31 and 2026-06-09\nrespectively. The update was prepared as part of the Hibiscus alignment\neffort but was not uploaded before Feature Freeze on 20 August.\n\nThis update also repairs the package's own autopkgtest in Stonking.\nmagnum-capi-helm 1.2.0-3 currently fails three unit tests\n(test_get_capi_cluster_found, test_get_kubeadm_control_plane_found,\ntest_get_machine_deployment_found) because requests 2.34 makes\nSession.get() pass params=None explicitly; 1.4.0 contains the upstream\nfix (\"Fix tests due to upgrade of requests 2.34+\"). The failure currently\nblocks the migration of pbr, oslo.log and oslo.utils.\n\n[Requested update]\n\nmagnum-capi-helm: 1.2.0-3 -> 1.4.0\n\nChanges since 1.2.0 (upstream ChangeLog):\n\n1.2.1\n* Fix deletion of non-default node groups\n* Introduce Magnum-CAPI-helm documentation\n\n1.3.0\n* Implement control plane resize\n* Use API load-balancer floating IPs according to template and label\n* Support token-based kubeconfig files for the CAPI management cluster\n* Fix resize of default workers via terraform\n\n1.4.0\n* Support adding multiple extra networks\n* Pass network_driver template option as CNI type\n* Add oslo.config-based cluster label registry with auto-generated docs\n* Add support for HelmChartProxy resources\n* Generalize Kubernetes control plane resource handling\n* Use openstackcluster v1beta1 API\n* Support the Magnum credential API (application credential rotation)\n* Start using csi_cinder_volume_binding_mode config option\n* Fix: allow deprecated label names to be used\n* Adapt to latest Magnum changes\n* Fix tests for requests >= 2.34\n* Drop support for Python 3.6-3.9\n* Expanded documentation\n\n[Regression potential]\n\n* The driver provisioning paths change behaviour: OpenStackCluster v1beta1,\n  HelmChartProxy support, credential rotation and control-plane resize\n  affect cluster create/update/resize flows and require a Cluster API\n  management cluster with v1beta1 providers and compatible capi-helm-charts\n  (the defaults are configurable via the driver's oslo.config options).\n* Packaging adds six explicit runtime Depends (python3-certifi,\n  python3-keystoneauth1, python3-oslo.concurrency, python3-oslo.config,\n  python3-requests, python3-yaml). All are already installed transitively\n  via python3-magnum, so no new packages are required.\n* magnum-capi-helm has no reverse dependencies.\n* Newest Hibiscus's magnum no longer depends on python-novaclient, causing\n  some novaclient-mocked flavor-validation tests failures. These tests are\n  skipped. The replacement openstacksdk paths in magnum are already covered\n  by the test_validate_*_openstacksdk tests.\n* Verification: the nit-test suite (169 tests) passes on a Stonking system\n  with python3-requests 2.34.2-1 and magnum 22.0.0, including the three\n  previously failing tests.\n\n[Other info]\n\n* Debian remains at 1.2.0-3; Ubuntu carries this update ahead of Debian.\n* Test PPA / merge proposal: <link TBD>",
+            "content_sha": "51c4feaaa9f62df36ddb9e0a83a791c8a23d7908c654a5003d26b2d0d2086fee",
+            "date_created": "2026-09-12T03:09:12.181020+00:00",
+            "index": 0,
+            "url": "https://bugs.launchpad.net/ubuntu/+source/magnum-capi-helm/+bug/2167149/comments/0"
+          },
+          {
+            "author": "seb128",
+            "author_is_release_team": false,
+            "content": "You didn't subscribe ubuntu-release to the bug which means it's not in their review queue, doing that for you now",
+            "content_sha": "796aff6e86e9a937312714c5c59d3ba7ea9b27dd06e092caf39c9b5cb79aaafc",
+            "date_created": "2026-09-21T14:53:56.150899+00:00",
+            "index": 1,
+            "url": "https://bugs.launchpad.net/ubuntu/+source/magnum-capi-helm/+bug/2167149/comments/1"
+          },
+          {
+            "author": "himax16",
+            "author_is_release_team": false,
+            "content": "Got it thanks",
+            "content_sha": "97b3d8e277fbd596bbd43350471c89f605dcfaade006c8abfe5762d5e2fab9e0",
+            "date_created": "2026-09-21T15:11:43.373628+00:00",
+            "index": 2,
+            "url": "https://bugs.launchpad.net/ubuntu/+source/magnum-capi-helm/+bug/2167149/comments/2"
+          }
+        ],
+        "date_created": "2026-09-12T03:09:12.181020+00:00",
+        "date_last_message": "2026-09-21T15:11:43.373628+00:00",
+        "date_last_updated": "2026-09-21T15:11:44.232822+00:00",
+        "description": "[Summary and rationale]\n\nPlease grant a Feature Freeze Exception to update magnum-capi-helm from\n1.2.0-3 to 1.4.0-0ubuntu1 in Ubuntu 26.10 (Stonking).\n\nmagnum-capi-helm is the OpenStack Magnum driver that provisions Kubernetes\nclusters via Cluster API and Helm. Stonking targets OpenStack 2026.2\nHibiscus (magnum 22.0.0 is in stonking-proposed). The version in the\narchive, 1.2.0 (October 2024), is significantly older.\n\nUpstream 1.3.0 and 1.4.0 were released on 2025-07-31 and 2026-06-09\nrespectively. The update was prepared as part of the Hibiscus alignment\neffort but was not uploaded before Feature Freeze on 20 August.\n\nThis update also repairs the package's own autopkgtest in Stonking.\nmagnum-capi-helm 1.2.0-3 currently fails three unit tests\n(test_get_capi_cluster_found, test_get_kubeadm_control_plane_found,\ntest_get_machine_deployment_found) because requests 2.34 makes\nSession.get() pass params=None explicitly; 1.4.0 contains the upstream\nfix (\"Fix tests due to upgrade of requests 2.34+\"). The failure currently\nblocks the migration of pbr, oslo.log and oslo.utils.\n\n[Requested update]\n\nmagnum-capi-helm: 1.2.0-3 -> 1.4.0\n\nChanges since 1.2.0 (upstream ChangeLog):\n\n1.2.1\n* Fix deletion of non-default node groups\n* Introduce Magnum-CAPI-helm documentation\n\n1.3.0\n* Implement control plane resize\n* Use API load-balancer floating IPs according to template and label\n* Support token-based kubeconfig files for the CAPI management cluster\n* Fix resize of default workers via terraform\n\n1.4.0\n* Support adding multiple extra networks\n* Pass network_driver template option as CNI type\n* Add oslo.config-based cluster label registry with auto-generated docs\n* Add support for HelmChartProxy resources\n* Generalize Kubernetes control plane resource handling\n* Use openstackcluster v1beta1 API\n* Support the Magnum credential API (application credential rotation)\n* Start using csi_cinder_volume_binding_mode config option\n* Fix: allow deprecated label names to be used\n* Adapt to latest Magnum changes\n* Fix tests for requests >= 2.34\n* Drop support for Python 3.6-3.9\n* Expanded documentation\n\n[Regression potential]\n\n* The driver provisioning paths change behaviour: OpenStackCluster v1beta1,\n  HelmChartProxy support, credential rotation and control-plane resize\n  affect cluster create/update/resize flows and require a Cluster API\n  management cluster with v1beta1 providers and compatible capi-helm-charts\n  (the defaults are configurable via the driver's oslo.config options).\n* Packaging adds six explicit runtime Depends (python3-certifi,\n  python3-keystoneauth1, python3-oslo.concurrency, python3-oslo.config,\n  python3-requests, python3-yaml). All are already installed transitively\n  via python3-magnum, so no new packages are required.\n* magnum-capi-helm has no reverse dependencies.\n* Newest Hibiscus's magnum no longer depends on python-novaclient, causing\n  some novaclient-mocked flavor-validation tests failures. These tests are\n  skipped. The replacement openstacksdk paths in magnum are already covered\n  by the test_validate_*_openstacksdk tests.\n* Verification: the nit-test suite (169 tests) passes on a Stonking system\n  with python3-requests 2.34.2-1 and magnum 22.0.0, including the three\n  previously failing tests.\n\n[Other info]\n\n* Debian remains at 1.2.0-3; Ubuntu carries this update ahead of Debian.\n* Test PPA: https://launchpad.net/~himax16/+archive/ubuntu/hibiscus-test",
+        "description_sha": "68fef3e8771163efadff85d039b487104cfc07db5b4f2636473f1fce86f78a3d",
+        "discovered_via": "release-team-queue",
+        "id": 2167149,
+        "message_count": 3,
+        "release_team_subscribed": true,
+        "reporter": "himax16",
+        "subscribers": [
+          "himax16",
+          "ubuntu-release"
+        ],
+        "tags": [],
+        "tasks": [
+          {
+            "assignee": null,
+            "importance": "Undecided",
+            "status": "New",
+            "target": "magnum-capi-helm (Ubuntu)"
+          }
+        ],
+        "title": "[FFe] Update magnum-capi-helm to 1.4.0 in Stonking",
+        "url": "https://bugs.launchpad.net/bugs/2167149"
+      },
+      "fingerprint": "sha256:0647d7bbdedc2bbe3312a3f8f7e661e001a44032a328f6034c0142e8629cfab5",
+      "flavours": {
+        "ack_required_from": [],
+        "acks": [],
+        "affected_flavours": [],
+        "impact": "UNSEEDED",
+        "requester_is_flavour_lead": null,
+        "requesting_flavour": null
+      },
+      "injection_signals": [],
+      "packages": [
+        {
+          "archive": {
+            "note": null,
+            "provenance": {
+              "cache": "fresh",
+              "checked_at": "2026-09-21T15:50:00Z",
+              "duration_ms": 306,
+              "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=magnum-capi-helm&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
+              "method": "http_get",
+              "raw_ref": "sha256:683e3b1376352356dd3232b9c6f8da513425b55d7700f5fe974124a820df1e42",
+              "raw_truncated": false,
+              "source_id": "launchpad.archive"
+            },
+            "status": "OK",
+            "value": {
+              "binaries": [
+                "python3-magnum-capi-helm"
+              ],
+              "component": "universe",
+              "in_archive": true,
+              "pocket": "Release",
+              "source": "magnum-capi-helm",
+              "version": "1.2.0-3"
+            }
+          },
+          "build_rdepends": {
+            "note": null,
+            "provenance": {
+              "cache": "fresh",
+              "checked_at": "2026-09-21T15:50:02Z",
+              "duration_ms": 152,
+              "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:magnum-capi-helm",
+              "method": "http_get",
+              "raw_ref": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+              "raw_truncated": false,
+              "source_id": "rdepends.build"
+            },
+            "status": "OK",
+            "value": {
+              "arch": "source",
+              "bucket": "0",
+              "kind": "build",
+              "sample": [],
+              "seeded_rdeps": [],
+              "total": 0
+            }
+          },
+          "name": "magnum-capi-helm",
+          "rdepends": {
+            "note": null,
+            "provenance": {
+              "cache": "fresh",
+              "checked_at": "2026-09-21T15:50:01Z",
+              "duration_ms": 161,
+              "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:magnum-capi-helm",
+              "method": "http_get",
+              "raw_ref": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+              "raw_truncated": false,
+              "source_id": "rdepends.binary"
+            },
+            "status": "OK",
+            "value": {
+              "arch": "any",
+              "bucket": "0",
+              "kind": "binary",
+              "sample": [],
+              "seeded_rdeps": [],
+              "total": 0
+            }
+          },
+          "seeds": {
+            "note": "none of python3-magnum-capi-helm appear in the seed index, but the index looks incomplete (index covers only 5 flavours), so this is not evidence that the package is unseeded",
+            "provenance": {
+              "cache": "fresh",
+              "checked_at": "2026-09-21T15:50:01Z",
+              "duration_ms": 634,
+              "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
+              "method": "http_get",
+              "raw_ref": "sha256:865bc08df62b9eeb7455636dada101238bbdc89bef1960403db6b814fa27b3c5",
+              "raw_truncated": false,
+              "source_id": "seeds"
+            },
+            "status": "UNAVAILABLE",
+            "value": null
+          }
+        }
+      ],
+      "release_context": {
+        "note": null,
+        "provenance": {
+          "cache": "fresh",
+          "checked_at": "2026-09-21T15:49:59Z",
+          "duration_ms": 115,
+          "locator": "https://documentation.ubuntu.com/release-notes/26.10/schedule/",
+          "method": "http_get",
+          "raw_ref": "sha256:a51b44260a65f3d41e87e9067245550b625351237c43bf020348c2afbcff7397",
+          "raw_truncated": false,
+          "source_id": "calendar.schedule"
+        },
+        "status": "OK",
+        "value": {
+          "days_bucket": "28-15",
+          "days_since_feature_freeze": 32,
+          "days_to_release": 24,
+          "derivation": "schedule-page",
+          "feature_freeze": "2026-08-20",
+          "freeze_window_elapsed_pct": 57,
+          "milestones": [
+            {
+              "date": "2026-04-30",
+              "name": "Toolchain Uploaded"
+            },
+            {
+              "date": "2026-07-02",
+              "name": "Ubuntu Testing Week (optional)"
+            },
+            {
+              "date": "2026-08-06",
+              "name": "Expected Glibc 2.44 merge"
+            },
+            {
+              "date": "2026-08-13",
+              "name": "Expected LLVM default transition"
+            },
+            {
+              "date": "2026-08-20",
+              "name": "Debian Import Freeze"
+            },
+            {
+              "date": "2026-08-20",
+              "name": "Feature Freeze"
+            },
+            {
+              "date": "2026-09-10",
+              "name": "UI Freeze"
+            },
+            {
+              "date": "2026-09-17",
+              "name": "Documentation String Freeze"
+            },
+            {
+              "date": "2026-09-17",
+              "name": "Kernel Feature Freeze"
+            },
+            {
+              "date": "2026-09-21",
+              "name": "Beta Freeze"
+            },
+            {
+              "date": "2026-09-21",
+              "name": "Hardware Enablement Freeze"
+            },
+            {
+              "date": "2026-09-24",
+              "name": "Beta"
+            },
+            {
+              "date": "2026-10-01",
+              "name": "Kernel Freeze"
+            },
+            {
+              "date": "2026-10-01",
+              "name": "Non Language Pack Translation Deadline"
+            },
+            {
+              "date": "2026-10-08",
+              "name": "Final Freeze"
+            },
+            {
+              "date": "2026-10-08",
+              "name": "Language Pack Translation Deadline"
+            },
+            {
+              "date": "2026-10-08",
+              "name": "Release Candidate"
+            },
+            {
+              "date": "2026-10-15",
+              "name": "Final Release"
+            }
+          ],
+          "phase": "BETA_FREEZE",
+          "release_date": "2026-10-15",
+          "release_type": "INTERIM",
+          "series": "stonking",
+          "version": "26.10"
+        }
+      },
+      "subject": {
+        "derivation": "packages:bug-tasks; series:mentioned-in-bug-text",
+        "ffe_kind": "new-upstream",
+        "packages": [
+          "magnum-capi-helm"
+        ],
+        "target_series": "stonking"
+      },
+      "testing": {
+        "autopkgtest": "ABSENT",
+        "build": "ABSENT",
+        "corroborated": true,
+        "items": [
+          {
+            "detail": "PPA ~himax16/hibiscus-test exists on Launchpad",
+            "kind": "ppa",
+            "locator": "https://launchpad.net/~himax16/+archive/ubuntu/hibiscus-test",
+            "source": "description",
+            "state": "FOUND_VERIFIED"
+          }
+        ],
+        "ppa": "FOUND_VERIFIED",
+        "test_output": "ABSENT",
+        "unverified_claims": []
+      },
+      "unavailable": [
+        {
+          "impact": "cannot tell which Ubuntu images ship this package",
+          "reason": "seed index incomplete: index covers only 5 flavours",
+          "source_id": "seeds"
+        }
+      ]
+    },
+    "human": {
+      "decided": false,
+      "decision": null,
+      "detected_at": null,
+      "final_status": null,
+      "left_queue_at": null
+    },
+    "provenance": {
+      "generated_at": "2026-09-21T15:50:02Z",
+      "harness": null,
+      "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
+      "policy_version": "1.0.0",
+      "review_key": "sha256:2529e22258312525e1e4116923cf32c041f74cdf58b3f283816268a521581222",
+      "risk_algorithm_version": "risk/1.2.0",
+      "run_id": "run-20260921T154952Z",
+      "tool_version": "0.1.0"
+    },
+    "record_id": "2167149/0647d7bbdedc2bbe",
+    "risk": {
+      "algorithm_version": "risk/1.2.0",
+      "band": "MODERATE",
+      "components": [
+        {
+          "evidence_refs": [
+            "/evidence/release_context"
+          ],
+          "max_points": 20,
+          "name": "release_posture",
+          "points": 14,
+          "rationale": "interim release, past beta freeze, 24 days to release, 57% through the freeze window"
+        },
+        {
+          "evidence_refs": [
+            "/evidence/packages"
+          ],
+          "max_points": 25,
+          "name": "seeded_reach",
+          "points": 15,
+          "rationale": "could not establish which images ship this package; scored cautiously rather than as unseeded"
+        },
+        {
+          "evidence_refs": [
+            "/evidence/packages"
+          ],
+          "max_points": 25,
+          "name": "dependency_reach",
+          "points": 0,
+          "rationale": "nothing in the archive depends on this package"
+        },
+        {
+          "evidence_refs": [
+            "/evidence/packages"
+          ],
+          "max_points": 10,
+          "name": "archive_standing",
+          "points": 3,
+          "rationale": "in universe or multiverse, which is community-supported"
+        },
+        {
+          "evidence_refs": [
+            "/evidence/subject"
+          ],
+          "max_points": 5,
+          "name": "change_shape",
+          "points": 2,
+          "rationale": "a new upstream to an existing package"
+        },
+        {
+          "evidence_refs": [
+            "/evidence/testing"
+          ],
+          "max_points": 15,
+          "name": "unvalidated_change",
+          "points": 10,
+          "rationale": "the bug links a PPA"
+        }
+      ],
+      "confidence_ceiling": "MEDIUM",
+      "decision_floor": null,
+      "gates": [
+        {
+          "effect": "floor_needs_information",
+          "evidence_refs": [
+            "/evidence/subject"
+          ],
+          "id": "no_package_identified",
+          "rationale": "the affected package is identified",
+          "triggered": false
+        },
+        {
+          "effect": "floor_needs_information",
+          "evidence_refs": [
+            "/evidence/testing"
+          ],
+          "id": "no_testing_evidence",
+          "rationale": "the bug links testing evidence",
+          "triggered": false
+        },
+        {
+          "effect": "flag",
+          "evidence_refs": [
+            "/evidence/flavours"
+          ],
+          "id": "flavour_ack_outstanding",
+          "rationale": "no cross-flavour acknowledgement is outstanding",
+          "triggered": false
+        },
+        {
+          "effect": "floor_needs_information",
+          "evidence_refs": [
+            "/evidence/release_context"
+          ],
+          "id": "after_final_freeze",
+          "rationale": "the request is within the ordinary freeze window",
+          "triggered": false
+        },
+        {
+          "effect": "flag",
+          "evidence_refs": [
+            "/evidence/release_context"
+          ],
+          "id": "before_feature_freeze",
+          "rationale": "the target release is past Feature Freeze",
+          "triggered": false
+        },
+        {
+          "effect": "flag",
+          "evidence_refs": [
+            "/evidence/subject"
+          ],
+          "id": "unrecoverable_failure_mode",
+          "rationale": "a regression here would be fixable by an SRU",
+          "triggered": false
+        },
+        {
+          "effect": "flag",
+          "evidence_refs": [
+            "/evidence/injection"
+          ],
+          "id": "suspicious_bug_text",
+          "rationale": "nothing in the bug text resembles an attempt to steer the reviewer",
+          "triggered": false
+        },
+        {
+          "effect": "cap_confidence",
+          "evidence_refs": [
+            "/evidence/unavailable"
+          ],
+          "id": "evidence_unavailable",
+          "rationale": "could not consult seeds, so this assessment rests on incomplete evidence",
+          "triggered": true
+        }
+      ],
+      "score": 44
+    },
+    "schema_version": "1.0.0",
+    "status": "EVIDENCE_ONLY"
+  },
+  "version": 1
+}
