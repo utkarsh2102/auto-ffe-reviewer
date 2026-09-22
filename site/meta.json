@@ -3,7 +3,7 @@
     "approve": 0,
     "awaiting_flavour_ack": 0,
     "evidence_incomplete": 3,
-    "high_risk": 1,
+    "high_risk": 2,
     "needs_attention": 3,
     "needs_information": 0,
     "no_recommendation": 3,
@@ -11,7 +11,7 @@
     "open": 3,
     "reject": 0
   },
-  "generated_at": "2026-09-22T18:15:06Z",
+  "generated_at": "2026-09-22T21:36:49Z",
   "harness": "claude-code",
   "release_team": "ubuntu-release",
   "title": "FFe Reviewer"

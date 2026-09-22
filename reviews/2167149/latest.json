@@ -57,7 +57,7 @@
       "title": "[FFe] Update magnum-capi-helm to 1.4.0 in Stonking",
       "url": "https://bugs.launchpad.net/bugs/2167149"
     },
-    "fingerprint": "sha256:9053e010b407b5d5f9798b988dc598f18c2fc4180e2d9cbead04032e24150168",
+    "fingerprint": "sha256:0647d7bbdedc2bbe3312a3f8f7e661e001a44032a328f6034c0142e8629cfab5",
     "flavours": {
       "ack_required_from": [],
       "acks": [],
@@ -73,8 +73,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-22T18:15:04Z",
-            "duration_ms": 404,
+            "checked_at": "2026-09-22T21:36:47Z",
+            "duration_ms": 239,
             "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=magnum-capi-helm&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
             "method": "http_get",
             "raw_ref": "sha256:683e3b1376352356dd3232b9c6f8da513425b55d7700f5fe974124a820df1e42",
@@ -97,8 +97,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-22T18:15:05Z",
-            "duration_ms": 139,
+            "checked_at": "2026-09-22T21:36:49Z",
+            "duration_ms": 112,
             "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:magnum-capi-helm",
             "method": "http_get",
             "raw_ref": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
@@ -120,8 +120,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-22T18:15:05Z",
-            "duration_ms": 275,
+            "checked_at": "2026-09-22T21:36:48Z",
+            "duration_ms": 115,
             "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:magnum-capi-helm",
             "method": "http_get",
             "raw_ref": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
@@ -139,14 +139,14 @@
           }
         },
         "seeds": {
-          "note": "none of python3-magnum-capi-helm appear in the seed index, but the index looks incomplete (index covers only 2 flavours), so this is not evidence that the package is unseeded",
+          "note": "none of python3-magnum-capi-helm appear in the seed index, but the index looks incomplete (index covers only 3 flavours), so this is not evidence that the package is unseeded",
           "provenance": {
             "cache": "cached",
-            "checked_at": "2026-09-22T18:15:05Z",
+            "checked_at": "2026-09-22T21:36:48Z",
             "duration_ms": 0,
             "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
             "method": "http_get",
-            "raw_ref": "sha256:81e27913cb5f01f3a9fe6c6a7260a3ebac23a6cb87f06de293e02df2aab3010d",
+            "raw_ref": "sha256:956e413bf2cca1af139b04e931c3e2bfaf94524e9af0a52c4c52337b9199a847",
             "raw_truncated": false,
             "source_id": "seeds"
           },
@@ -156,14 +156,14 @@
       }
     ],
     "release_context": {
-      "note": "schedule page unavailable; dates approximated as release minus 8 weeks, which has been observed to be up to a week early",
+      "note": null,
       "provenance": {
-        "cache": "none",
-        "checked_at": "2026-09-22T18:15:04Z",
+        "cache": "cached",
+        "checked_at": "2026-09-22T21:36:47Z",
         "duration_ms": 0,
         "locator": "https://documentation.ubuntu.com/release-notes/26.10/schedule/",
-        "method": "computed",
-        "raw_ref": null,
+        "method": "http_get",
+        "raw_ref": "sha256:a51b44260a65f3d41e87e9067245550b625351237c43bf020348c2afbcff7397",
         "raw_truncated": false,
         "source_id": "calendar.schedule"
       },
@@ -172,20 +172,84 @@
         "days_bucket": "28-15",
         "days_since_feature_freeze": 33,
         "days_to_release": 23,
-        "derivation": "approximate",
+        "derivation": "schedule-page",
         "feature_freeze": "2026-08-20",
         "freeze_window_elapsed_pct": 59,
         "milestones": [
           {
+            "date": "2026-04-30",
+            "name": "Toolchain Uploaded"
+          },
+          {
+            "date": "2026-07-02",
+            "name": "Ubuntu Testing Week (optional)"
+          },
+          {
+            "date": "2026-08-06",
+            "name": "Expected Glibc 2.44 merge"
+          },
+          {
+            "date": "2026-08-13",
+            "name": "Expected LLVM default transition"
+          },
+          {
+            "date": "2026-08-20",
+            "name": "Debian Import Freeze"
+          },
+          {
             "date": "2026-08-20",
             "name": "Feature Freeze"
+          },
+          {
+            "date": "2026-09-10",
+            "name": "UI Freeze"
+          },
+          {
+            "date": "2026-09-17",
+            "name": "Documentation String Freeze"
+          },
+          {
+            "date": "2026-09-17",
+            "name": "Kernel Feature Freeze"
+          },
+          {
+            "date": "2026-09-21",
+            "name": "Beta Freeze"
+          },
+          {
+            "date": "2026-09-21",
+            "name": "Hardware Enablement Freeze"
+          },
+          {
+            "date": "2026-09-24",
+            "name": "Beta"
+          },
+          {
+            "date": "2026-10-01",
+            "name": "Kernel Freeze"
+          },
+          {
+            "date": "2026-10-01",
+            "name": "Non Language Pack Translation Deadline"
+          },
+          {
+            "date": "2026-10-08",
+            "name": "Final Freeze"
+          },
+          {
+            "date": "2026-10-08",
+            "name": "Language Pack Translation Deadline"
+          },
+          {
+            "date": "2026-10-08",
+            "name": "Release Candidate"
           },
           {
             "date": "2026-10-15",
             "name": "Final Release"
           }
         ],
-        "phase": "FEATURE_FREEZE",
+        "phase": "BETA_FREEZE",
         "release_date": "2026-10-15",
         "release_type": "INTERIM",
         "series": "stonking",
@@ -219,13 +283,8 @@
     },
     "unavailable": [
       {
-        "impact": "cannot tell how late in the freeze this request is",
-        "reason": "calendar.schedule: documentation.ubuntu.com rate-limited us",
-        "source_id": "calendar.schedule"
-      },
-      {
         "impact": "cannot tell which Ubuntu images ship this package",
-        "reason": "seed index incomplete: index covers only 2 flavours",
+        "reason": "seed index incomplete: index covers only 3 flavours",
         "source_id": "seeds"
       }
     ]
@@ -238,17 +297,17 @@
     "left_queue_at": null
   },
   "provenance": {
-    "generated_at": "2026-09-22T18:15:06Z",
+    "generated_at": "2026-09-22T21:36:49Z",
     "harness": null,
     "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
     "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
     "policy_version": "1.0.0",
-    "review_key": "sha256:612b0ff3644c693010fb08e834c2141b2ede7a28ee772a846a40a10435682392",
+    "review_key": "sha256:2529e22258312525e1e4116923cf32c041f74cdf58b3f283816268a521581222",
     "risk_algorithm_version": "risk/1.2.0",
-    "run_id": "run-20260922T181425Z",
+    "run_id": "run-20260922T213629Z",
     "tool_version": "0.1.0"
   },
-  "record_id": "2167149/9053e010b407b5d5",
+  "record_id": "2167149/0647d7bbdedc2bbe",
   "risk": {
     "algorithm_version": "risk/1.2.0",
     "band": "MODERATE",
@@ -259,8 +318,8 @@
         ],
         "max_points": 20,
         "name": "release_posture",
-        "points": 7,
-        "rationale": "interim release, past feature freeze, 23 days to release, 59% through the freeze window"
+        "points": 14,
+        "rationale": "interim release, past beta freeze, 23 days to release, 59% through the freeze window"
       },
       {
         "evidence_refs": [
@@ -308,7 +367,7 @@
         "rationale": "the bug links a PPA"
       }
     ],
-    "confidence_ceiling": "LOW",
+    "confidence_ceiling": "MEDIUM",
     "decision_floor": null,
     "gates": [
       {
@@ -380,11 +439,11 @@
           "/evidence/unavailable"
         ],
         "id": "evidence_unavailable",
-        "rationale": "could not consult calendar.schedule, seeds, so this assessment rests on incomplete evidence",
+        "rationale": "could not consult seeds, so this assessment rests on incomplete evidence",
         "triggered": true
       }
     ],
-    "score": 37
+    "score": 44
   },
   "schema_version": "1.0.0",
   "status": "EVIDENCE_ONLY"

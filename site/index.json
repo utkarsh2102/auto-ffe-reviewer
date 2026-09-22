@@ -22,7 +22,7 @@
       "rdepends": 0,
       "release_type": "LTS",
       "reporter": "benh-kernel",
-      "reviewed_at": "2026-09-22T18:14:38Z",
+      "reviewed_at": "2026-09-22T21:36:36Z",
       "risk_band": "HIGH",
       "risk_score": 70,
       "seeded": null,
@@ -32,7 +32,6 @@
       "testing_corroborated": false,
       "title": "[FFE/SRU] linux-entra-sso: broken compatibility with new MSFT msalcpp broker",
       "unavailable": [
-        "calendar.schedule",
         "seeds"
       ],
       "url": "https://bugs.launchpad.net/bugs/2167899",
@@ -48,23 +47,23 @@
       "decision_floor": null,
       "ffe_kind": "merge",
       "flags": [],
-      "flavour_impact": "SINGLE_FLAVOUR",
+      "flavour_impact": "CORE",
       "has_assessment": false,
       "injection_signals": 1,
-      "is_core": false,
+      "is_core": true,
       "missing_information": [],
       "packages": [
         "rdma-core"
       ],
-      "phase": "FEATURE_FREEZE",
+      "phase": "BETA_FREEZE",
       "rdepends": 67,
       "release_type": "INTERIM",
       "reporter": "virtustom",
-      "reviewed_at": "2026-09-22T18:14:58Z",
-      "risk_band": "MODERATE",
-      "risk_score": 42,
+      "reviewed_at": "2026-09-22T21:36:45Z",
+      "risk_band": "HIGH",
+      "risk_score": 68,
       "seeded": [
-        "ubuntu-budgie"
+        "ubuntu"
       ],
       "series": "stonking",
       "status": "EVIDENCE_ONLY",
@@ -72,7 +71,6 @@
       "testing_corroborated": true,
       "title": "FFe: Please merge rdma-core 65.0-1 from Debian unstable into stonking (new upstream release 65.0)",
       "unavailable": [
-        "calendar.schedule",
         "seeds"
       ],
       "url": "https://bugs.launchpad.net/bugs/2167325",
@@ -96,13 +94,13 @@
       "packages": [
         "magnum-capi-helm"
       ],
-      "phase": "FEATURE_FREEZE",
+      "phase": "BETA_FREEZE",
       "rdepends": 0,
       "release_type": "INTERIM",
       "reporter": "himax16",
-      "reviewed_at": "2026-09-22T18:15:06Z",
+      "reviewed_at": "2026-09-22T21:36:49Z",
       "risk_band": "MODERATE",
-      "risk_score": 37,
+      "risk_score": 44,
       "seeded": null,
       "series": "stonking",
       "status": "EVIDENCE_ONLY",
@@ -110,7 +108,6 @@
       "testing_corroborated": true,
       "title": "[FFe] Update magnum-capi-helm to 1.4.0 in Stonking",
       "unavailable": [
-        "calendar.schedule",
         "seeds"
       ],
       "url": "https://bugs.launchpad.net/bugs/2167149",
@@ -121,7 +118,7 @@
     "approve": 0,
     "awaiting_flavour_ack": 0,
     "evidence_incomplete": 3,
-    "high_risk": 1,
+    "high_risk": 2,
     "needs_attention": 3,
     "needs_information": 0,
     "no_recommendation": 3,

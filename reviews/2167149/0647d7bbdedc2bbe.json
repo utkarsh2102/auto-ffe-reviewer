@@ -73,8 +73,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-21T15:50:00Z",
-            "duration_ms": 306,
+            "checked_at": "2026-09-22T21:36:47Z",
+            "duration_ms": 239,
             "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=magnum-capi-helm&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
             "method": "http_get",
             "raw_ref": "sha256:683e3b1376352356dd3232b9c6f8da513425b55d7700f5fe974124a820df1e42",
@@ -97,8 +97,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-21T15:50:02Z",
-            "duration_ms": 152,
+            "checked_at": "2026-09-22T21:36:49Z",
+            "duration_ms": 112,
             "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:magnum-capi-helm",
             "method": "http_get",
             "raw_ref": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
@@ -120,8 +120,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-21T15:50:01Z",
-            "duration_ms": 161,
+            "checked_at": "2026-09-22T21:36:48Z",
+            "duration_ms": 115,
             "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:magnum-capi-helm",
             "method": "http_get",
             "raw_ref": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
@@ -139,14 +139,14 @@
           }
         },
         "seeds": {
-          "note": "none of python3-magnum-capi-helm appear in the seed index, but the index looks incomplete (index covers only 5 flavours), so this is not evidence that the package is unseeded",
+          "note": "none of python3-magnum-capi-helm appear in the seed index, but the index looks incomplete (index covers only 3 flavours), so this is not evidence that the package is unseeded",
           "provenance": {
-            "cache": "fresh",
-            "checked_at": "2026-09-21T15:50:01Z",
-            "duration_ms": 634,
+            "cache": "cached",
+            "checked_at": "2026-09-22T21:36:48Z",
+            "duration_ms": 0,
             "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
             "method": "http_get",
-            "raw_ref": "sha256:865bc08df62b9eeb7455636dada101238bbdc89bef1960403db6b814fa27b3c5",
+            "raw_ref": "sha256:956e413bf2cca1af139b04e931c3e2bfaf94524e9af0a52c4c52337b9199a847",
             "raw_truncated": false,
             "source_id": "seeds"
           },
@@ -158,9 +158,9 @@
     "release_context": {
       "note": null,
       "provenance": {
-        "cache": "fresh",
-        "checked_at": "2026-09-21T15:49:59Z",
-        "duration_ms": 115,
+        "cache": "cached",
+        "checked_at": "2026-09-22T21:36:47Z",
+        "duration_ms": 0,
         "locator": "https://documentation.ubuntu.com/release-notes/26.10/schedule/",
         "method": "http_get",
         "raw_ref": "sha256:a51b44260a65f3d41e87e9067245550b625351237c43bf020348c2afbcff7397",
@@ -170,11 +170,11 @@
       "status": "OK",
       "value": {
         "days_bucket": "28-15",
-        "days_since_feature_freeze": 32,
-        "days_to_release": 24,
+        "days_since_feature_freeze": 33,
+        "days_to_release": 23,
         "derivation": "schedule-page",
         "feature_freeze": "2026-08-20",
-        "freeze_window_elapsed_pct": 57,
+        "freeze_window_elapsed_pct": 59,
         "milestones": [
           {
             "date": "2026-04-30",
@@ -284,7 +284,7 @@
     "unavailable": [
       {
         "impact": "cannot tell which Ubuntu images ship this package",
-        "reason": "seed index incomplete: index covers only 5 flavours",
+        "reason": "seed index incomplete: index covers only 3 flavours",
         "source_id": "seeds"
       }
     ]
@@ -297,14 +297,14 @@
     "left_queue_at": null
   },
   "provenance": {
-    "generated_at": "2026-09-21T15:50:02Z",
+    "generated_at": "2026-09-22T21:36:49Z",
     "harness": null,
     "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
     "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
     "policy_version": "1.0.0",
     "review_key": "sha256:2529e22258312525e1e4116923cf32c041f74cdf58b3f283816268a521581222",
     "risk_algorithm_version": "risk/1.2.0",
-    "run_id": "run-20260921T154952Z",
+    "run_id": "run-20260922T213629Z",
     "tool_version": "0.1.0"
   },
   "record_id": "2167149/0647d7bbdedc2bbe",
@@ -319,7 +319,7 @@
         "max_points": 20,
         "name": "release_posture",
         "points": 14,
-        "rationale": "interim release, past beta freeze, 24 days to release, 57% through the freeze window"
+        "rationale": "interim release, past beta freeze, 23 days to release, 59% through the freeze window"
       },
       {
         "evidence_refs": [
