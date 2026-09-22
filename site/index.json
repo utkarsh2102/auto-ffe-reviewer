@@ -2,10 +2,88 @@
   "bugs": [
     {
       "ack_required_from": [],
+      "bug_id": 2167899,
+      "build_rdepends": 0,
+      "confidence": null,
+      "days_to_release": -880,
+      "decision": null,
+      "decision_floor": "NEEDS_INFORMATION",
+      "ffe_kind": "feature-change",
+      "flags": [],
+      "flavour_impact": "UNSEEDED",
+      "has_assessment": false,
+      "injection_signals": 0,
+      "is_core": false,
+      "missing_information": [],
+      "packages": [
+        "linux-entra-sso"
+      ],
+      "phase": "FINAL_RELEASE",
+      "rdepends": 0,
+      "release_type": "LTS",
+      "reporter": "benh-kernel",
+      "reviewed_at": "2026-09-22T18:14:38Z",
+      "risk_band": "HIGH",
+      "risk_score": 70,
+      "seeded": null,
+      "series": "noble",
+      "status": "EVIDENCE_ONLY",
+      "summary": null,
+      "testing_corroborated": false,
+      "title": "[FFE/SRU] linux-entra-sso: broken compatibility with new MSFT msalcpp broker",
+      "unavailable": [
+        "calendar.schedule",
+        "seeds"
+      ],
+      "url": "https://bugs.launchpad.net/bugs/2167899",
+      "version": "24.04"
+    },
+    {
+      "ack_required_from": [],
+      "bug_id": 2167325,
+      "build_rdepends": 37,
+      "confidence": null,
+      "days_to_release": 23,
+      "decision": null,
+      "decision_floor": null,
+      "ffe_kind": "merge",
+      "flags": [],
+      "flavour_impact": "SINGLE_FLAVOUR",
+      "has_assessment": false,
+      "injection_signals": 1,
+      "is_core": false,
+      "missing_information": [],
+      "packages": [
+        "rdma-core"
+      ],
+      "phase": "FEATURE_FREEZE",
+      "rdepends": 67,
+      "release_type": "INTERIM",
+      "reporter": "virtustom",
+      "reviewed_at": "2026-09-22T18:14:58Z",
+      "risk_band": "MODERATE",
+      "risk_score": 42,
+      "seeded": [
+        "ubuntu-budgie"
+      ],
+      "series": "stonking",
+      "status": "EVIDENCE_ONLY",
+      "summary": null,
+      "testing_corroborated": true,
+      "title": "FFe: Please merge rdma-core 65.0-1 from Debian unstable into stonking (new upstream release 65.0)",
+      "unavailable": [
+        "calendar.schedule",
+        "seeds"
+      ],
+      "url": "https://bugs.launchpad.net/bugs/2167325",
+      "version": "26.10"
+    },
+    {
+      "ack_required_from": [],
       "bug_id": 2167149,
       "build_rdepends": 0,
       "confidence": null,
-      "days_to_release": 24,
+      "days_to_release": 23,
       "decision": null,
       "decision_floor": null,
       "ffe_kind": "new-upstream",
@@ -18,13 +96,13 @@
       "packages": [
         "magnum-capi-helm"
       ],
-      "phase": "BETA_FREEZE",
+      "phase": "FEATURE_FREEZE",
       "rdepends": 0,
       "release_type": "INTERIM",
       "reporter": "himax16",
-      "reviewed_at": "2026-09-21T15:50:02Z",
+      "reviewed_at": "2026-09-22T18:15:06Z",
       "risk_band": "MODERATE",
-      "risk_score": 44,
+      "risk_score": 37,
       "seeded": null,
       "series": "stonking",
       "status": "EVIDENCE_ONLY",
@@ -32,6 +110,7 @@
       "testing_corroborated": true,
       "title": "[FFe] Update magnum-capi-helm to 1.4.0 in Stonking",
       "unavailable": [
+        "calendar.schedule",
         "seeds"
       ],
       "url": "https://bugs.launchpad.net/bugs/2167149",
@@ -41,13 +120,13 @@
   "counts": {
     "approve": 0,
     "awaiting_flavour_ack": 0,
-    "evidence_incomplete": 1,
-    "high_risk": 0,
-    "needs_attention": 1,
+    "evidence_incomplete": 3,
+    "high_risk": 1,
+    "needs_attention": 3,
     "needs_information": 0,
-    "no_recommendation": 1,
-    "no_testing_evidence": 0,
-    "open": 1,
+    "no_recommendation": 3,
+    "no_testing_evidence": 1,
+    "open": 3,
     "reject": 0
   },
   "version": 1

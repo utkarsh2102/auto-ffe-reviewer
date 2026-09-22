@@ -1,0 +1,385 @@
+{
+  "assessment": null,
+  "evidence": {
+    "bug": {
+      "comments": [
+        {
+          "author": "benh-kernel",
+          "author_is_release_team": false,
+          "content": "Mirroring Debian bug: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1148245\n\nThe version currently in resolute multiverse doesn't seem to work at all. Luca fixed it in Debian\nsid following my bug report (version 1.11.0-1 has the fix).\n\nPlease either update multiverse with the new version or backport the actual build system fix.\n\n(See the debian bug for all the details).",
+          "content_sha": "520ed4ea51f1ae9d3812eac018ca5f222196984b11f60498707c3d75a9687341",
+          "date_created": "2026-09-22T00:00:31.642141+00:00",
+          "index": 0,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/linux-entra-sso/+bug/2167899/comments/0"
+        },
+        {
+          "author": "bluca",
+          "author_is_release_team": false,
+          "content": "Fix uploaded to stonking-proposed, resolute-proposed and noble-backports, waiting for FFE/SRU/backport reviews",
+          "content_sha": "d44e2a922567cfd87a6033551e3fb7fffdd1538b4aa23768b2f7df4f9511e15c",
+          "date_created": "2026-09-22T18:00:15.723294+00:00",
+          "index": 1,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/linux-entra-sso/+bug/2167899/comments/1"
+        }
+      ],
+      "date_created": "2026-09-22T00:00:31.642141+00:00",
+      "date_last_message": "2026-09-22T18:00:15.723294+00:00",
+      "date_last_updated": "2026-09-22T18:03:06.965728+00:00",
+      "description": "[ Rationale ]\n\nThe proprietary C++ Entra broker from Microsoft now expects a version being set in the IPC request that linux-entra-sso sends, but the current build does not set one as the build process takes it from git, which is not available at package build time. The consequence for Ubuntu + Entra users is that they cannot access Conditional-Access-protected resourced from their browsers, and are effectively cut off from their corporate resources (emails, docs, etc).\n\nThe older/deprecated proprietary java-based MSFT Entra broker, and the open source Himmelblau Entra broker, are not affected.\n\n[ Impact / Scope ]\n\nThe solution is a change to debian/rules to set an environment variable override that fixes the version to the source package version, bypassing the build system git tag parsing logic. The only runtime difference is that an actual version is included in the IPC, and the only package difference is that the version is stamped in the Python script instead of being an empty string.\n\nroot@stonking:~# seeded-in-ubuntu linux-entra-sso\nlinux-entra-sso's binaries are not seeded for stonking.\n\n[ Test Plan ]\n\nPackage builds correctly and sends version via IPC.\n\nDiffoscope output for Stonking:\n\nroot@stonking:/tmp# diffoscope --exclude-directory-metadata=recursive /var/cache/apt/archives/linux-entra-sso_1.8.1-1_all.deb ./linux-entra-sso_1.8.1-1ubuntu1_all.deb\n--- /var/cache/apt/archives/linux-entra-sso_1.8.1-1_all.deb\n+++ ./linux-entra-sso_1.8.1-1ubuntu1_all.deb\n├── control.tar.zst\n│ ├── control.tar\n│ │ ├── ./control\n│ │ │ @@ -1,16 +1,16 @@\n│ │ │  Package: linux-entra-sso\n│ │ │ -Version: 1.8.1-1\n│ │ │ +Version: 1.8.1-1ubuntu1\n│ │ │  Architecture: all\n│ │ │  Maintainer: Ubuntu Developers <email address hidden>\n│ │ │ -Original-Maintainer: Luca Boccassi <email address hidden>\n│ │ │  Installed-Size: 40\n│ │ │  Depends: python3, python3-gi, python3-pydbus\n│ │ │  Suggests: chromium | chromium-browser, firefox | firefox-esr\n│ │ │  Enhances: chromium, chromium-browser, firefox, firefox-esr\n│ │ │  Section: contrib/web\n│ │ │  Priority: optional\n│ │ │  Homepage: https://github.com/siemens/linux-entra-sso\n│ │ │  Description: Entra ID SSO via Himmelblau or Microsoft Identity Broker on Linux\n│ │ │   Local native host messaging connector for Firefox/Chromium/Chrome extension to\n│ │ │   implement Entra ID SSO Conditional Access, connecting to the Identity Broker\n│ │ │   via D-Bus. Supports the open source Himmelblau stack or the Microsoft stack.\n│ │ │ +Original-Maintainer: Luca Boccassi <email address hidden>\n│ │ ├── ./md5sums\n│ │ │ ├── ./md5sums\n│ │ │ │┄ Files differ\n├── data.tar.zst\n│ ├── data.tar\n│ │ ├── ./usr/libexec/linux-entra-sso/linux-entra-sso.py\n│ │ │ @@ -18,15 +18,15 @@\n│ │ │  from xml.etree import ElementTree as ET\n│ │ │\n│ │ │  from gi.repository import GLib\n│ │ │  from pydbus import SessionBus\n│ │ │  from pydbus.proxy import CompositeInterface\n│ │ │\n│ │ │  # version is replaced on installation\n│ │ │ -LINUX_ENTRA_SSO_VERSION = \"\"\n│ │ │ +LINUX_ENTRA_SSO_VERSION = \"1.8.1\"\n│ │ │\n│ │ │  # the ssoUrl is a mandatory parameter when requesting a PRT SSO\n│ │ │  # Cookie, but the correct value is not checked as of 30.05.2024\n│ │ │  # by the authorization backend. By that, a static (fallback)\n│ │ │  # value can be used, if no real value is provided.\n│ │ │  SSO_URL_DEFAULT = \"https://login.microsoftonline.com/\"\n│ │ │  EDGE_BROWSER_CLIENT_ID = \"d7b530a4-7680-4c23-a8bf-c52c121d2e87\"\n│ │ ├── ./usr/share/doc/linux-entra-sso/changelog.Debian.gz\n│ │ │ ├── changelog.Debian\n│ │ │ │ @@ -1,7 +1,14 @@\n│ │ │ │ +linux-entra-sso (1.8.1-1ubuntu1) stonking; urgency=medium\n│ │ │ │ +\n│ │ │ │ +  * d/rules: set RELEASE_TAG with upstream version\n│ │ │ │ +    (LP: #2167899)\n│ │ │ │ +\n│ │ │ │ + -- Luca Boccassi <email address hidden>  Tue, 22 Sep 2026 13:03:45 +0200\n│ │ │ │ +\n│ │ │ │  linux-entra-sso (1.8.1-1) unstable; urgency=medium\n│ │ │ │\n│ │ │ │    * Update upstream source from tag 'upstream/1.8.1'\n│ │ │ │    * Bump Standards-version to 4.7.4, no changes\n│ │ │ │\n│ │ │ │   -- Luca Boccassi <email address hidden>  Mon, 27 Apr 2026 11:49:03 +0100\n\nDiffoscope output for Resolute:\n\nroot@resolute:/tmp# diffoscope --exclude-directory-metadata=recursive /var/cache/apt/archives/linux-entra-sso_1.8.0-1_all.deb ./linux-entra-sso_1.8.0-1ubuntu26.04.1_all.deb\n--- /var/cache/apt/archives/linux-entra-sso_1.8.0-1_all.deb\n+++ ./linux-entra-sso_1.8.0-1ubuntu26.04.1_all.deb\n├── control.tar.zst\n│ ├── control.tar\n│ │ ├── ./control\n│ │ │ @@ -1,16 +1,16 @@\n│ │ │  Package: linux-entra-sso\n│ │ │ -Version: 1.8.0-1\n│ │ │ +Version: 1.8.0-1ubuntu26.04.1\n│ │ │  Architecture: all\n│ │ │  Maintainer: Ubuntu Developers <email address hidden>\n│ │ │ -Original-Maintainer: Luca Boccassi <email address hidden>\n│ │ │  Installed-Size: 40\n│ │ │  Depends: python3, python3-gi, python3-pydbus\n│ │ │  Suggests: chromium | chromium-browser, firefox | firefox-esr\n│ │ │  Enhances: chromium, chromium-browser, firefox, firefox-esr\n│ │ │  Section: contrib/web\n│ │ │  Priority: optional\n│ │ │  Homepage: https://github.com/siemens/linux-entra-sso\n│ │ │  Description: Entra ID SSO via Himmelblau or Microsoft Identity Broker on Linux\n│ │ │   Local native host messaging connector for Firefox/Chromium/Chrome extension to\n│ │ │   implement Entra ID SSO Conditional Access, connecting to the Identity Broker\n│ │ │   via D-Bus. Supports the open source Himmelblau stack or the Microsoft stack.\n│ │ │ +Original-Maintainer: Luca Boccassi <email address hidden>\n│ │ ├── ./md5sums\n│ │ │ ├── ./md5sums\n│ │ │ │┄ Files differ\n├── data.tar.zst\n│ ├── data.tar\n│ │ ├── ./usr/libexec/linux-entra-sso/linux-entra-sso.py\n│ │ │ @@ -19,15 +19,15 @@\n│ │ │  from xml.etree import ElementTree as ET\n│ │ │\n│ │ │  from gi.repository import GLib\n│ │ │  from pydbus import SessionBus\n│ │ │  from pydbus.proxy import CompositeInterface\n│ │ │\n│ │ │  # version is replaced on installation\n│ │ │ -LINUX_ENTRA_SSO_VERSION = \"\"\n│ │ │ +LINUX_ENTRA_SSO_VERSION = \"1.8.0\"\n│ │ │\n│ │ │  # the ssoUrl is a mandatory parameter when requesting a PRT SSO\n│ │ │  # Cookie, but the correct value is not checked as of 30.05.2024\n│ │ │  # by the authorization backend. By that, a static (fallback)\n│ │ │  # value can be used, if no real value is provided.\n│ │ │  SSO_URL_DEFAULT = \"https://login.microsoftonline.com/\"\n│ │ │  EDGE_BROWSER_CLIENT_ID = \"d7b530a4-7680-4c23-a8bf-c52c121d2e87\"\n│ │ ├── ./usr/share/doc/linux-entra-sso/changelog.Debian.gz\n│ │ │ ├── changelog.Debian\n│ │ │ │ @@ -1,7 +1,14 @@\n│ │ │ │ +linux-entra-sso (1.8.0-1ubuntu26.04.1) resolute; urgency=medium\n│ │ │ │ +\n│ │ │ │ +  * d/rules: set RELEASE_TAG with upstream version\n│ │ │ │ +    (LP: #2167899)\n│ │ │ │ +\n│ │ │ │ + -- Luca Boccassi <email address hidden>  Tue, 22 Sep 2026 13:45:24 +0200\n│ │ │ │ +\n│ │ │ │  linux-entra-sso (1.8.0-1) unstable; urgency=medium\n│ │ │ │\n│ │ │ │    * Update upstream source from tag 'upstream/1.8.0'\n│ │ │ │\n│ │ │ │   -- Luca Boccassi <email address hidden>  Tue, 17 Feb 2026 09:52:47 +0000\n│ │ │ │\n│ │ │ │  linux-entra-sso (1.7.2-1) unstable; urgency=medium\n\n[ Where problems could occur / Regression Potential ]\n\nThis changes the IPC message sent from the browser extension connector helper to the local identity broker. While unlikely, it is theoretically possible that a future broker update could revert the change requiring the version in the message, and instead demand an empty version in the protocol, and thus reject the message, requiring another package update.\n\n[ Other Info ]\n\nOriginal bug report text follows:\n\nMirroring Debian bug: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1148245\n\nThe version currently in resolute multiverse doesn't seem to work at all. Luca fixed it in Debian\nsid following my bug report (version 1.11.0-1 has the fix).\n\nPlease either update multiverse with the new version or backport the actual build system fix.\n\n(See the debian bug for all the details).",
+      "description_sha": "ed59ca7877e9c20a8f1643bf38b048a9e7f921ba8ca31e691d10a27f22bca1b9",
+      "discovered_via": "release-team-queue",
+      "id": 2167899,
+      "message_count": 2,
+      "release_team_subscribed": true,
+      "reporter": "benh-kernel",
+      "subscribers": [
+        "benh-kernel",
+        "ubuntu-release",
+        "ubuntu-sru"
+      ],
+      "tags": [],
+      "tasks": [
+        {
+          "assignee": null,
+          "importance": "Undecided",
+          "status": "New",
+          "target": "linux-entra-sso (Ubuntu)"
+        },
+        {
+          "assignee": null,
+          "importance": "Undecided",
+          "status": "New",
+          "target": "linux-entra-sso (Ubuntu Noble)"
+        },
+        {
+          "assignee": null,
+          "importance": "Undecided",
+          "status": "New",
+          "target": "linux-entra-sso (Ubuntu Resolute)"
+        },
+        {
+          "assignee": null,
+          "importance": "Undecided",
+          "status": "New",
+          "target": "linux-entra-sso (Ubuntu Stonking)"
+        },
+        {
+          "assignee": null,
+          "importance": "Unknown",
+          "status": "Unknown",
+          "target": "linux-entra-sso (Debian)"
+        }
+      ],
+      "title": "[FFE/SRU] linux-entra-sso: broken compatibility with new MSFT msalcpp broker",
+      "url": "https://bugs.launchpad.net/bugs/2167899"
+    },
+    "fingerprint": "sha256:69aa43c4b8f62bf9d56d005a8a714c8bd2242f2134c7f851e4246316ff77c9f9",
+    "flavours": {
+      "ack_required_from": [],
+      "acks": [],
+      "affected_flavours": [],
+      "impact": "UNSEEDED",
+      "requester_is_flavour_lead": null,
+      "requesting_flavour": null
+    },
+    "injection_signals": [],
+    "packages": [
+      {
+        "archive": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-09-22T18:14:36Z",
+            "duration_ms": 355,
+            "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=linux-entra-sso&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fnoble&status=Published&order_by_date=true",
+            "method": "http_get",
+            "raw_ref": "sha256:106739aeed2195218ada510174c286d3e0449512829d0b5ffec466afa10e3914",
+            "raw_truncated": false,
+            "source_id": "launchpad.archive"
+          },
+          "status": "OK",
+          "value": {
+            "binaries": [
+              "linux-entra-sso"
+            ],
+            "component": "multiverse",
+            "in_archive": true,
+            "pocket": "Backports",
+            "source": "linux-entra-sso",
+            "version": "1.8.0-1~bpo24.04.1"
+          }
+        },
+        "build_rdepends": {
+          "note": "src:linux-entra-sso is not in the noble archive, so it has no reverse dependencies yet",
+          "provenance": {
+            "cache": "none",
+            "checked_at": "2026-09-22T18:14:38Z",
+            "duration_ms": 0,
+            "locator": "http://qa.ubuntuwire.org/rdepends/v1/noble/source/src:linux-entra-sso",
+            "method": "computed",
+            "raw_ref": null,
+            "raw_truncated": false,
+            "source_id": "rdepends.build"
+          },
+          "status": "NOT_APPLICABLE",
+          "value": null
+        },
+        "name": "linux-entra-sso",
+        "rdepends": {
+          "note": "src:linux-entra-sso is not in the noble archive, so it has no reverse dependencies yet",
+          "provenance": {
+            "cache": "none",
+            "checked_at": "2026-09-22T18:14:37Z",
+            "duration_ms": 0,
+            "locator": "http://qa.ubuntuwire.org/rdepends/v1/noble/any/src:linux-entra-sso",
+            "method": "computed",
+            "raw_ref": null,
+            "raw_truncated": false,
+            "source_id": "rdepends.binary"
+          },
+          "status": "NOT_APPLICABLE",
+          "value": null
+        },
+        "seeds": {
+          "note": "none of linux-entra-sso appear in the seed index, but the index looks incomplete (index covers only 2 flavours), so this is not evidence that the package is unseeded",
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-09-22T18:14:37Z",
+            "duration_ms": 498,
+            "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
+            "method": "http_get",
+            "raw_ref": "sha256:81e27913cb5f01f3a9fe6c6a7260a3ebac23a6cb87f06de293e02df2aab3010d",
+            "raw_truncated": false,
+            "source_id": "seeds"
+          },
+          "status": "UNAVAILABLE",
+          "value": null
+        }
+      }
+    ],
+    "release_context": {
+      "note": "schedule page unavailable; dates approximated as release minus 8 weeks, which has been observed to be up to a week early",
+      "provenance": {
+        "cache": "none",
+        "checked_at": "2026-09-22T18:14:36Z",
+        "duration_ms": 0,
+        "locator": "https://documentation.ubuntu.com/release-notes/24.04/schedule/",
+        "method": "computed",
+        "raw_ref": null,
+        "raw_truncated": false,
+        "source_id": "calendar.schedule"
+      },
+      "status": "OK",
+      "value": {
+        "days_bucket": "post-release",
+        "days_since_feature_freeze": 936,
+        "days_to_release": -880,
+        "derivation": "approximate",
+        "feature_freeze": "2024-02-29",
+        "freeze_window_elapsed_pct": 100,
+        "milestones": [
+          {
+            "date": "2024-02-29",
+            "name": "Feature Freeze"
+          },
+          {
+            "date": "2024-04-25",
+            "name": "Final Release"
+          }
+        ],
+        "phase": "FINAL_RELEASE",
+        "release_date": "2024-04-25",
+        "release_type": "LTS",
+        "series": "noble",
+        "version": "24.04"
+      }
+    },
+    "subject": {
+      "derivation": "packages:bug-tasks; series:bug-task-series",
+      "ffe_kind": "feature-change",
+      "packages": [
+        "linux-entra-sso"
+      ],
+      "target_series": "noble"
+    },
+    "testing": {
+      "autopkgtest": "ABSENT",
+      "build": "ABSENT",
+      "corroborated": false,
+      "items": [],
+      "ppa": "ABSENT",
+      "test_output": "ABSENT",
+      "unverified_claims": []
+    },
+    "unavailable": [
+      {
+        "impact": "cannot tell how late in the freeze this request is",
+        "reason": "calendar.schedule: documentation.ubuntu.com rate-limited us",
+        "source_id": "calendar.schedule"
+      },
+      {
+        "impact": "cannot tell which Ubuntu images ship this package",
+        "reason": "seed index incomplete: index covers only 2 flavours",
+        "source_id": "seeds"
+      }
+    ]
+  },
+  "human": {
+    "decided": false,
+    "decision": null,
+    "detected_at": null,
+    "final_status": null,
+    "left_queue_at": null
+  },
+  "provenance": {
+    "generated_at": "2026-09-22T18:14:38Z",
+    "harness": null,
+    "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
+    "policy_version": "1.0.0",
+    "review_key": "sha256:9373482df053f21a8433bf112ace0e63a834c47806932ef96fdb1e1256e2f899",
+    "risk_algorithm_version": "risk/1.2.0",
+    "run_id": "run-20260922T181425Z",
+    "tool_version": "0.1.0"
+  },
+  "record_id": "2167899/69aa43c4b8f62bf9",
+  "risk": {
+    "algorithm_version": "risk/1.2.0",
+    "band": "HIGH",
+    "components": [
+      {
+        "evidence_refs": [
+          "/evidence/release_context"
+        ],
+        "max_points": 20,
+        "name": "release_posture",
+        "points": 20,
+        "rationale": "LTS release, past final release, -880 days to release, 100% through the freeze window"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/packages"
+        ],
+        "max_points": 25,
+        "name": "seeded_reach",
+        "points": 15,
+        "rationale": "could not establish which images ship this package; scored cautiously rather than as unseeded"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/packages"
+        ],
+        "max_points": 25,
+        "name": "dependency_reach",
+        "points": 15,
+        "rationale": "reverse dependencies could not be determined; scored cautiously rather than as a leaf"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/packages"
+        ],
+        "max_points": 10,
+        "name": "archive_standing",
+        "points": 3,
+        "rationale": "in universe or multiverse, which is community-supported"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/subject"
+        ],
+        "max_points": 5,
+        "name": "change_shape",
+        "points": 2,
+        "rationale": "a feature change to an existing package"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/testing"
+        ],
+        "max_points": 15,
+        "name": "unvalidated_change",
+        "points": 15,
+        "rationale": "no PPA, build log or test results are linked from the bug"
+      }
+    ],
+    "confidence_ceiling": "LOW",
+    "decision_floor": "NEEDS_INFORMATION",
+    "gates": [
+      {
+        "effect": "floor_needs_information",
+        "evidence_refs": [
+          "/evidence/subject"
+        ],
+        "id": "no_package_identified",
+        "rationale": "the affected package is identified",
+        "triggered": false
+      },
+      {
+        "effect": "floor_needs_information",
+        "evidence_refs": [
+          "/evidence/testing"
+        ],
+        "id": "no_testing_evidence",
+        "rationale": "nothing in the bug demonstrates the change works: no PPA, build log or test results",
+        "triggered": true
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/flavours"
+        ],
+        "id": "flavour_ack_outstanding",
+        "rationale": "no cross-flavour acknowledgement is outstanding",
+        "triggered": false
+      },
+      {
+        "effect": "floor_needs_information",
+        "evidence_refs": [
+          "/evidence/release_context"
+        ],
+        "id": "after_final_freeze",
+        "rationale": "the request is past final release, when only release-critical fixes are normally considered",
+        "triggered": true
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/release_context"
+        ],
+        "id": "before_feature_freeze",
+        "rationale": "the target release is past Feature Freeze",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/subject"
+        ],
+        "id": "unrecoverable_failure_mode",
+        "rationale": "a regression here would be fixable by an SRU",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/injection"
+        ],
+        "id": "suspicious_bug_text",
+        "rationale": "nothing in the bug text resembles an attempt to steer the reviewer",
+        "triggered": false
+      },
+      {
+        "effect": "cap_confidence",
+        "evidence_refs": [
+          "/evidence/unavailable"
+        ],
+        "id": "evidence_unavailable",
+        "rationale": "could not consult calendar.schedule, seeds, so this assessment rests on incomplete evidence",
+        "triggered": true
+      }
+    ],
+    "score": 70
+  },
+  "schema_version": "1.0.0",
+  "status": "EVIDENCE_ONLY"
+}
