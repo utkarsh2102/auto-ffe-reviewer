@@ -1,8 +1,19 @@
 {
   "agreed": 0,
   "comparable": 0,
-  "decided": 0,
+  "decided": 1,
   "rate": null,
-  "recent": [],
+  "recent": [
+    {
+      "agreed": null,
+      "bug_id": 1867935,
+      "decided_at": "2026-09-22T14:09:29Z",
+      "ours": null,
+      "risk_band": "MODERATE",
+      "theirs": "REJECTED",
+      "title": "[FFE] Update openwsman & wsmancli to resolve FTBFS (and update it in general)",
+      "url": "https://bugs.launchpad.net/bugs/1867935"
+    }
+  ],
   "version": 1
 }
