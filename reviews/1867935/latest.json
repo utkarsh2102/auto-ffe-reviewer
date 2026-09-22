@@ -1,0 +1,585 @@
+{
+  "assessment": null,
+  "evidence": {
+    "bug": {
+      "comments": [
+        {
+          "author": "doko",
+          "author_is_release_team": false,
+          "content": "remove openwsman and rdep wsmancli, ftbfs with current openssl, no rdeps except for wsmancli. Not in Debian.",
+          "content_sha": "afc1f8f1163dc2a51735e3a23dbcae9f33d716e06b6580643a86b7d982c44fde",
+          "date_created": "2020-03-18T14:39:35.945706+00:00",
+          "index": 0,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/openwsman/+bug/1867935/comments/0"
+        },
+        {
+          "author": "xnox",
+          "author_is_release_team": false,
+          "content": "No, we cannot remove as maas snap uses wsmancli. So we need to fix it.",
+          "content_sha": "b12b65f65e1013e9ecc01eaf419cbba9a7569810b7f33ed9a4615121b411901a",
+          "date_created": "2020-03-18T15:01:00.006743+00:00",
+          "index": 1,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/openwsman/+bug/1867935/comments/1"
+        },
+        {
+          "author": "ltrager",
+          "author_is_release_team": false,
+          "content": "MAAS uses wsmancli for AMT support which is required by Intel NUCs. ",
+          "content_sha": "bd16c214e6bf9016c96be6e9a67403140e791c6626201c0bd931ae49f55a01d5",
+          "date_created": "2020-03-23T22:13:48.248893+00:00",
+          "index": 2,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/openwsman/+bug/1867935/comments/2"
+        },
+        {
+          "author": "paelzer",
+          "author_is_release_team": false,
+          "content": "This is Ubuntu only and stuck\n- no d/watch file to get newer source\n- homepage points to https://openwsman.github.io/\n- the test fail is in https://launchpadlibrarian.net/876762448/buildlog_ubuntu-stonking-amd64.openwsman_2.6.5-0ubuntu17_BUILDING.txt.gz and about cmake requirements being too old and compat was dropped\n- no work on the package since many years other than automated rebuilds\n- IMHO that would need to be a bump up from 2.6.5 (current in Ubuntu) to 2.8.1 (latest upstream)\n\n=> https://github.com/Openwsman/openwsman/releases/tag/v2.8.1\n=> Also the sibling wsmancli needs https://github.com/Openwsman/wsmancli/releases/tag/v2.8.0\n\n",
+          "content_sha": "4a3e25255be10935aeaf955c5d56c440f42d925c1c306975b542ddf965a7af69",
+          "date_created": "2026-09-21T10:36:42.455944+00:00",
+          "index": 3,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/openwsman/+bug/1867935/comments/3"
+        }
+      ],
+      "date_created": "2020-03-18T14:39:35.945706+00:00",
+      "date_last_message": "2026-09-21T10:36:42.455944+00:00",
+      "date_last_updated": "2026-09-22T07:14:56.623293+00:00",
+      "description": "## FFE ##\n\n[Rationale]\n\n* Without any fix this is an FTBFS, the FTBFS is because it is severely\n  outdated not getting reasonable updates in many years.\n  Upstream has continued to release new versions, they work, let us upgrade\n  it to those to fix (alternative was to remove it, but MAAS still uses it)\n\n[ Scope ]\n\n* The two packages belong together (wsmancli uses openwsman) and are used\n  by MAAS\n\n* There are no other things directly depending on it\n\n* The assumption would be that users would prefer a version of this decade :-)\n\n* Add the output of seeded-in-ubuntu:\n\n$ seeded-in-ubuntu wsmancli\nwsmancli's binaries are not seeded.\n\nSince the latest version is an FTBFS it would fail\n\n$ seeded-in-ubuntu openwsman\nStatus unknown: No binary packages built by the latest openwsman.\nTry again using -b and the expected binary packages.\n\nBut passing all binaries returns nothing either\n\n$ seeded-in-ubuntu --binary libopenwsman-dev libopenwsman1 libwsman-client4t64 libwsman-client4t64-dbgsym libwsman-clientpp-dev libwsman-clientpp1t64 libwsman-clientpp1t64-dbgsym libwsman-curl-client-transport1 libwsman-curl-client-transport1-dbgsym libwsman-server1t64 libwsman-server1t64-dbgsym libwsman1t64 libwsman1t64-dbgsym openwsman openwsman-dbgsym\nlibopenwsman-dev is not seeded (and may not exist).\nlibopenwsman1 is not seeded (and may not exist).\nlibwsman-client4t64 is not seeded (and may not exist).\nlibwsman-client4t64-dbgsym is not seeded (and may not exist).\nlibwsman-clientpp-dev is not seeded (and may not exist).\nlibwsman-clientpp1t64 is not seeded (and may not exist).\nlibwsman-clientpp1t64-dbgsym is not seeded (and may not exist).\nlibwsman-curl-client-transport1 is not seeded (and may not exist).\nlibwsman-curl-client-transport1-dbgsym is not seeded (and may not exist).\nlibwsman-server1t64 is not seeded (and may not exist).\nlibwsman-server1t64-dbgsym is not seeded (and may not exist).\nlibwsman1t64 is not seeded (and may not exist).\nlibwsman1t64-dbgsym is not seeded (and may not exist).\nopenwsman is not seeded (and may not exist).\nopenwsman-dbgsym is not seeded (and may not exist).\n\n* For new upstream microreleases, include a diff of the upstream changelog\n  since the version included in the archive. This could be a git\n  commit log, CHANGES or NEWS file, or any other list of the relevant\n  upstream changes.\n\n[ Documentation ]\n\n* There is no documentation for this package I could find other than\n  package integrated man pages and such.\n\n* Yes, updating this to a recent version may change the UX and we are past\n  UI freeze, but I see no other feasible option to keep it alive right now.\n\n[ Regression Potential ]\n\n* After a decade of changes you'd expect much, but it is reasonably stable\n\n* wsmancli only updated to be compatible to openwsman 2.8.0\n  https://github.com/Openwsman/wsmancli/releases/tag/v2.8.0\n\n* openwsman has gotten more, the patch versions are fixes, but 2.7 and 2.8 \n  hold a few\n  - https://github.com/Openwsman/openwsman/releases/tag/v2.7.0\n  - https://github.com/Openwsman/openwsman/releases/tag/v2.8.0\n  Calling out the two sets of API changes\n\n* In regard to be \"Tested\" before an FFE I can't say much myself.\n  This may need special hardware or at least spawn systems to talk.\n  I can't do that. But since MAAS is the reason to need this\n  instead of being removed I asked them to test the PPA.\n  I'll wait with the upload until we get their answer here.\n\n[ Testing ]\n\n* Smoke test:\n  - PPA: https://launchpad.net/~paelzer/+archive/ubuntu/lp-1867935-wsman-stonking\n  - Build logs:\n    - https://launchpadlibrarian.net/877756707/buildlog_ubuntu-stonking-amd64.openwsman_2.8.1-0ubuntu1~stonkingppa1_BUILDING.txt.gz\n    - https://launchpadlibrarian.net/877803713/buildlog_ubuntu-stonking-amd64.wsmancli_2.8.0-0ubuntu1~stonkingppa1_BUILDING.txt.gz\n  - Installation:\n    - testing a more full install\n  \n\nroot@s:~# apt install wsmancli openwsman python3-openwsman libopenwsman-dev\nInstalling:                     \n  libopenwsman-dev  openwsman  python3-openwsman  wsmancli\n\nInstalling dependencies:\n  libcimcclient0  libwsman-client5  libwsman-curl-client-transport1  libwsman-server1t64  libwsman1t64\n\nSummary:\n  Upgrading: 0, Installing: 9, Removing: 0, Not Upgrading: 0\n  Download size: 412 kB\n  Space needed: 1690 kB / 42.2 GB available\n\nContinue? [Y/n] Y\nGet:1 https://ppa.launchpadcontent.net/paelzer/lp-1867935-wsman-stonking/ubuntu stonking/main amd64 libwsman-curl-client-transport1 amd64 2.8.1-0ubuntu1~stonkingppa1 [13.4 kB]\nGet:2 http://archive.ubuntu.com/ubuntu stonking/universe amd64 libcimcclient0 amd64 2.2.8-0ubuntu5 [64.7 kB]\nGet:3 https://ppa.launchpadcontent.net/paelzer/lp-1867935-wsman-stonking/ubuntu stonking/main amd64 libwsman-client5 amd64 2.8.1-0ubuntu1~stonkingppa1 [19.7 kB]\nGet:4 https://ppa.launchpadcontent.net/paelzer/lp-1867935-wsman-stonking/ubuntu stonking/main amd64 libwsman1t64 amd64 2.8.1-0ubuntu1~stonkingppa1 [88.6 kB]\nGet:5 https://ppa.launchpadcontent.net/paelzer/lp-1867935-wsman-stonking/ubuntu stonking/main amd64 libopenwsman-dev amd64 2.8.1-0ubuntu1~stonkingppa1 [45.8 kB]\nGet:6 https://ppa.launchpadcontent.net/paelzer/lp-1867935-wsman-stonking/ubuntu stonking/main amd64 libwsman-server1t64 amd64 2.8.1-0ubuntu1~stonkingppa1 [10.2 kB]\nGet:7 https://ppa.launchpadcontent.net/paelzer/lp-1867935-wsman-stonking/ubuntu stonking/main amd64 openwsman amd64 2.8.1-0ubuntu1~stonkingppa1 [66.3 kB]\nGet:8 https://ppa.launchpadcontent.net/paelzer/lp-1867935-wsman-stonking/ubuntu stonking/main amd64 python3-openwsman amd64 2.8.1-0ubuntu1~stonkingppa1 [81.2 kB]\nGet:9 https://ppa.launchpadcontent.net/paelzer/lp-1867935-wsman-stonking/ubuntu stonking/main amd64 wsmancli amd64 2.8.0-0ubuntu1~stonkingppa1 [22.4 kB]\nFetched 412 kB in 1s (812 kB/s)                                        \ndebconf: unable to initialize frontend: Dialog\ndebconf: (No usable dialog-like program is installed, so the dialog based frontend cannot be used. at /usr/share/perl5/Debconf/FrontEnd/Dialog.pm line 79, <STDIN> line 9.)\ndebconf: falling back to frontend: Readline\ndebconf: unable to initialize frontend: Readline\ndebconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.42.3 /usr/local/share/perl/5.42.3 /usr/lib/x86_64-linux-gnu/perl5/5.42 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.42 /usr/share/perl/5.42 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 8, <STDIN> line 9.)\ndebconf: falling back to frontend: Teletype\nSelecting previously unselected package libcimcclient0.\n(Reading database ... 33783 files and directories currently installed.)\nPreparing to unpack .../0-libcimcclient0_2.2.8-0ubuntu5_amd64.deb ...\nUnpacking libcimcclient0 (2.2.8-0ubuntu5) ...\nSelecting previously unselected package libwsman-curl-client-transport1:amd64.\nPreparing to unpack .../1-libwsman-curl-client-transport1_2.8.1-0ubuntu1~stonkingppa1_amd64.deb ...\nUnpacking libwsman-curl-client-transport1:amd64 (2.8.1-0ubuntu1~stonkingppa1) ...\nSelecting previously unselected package libwsman-client5:amd64.\nPreparing to unpack .../2-libwsman-client5_2.8.1-0ubuntu1~stonkingppa1_amd64.deb ...\nUnpacking libwsman-client5:amd64 (2.8.1-0ubuntu1~stonkingppa1) ...\nSelecting previously unselected package libwsman1t64:amd64.\nPreparing to unpack .../3-libwsman1t64_2.8.1-0ubuntu1~stonkingppa1_amd64.deb ...\nUnpacking libwsman1t64:amd64 (2.8.1-0ubuntu1~stonkingppa1) ...\nSelecting previously unselected package libopenwsman-dev:amd64.\nPreparing to unpack .../4-libopenwsman-dev_2.8.1-0ubuntu1~stonkingppa1_amd64.deb ...\nUnpacking libopenwsman-dev:amd64 (2.8.1-0ubuntu1~stonkingppa1) ...\nSelecting previously unselected package libwsman-server1t64:amd64.\nPreparing to unpack .../5-libwsman-server1t64_2.8.1-0ubuntu1~stonkingppa1_amd64.deb ...\nUnpacking libwsman-server1t64:amd64 (2.8.1-0ubuntu1~stonkingppa1) ...\nSelecting previously unselected package openwsman.\nPreparing to unpack .../6-openwsman_2.8.1-0ubuntu1~stonkingppa1_amd64.deb ...\nUnpacking openwsman (2.8.1-0ubuntu1~stonkingppa1) ...\nSelecting previously unselected package python3-openwsman.\nPreparing to unpack .../7-python3-openwsman_2.8.1-0ubuntu1~stonkingppa1_amd64.deb ...\nUnpacking python3-openwsman (2.8.1-0ubuntu1~stonkingppa1) ...\nSelecting previously unselected package wsmancli.\nPreparing to unpack .../8-wsmancli_2.8.0-0ubuntu1~stonkingppa1_amd64.deb ...\nUnpacking wsmancli (2.8.0-0ubuntu1~stonkingppa1) ...\nSetting up libwsman-curl-client-transport1:amd64 (2.8.1-0ubuntu1~stonkingppa1) ...\nSetting up libwsman-client5:amd64 (2.8.1-0ubuntu1~stonkingppa1) ...\nSetting up libcimcclient0 (2.2.8-0ubuntu5) ...\nSetting up libwsman1t64:amd64 (2.8.1-0ubuntu1~stonkingppa1) ...\nSetting up wsmancli (2.8.0-0ubuntu1~stonkingppa1) ...\nSetting up python3-openwsman (2.8.1-0ubuntu1~stonkingppa1) ...\nSetting up libwsman-server1t64:amd64 (2.8.1-0ubuntu1~stonkingppa1) ...\nSetting up libopenwsman-dev:amd64 (2.8.1-0ubuntu1~stonkingppa1) ...\nSetting up openwsman (2.8.1-0ubuntu1~stonkingppa1) ...\nCreated symlink '/etc/systemd/system/multi-user.target.wants/openwsman.service' → '/usr/lib/systemd/system/openwsman.service'.\nProcessing triggers for libc-bin (2.44-1ubuntu1) ...\n\n\n\n  - Upgrade: of a normal cli + deps (less than above) as most likely example\n    - While stonking is in general a bit unhappy, it detected\n      all well including the dependency switch of the lib from openwsman\n\n\nroot@s:~# apt dist-upgrade\nUpgrading:                      \n  libwsman-curl-client-transport1  libwsman1t64  wsmancli\n\nInstalling dependencies:\n  libwsman-client5\n\nREMOVING:\n  libwsman-client4t64\n\nSummary:\n  Upgrading: 3, Installing: 1, Removing: 1, Not Upgrading: 0\n  Download size: 144 kB\n  Space needed: 9216 B / 42.2 GB available\n\nContinue? [Y/n] Y\nGet:1 https://ppa.launchpadcontent.net/paelzer/lp-1867935-wsman-stonking/ubuntu stonking/main amd64 libwsman-curl-client-transport1 amd64 2.8.1-0ubuntu1~stonkingppa1 [13.4 kB]\nGet:2 https://ppa.launchpadcontent.net/paelzer/lp-1867935-wsman-stonking/ubuntu stonking/main amd64 wsmancli amd64 2.8.0-0ubuntu1~stonkingppa1 [22.4 kB]\nGet:3 https://ppa.launchpadcontent.net/paelzer/lp-1867935-wsman-stonking/ubuntu stonking/main amd64 libwsman1t64 amd64 2.8.1-0ubuntu1~stonkingppa1 [88.6 kB]\nGet:4 https://ppa.launchpadcontent.net/paelzer/lp-1867935-wsman-stonking/ubuntu stonking/main amd64 libwsman-client5 amd64 2.8.1-0ubuntu1~stonkingppa1 [19.7 kB]\nFetched 144 kB in 0s (500 kB/s)             \ndebconf: unable to initialize frontend: Dialog\ndebconf: (No usable dialog-like program is installed, so the dialog based frontend cannot be used. at /usr/share/perl5/Debconf/FrontEnd/Dialog.pm line 79, <STDIN> line 4.)\ndebconf: falling back to frontend: Readline\ndebconf: unable to initialize frontend: Readline\ndebconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.42.3 /usr/local/share/perl/5.42.3 /usr/lib/x86_64-linux-gnu/perl5/5.42 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.42 /usr/share/perl/5.42 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 8, <STDIN> line 4.)\ndebconf: falling back to frontend: Teletype\n(Reading database ... 33809 files and directories currently installed.)\nPreparing to unpack .../libwsman-curl-client-transport1_2.8.1-0ubuntu1~stonkingppa1_amd64.deb ...\nUnpacking libwsman-curl-client-transport1:amd64 (2.8.1-0ubuntu1~stonkingppa1) over (2.6.5-0ubuntu16) ...\nPreparing to unpack .../wsmancli_2.8.0-0ubuntu1~stonkingppa1_amd64.deb ...\nUnpacking wsmancli (2.8.0-0ubuntu1~stonkingppa1) over (2.6.2-0ubuntu2) ...\nPreparing to unpack .../libwsman1t64_2.8.1-0ubuntu1~stonkingppa1_amd64.deb ...\nUnpacking libwsman1t64:amd64 (2.8.1-0ubuntu1~stonkingppa1) over (2.6.5-0ubuntu16) ...\n(Reading database ... 33807 files and directories currently installed.)\nRemoving libwsman-client4t64:amd64 (2.6.5-0ubuntu16) ...\nSelecting previously unselected package libwsman-client5:amd64.\n(Reading database ... 33803 files and directories currently installed.)\nPreparing to unpack .../libwsman-client5_2.8.1-0ubuntu1~stonkingppa1_amd64.deb ...\nUnpacking libwsman-client5:amd64 (2.8.1-0ubuntu1~stonkingppa1) ...\nSetting up libwsman-curl-client-transport1:amd64 (2.8.1-0ubuntu1~stonkingppa1) ...\nSetting up libwsman-client5:amd64 (2.8.1-0ubuntu1~stonkingppa1) ...\nSetting up libwsman1t64:amd64 (2.8.1-0ubuntu1~stonkingppa1) ...\nSetting up wsmancli (2.8.0-0ubuntu1~stonkingppa1) ...\nProcessing triggers for libc-bin (2.44-1ubuntu1) ...\n\n\n\n  - Autopkgtest: n/a\n  - Does it break other packages: no\n\n* As mentioned, I wait for MAAS to confirm their real usage\n\n\n---\n\nUpdate Sept 2026\n\nThis was Ubuntu only and broken just because no one was willing to update it.\nInstead of a blunt removal (MAAS tells me they still use it) update it to the most recent version. I'm not adopting full maintainership, but tried to clean\nup the packaging and move to a new version.\n\nAFAICS:\n- the new versions build\n- match the latest upstream\n- have some minor packaging improvements applied\n\nPPA: https://launchpad.net/~paelzer/+archive/ubuntu/lp-1867935-wsman-stonking\n\nThat makes it need an FFE which is completed at the top of this.\n\n---\n\noriginal title: fix openwsman ftbfs (or remove openwsman and rdep wsmancli)\n\nformer suggestion: remove openwsman and rdep wsmancli, ftbfs with current  openssl, no rdeps except for wsmancli. Not in Debian.",
+      "description_sha": "6ae84aa874a0840f5265a93cb11b618fe3f1ffafff1f77f5b44a4b8b625b2252",
+      "discovered_via": "release-team-queue",
+      "id": 1867935,
+      "message_count": 4,
+      "release_team_subscribed": true,
+      "reporter": "doko",
+      "subscribers": [
+        "doko",
+        "ubuntu-release"
+      ],
+      "tags": [
+        "ftbfs",
+        "rls-ff-incoming",
+        "server-todo"
+      ],
+      "tasks": [
+        {
+          "assignee": null,
+          "importance": "Undecided",
+          "status": "Won't Fix",
+          "target": "maas"
+        },
+        {
+          "assignee": "ltrager",
+          "importance": "High",
+          "status": "Triaged",
+          "target": "openwsman (Ubuntu)"
+        },
+        {
+          "assignee": null,
+          "importance": "Undecided",
+          "status": "Triaged",
+          "target": "wsmancli (Ubuntu)"
+        }
+      ],
+      "title": "[FFE] Update openwsman & wsmancli to resolve FTBFS (and update it in general)",
+      "url": "https://bugs.launchpad.net/bugs/1867935"
+    },
+    "fingerprint": "sha256:318ee8325946cee7fb68d0113110a1c55d25dde54de537e88572c1ea3367aa95",
+    "flavours": {
+      "ack_required_from": [],
+      "acks": [],
+      "affected_flavours": [],
+      "impact": "UNSEEDED",
+      "requester_is_flavour_lead": null,
+      "requesting_flavour": null
+    },
+    "injection_signals": [],
+    "packages": [
+      {
+        "archive": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-09-22T09:27:13Z",
+            "duration_ms": 427,
+            "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=openwsman&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
+            "method": "http_get",
+            "raw_ref": "sha256:1a1924f96e3438f6b8b8063f9917fe9b3e9d4dc46a0e6f6b9a90e724856dc7a7",
+            "raw_truncated": false,
+            "source_id": "launchpad.archive"
+          },
+          "status": "OK",
+          "value": {
+            "binaries": [],
+            "component": "universe",
+            "in_archive": true,
+            "pocket": "Proposed",
+            "source": "openwsman",
+            "version": "2.6.5-0ubuntu17"
+          }
+        },
+        "build_rdepends": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-09-22T09:27:15Z",
+            "duration_ms": 112,
+            "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:openwsman",
+            "method": "http_get",
+            "raw_ref": "sha256:68e216a7b15d2b0124b5a0e83268c8321a7b30382866371c0882dbbd03e504ca",
+            "raw_truncated": false,
+            "source_id": "rdepends.build"
+          },
+          "status": "OK",
+          "value": {
+            "arch": "source",
+            "bucket": "1-5",
+            "kind": "build",
+            "sample": [
+              "wsmancli"
+            ],
+            "seeded_rdeps": [],
+            "total": 1
+          }
+        },
+        "name": "openwsman",
+        "rdepends": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-09-22T09:27:14Z",
+            "duration_ms": 118,
+            "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:openwsman",
+            "method": "http_get",
+            "raw_ref": "sha256:e455ed3d49164ea4c29bc899cf972257db1889a0813478570474b2b5125e1e29",
+            "raw_truncated": false,
+            "source_id": "rdepends.binary"
+          },
+          "status": "OK",
+          "value": {
+            "arch": "any",
+            "bucket": "1-5",
+            "kind": "binary",
+            "sample": [
+              "wsmancli"
+            ],
+            "seeded_rdeps": [],
+            "total": 1
+          }
+        },
+        "seeds": {
+          "note": "none of openwsman appear in the seed index, but the index looks incomplete (index covers only 7 flavours), so this is not evidence that the package is unseeded",
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-09-22T09:27:14Z",
+            "duration_ms": 555,
+            "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
+            "method": "http_get",
+            "raw_ref": "sha256:26a31f2d6e0ee08d3dd9bc34a53dc01d3483f716a1c6100bf2c6b6cc7081c8cf",
+            "raw_truncated": false,
+            "source_id": "seeds"
+          },
+          "status": "UNAVAILABLE",
+          "value": null
+        }
+      },
+      {
+        "archive": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-09-22T09:27:15Z",
+            "duration_ms": 384,
+            "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=wsmancli&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
+            "method": "http_get",
+            "raw_ref": "sha256:eeeef0ec574fad9d25564598305e4af3b39c4244f0276acab81b7ca10eda2d74",
+            "raw_truncated": false,
+            "source_id": "launchpad.archive"
+          },
+          "status": "OK",
+          "value": {
+            "binaries": [
+              "wsmancli"
+            ],
+            "component": "universe",
+            "in_archive": true,
+            "pocket": "Release",
+            "source": "wsmancli",
+            "version": "2.6.2-0ubuntu2"
+          }
+        },
+        "build_rdepends": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-09-22T09:27:17Z",
+            "duration_ms": 112,
+            "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:wsmancli",
+            "method": "http_get",
+            "raw_ref": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "raw_truncated": false,
+            "source_id": "rdepends.build"
+          },
+          "status": "OK",
+          "value": {
+            "arch": "source",
+            "bucket": "0",
+            "kind": "build",
+            "sample": [],
+            "seeded_rdeps": [],
+            "total": 0
+          }
+        },
+        "name": "wsmancli",
+        "rdepends": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-09-22T09:27:16Z",
+            "duration_ms": 120,
+            "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:wsmancli",
+            "method": "http_get",
+            "raw_ref": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "raw_truncated": false,
+            "source_id": "rdepends.binary"
+          },
+          "status": "OK",
+          "value": {
+            "arch": "any",
+            "bucket": "0",
+            "kind": "binary",
+            "sample": [],
+            "seeded_rdeps": [],
+            "total": 0
+          }
+        },
+        "seeds": {
+          "note": "none of wsmancli appear in the seed index, but the index looks incomplete (index covers only 7 flavours), so this is not evidence that the package is unseeded",
+          "provenance": {
+            "cache": "cached",
+            "checked_at": "2026-09-22T09:27:16Z",
+            "duration_ms": 0,
+            "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
+            "method": "http_get",
+            "raw_ref": "sha256:26a31f2d6e0ee08d3dd9bc34a53dc01d3483f716a1c6100bf2c6b6cc7081c8cf",
+            "raw_truncated": false,
+            "source_id": "seeds"
+          },
+          "status": "UNAVAILABLE",
+          "value": null
+        }
+      }
+    ],
+    "release_context": {
+      "note": null,
+      "provenance": {
+        "cache": "fresh",
+        "checked_at": "2026-09-22T09:27:13Z",
+        "duration_ms": 675,
+        "locator": "https://documentation.ubuntu.com/release-notes/26.10/schedule/",
+        "method": "http_get",
+        "raw_ref": "sha256:a51b44260a65f3d41e87e9067245550b625351237c43bf020348c2afbcff7397",
+        "raw_truncated": false,
+        "source_id": "calendar.schedule"
+      },
+      "status": "OK",
+      "value": {
+        "days_bucket": "28-15",
+        "days_since_feature_freeze": 33,
+        "days_to_release": 23,
+        "derivation": "schedule-page",
+        "feature_freeze": "2026-08-20",
+        "freeze_window_elapsed_pct": 59,
+        "milestones": [
+          {
+            "date": "2026-04-30",
+            "name": "Toolchain Uploaded"
+          },
+          {
+            "date": "2026-07-02",
+            "name": "Ubuntu Testing Week (optional)"
+          },
+          {
+            "date": "2026-08-06",
+            "name": "Expected Glibc 2.44 merge"
+          },
+          {
+            "date": "2026-08-13",
+            "name": "Expected LLVM default transition"
+          },
+          {
+            "date": "2026-08-20",
+            "name": "Debian Import Freeze"
+          },
+          {
+            "date": "2026-08-20",
+            "name": "Feature Freeze"
+          },
+          {
+            "date": "2026-09-10",
+            "name": "UI Freeze"
+          },
+          {
+            "date": "2026-09-17",
+            "name": "Documentation String Freeze"
+          },
+          {
+            "date": "2026-09-17",
+            "name": "Kernel Feature Freeze"
+          },
+          {
+            "date": "2026-09-21",
+            "name": "Beta Freeze"
+          },
+          {
+            "date": "2026-09-21",
+            "name": "Hardware Enablement Freeze"
+          },
+          {
+            "date": "2026-09-24",
+            "name": "Beta"
+          },
+          {
+            "date": "2026-10-01",
+            "name": "Kernel Freeze"
+          },
+          {
+            "date": "2026-10-01",
+            "name": "Non Language Pack Translation Deadline"
+          },
+          {
+            "date": "2026-10-08",
+            "name": "Final Freeze"
+          },
+          {
+            "date": "2026-10-08",
+            "name": "Language Pack Translation Deadline"
+          },
+          {
+            "date": "2026-10-08",
+            "name": "Release Candidate"
+          },
+          {
+            "date": "2026-10-15",
+            "name": "Final Release"
+          }
+        ],
+        "phase": "BETA_FREEZE",
+        "release_date": "2026-10-15",
+        "release_type": "INTERIM",
+        "series": "stonking",
+        "version": "26.10"
+      }
+    },
+    "subject": {
+      "derivation": "packages:bug-tasks; series:assumed-development-series",
+      "ffe_kind": "seed-change",
+      "packages": [
+        "openwsman",
+        "wsmancli"
+      ],
+      "target_series": "stonking"
+    },
+    "testing": {
+      "autopkgtest": "ABSENT",
+      "build": "FOUND_UNVERIFIED",
+      "corroborated": true,
+      "items": [
+        {
+          "detail": "PPA ~paelzer/lp-1867935-wsman-stonking exists on Launchpad",
+          "kind": "ppa",
+          "locator": "https://launchpad.net/~paelzer/+archive/ubuntu/lp-1867935-wsman-stonking",
+          "source": "description",
+          "state": "FOUND_VERIFIED"
+        },
+        {
+          "detail": "linked build log",
+          "kind": "build_log",
+          "locator": "https://launchpadlibrarian.net/877756707/buildlog_ubuntu-stonking-amd64.openwsman_2.8.1-0ubuntu1",
+          "source": "description",
+          "state": "FOUND_UNVERIFIED"
+        },
+        {
+          "detail": "linked build log",
+          "kind": "build_log",
+          "locator": "https://launchpadlibrarian.net/877803713/buildlog_ubuntu-stonking-amd64.wsmancli_2.8.0-0ubuntu1",
+          "source": "description",
+          "state": "FOUND_UNVERIFIED"
+        },
+        {
+          "detail": "linked build log",
+          "kind": "build_log",
+          "locator": "https://launchpadlibrarian.net/876762448/buildlog_ubuntu-stonking-amd64.openwsman_2.6.5-0ubuntu17_BUILDING.txt.gz",
+          "source": "comment #3",
+          "state": "FOUND_UNVERIFIED"
+        }
+      ],
+      "ppa": "FOUND_VERIFIED",
+      "test_output": "ABSENT",
+      "unverified_claims": []
+    },
+    "unavailable": [
+      {
+        "impact": "cannot tell which Ubuntu images ship this package",
+        "reason": "seed index incomplete: index covers only 7 flavours",
+        "source_id": "seeds"
+      }
+    ]
+  },
+  "human": {
+    "decided": false,
+    "decision": null,
+    "detected_at": null,
+    "final_status": null,
+    "left_queue_at": null
+  },
+  "provenance": {
+    "generated_at": "2026-09-22T09:27:17Z",
+    "harness": null,
+    "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
+    "policy_version": "1.0.0",
+    "review_key": "sha256:6836f361db291d03ef6b79fe92c68114f0c31db47841f7635a20649e8a395013",
+    "risk_algorithm_version": "risk/1.2.0",
+    "run_id": "run-20260922T092706Z",
+    "tool_version": "0.1.0"
+  },
+  "record_id": "1867935/318ee8325946cee7",
+  "risk": {
+    "algorithm_version": "risk/1.2.0",
+    "band": "MODERATE",
+    "components": [
+      {
+        "evidence_refs": [
+          "/evidence/release_context"
+        ],
+        "max_points": 20,
+        "name": "release_posture",
+        "points": 14,
+        "rationale": "interim release, past beta freeze, 23 days to release, 59% through the freeze window"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/packages"
+        ],
+        "max_points": 25,
+        "name": "seeded_reach",
+        "points": 15,
+        "rationale": "could not establish which images ship this package; scored cautiously rather than as unseeded"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/packages"
+        ],
+        "max_points": 25,
+        "name": "dependency_reach",
+        "points": 4,
+        "rationale": "1 reverse dependencies, 1 reverse build-dependencies"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/packages"
+        ],
+        "max_points": 10,
+        "name": "archive_standing",
+        "points": 3,
+        "rationale": "in universe or multiverse, which is community-supported"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/subject"
+        ],
+        "max_points": 5,
+        "name": "change_shape",
+        "points": 4,
+        "rationale": "changes what lands on an image, so it affects users who never install the package directly"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/testing"
+        ],
+        "max_points": 15,
+        "name": "unvalidated_change",
+        "points": 5,
+        "rationale": "the bug links a PPA, a build log"
+      }
+    ],
+    "confidence_ceiling": "MEDIUM",
+    "decision_floor": null,
+    "gates": [
+      {
+        "effect": "floor_needs_information",
+        "evidence_refs": [
+          "/evidence/subject"
+        ],
+        "id": "no_package_identified",
+        "rationale": "the affected package is identified",
+        "triggered": false
+      },
+      {
+        "effect": "floor_needs_information",
+        "evidence_refs": [
+          "/evidence/testing"
+        ],
+        "id": "no_testing_evidence",
+        "rationale": "the bug links testing evidence",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/flavours"
+        ],
+        "id": "flavour_ack_outstanding",
+        "rationale": "no cross-flavour acknowledgement is outstanding",
+        "triggered": false
+      },
+      {
+        "effect": "floor_needs_information",
+        "evidence_refs": [
+          "/evidence/release_context"
+        ],
+        "id": "after_final_freeze",
+        "rationale": "the request is within the ordinary freeze window",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/release_context"
+        ],
+        "id": "before_feature_freeze",
+        "rationale": "the target release is past Feature Freeze",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/subject"
+        ],
+        "id": "unrecoverable_failure_mode",
+        "rationale": "a regression here would be fixable by an SRU",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/injection"
+        ],
+        "id": "suspicious_bug_text",
+        "rationale": "nothing in the bug text resembles an attempt to steer the reviewer",
+        "triggered": false
+      },
+      {
+        "effect": "cap_confidence",
+        "evidence_refs": [
+          "/evidence/unavailable"
+        ],
+        "id": "evidence_unavailable",
+        "rationale": "could not consult seeds, so this assessment rests on incomplete evidence",
+        "triggered": true
+      }
+    ],
+    "score": 45
+  },
+  "schema_version": "1.0.0",
+  "status": "EVIDENCE_ONLY"
+}
