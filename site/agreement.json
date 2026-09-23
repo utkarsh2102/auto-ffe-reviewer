@@ -1,9 +1,19 @@
 {
   "agreed": 0,
   "comparable": 0,
-  "decided": 1,
+  "decided": 2,
   "rate": null,
   "recent": [
+    {
+      "agreed": null,
+      "bug_id": 2167149,
+      "decided_at": "2026-09-23T15:12:13Z",
+      "ours": null,
+      "risk_band": "MODERATE",
+      "theirs": "APPROVED",
+      "title": "[FFe] Update magnum-capi-helm to 1.4.0 in Stonking",
+      "url": "https://bugs.launchpad.net/bugs/2167149"
+    },
     {
       "agreed": null,
       "bug_id": 1867935,

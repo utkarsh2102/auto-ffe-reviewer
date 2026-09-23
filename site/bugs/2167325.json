@@ -39,6 +39,14 @@
       "generated_at": "2026-09-23T10:17:36Z",
       "risk_score": 68,
       "status": "EVIDENCE_ONLY"
+    },
+    {
+      "confidence": null,
+      "decision": null,
+      "fingerprint": "sha256:f44df1bf907efc0e66ecc261467f2ba1875e42f8c92c66193238c5203fe8727d",
+      "generated_at": "2026-09-23T15:11:52Z",
+      "risk_score": 68,
+      "status": "EVIDENCE_ONLY"
     }
   ],
   "record": {
@@ -99,16 +107,25 @@
             "date_created": "2026-09-22T15:36:08.320078+00:00",
             "index": 5,
             "url": "https://bugs.launchpad.net/ubuntu/+source/rdma-core/+bug/2167325/comments/5"
+          },
+          {
+            "author": "paride",
+            "author_is_release_team": true,
+            "content": "Hi, I am not saying \"FFe rejected\" for now, but I am not fully convinced by this one:\n\n- Yes the new version is \"better\", as new versions are normally expected to be, but it does not fix specific bugs, and we need to stabilize things at some point (that is: at feature freeze).\n- The new version FTBFS in Debian; the fix proposed upstream is not merged yet.\n- I think not all the testing under [Testing] has been completed.\n- Stonking is in beta freeze.\n\nIf you still think this is worth having in Stonking, please help the release team better understand why this is needed and how you plan to tackle the FTBFS. Note that even if we grant the FFe, the expectation is that the upload is done as soon as possible.\n\nThanks for checking!",
+            "content_sha": "7347d3b0ddf20e3e415c80083290d705966ac89de2f602b36a5b8b25fff547a5",
+            "date_created": "2026-09-23T11:03:26.480699+00:00",
+            "index": 6,
+            "url": "https://bugs.launchpad.net/ubuntu/+source/rdma-core/+bug/2167325/comments/6"
           }
         ],
         "date_created": "2026-09-15T10:32:38.829040+00:00",
-        "date_last_message": "2026-09-22T15:36:08.320078+00:00",
-        "date_last_updated": "2026-09-22T15:36:14.918983+00:00",
+        "date_last_message": "2026-09-23T11:03:26.480699+00:00",
+        "date_last_updated": "2026-09-23T11:03:47.536285+00:00",
         "description": "## FFe ##\n\n[Description]\n\nMerge Debian unstable 65.0-1 (upstream 65.0) as 65.0-1ubuntu1. stonking has 64.0-1ubuntu1 (FFe LP: #2165887).\n\nUpstream v64.0..v65.0 (91 commits), highlights:\n- mlx5: ConnectX-10 PCI IDs, clock and CQ cleanup fixes\n- rdma_topo: ConnectX-9 ID, multi-NIC and NUMA topology support\n- libibverbs: Completion Counters verbs, DMA-buf fd export for ibv_buf\n- librdmacm: repoll_* API, epoll in librspreload, CM event fixes\n- Provider updates: mana, efa, ionic, bnxt_re, erdma\n\nABI: no SONAME change, new symbols only. Private ABI bump (IBVERBS_PRIVATE_65) affects only libibverbs1 and ibverbs-providers from the same source, as in 64.0.\n\nUbuntu delta is unchanged: no pandoc and no man pages on i386.\n\n[Rationale]\n\n- NVIDIA GB300 Grace machines benefit from the mlx5 and rdma_topo updates.\n- Intel IPU E2000 (irdma GEN3) systems can benefit from the libibverbs updates.\n- Keeps 26.10 on the current upstream release, already in Debian, with no new delta.\n\n[Regression potential]\n\n- Consumers: ceph, dpdk, libfabric, openmpi, ucx, fio, libpcap, ...\n- No ABI break. Main risk is in mlx5/mlx4/mthca CQ handling and librdmacm event dispatch.\n- librspreload now also interposes epoll_*; this only affects apps run with LD_PRELOAD=librspreload.\n\n[Testing]\n\nPPA: ppa:virtustom/rdma-core-65.0-stonking\nhttps://launchpad.net/~virtustom/+archive/ubuntu/rdma-core-65.0-stonking\n- Builds: in progress in the PPA for all architectures\n- Reverse-dependency autopkgtests: TODO (same 14 sources as for 64.0, see autopkgtest-rdeps.txt)\n- Install and upgrade from 64.0-1ubuntu1 in stonking LXD: TODO (see install-upgrade.log)\n\nseeded-in-ubuntu rdma-core: rdma-core's binaries are not seeded.",
         "description_sha": "167ec8728085de048e67ea8070c9ab39ac7b15fead19c879353266be1e050810",
         "discovered_via": "release-team-queue",
         "id": 2167325,
-        "message_count": 6,
+        "message_count": 7,
         "release_team_subscribed": true,
         "reporter": "virtustom",
         "subscribers": [
@@ -124,20 +141,48 @@
           {
             "assignee": null,
             "importance": "Undecided",
-            "status": "New",
+            "status": "Incomplete",
             "target": "rdma-core (Ubuntu)"
           }
         ],
         "title": "FFe: Please merge rdma-core 65.0-1 from Debian unstable into stonking (new upstream release 65.0)",
         "url": "https://bugs.launchpad.net/bugs/2167325"
       },
-      "fingerprint": "sha256:cb82012448579989e6b179724038050af8206083230d926b6b5df6b7f5336b70",
+      "fingerprint": "sha256:f44df1bf907efc0e66ecc261467f2ba1875e42f8c92c66193238c5203fe8727d",
       "flavours": {
         "ack_required_from": [],
-        "acks": [],
-        "affected_flavours": [],
+        "acks": [
+          {
+            "author": "paride",
+            "author_in_flavour_team": true,
+            "flavour": "kubuntu",
+            "message_url": "https://bugs.launchpad.net/ubuntu/+source/rdma-core/+bug/2167325/comments/6"
+          },
+          {
+            "author": "rr",
+            "author_in_flavour_team": true,
+            "flavour": "kubuntu",
+            "message_url": "https://bugs.launchpad.net/ubuntu/+source/rdma-core/+bug/2167325/comments/5"
+          },
+          {
+            "author": "paride",
+            "author_in_flavour_team": true,
+            "flavour": "ubuntu-budgie",
+            "message_url": "https://bugs.launchpad.net/ubuntu/+source/rdma-core/+bug/2167325/comments/6"
+          },
+          {
+            "author": "rr",
+            "author_in_flavour_team": true,
+            "flavour": "ubuntu-budgie",
+            "message_url": "https://bugs.launchpad.net/ubuntu/+source/rdma-core/+bug/2167325/comments/5"
+          }
+        ],
+        "affected_flavours": [
+          "kubuntu",
+          "ubuntu-budgie"
+        ],
         "impact": "CORE",
-        "requester_is_flavour_lead": null,
+        "requester_is_flavour_lead": false,
         "requesting_flavour": null
       },
       "injection_signals": [
@@ -154,8 +199,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-23T10:16:39Z",
-              "duration_ms": 7325,
+              "checked_at": "2026-09-23T15:10:25Z",
+              "duration_ms": 3753,
               "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=rdma-core&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
               "method": "http_get",
               "raw_ref": "sha256:ede5f8f4fb3abdb4aa93c393418398562b2455387100efaeb12815295658a6dd",
@@ -195,8 +240,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-23T10:17:31Z",
-              "duration_ms": 163,
+              "checked_at": "2026-09-23T15:10:55Z",
+              "duration_ms": 135,
               "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:rdma-core",
               "method": "http_get",
               "raw_ref": "sha256:50a5fff14890ff528485e8efa4f0f1240a7904ed747e5d69257c10b1e82d1252",
@@ -244,8 +289,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-23T10:17:31Z",
-              "duration_ms": 364,
+              "checked_at": "2026-09-23T15:10:54Z",
+              "duration_ms": 139,
               "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:rdma-core",
               "method": "http_get",
               "raw_ref": "sha256:4bf97f4828b0d61c0875f2417551d12a7e1754f0658801c2097ef39a625bc65b",
@@ -289,14 +334,14 @@
             }
           },
           "seeds": {
-            "note": "seed index looks incomplete (index covers only 2 flavours); the listed images are real but there may be more",
+            "note": "seed index looks incomplete (index covers only 7 flavours); the listed images are real but there may be more",
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-23T10:17:30Z",
-              "duration_ms": 770,
+              "checked_at": "2026-09-23T15:10:54Z",
+              "duration_ms": 425,
               "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
               "method": "http_get",
-              "raw_ref": "sha256:caade64fa2a1ff66d76b61b60c8f42103e2b1dd21b7833fec777a492b4b0594d",
+              "raw_ref": "sha256:8ea711852e262a7f6e980f1d88ec9f01d1e3c8494096f25081a14504570e7768",
               "raw_truncated": false,
               "source_id": "seeds"
             },
@@ -333,11 +378,21 @@
                 "librdmacm-dev"
               ],
               "flavours": [
-                "ubuntu"
+                "kubuntu",
+                "ubuntu",
+                "ubuntu-budgie"
               ],
               "images": [
                 [
+                  "kubuntu",
+                  "supported"
+                ],
+                [
                   "ubuntu",
+                  "supported"
+                ],
+                [
+                  "ubuntu-budgie",
                   "supported"
                 ]
               ],
@@ -350,8 +405,8 @@
         "note": null,
         "provenance": {
           "cache": "fresh",
-          "checked_at": "2026-09-23T10:16:32Z",
-          "duration_ms": 84,
+          "checked_at": "2026-09-23T15:10:21Z",
+          "duration_ms": 794,
           "locator": "https://documentation.ubuntu.com/release-notes/26.10/schedule/",
           "method": "http_get",
           "raw_ref": "sha256:a51b44260a65f3d41e87e9067245550b625351237c43bf020348c2afbcff7397",
@@ -503,17 +558,17 @@
       "left_queue_at": null
     },
     "provenance": {
-      "generated_at": "2026-09-23T10:17:36Z",
+      "generated_at": "2026-09-23T15:11:52Z",
       "harness": null,
       "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
       "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
       "policy_version": "1.0.0",
-      "review_key": "sha256:61c1e801193ecebe02369e8e48839f6922b4f754f30c0d6143be7de0786686ed",
+      "review_key": "sha256:de2416cb5fce6e2be5da0c5f2e12f6f34279e49641c7b53eab1559b416742256",
       "risk_algorithm_version": "risk/1.2.0",
-      "run_id": "run-20260923T101452Z",
+      "run_id": "run-20260923T151006Z",
       "tool_version": "0.1.0"
     },
-    "record_id": "2167325/cb82012448579989",
+    "record_id": "2167325/f44df1bf907efc0e",
     "risk": {
       "algorithm_version": "risk/1.2.0",
       "band": "HIGH",
