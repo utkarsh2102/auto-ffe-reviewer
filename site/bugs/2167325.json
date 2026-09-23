@@ -31,6 +31,14 @@
       "generated_at": "2026-09-23T05:03:38Z",
       "risk_score": 68,
       "status": "EVIDENCE_ONLY"
+    },
+    {
+      "confidence": null,
+      "decision": null,
+      "fingerprint": "sha256:cb82012448579989e6b179724038050af8206083230d926b6b5df6b7f5336b70",
+      "generated_at": "2026-09-23T10:17:36Z",
+      "risk_score": 68,
+      "status": "EVIDENCE_ONLY"
     }
   ],
   "record": {
@@ -123,22 +131,13 @@
         "title": "FFe: Please merge rdma-core 65.0-1 from Debian unstable into stonking (new upstream release 65.0)",
         "url": "https://bugs.launchpad.net/bugs/2167325"
       },
-      "fingerprint": "sha256:2e701aea0c7e7c308761ba30a5a43868852082ccd6c83d0b14a1bc4ff76ad05c",
+      "fingerprint": "sha256:cb82012448579989e6b179724038050af8206083230d926b6b5df6b7f5336b70",
       "flavours": {
         "ack_required_from": [],
-        "acks": [
-          {
-            "author": "rr",
-            "author_in_flavour_team": true,
-            "flavour": "kubuntu",
-            "message_url": "https://bugs.launchpad.net/ubuntu/+source/rdma-core/+bug/2167325/comments/5"
-          }
-        ],
-        "affected_flavours": [
-          "kubuntu"
-        ],
+        "acks": [],
+        "affected_flavours": [],
         "impact": "CORE",
-        "requester_is_flavour_lead": false,
+        "requester_is_flavour_lead": null,
         "requesting_flavour": null
       },
       "injection_signals": [
@@ -155,8 +154,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-23T05:03:27Z",
-              "duration_ms": 347,
+              "checked_at": "2026-09-23T10:16:39Z",
+              "duration_ms": 7325,
               "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=rdma-core&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
               "method": "http_get",
               "raw_ref": "sha256:ede5f8f4fb3abdb4aa93c393418398562b2455387100efaeb12815295658a6dd",
@@ -196,8 +195,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-23T05:03:34Z",
-              "duration_ms": 124,
+              "checked_at": "2026-09-23T10:17:31Z",
+              "duration_ms": 163,
               "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:rdma-core",
               "method": "http_get",
               "raw_ref": "sha256:50a5fff14890ff528485e8efa4f0f1240a7904ed747e5d69257c10b1e82d1252",
@@ -245,8 +244,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-23T05:03:33Z",
-              "duration_ms": 127,
+              "checked_at": "2026-09-23T10:17:31Z",
+              "duration_ms": 364,
               "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:rdma-core",
               "method": "http_get",
               "raw_ref": "sha256:4bf97f4828b0d61c0875f2417551d12a7e1754f0658801c2097ef39a625bc65b",
@@ -290,14 +289,14 @@
             }
           },
           "seeds": {
-            "note": "seed index looks incomplete (index covers only 3 flavours); the listed images are real but there may be more",
+            "note": "seed index looks incomplete (index covers only 2 flavours); the listed images are real but there may be more",
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-23T05:03:33Z",
-              "duration_ms": 420,
+              "checked_at": "2026-09-23T10:17:30Z",
+              "duration_ms": 770,
               "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
               "method": "http_get",
-              "raw_ref": "sha256:be2a6bbc3bd90d101ca64e84c6bc0bc4e0ea78fa933b3b249fe23a37e6145d0e",
+              "raw_ref": "sha256:caade64fa2a1ff66d76b61b60c8f42103e2b1dd21b7833fec777a492b4b0594d",
               "raw_truncated": false,
               "source_id": "seeds"
             },
@@ -334,14 +333,9 @@
                 "librdmacm-dev"
               ],
               "flavours": [
-                "kubuntu",
                 "ubuntu"
               ],
               "images": [
-                [
-                  "kubuntu",
-                  "supported"
-                ],
                 [
                   "ubuntu",
                   "supported"
@@ -356,8 +350,8 @@
         "note": null,
         "provenance": {
           "cache": "fresh",
-          "checked_at": "2026-09-23T05:03:27Z",
-          "duration_ms": 712,
+          "checked_at": "2026-09-23T10:16:32Z",
+          "duration_ms": 84,
           "locator": "https://documentation.ubuntu.com/release-notes/26.10/schedule/",
           "method": "http_get",
           "raw_ref": "sha256:a51b44260a65f3d41e87e9067245550b625351237c43bf020348c2afbcff7397",
@@ -509,17 +503,17 @@
       "left_queue_at": null
     },
     "provenance": {
-      "generated_at": "2026-09-23T05:03:38Z",
+      "generated_at": "2026-09-23T10:17:36Z",
       "harness": null,
       "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
       "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
       "policy_version": "1.0.0",
-      "review_key": "sha256:58328ac35d3dc28ed6144c2c9767ef7358006e20a3d8e9e7408b0001b18d39cd",
+      "review_key": "sha256:61c1e801193ecebe02369e8e48839f6922b4f754f30c0d6143be7de0786686ed",
       "risk_algorithm_version": "risk/1.2.0",
-      "run_id": "run-20260923T050319Z",
+      "run_id": "run-20260923T101452Z",
       "tool_version": "0.1.0"
     },
-    "record_id": "2167325/2e701aea0c7e7c30",
+    "record_id": "2167325/cb82012448579989",
     "risk": {
       "algorithm_version": "risk/1.2.0",
       "band": "HIGH",

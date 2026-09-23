@@ -22,11 +22,10 @@
       "rdepends": 67,
       "release_type": "INTERIM",
       "reporter": "virtustom",
-      "reviewed_at": "2026-09-23T05:03:38Z",
+      "reviewed_at": "2026-09-23T10:17:36Z",
       "risk_band": "HIGH",
       "risk_score": 68,
       "seeded": [
-        "kubuntu",
         "ubuntu"
       ],
       "series": "stonking",
