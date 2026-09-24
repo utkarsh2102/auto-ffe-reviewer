@@ -5,7 +5,7 @@
       "bug_id": 2167325,
       "build_rdepends": 37,
       "confidence": null,
-      "days_to_release": 22,
+      "days_to_release": 21,
       "decision": null,
       "decision_floor": null,
       "ffe_kind": "merge",
@@ -18,13 +18,13 @@
       "packages": [
         "rdma-core"
       ],
-      "phase": "BETA_FREEZE",
+      "phase": "BETA",
       "rdepends": 67,
       "release_type": "INTERIM",
       "reporter": "virtustom",
-      "reviewed_at": "2026-09-23T15:11:52Z",
+      "reviewed_at": "2026-09-24T00:57:50Z",
       "risk_band": "HIGH",
-      "risk_score": 68,
+      "risk_score": 69,
       "seeded": [
         "kubuntu",
         "ubuntu",
@@ -35,21 +35,60 @@
       "summary": null,
       "testing_corroborated": true,
       "title": "FFe: Please merge rdma-core 65.0-1 from Debian unstable into stonking (new upstream release 65.0)",
-      "unavailable": [],
+      "unavailable": [
+        "seeds"
+      ],
       "url": "https://bugs.launchpad.net/bugs/2167325",
+      "version": "26.10"
+    },
+    {
+      "ack_required_from": [],
+      "bug_id": 2168274,
+      "build_rdepends": 0,
+      "confidence": null,
+      "days_to_release": 21,
+      "decision": null,
+      "decision_floor": null,
+      "ffe_kind": "new-package",
+      "flags": [],
+      "flavour_impact": "UNSEEDED",
+      "has_assessment": false,
+      "injection_signals": 0,
+      "is_core": false,
+      "missing_information": [],
+      "packages": [
+        "lustre"
+      ],
+      "phase": "BETA",
+      "rdepends": 0,
+      "release_type": "INTERIM",
+      "reporter": "jedel",
+      "reviewed_at": "2026-09-24T00:52:24Z",
+      "risk_band": "HIGH",
+      "risk_score": 53,
+      "seeded": null,
+      "series": "stonking",
+      "status": "EVIDENCE_ONLY",
+      "summary": null,
+      "testing_corroborated": true,
+      "title": "Soft FFe / intention to upload",
+      "unavailable": [
+        "seeds"
+      ],
+      "url": "https://bugs.launchpad.net/bugs/2168274",
       "version": "26.10"
     }
   ],
   "counts": {
     "approve": 0,
     "awaiting_flavour_ack": 0,
-    "evidence_incomplete": 0,
-    "high_risk": 1,
-    "needs_attention": 1,
+    "evidence_incomplete": 2,
+    "high_risk": 2,
+    "needs_attention": 2,
     "needs_information": 0,
-    "no_recommendation": 1,
+    "no_recommendation": 2,
     "no_testing_evidence": 0,
-    "open": 1,
+    "open": 2,
     "reject": 0
   },
   "version": 1
