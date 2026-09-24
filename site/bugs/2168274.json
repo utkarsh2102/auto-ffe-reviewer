@@ -7,6 +7,14 @@
       "generated_at": "2026-09-24T00:52:24Z",
       "risk_score": 53,
       "status": "EVIDENCE_ONLY"
+    },
+    {
+      "confidence": null,
+      "decision": null,
+      "fingerprint": "sha256:6760fe0304c43ad5af99a61a1d8d47af99c7653969bc0450c2953265490f7cbd",
+      "generated_at": "2026-09-24T11:38:30Z",
+      "risk_score": 53,
+      "status": "EVIDENCE_ONLY"
     }
   ],
   "record": {
@@ -49,16 +57,25 @@
             "date_created": "2026-09-23T18:54:57.543279+00:00",
             "index": 3,
             "url": "https://bugs.launchpad.net/ubuntu/+source/lustre/+bug/2168274/comments/3"
+          },
+          {
+            "author": "paelzer",
+            "author_is_release_team": false,
+            "content": "Thank you,\nI'm somewhat aware of the reasoning and case itself, let me have a look at the outcome of this cooperation ...\n\n\nThanks for the extra confidence of not being a late rushed crap due to providing install logs, test logs and generally outlining the details and what you did. It shows that you really thought about impact, regressions and more.\n\nI checked the upload in the PPA as if it would be in NEW queue, namespacing (lustes- and lib names that match) and licenses (no warnings) are fine.\nThe packaging best practises you already iterated on the last few days.\n\nThanks!\n\nAsk in regard to the changelog (maybe it is in git but not in the PPA uploads I checked):\n- it is almost a hard requirement to map to this bug there, please add \"(LP: #2168274)\"\n- it would be lovely but not required if there could be a bit of a summary what was done (not all details, but high level if you started from scratch and why some options have been chosen, ...) This is almost free text and a bit more than \"Initial release\" would help. I know that you know what it is all about, but others do not.\n\nAA pre-ack for this case under https://ubuntu.com/project/docs/release-team/freezes/#new-packages",
+            "content_sha": "ca01beb03c31a1b67230b1edc586448a125113e3cc933fd9b38ae5402d2865b8",
+            "date_created": "2026-09-24T06:04:33.083860+00:00",
+            "index": 4,
+            "url": "https://bugs.launchpad.net/ubuntu/+source/lustre/+bug/2168274/comments/4"
           }
         ],
         "date_created": "2026-09-23T18:35:17.075366+00:00",
-        "date_last_message": "2026-09-23T18:54:57.543279+00:00",
-        "date_last_updated": "2026-09-23T18:54:58.109441+00:00",
+        "date_last_message": "2026-09-24T06:04:33.083860+00:00",
+        "date_last_updated": "2026-09-24T06:04:34.614278+00:00",
         "description": "## FFE ##\n\n[ Rationale ]\n\n* Introduce `lustre` as a new source package in stonking/universe\n  (2.17.58+dfsg-0ubuntu1): the Lustre parallel filesystem, including\n  client and server userspace, and a DKMS kernel module\n  package using ZFS OSD as its backend.\n* Charmed Lustre is the main driver (https://charmhub.io/lustre-server). The\n  charm currently uses a PPA (https://launchpad.net/~ubuntu-hpc/+archive/ubuntu/lustre-2.17)\n  to install the required Lustre packages. This does not work for a formal product,\n  since it doesn't give any security patches and maintenance guarantees. Landing\n  in Universe formalizes the offering and ends the PPA dependency.\n\n[ Scope ]\n\n* New source package for the current series only.\n  - Binaries: lustre-client-utils, lustre-server-utils,\n    lustre-resource-agents, liblustreapi1, liblnetconfig4,\n    liblustreapi-dev, liblnetconfig-dev, lustre-dkms\n  - Target: stonking/universe. Goes through NEW.\n* Upstream: Lustre 2.17.58\n  (https://github.com/Lustre/lustre-release/tree/2.17.58). There is no\n  current archive version to diff the upstream changelog against; the\n  name last shipped as 1.8.5+dfsg-3.1ubuntu2 in 2013,\n  and the PPA publication page already carries Launchpad's diff\n  against that version. Upstream references:\n  - ChangeLog at the release tag:\n    https://github.com/Lustre/lustre-release/blob/2.17.58/lustre/ChangeLog\n  - Changes in this point release (2.17.57..2.17.58):\n    https://github.com/Lustre/lustre-release/compare/2.17.57...2.17.58\n  - Supported kernels: https://wiki.whamcloud.com/display/PUB/Lustre+Support+Matrix\n* `seeded-in-ubuntu lustre` output:\n    The source package 'lustre' does not exist in the Ubuntu primary\n    archive in stonking for pockets Release, Security, Updates,\n    Proposed with status in Pending, Published\n  The package is not seeded anywhere and nothing depends on it.\n* No removals, no transitions, and no shared library conflicts (new\n  SONAMEs: liblustreapi1, liblnetconfig4).\n\n[ Testing ]\n\n* Smoke test:\n  - PPA: https://launchpad.net/~ubuntu-hpc/+archive/ubuntu/lustre-2.17\n    (latest published upload for stonking:\n    2.17.58+dfsg-0ubuntu1~ppa1~stonking10,\n    https://launchpad.net/~ubuntu-hpc/+archive/ubuntu/lustre-2.17/+sourcepub/18752566/+listing-archive-extra)\n  - Build: Launchpad build logs for the stonking10 upload:\n    - amd64: https://launchpad.net/~ubuntu-hpc/+archive/ubuntu/lustre-2.17/+build/33622835\n    - arm64: https://launchpad.net/~ubuntu-hpc/+archive/ubuntu/lustre-2.17/+build/33622837\n  - Installation: fresh stonking LXD VMs. Verified with a\n    three-node cluster (MDS/OSS/client) that does a remote IO read/write.\n    Successful run: https://bugs.launchpad.net/ubuntu/+source/lustre/+bug/2168274/+attachment/6002064/+files/test.log\n  - Upgrade: 2.17.58+dfsg-0ubuntu1 sorts above the PPA versions\n    (2.17.58+dfsg-0ubuntu1~ppa1~stonkingN), so archive installs upgrade\n    over the PPA.\n  - Autopkgtest: `dkms-autopkgtest` PASS. It builds and installs the\n    lustre-dkms module for the running kernel inside a qemu testbed. The\n    test ships in the package and will run in Ubuntu CI on publication, including\n    per-kernel triggers through the dkms hook.\n    Successful run: https://bugs.launchpad.net/ubuntu/+source/lustre/+bug/2168274/+attachment/6002045/+files/autopkgtest-control-only-pass.log\n  - Does it break other packages: N/A. New package, no reverse\n    dependencies.\n\n[ Regression Potential ]\n\n* This is a new package. There are no archive users to regress and\n  nothing depends on it. Potential regressions:\n  - DKMS builds fail on user kernels as ABIs move. The\n    autopkgtest exercises this exact build path.\n  - ZFS version mismatch. The Lustre DKMS package has a dependency on\n    the ZFS DKMS package for its compilation process. If the ZFS version\n    used in the lustre build and the runtime ZFS mismatch, module load\n    fails with \"disagrees about version of symbol\"; the versioned\n    zfs-dkms (>= 2.0.7) dependency prevents this by making lustre build\n    against the zfs it will load.\n\n[ Other Info ]\n\n* Historical note: a `lustre` source package existed in Ubuntu\n  universe (section admin, 1.8.5+dfsg-3.1ubuntu2) until it was removed\n  during the Trusty cycle (RoQA, Debian #690459, \"does not work with\n  Debian Linux kernel packages\"). This upload is an entirely new\n  packaging of upstream 2.17.58; the old binaries only ever shipped to\n  series that are EOL today, so there is no upgrade path to consider.\n* This bug is also the heads-up for the Kernel team and Archive Admins:\n  production deployments with secure boot need signed kernel modules,\n  and the plan is for the Kernel team to build and sign kernel-flavor\n  Lustre module packages once the userspace and DKMS package is in the\n  archive.",
         "description_sha": "87e6c31aa3ea963f9f160b0a52e9de87bdb4362c31dbb4977eafab2cfd5c474f",
         "discovered_via": "release-team-queue",
         "id": 2168274,
-        "message_count": 4,
+        "message_count": 5,
         "release_team_subscribed": true,
         "reporter": "jedel",
         "subscribers": [
@@ -77,7 +94,7 @@
         "title": "Soft FFe / intention to upload",
         "url": "https://bugs.launchpad.net/bugs/2168274"
       },
-      "fingerprint": "sha256:31cdcc3946ee8c4e8a46f52662651fa567c78888d58f8962af43c1bec32e4a74",
+      "fingerprint": "sha256:6760fe0304c43ad5af99a61a1d8d47af99c7653969bc0450c2953265490f7cbd",
       "flavours": {
         "ack_required_from": [],
         "acks": [],
@@ -93,8 +110,8 @@
             "note": "lustre has no published source in stonking",
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-24T00:52:09Z",
-              "duration_ms": 12426,
+              "checked_at": "2026-09-24T11:38:29Z",
+              "duration_ms": 350,
               "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=lustre&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
               "method": "http_get",
               "raw_ref": "sha256:aeccab7ba3548115eac64a023c8f60fa448132b168d09e179f15732ea44e50f7",
@@ -115,7 +132,7 @@
             "note": "lustre is not published in stonking",
             "provenance": {
               "cache": "none",
-              "checked_at": "2026-09-24T00:52:09Z",
+              "checked_at": "2026-09-24T11:38:29Z",
               "duration_ms": 0,
               "locator": "lustre",
               "method": "computed",
@@ -131,7 +148,7 @@
             "note": "lustre is not published in stonking",
             "provenance": {
               "cache": "none",
-              "checked_at": "2026-09-24T00:52:09Z",
+              "checked_at": "2026-09-24T11:38:29Z",
               "duration_ms": 0,
               "locator": "lustre",
               "method": "computed",
@@ -143,14 +160,14 @@
             "value": null
           },
           "seeds": {
-            "note": "none of lustre appear in the seed index, but the index looks incomplete (index covers only 6 flavours), so this is not evidence that the package is unseeded",
+            "note": "none of lustre appear in the seed index, but the index looks incomplete (index covers only 1 flavours), so this is not evidence that the package is unseeded",
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-24T00:52:09Z",
-              "duration_ms": 502,
+              "checked_at": "2026-09-24T11:38:29Z",
+              "duration_ms": 549,
               "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
               "method": "http_get",
-              "raw_ref": "sha256:efdab106ded41e798a70fa568e21d9e0b09adf530cef73e223cb55744c82f3b0",
+              "raw_ref": "sha256:5f7e0f4f7f0e1455ea3573194de63587ca4de085d3ce97dd2597de430a453ee6",
               "raw_truncated": false,
               "source_id": "seeds"
             },
@@ -163,8 +180,8 @@
         "note": null,
         "provenance": {
           "cache": "fresh",
-          "checked_at": "2026-09-24T00:51:56Z",
-          "duration_ms": 485,
+          "checked_at": "2026-09-24T11:38:28Z",
+          "duration_ms": 487,
           "locator": "https://documentation.ubuntu.com/release-notes/26.10/schedule/",
           "method": "http_get",
           "raw_ref": "sha256:a51b44260a65f3d41e87e9067245550b625351237c43bf020348c2afbcff7397",
@@ -302,7 +319,7 @@
       "unavailable": [
         {
           "impact": "cannot tell which Ubuntu images ship this package",
-          "reason": "seed index incomplete: index covers only 6 flavours",
+          "reason": "seed index incomplete: index covers only 1 flavours",
           "source_id": "seeds"
         }
       ]
@@ -315,17 +332,17 @@
       "left_queue_at": null
     },
     "provenance": {
-      "generated_at": "2026-09-24T00:52:24Z",
+      "generated_at": "2026-09-24T11:38:30Z",
       "harness": null,
       "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
       "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
       "policy_version": "1.0.0",
-      "review_key": "sha256:721f5d9f69997b8cc0c63c77e5ad5ea76e998ac1aa1d7aa2323ea776997eb1bf",
+      "review_key": "sha256:2aa30d3302404a1767e47ada3bb8e777d63ee01384d07e12272eeafec4054109",
       "risk_algorithm_version": "risk/1.2.0",
-      "run_id": "run-20260924T004938Z",
+      "run_id": "run-20260924T113821Z",
       "tool_version": "0.1.0"
     },
-    "record_id": "2168274/31cdcc3946ee8c4e",
+    "record_id": "2168274/6760fe0304c43ad5",
     "risk": {
       "algorithm_version": "risk/1.2.0",
       "band": "HIGH",
