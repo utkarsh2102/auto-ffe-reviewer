@@ -1,0 +1,589 @@
+{
+  "history": [
+    {
+      "confidence": null,
+      "decision": null,
+      "fingerprint": "sha256:c86b611b1834a18c076fa4fd714a81c8d6559dc2c7904d85ce84384a5355e3a1",
+      "generated_at": "2026-09-24T16:57:24Z",
+      "risk_score": 87,
+      "status": "EVIDENCE_ONLY"
+    }
+  ],
+  "record": {
+    "assessment": null,
+    "evidence": {
+      "bug": {
+        "comments": [
+          {
+            "author": "ravi-sharma",
+            "author_is_release_team": false,
+            "content": "OpenSSL 3 shared-library runtime for software that cannot use OpenSSL 4 like nvidia-graphics-drivers-*\n\nThe package should only build libssl3t64.",
+            "content_sha": "5214b24e2270c5aff082979eefa135bde0cda64d660e4d8a581ee7b98a7358f8",
+            "date_created": "2026-09-17T19:28:17.482763+00:00",
+            "index": 0,
+            "url": "https://bugs.launchpad.net/ubuntu/+source/openssl/+bug/2167636/comments/0"
+          },
+          {
+            "author": "mdeslaur",
+            "author_is_release_team": false,
+            "content": "To be able to test openssl3-compat security updates in the future, we will need to have access to the binaries and utilities too. Please see the openssl1.0 package for an example on how we've handled this in the past.",
+            "content_sha": "64df4f51523a54ec46f84ea5d2b0c9b57d8a74fbfcf6c30b99fe3fdaf5e6e7db",
+            "date_created": "2026-09-18T11:13:25.546212+00:00",
+            "index": 1,
+            "url": "https://bugs.launchpad.net/ubuntu/+source/openssl/+bug/2167636/comments/1"
+          },
+          {
+            "author": "ravi-sharma",
+            "author_is_release_team": false,
+            "content": "Hello Marc, could you please explain in a few words why the binaries and utilities are required? I could try to infer this from the openssl1.0 packaging, but I’d rather not miss anything that is specific to openssl3.\n\nMy intention is to keep the openssl3 package in stonking(+) exactly as same as resolute, so maintenance burden is minimal.\n\nAs far as testing security patches is concerned, there will be nothing dependent upon openssl3 in stonking(+), except nvidia-graphics-drivers-*. Everything else has moved to openssl 4 or will be removed. Unless we have a test suite for nvidia-graphics-drivers in the interim release, I don't see any value in testing the build.",
+            "content_sha": "e93062601fca018d31d5c8e1e345df70a5f4a2b1ae009eaae6f97f2a5453e026",
+            "date_created": "2026-09-21T08:11:04.351382+00:00",
+            "index": 2,
+            "url": "https://bugs.launchpad.net/ubuntu/+source/openssl/+bug/2167636/comments/2"
+          },
+          {
+            "author": "mdeslaur",
+            "author_is_release_team": false,
+            "content": "Hi Ravi,\n\nOpenSSL gets a lot of security updates. We need some way to test if the patches we add to this package break it or not. While just blindly adding the resolute patches to this package may work for a while, as soon as we hit a snag and it stops building or working properly because of the different dependencies and toolchains in stonking+, we won't have the command line tools to run autopkgtests, or our test scripts.\n\nWe either never update it for security issues, which is less than ideal, though perhaps acceptable since it is only used for graphics drivers, or we have the packaging provide the openssl binary in a different filesystem location so it can be called by autopkgtest and test scripts, like the openssl1.0 package did.\n\nThe openssl1.0 package provided the openssl binary in /usr/lib/ssl1.0/openssl, so something similar could be done here, like /usr/lib/ssl3.5/openssl.\n\n",
+            "content_sha": "056801844918b0ba6c4d9b466faeba8bfd6938c86caf2d9fc29f229eaa641cbb",
+            "date_created": "2026-09-21T11:41:27.438988+00:00",
+            "index": 3,
+            "url": "https://bugs.launchpad.net/ubuntu/+source/openssl/+bug/2167636/comments/3"
+          },
+          {
+            "author": "ravi-sharma",
+            "author_is_release_team": false,
+            "content": "Hi Marc, Thank you for your resposne. I have added /usr/lib/ssl3.5/openssl\n\nhttps://code.launchpad.net/~ravi-sharma/ubuntu/+source/openssl/+git/openssl/+merge/511943\n\nHere is a ppa if you'd like to give it a go: https://launchpad.net/~ravi-sharma/+archive/ubuntu/fix-lp2167636-openssl/+packages ",
+            "content_sha": "82e3ea4702a5fdd83fc81e483a29c4f1e9dd6b3e821ade303b794faf4130896e",
+            "date_created": "2026-09-24T08:30:17.368765+00:00",
+            "index": 4,
+            "url": "https://bugs.launchpad.net/ubuntu/+source/openssl/+bug/2167636/comments/4"
+          },
+          {
+            "author": "mdeslaur",
+            "author_is_release_team": false,
+            "content": "Awesome, I'll give it a spin, thanks!",
+            "content_sha": "e2a2b35d9ce90997c8a661f8a5c7bedd035be56a5cc4715066b61d511105f721",
+            "date_created": "2026-09-24T15:21:03.389253+00:00",
+            "index": 5,
+            "url": "https://bugs.launchpad.net/ubuntu/+source/openssl/+bug/2167636/comments/5"
+          },
+          {
+            "author": "paride",
+            "author_is_release_team": true,
+            "content": "This is a NEW package with a narrow scope (running nvidia-graphics-drivers), I don't have specific worry points, FFe approved. Thanks for checking!",
+            "content_sha": "82ea5fb18dc3fcd3b8f7ddd3836392714cb363ad5f295a860bd1f220b5492aca",
+            "date_created": "2026-09-24T16:13:47.941385+00:00",
+            "index": 6,
+            "url": "https://bugs.launchpad.net/ubuntu/+source/openssl/+bug/2167636/comments/6"
+          },
+          {
+            "author": "mdeslaur",
+            "author_is_release_team": false,
+            "content": "I have modified our test scripts to support the new openssl3 package, and it works as expected. Thanks!\n\nhttps://git.launchpad.net/qa-regression-testing/commit/?id=5929169b11ab0708ed51c46156dcc13c5275dd44",
+            "content_sha": "e29fef60576436f46a403ce31e1c631b78a247e38ee33f376e7a8ddc74ada4df",
+            "date_created": "2026-09-24T16:52:47.722867+00:00",
+            "index": 7,
+            "url": "https://bugs.launchpad.net/ubuntu/+source/openssl/+bug/2167636/comments/7"
+          }
+        ],
+        "date_created": "2026-09-17T19:28:17.482763+00:00",
+        "date_last_message": "2026-09-24T16:52:47.722867+00:00",
+        "date_last_updated": "2026-09-24T16:52:48.324447+00:00",
+        "description": "OpenSSL 3 shared-library runtime for software that cannot use OpenSSL 4 like nvidia-graphics-drivers-*\n\nThe package should only build libssl3t64 and openssl bin in /usr/lib/ssl3.5/.",
+        "description_sha": "1d3a659560e5b0277ae4189f857d3236f970f4c32393feba76eeea6b7b9ecff9",
+        "discovered_via": "release-team-queue",
+        "id": 2167636,
+        "message_count": 8,
+        "release_team_subscribed": true,
+        "reporter": "ravi-sharma",
+        "subscribers": [
+          "ravi-sharma",
+          "ubuntu-release"
+        ],
+        "tags": [],
+        "tasks": [
+          {
+            "assignee": "ravi-sharma",
+            "importance": "Undecided",
+            "status": "New",
+            "target": "openssl (Ubuntu)"
+          }
+        ],
+        "title": "[FFe] create an openssl3 compat package for stonking",
+        "url": "https://bugs.launchpad.net/bugs/2167636"
+      },
+      "fingerprint": "sha256:c86b611b1834a18c076fa4fd714a81c8d6559dc2c7904d85ce84384a5355e3a1",
+      "flavours": {
+        "ack_required_from": [],
+        "acks": [],
+        "affected_flavours": [],
+        "impact": "CORE",
+        "requester_is_flavour_lead": null,
+        "requesting_flavour": null
+      },
+      "injection_signals": [],
+      "packages": [
+        {
+          "archive": {
+            "note": null,
+            "provenance": {
+              "cache": "fresh",
+              "checked_at": "2026-09-24T16:57:20Z",
+              "duration_ms": 390,
+              "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=openssl&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
+              "method": "http_get",
+              "raw_ref": "sha256:478c5183f6ba7fc172b00fcd7581acb0a18be28c1005a3028d9393087eb2caae",
+              "raw_truncated": false,
+              "source_id": "launchpad.archive"
+            },
+            "status": "OK",
+            "value": {
+              "binaries": [
+                "libssl-dev",
+                "libssl-doc",
+                "libssl4",
+                "openssl",
+                "openssl-provider-legacy"
+              ],
+              "component": "main",
+              "in_archive": true,
+              "pocket": "Release",
+              "source": "openssl",
+              "version": "4.0.1-1ubuntu4"
+            }
+          },
+          "build_rdepends": {
+            "note": null,
+            "provenance": {
+              "cache": "fresh",
+              "checked_at": "2026-09-24T16:57:24Z",
+              "duration_ms": 108,
+              "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:openssl",
+              "method": "http_get",
+              "raw_ref": "sha256:25d867301d778ecc8a1750ca6bf73390d5f76d387f16647a096ad17cebeb6b14",
+              "raw_truncated": false,
+              "source_id": "rdepends.build"
+            },
+            "status": "OK",
+            "value": {
+              "arch": "source",
+              "bucket": "500+",
+              "kind": "build",
+              "sample": [
+                "389-ds-base",
+                "accel-config",
+                "ace",
+                "actor-framework",
+                "afflib",
+                "aiocoap",
+                "aioquic",
+                "aircrack-ng",
+                "alligator",
+                "alpine",
+                "alsa-scarlett-gui",
+                "altos",
+                "amanda",
+                "amqp-cpp",
+                "amqtt",
+                "android-file-transfer",
+                "apache-arrow",
+                "apache2",
+                "apr-util",
+                "apt",
+                "apt-cacher-ng",
+                "argyll",
+                "arm-trusted-firmware",
+                "asio",
+                "asterisk"
+              ],
+              "seeded_rdeps": [],
+              "total": 953
+            }
+          },
+          "name": "openssl",
+          "rdepends": {
+            "note": null,
+            "provenance": {
+              "cache": "fresh",
+              "checked_at": "2026-09-24T16:57:24Z",
+              "duration_ms": 1100,
+              "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:openssl",
+              "method": "http_get",
+              "raw_ref": "sha256:f9d001f83171f91e6c7a35efb4b623ff2cb086478e59d6449a1ec3ad8ddc0b50",
+              "raw_truncated": true,
+              "source_id": "rdepends.binary"
+            },
+            "status": "OK",
+            "value": {
+              "arch": "any",
+              "bucket": "500+",
+              "kind": "binary",
+              "sample": [
+                "389-ds-base",
+                "389-ds-base-libs",
+                "accel-config-test",
+                "acme-tiny",
+                "afflib-tools",
+                "aircrack-ng",
+                "alpine",
+                "alsa-scarlett-gui",
+                "amanda-common",
+                "android-file-transfer",
+                "ani-cli",
+                "apache2-bin",
+                "apache2-dev",
+                "apache2-ssl-dev",
+                "apache2-utils",
+                "apt",
+                "apt-cacher-ng",
+                "argyll",
+                "arm-trusted-firmware-tools",
+                "asterisk",
+                "asterisk-modules",
+                "atuin",
+                "atuin-server",
+                "ausweisapp",
+                "autobahn-cpp-dev"
+              ],
+              "seeded_rdeps": [],
+              "total": 1277
+            }
+          },
+          "seeds": {
+            "note": "seed index looks incomplete (index covers only 1 flavours); the listed images are real but there may be more",
+            "provenance": {
+              "cache": "fresh",
+              "checked_at": "2026-09-24T16:57:23Z",
+              "duration_ms": 416,
+              "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
+              "method": "http_get",
+              "raw_ref": "sha256:cdcec985f43bfc8370c2e03297aa0861c67de26b86af5e54a072fb767c9e86df",
+              "raw_truncated": false,
+              "source_id": "seeds"
+            },
+            "status": "OK",
+            "value": {
+              "binaries_checked": [
+                "libssl-dev",
+                "libssl-doc",
+                "libssl4",
+                "openssl",
+                "openssl-provider-legacy"
+              ],
+              "binaries_seeded": [
+                "openssl",
+                "openssl-provider-legacy"
+              ],
+              "flavours": [
+                "ubuntu-core-installer"
+              ],
+              "images": [
+                [
+                  "ubuntu-core-installer",
+                  "daily-live"
+                ]
+              ],
+              "is_core": true
+            }
+          }
+        }
+      ],
+      "release_context": {
+        "note": null,
+        "provenance": {
+          "cache": "fresh",
+          "checked_at": "2026-09-24T16:57:20Z",
+          "duration_ms": 235,
+          "locator": "https://documentation.ubuntu.com/release-notes/26.10/schedule/",
+          "method": "http_get",
+          "raw_ref": "sha256:a51b44260a65f3d41e87e9067245550b625351237c43bf020348c2afbcff7397",
+          "raw_truncated": false,
+          "source_id": "calendar.schedule"
+        },
+        "status": "OK",
+        "value": {
+          "days_bucket": "28-15",
+          "days_since_feature_freeze": 35,
+          "days_to_release": 21,
+          "derivation": "schedule-page",
+          "feature_freeze": "2026-08-20",
+          "freeze_window_elapsed_pct": 62,
+          "milestones": [
+            {
+              "date": "2026-04-30",
+              "name": "Toolchain Uploaded"
+            },
+            {
+              "date": "2026-07-02",
+              "name": "Ubuntu Testing Week (optional)"
+            },
+            {
+              "date": "2026-08-06",
+              "name": "Expected Glibc 2.44 merge"
+            },
+            {
+              "date": "2026-08-13",
+              "name": "Expected LLVM default transition"
+            },
+            {
+              "date": "2026-08-20",
+              "name": "Debian Import Freeze"
+            },
+            {
+              "date": "2026-08-20",
+              "name": "Feature Freeze"
+            },
+            {
+              "date": "2026-09-10",
+              "name": "UI Freeze"
+            },
+            {
+              "date": "2026-09-17",
+              "name": "Documentation String Freeze"
+            },
+            {
+              "date": "2026-09-17",
+              "name": "Kernel Feature Freeze"
+            },
+            {
+              "date": "2026-09-21",
+              "name": "Beta Freeze"
+            },
+            {
+              "date": "2026-09-21",
+              "name": "Hardware Enablement Freeze"
+            },
+            {
+              "date": "2026-09-24",
+              "name": "Beta"
+            },
+            {
+              "date": "2026-10-01",
+              "name": "Kernel Freeze"
+            },
+            {
+              "date": "2026-10-01",
+              "name": "Non Language Pack Translation Deadline"
+            },
+            {
+              "date": "2026-10-08",
+              "name": "Final Freeze"
+            },
+            {
+              "date": "2026-10-08",
+              "name": "Language Pack Translation Deadline"
+            },
+            {
+              "date": "2026-10-08",
+              "name": "Release Candidate"
+            },
+            {
+              "date": "2026-10-15",
+              "name": "Final Release"
+            }
+          ],
+          "phase": "BETA",
+          "release_date": "2026-10-15",
+          "release_type": "INTERIM",
+          "series": "stonking",
+          "version": "26.10"
+        }
+      },
+      "subject": {
+        "derivation": "packages:bug-tasks; series:mentioned-in-bug-text",
+        "ffe_kind": "feature-change",
+        "packages": [
+          "openssl"
+        ],
+        "target_series": "stonking"
+      },
+      "testing": {
+        "autopkgtest": "ABSENT",
+        "build": "ABSENT",
+        "corroborated": true,
+        "items": [
+          {
+            "detail": "PPA ~ravi-sharma/fix-lp2167636-openssl exists on Launchpad",
+            "kind": "ppa",
+            "locator": "https://launchpad.net/~ravi-sharma/+archive/ubuntu/fix-lp2167636-openssl",
+            "source": "comment #4",
+            "state": "FOUND_VERIFIED"
+          },
+          {
+            "detail": "I have modified our test scripts to support the new openssl3 package, and it works as expected",
+            "kind": "claim",
+            "locator": null,
+            "source": "comment #7",
+            "state": "CLAIMED_ONLY"
+          }
+        ],
+        "ppa": "FOUND_VERIFIED",
+        "test_output": "ABSENT",
+        "unverified_claims": [
+          "I have modified our test scripts to support the new openssl3 package, and it works as expected"
+        ]
+      },
+      "unavailable": []
+    },
+    "human": {
+      "decided": false,
+      "decision": null,
+      "detected_at": null,
+      "final_status": null,
+      "left_queue_at": null
+    },
+    "provenance": {
+      "generated_at": "2026-09-24T16:57:24Z",
+      "harness": null,
+      "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
+      "policy_version": "1.0.0",
+      "review_key": "sha256:a9cbe4b7159f2a54f6ed901073bb575393d68619ccadc946e0b46e803c1cef2d",
+      "risk_algorithm_version": "risk/1.2.0",
+      "run_id": "run-20260924T165715Z",
+      "tool_version": "0.1.0"
+    },
+    "record_id": "2167636/c86b611b1834a18c",
+    "risk": {
+      "algorithm_version": "risk/1.2.0",
+      "band": "SEVERE",
+      "components": [
+        {
+          "evidence_refs": [
+            "/evidence/release_context"
+          ],
+          "max_points": 20,
+          "name": "release_posture",
+          "points": 15,
+          "rationale": "interim release, past beta, 21 days to release, 62% through the freeze window"
+        },
+        {
+          "evidence_refs": [
+            "/evidence/packages"
+          ],
+          "max_points": 25,
+          "name": "seeded_reach",
+          "points": 25,
+          "rationale": "seeded on a core Ubuntu image, so a regression reaches the default install"
+        },
+        {
+          "evidence_refs": [
+            "/evidence/packages"
+          ],
+          "max_points": 25,
+          "name": "dependency_reach",
+          "points": 25,
+          "rationale": "1277 reverse dependencies, 953 reverse build-dependencies"
+        },
+        {
+          "evidence_refs": [
+            "/evidence/packages"
+          ],
+          "max_points": 10,
+          "name": "archive_standing",
+          "points": 10,
+          "rationale": "in main or restricted, so it carries a Canonical support commitment"
+        },
+        {
+          "evidence_refs": [
+            "/evidence/subject"
+          ],
+          "max_points": 5,
+          "name": "change_shape",
+          "points": 2,
+          "rationale": "a feature change to an existing package"
+        },
+        {
+          "evidence_refs": [
+            "/evidence/testing"
+          ],
+          "max_points": 15,
+          "name": "unvalidated_change",
+          "points": 10,
+          "rationale": "the bug links a PPA"
+        }
+      ],
+      "confidence_ceiling": "HIGH",
+      "decision_floor": null,
+      "gates": [
+        {
+          "effect": "floor_needs_information",
+          "evidence_refs": [
+            "/evidence/subject"
+          ],
+          "id": "no_package_identified",
+          "rationale": "the affected package is identified",
+          "triggered": false
+        },
+        {
+          "effect": "floor_needs_information",
+          "evidence_refs": [
+            "/evidence/testing"
+          ],
+          "id": "no_testing_evidence",
+          "rationale": "the bug links testing evidence",
+          "triggered": false
+        },
+        {
+          "effect": "flag",
+          "evidence_refs": [
+            "/evidence/flavours"
+          ],
+          "id": "flavour_ack_outstanding",
+          "rationale": "no cross-flavour acknowledgement is outstanding",
+          "triggered": false
+        },
+        {
+          "effect": "floor_needs_information",
+          "evidence_refs": [
+            "/evidence/release_context"
+          ],
+          "id": "after_final_freeze",
+          "rationale": "the request is within the ordinary freeze window",
+          "triggered": false
+        },
+        {
+          "effect": "flag",
+          "evidence_refs": [
+            "/evidence/release_context"
+          ],
+          "id": "before_feature_freeze",
+          "rationale": "the target release is past Feature Freeze",
+          "triggered": false
+        },
+        {
+          "effect": "flag",
+          "evidence_refs": [
+            "/evidence/subject"
+          ],
+          "id": "unrecoverable_failure_mode",
+          "rationale": "a regression here would be fixable by an SRU",
+          "triggered": false
+        },
+        {
+          "effect": "flag",
+          "evidence_refs": [
+            "/evidence/injection"
+          ],
+          "id": "suspicious_bug_text",
+          "rationale": "nothing in the bug text resembles an attempt to steer the reviewer",
+          "triggered": false
+        },
+        {
+          "effect": "cap_confidence",
+          "evidence_refs": [
+            "/evidence/unavailable"
+          ],
+          "id": "evidence_unavailable",
+          "rationale": "every evidence source was available",
+          "triggered": false
+        }
+      ],
+      "score": 87
+    },
+    "schema_version": "1.0.0",
+    "status": "EVIDENCE_ONLY"
+  },
+  "version": 1
+}

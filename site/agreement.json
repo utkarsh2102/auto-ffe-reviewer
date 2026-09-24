@@ -1,9 +1,29 @@
 {
   "agreed": 0,
   "comparable": 0,
-  "decided": 2,
+  "decided": 4,
   "rate": null,
   "recent": [
+    {
+      "agreed": null,
+      "bug_id": 2168274,
+      "decided_at": "2026-09-24T16:57:33Z",
+      "ours": null,
+      "risk_band": "HIGH",
+      "theirs": "APPROVED",
+      "title": "Soft FFe / intention to upload",
+      "url": "https://bugs.launchpad.net/bugs/2168274"
+    },
+    {
+      "agreed": null,
+      "bug_id": 2167325,
+      "decided_at": "2026-09-24T16:57:26Z",
+      "ours": null,
+      "risk_band": "HIGH",
+      "theirs": "REJECTED",
+      "title": "FFe: Please merge rdma-core 65.0-1 from Debian unstable into stonking (new upstream release 65.0)",
+      "url": "https://bugs.launchpad.net/bugs/2167325"
+    },
     {
       "agreed": null,
       "bug_id": 2167149,

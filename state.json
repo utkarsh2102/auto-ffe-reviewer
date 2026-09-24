@@ -44,7 +44,7 @@
       "decision": null,
       "discovered_via": "release-team-queue",
       "fingerprint": "sha256:9d151b5936d266244cff05a58a5abb5e03df62dc1f95d07e2010b6e389510b2a",
-      "in_queue": true,
+      "in_queue": false,
       "last_evidence_at": "2026-09-24T11:38:39Z",
       "last_review_at": "",
       "last_seen_at": "2026-09-24T11:38:32Z",
@@ -52,7 +52,25 @@
       "llm_runs_today": 0,
       "message_count": 7,
       "review_key": "sha256:4df30a9617d2ff22c91faaa2f7de9333e746b49790d48cf05d2bfb9c2c73cca8",
-      "status": "Incomplete"
+      "status": "Invalid"
+    },
+    "2167636": {
+      "bug_id": 2167636,
+      "confidence": null,
+      "date_last_message": "2026-09-24T16:52:47.722867+00:00",
+      "date_last_updated": "2026-09-24T16:52:48.324447+00:00",
+      "decision": null,
+      "discovered_via": "release-team-queue",
+      "fingerprint": "sha256:c86b611b1834a18c076fa4fd714a81c8d6559dc2c7904d85ce84384a5355e3a1",
+      "in_queue": true,
+      "last_evidence_at": "2026-09-24T16:57:24Z",
+      "last_review_at": "",
+      "last_seen_at": "2026-09-24T16:57:20Z",
+      "llm_runs_date": "",
+      "llm_runs_today": 0,
+      "message_count": 8,
+      "review_key": "sha256:a9cbe4b7159f2a54f6ed901073bb575393d68619ccadc946e0b46e803c1cef2d",
+      "status": "New"
     },
     "2167899": {
       "bug_id": 2167899,
@@ -80,7 +98,7 @@
       "decision": null,
       "discovered_via": "release-team-queue",
       "fingerprint": "sha256:6760fe0304c43ad5af99a61a1d8d47af99c7653969bc0450c2953265490f7cbd",
-      "in_queue": true,
+      "in_queue": false,
       "last_evidence_at": "2026-09-24T11:38:30Z",
       "last_review_at": "",
       "last_seen_at": "2026-09-24T11:38:28Z",
@@ -88,9 +106,9 @@
       "llm_runs_today": 0,
       "message_count": 5,
       "review_key": "sha256:2aa30d3302404a1767e47ada3bb8e777d63ee01384d07e12272eeafec4054109",
-      "status": "New"
+      "status": "Triaged"
     }
   },
-  "updated_at": "2026-09-24T11:38:39Z",
+  "updated_at": "2026-09-24T16:57:34Z",
   "version": 1
 }
