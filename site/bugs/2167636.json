@@ -7,6 +7,14 @@
       "generated_at": "2026-09-24T16:57:24Z",
       "risk_score": 87,
       "status": "EVIDENCE_ONLY"
+    },
+    {
+      "confidence": null,
+      "decision": null,
+      "fingerprint": "sha256:74e71fb21fc3333dff90484ddc55d5aedc8ce1ce1f7ce84f599b9638205f15ac",
+      "generated_at": "2026-09-24T18:56:36Z",
+      "risk_score": 87,
+      "status": "EVIDENCE_ONLY"
     }
   ],
   "record": {
@@ -113,7 +121,7 @@
         "title": "[FFe] create an openssl3 compat package for stonking",
         "url": "https://bugs.launchpad.net/bugs/2167636"
       },
-      "fingerprint": "sha256:c86b611b1834a18c076fa4fd714a81c8d6559dc2c7904d85ce84384a5355e3a1",
+      "fingerprint": "sha256:74e71fb21fc3333dff90484ddc55d5aedc8ce1ce1f7ce84f599b9638205f15ac",
       "flavours": {
         "ack_required_from": [],
         "acks": [],
@@ -129,8 +137,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-24T16:57:20Z",
-              "duration_ms": 390,
+              "checked_at": "2026-09-24T18:56:31Z",
+              "duration_ms": 315,
               "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=openssl&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
               "method": "http_get",
               "raw_ref": "sha256:478c5183f6ba7fc172b00fcd7581acb0a18be28c1005a3028d9393087eb2caae",
@@ -157,8 +165,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-24T16:57:24Z",
-              "duration_ms": 108,
+              "checked_at": "2026-09-24T18:56:36Z",
+              "duration_ms": 115,
               "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:openssl",
               "method": "http_get",
               "raw_ref": "sha256:25d867301d778ecc8a1750ca6bf73390d5f76d387f16647a096ad17cebeb6b14",
@@ -206,8 +214,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-24T16:57:24Z",
-              "duration_ms": 1100,
+              "checked_at": "2026-09-24T18:56:36Z",
+              "duration_ms": 1353,
               "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:openssl",
               "method": "http_get",
               "raw_ref": "sha256:f9d001f83171f91e6c7a35efb4b623ff2cb086478e59d6449a1ec3ad8ddc0b50",
@@ -253,12 +261,12 @@
           "seeds": {
             "note": "seed index looks incomplete (index covers only 1 flavours); the listed images are real but there may be more",
             "provenance": {
-              "cache": "fresh",
-              "checked_at": "2026-09-24T16:57:23Z",
-              "duration_ms": 416,
+              "cache": "cached",
+              "checked_at": "2026-09-24T18:56:34Z",
+              "duration_ms": 0,
               "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
               "method": "http_get",
-              "raw_ref": "sha256:cdcec985f43bfc8370c2e03297aa0861c67de26b86af5e54a072fb767c9e86df",
+              "raw_ref": "sha256:01cbd8d76bb69f9f10e97a9887763389426ddab5e5acfdbf1b5daffb1eac9815",
               "raw_truncated": false,
               "source_id": "seeds"
             },
@@ -292,9 +300,9 @@
       "release_context": {
         "note": null,
         "provenance": {
-          "cache": "fresh",
-          "checked_at": "2026-09-24T16:57:20Z",
-          "duration_ms": 235,
+          "cache": "cached",
+          "checked_at": "2026-09-24T18:56:31Z",
+          "duration_ms": 0,
           "locator": "https://documentation.ubuntu.com/release-notes/26.10/schedule/",
           "method": "http_get",
           "raw_ref": "sha256:a51b44260a65f3d41e87e9067245550b625351237c43bf020348c2afbcff7397",
@@ -424,7 +432,13 @@
           "I have modified our test scripts to support the new openssl3 package, and it works as expected"
         ]
       },
-      "unavailable": []
+      "unavailable": [
+        {
+          "impact": "cannot tell which Ubuntu images ship this package",
+          "reason": "seed index incomplete: index covers only 1 flavours",
+          "source_id": "seeds"
+        }
+      ]
     },
     "human": {
       "decided": false,
@@ -434,17 +448,17 @@
       "left_queue_at": null
     },
     "provenance": {
-      "generated_at": "2026-09-24T16:57:24Z",
+      "generated_at": "2026-09-24T18:56:36Z",
       "harness": null,
       "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
       "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
       "policy_version": "1.0.0",
-      "review_key": "sha256:a9cbe4b7159f2a54f6ed901073bb575393d68619ccadc946e0b46e803c1cef2d",
+      "review_key": "sha256:a568abbcf4aabfae8e00f4afc9514e9668a46c83da1fa9f31c8e99215298718f",
       "risk_algorithm_version": "risk/1.2.0",
-      "run_id": "run-20260924T165715Z",
+      "run_id": "run-20260924T185620Z",
       "tool_version": "0.1.0"
     },
-    "record_id": "2167636/c86b611b1834a18c",
+    "record_id": "2167636/74e71fb21fc3333d",
     "risk": {
       "algorithm_version": "risk/1.2.0",
       "band": "SEVERE",
@@ -504,7 +518,7 @@
           "rationale": "the bug links a PPA"
         }
       ],
-      "confidence_ceiling": "HIGH",
+      "confidence_ceiling": "MEDIUM",
       "decision_floor": null,
       "gates": [
         {
@@ -576,8 +590,8 @@
             "/evidence/unavailable"
           ],
           "id": "evidence_unavailable",
-          "rationale": "every evidence source was available",
-          "triggered": false
+          "rationale": "could not consult seeds, so this assessment rests on incomplete evidence",
+          "triggered": true
         }
       ],
       "score": 87

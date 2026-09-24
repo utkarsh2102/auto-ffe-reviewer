@@ -61,15 +61,33 @@
       "date_last_updated": "2026-09-24T16:52:48.324447+00:00",
       "decision": null,
       "discovered_via": "release-team-queue",
-      "fingerprint": "sha256:c86b611b1834a18c076fa4fd714a81c8d6559dc2c7904d85ce84384a5355e3a1",
+      "fingerprint": "sha256:74e71fb21fc3333dff90484ddc55d5aedc8ce1ce1f7ce84f599b9638205f15ac",
       "in_queue": true,
-      "last_evidence_at": "2026-09-24T16:57:24Z",
+      "last_evidence_at": "2026-09-24T18:56:36Z",
       "last_review_at": "",
-      "last_seen_at": "2026-09-24T16:57:20Z",
+      "last_seen_at": "2026-09-24T18:56:31Z",
       "llm_runs_date": "",
       "llm_runs_today": 0,
       "message_count": 8,
-      "review_key": "sha256:a9cbe4b7159f2a54f6ed901073bb575393d68619ccadc946e0b46e803c1cef2d",
+      "review_key": "sha256:a568abbcf4aabfae8e00f4afc9514e9668a46c83da1fa9f31c8e99215298718f",
+      "status": "New"
+    },
+    "2167863": {
+      "bug_id": 2167863,
+      "confidence": null,
+      "date_last_message": "2026-09-24T18:43:17.256398+00:00",
+      "date_last_updated": "2026-09-24T18:44:09.762662+00:00",
+      "decision": null,
+      "discovered_via": "release-team-queue",
+      "fingerprint": "sha256:03569b378ed684f707c6a6a8c0e19cf48e29df49e13890df270497fb7e6266d7",
+      "in_queue": true,
+      "last_evidence_at": "2026-09-24T18:56:29Z",
+      "last_review_at": "",
+      "last_seen_at": "2026-09-24T18:56:26Z",
+      "llm_runs_date": "",
+      "llm_runs_today": 0,
+      "message_count": 2,
+      "review_key": "sha256:5fa42a5f05bb6937a5a4712188b1945709f277a82a5227fb90bffe355b74f8dc",
       "status": "New"
     },
     "2167899": {
@@ -109,6 +127,6 @@
       "status": "Triaged"
     }
   },
-  "updated_at": "2026-09-24T16:57:34Z",
+  "updated_at": "2026-09-24T18:56:36Z",
   "version": 1
 }

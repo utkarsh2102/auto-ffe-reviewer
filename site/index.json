@@ -22,7 +22,7 @@
       "rdepends": 1277,
       "release_type": "INTERIM",
       "reporter": "ravi-sharma",
-      "reviewed_at": "2026-09-24T16:57:24Z",
+      "reviewed_at": "2026-09-24T18:56:36Z",
       "risk_band": "SEVERE",
       "risk_score": 87,
       "seeded": [
@@ -33,21 +33,60 @@
       "summary": null,
       "testing_corroborated": true,
       "title": "[FFe] create an openssl3 compat package for stonking",
-      "unavailable": [],
+      "unavailable": [
+        "seeds"
+      ],
       "url": "https://bugs.launchpad.net/bugs/2167636",
+      "version": "26.10"
+    },
+    {
+      "ack_required_from": [],
+      "bug_id": 2167863,
+      "build_rdepends": 3,
+      "confidence": null,
+      "days_to_release": 21,
+      "decision": null,
+      "decision_floor": null,
+      "ffe_kind": "merge",
+      "flags": [],
+      "flavour_impact": "UNSEEDED",
+      "has_assessment": false,
+      "injection_signals": 0,
+      "is_core": false,
+      "missing_information": [],
+      "packages": [
+        "wireplumber"
+      ],
+      "phase": "BETA",
+      "rdepends": 24,
+      "release_type": "INTERIM",
+      "reporter": "charles05",
+      "reviewed_at": "2026-09-24T18:56:29Z",
+      "risk_band": "HIGH",
+      "risk_score": 54,
+      "seeded": null,
+      "series": "stonking",
+      "status": "EVIDENCE_ONLY",
+      "summary": null,
+      "testing_corroborated": true,
+      "title": "FFe: Please merge 0.5.17-1 into Stonking",
+      "unavailable": [
+        "seeds"
+      ],
+      "url": "https://bugs.launchpad.net/bugs/2167863",
       "version": "26.10"
     }
   ],
   "counts": {
     "approve": 0,
     "awaiting_flavour_ack": 0,
-    "evidence_incomplete": 0,
-    "high_risk": 1,
-    "needs_attention": 1,
+    "evidence_incomplete": 2,
+    "high_risk": 2,
+    "needs_attention": 2,
     "needs_information": 0,
-    "no_recommendation": 1,
+    "no_recommendation": 2,
     "no_testing_evidence": 0,
-    "open": 1,
+    "open": 2,
     "reject": 0
   },
   "version": 1
