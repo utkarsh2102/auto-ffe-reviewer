@@ -1,0 +1,928 @@
+{
+  "assessment": null,
+  "evidence": {
+    "bug": {
+      "comments": [
+        {
+          "author": "lvoytek",
+          "author_is_release_team": false,
+          "content": "With the release of MySQL 9.7, and the push toward the removal of default-mysql-* packages, MariaDB and MySQL should no longer be considered interchangeable. In order to allow packages depending on one or the other to be installed at the same time, mysql-server and mariadb-server along with their dependencies should also be installable at the same time.\n\nTo do this, mariadb-server will need to move its runtime directory from /run/mysqld to /run/mariadbd and its config directory from /etc/mysql to /etc/mariadb. Likewise, remaining MariaDB symlinks used to achieve compatibility should be moved to the mariadb-compat package. Lastly, both mysql-server and mariadb-server binaries with conflicting names will need to be updated, with alternatives symlinks to point to them.\n\nThis update will make the mysql-common package no longer necessary, as my.cnf alternatives will no longer be needed. Once the removal of default-mysql-* is complete, mysql-defaults can be removed completely.",
+          "content_sha": "94bac93ed73b03d35df0d93abd924a576126f2f66e84959d5be9c68cae7b3f14",
+          "date_created": "2026-09-16T12:39:31.955554+00:00",
+          "index": 0,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/mysql-9.7/+bug/2167479/comments/0"
+        },
+        {
+          "author": "otto",
+          "author_is_release_team": false,
+          "content": "Latest 1:11.8.9+ds-3 ships now with https://salsa.debian.org/mariadb-team/mariadb-server/-/merge_requests/178",
+          "content_sha": "07c4b43f16d4d49412b6f265c1bb519374628de8308c06d574e0eff6968834c0",
+          "date_created": "2026-09-21T01:20:10.182119+00:00",
+          "index": 1,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/mysql-9.7/+bug/2167479/comments/1"
+        }
+      ],
+      "date_created": "2026-09-16T12:39:31.955554+00:00",
+      "date_last_message": "2026-09-21T01:20:10.182119+00:00",
+      "date_last_updated": "2026-09-25T20:00:20.350280+00:00",
+      "description": "Hello Release team,\n\nPlease accept this FFE to update MariaDB and MySQL in stonking to allow the two servers to be co-installed. This allows us to make sure packages depending directly on mariadb-server or mysql-server can be installed and used at the same time, which mitigates issues caused by Debian's move toward removing default-mysql-* packages (https://lists.debian.org/debian-devel/2026/05/msg00161.html).\n\nThe changes required are shown in attached merge proposals. On the mariadb side this includes\n\n- Moving the config directory from /etc/mysql to /etc/mariadb\n- Removing /etc/mysql/my.cnf alternatives use and removing mysql-common dependency\n- Renaming the binaries my_print_defaults, perror, innochecksum, myisam_ftdump, myisamchk, myisamlog and myisampack, adding symlinks with original names to them in mariadb-server-compat\n- Moving remaining mysql compat symlinks to mariadb-server-compat\n- Adding port 3306 backoff to 3307 logic when 3306 is in use\n- Updating package conflicts\n\nOn the mysql side this includes\n\n- Adding port 3306 backoff to 3307 logic when 3306 is in use\n- Updating package conflicts\n\n\nPPA with changes here - https://launchpad.net/~lvoytek/+archive/ubuntu/mariadb-mysql-co-install\n\nAutopkgtests for both packages are passing, including upstream test suite tests, and using the packages from the PPA confirms that mariadb-server and mysql-server can be installed/removed/purged in any combination together on the same system.\n\nNotably the removal of mysql-defaults is not necessary to solve this issue, and we can wait on that till next cycle.\n\n\n[Original info]\n\nWith the release of MySQL 9.7, and the push toward the removal of default-mysql-* packages, MariaDB and MySQL should no longer be considered interchangeable. In order to allow packages depending on one or the other to be installed at the same time, mysql-server and mariadb-server along with their dependencies should also be installable at the same time.\n\nTo do this, mariadb-server will need to move its runtime directory from /run/mysqld to /run/mariadbd and its config directory from /etc/mysql to /etc/mariadb. Likewise, remaining MariaDB symlinks used to achieve compatibility should be moved to the mariadb-compat package. Lastly, both mysql-server and mariadb-server binaries with conflicting names will need to be updated, with alternatives symlinks to point to them.\n\nThis update will make the mysql-common package no longer necessary, as my.cnf alternatives will no longer be needed. Once the removal of default-mysql-* is complete, mysql-defaults can be removed completely.",
+      "description_sha": "efc2d9254124a1a5feb5880530cd11ed3283b02a319d3ef8bfc08ad13b7fee26",
+      "discovered_via": "release-team-queue",
+      "id": 2167479,
+      "message_count": 2,
+      "release_team_subscribed": true,
+      "reporter": "lvoytek",
+      "subscribers": [
+        "lvoytek",
+        "ubuntu-release"
+      ],
+      "tags": [],
+      "tasks": [
+        {
+          "assignee": null,
+          "importance": "Undecided",
+          "status": "New",
+          "target": "mariadb (Ubuntu)"
+        },
+        {
+          "assignee": null,
+          "importance": "Undecided",
+          "status": "New",
+          "target": "mysql-9.7 (Ubuntu)"
+        },
+        {
+          "assignee": null,
+          "importance": "Undecided",
+          "status": "Deferred",
+          "target": "mysql-defaults (Ubuntu)"
+        }
+      ],
+      "title": "[FFE] Allow mysql-server and mariadb-server to be co-installed in stonking",
+      "url": "https://bugs.launchpad.net/bugs/2167479"
+    },
+    "fingerprint": "sha256:52f30223b551a71a32524662203d2e5e69739416b84e70523c27bdebf8b7eaf2",
+    "flavours": {
+      "ack_required_from": [],
+      "acks": [
+        {
+          "author": "otto",
+          "author_in_flavour_team": true,
+          "flavour": "ubuntu-budgie",
+          "message_url": "https://bugs.launchpad.net/ubuntu/+source/mysql-9.7/+bug/2167479/comments/1"
+        }
+      ],
+      "affected_flavours": [
+        "ubuntu-budgie"
+      ],
+      "impact": "CORE",
+      "requester_is_flavour_lead": true,
+      "requesting_flavour": "ubuntu-budgie"
+    },
+    "injection_signals": [],
+    "packages": [
+      {
+        "archive": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-09-25T21:46:52Z",
+            "duration_ms": 341,
+            "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=mariadb&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
+            "method": "http_get",
+            "raw_ref": "sha256:01aa15cb5977759654d252ffef914a0d4d80e59d0428cfba40768cd2e0bb2a35",
+            "raw_truncated": false,
+            "source_id": "launchpad.archive"
+          },
+          "status": "OK",
+          "value": {
+            "binaries": [
+              "libmariadb-dev",
+              "libmariadb-dev-compat",
+              "libmariadb3",
+              "libmariadbd-dev",
+              "libmariadbd19t64",
+              "mariadb-backup",
+              "mariadb-client",
+              "mariadb-client-compat",
+              "mariadb-client-core",
+              "mariadb-common",
+              "mariadb-plugin-connect",
+              "mariadb-plugin-connect-jdbc",
+              "mariadb-plugin-cracklib-password-check",
+              "mariadb-plugin-gssapi-client",
+              "mariadb-plugin-gssapi-server",
+              "mariadb-plugin-hashicorp-key-management",
+              "mariadb-plugin-mroonga",
+              "mariadb-plugin-oqgraph",
+              "mariadb-plugin-provider-bzip2",
+              "mariadb-plugin-provider-lz4",
+              "mariadb-plugin-provider-lzma",
+              "mariadb-plugin-provider-lzo",
+              "mariadb-plugin-provider-snappy",
+              "mariadb-plugin-rocksdb",
+              "mariadb-plugin-s3",
+              "mariadb-plugin-spider",
+              "mariadb-server",
+              "mariadb-server-compat",
+              "mariadb-server-core",
+              "mariadb-test",
+              "mariadb-test-data"
+            ],
+            "component": "main",
+            "in_archive": true,
+            "pocket": "Proposed",
+            "source": "mariadb",
+            "version": "1:11.8.9+ds-4"
+          }
+        },
+        "build_rdepends": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-09-25T21:47:00Z",
+            "duration_ms": 164,
+            "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:mariadb",
+            "method": "http_get",
+            "raw_ref": "sha256:4ac91f9375f877bcb68931bb1af5839925f0d508cbe4398e33a9390fd079e9bc",
+            "raw_truncated": false,
+            "source_id": "rdepends.build"
+          },
+          "status": "OK",
+          "value": {
+            "arch": "source",
+            "bucket": "21-100",
+            "kind": "build",
+            "sample": [
+              "akonadi",
+              "amarok",
+              "boinc",
+              "cctools",
+              "courier",
+              "courier-authlib",
+              "csync2",
+              "ctn",
+              "ddnet",
+              "drogon",
+              "emboss",
+              "exim4",
+              "freeradius",
+              "gdal",
+              "geoalchemy2",
+              "glpk",
+              "gnustep-sqlclient",
+              "grass",
+              "hipercontracer",
+              "hoel",
+              "icinga2",
+              "kannel",
+              "libdbd-mariadb-perl",
+              "libnss-mysql",
+              "lighttpd"
+            ],
+            "seeded_rdeps": [],
+            "total": 47
+          }
+        },
+        "name": "mariadb",
+        "rdepends": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-09-25T21:46:59Z",
+            "duration_ms": 222,
+            "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:mariadb",
+            "method": "http_get",
+            "raw_ref": "sha256:6c63f09405ee285d71c784874ccfb54dba560b1fa24b90952dc18375a86030c8",
+            "raw_truncated": false,
+            "source_id": "rdepends.binary"
+          },
+          "status": "OK",
+          "value": {
+            "arch": "any",
+            "bucket": "21-100",
+            "kind": "binary",
+            "sample": [
+              "akonadi-backend-mysql",
+              "amarok",
+              "cqrlog",
+              "ctn",
+              "ddnet-server",
+              "emboss-lib",
+              "exim4-daemon-heavy",
+              "exim4-mod-mysql",
+              "freeradius-mysql",
+              "grass-core",
+              "hipercontracer-dbshell",
+              "icinga2-ido-mysql",
+              "kannel-dev",
+              "lcmaps-plugins-jobrep-admin",
+              "libatalk",
+              "libboinc-app-dev",
+              "libboinc7t64",
+              "libcourier-authlib0",
+              "libdbd-mariadb-perl",
+              "libdrogon1t64",
+              "libgdal-dev",
+              "libgdal39",
+              "libhoel-dev",
+              "libhoel1.4t64",
+              "libhpctdb2"
+            ],
+            "seeded_rdeps": [],
+            "total": 59
+          }
+        },
+        "seeds": {
+          "note": "seed index looks incomplete (index covers only 7 flavours); the listed images are real but there may be more",
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-09-25T21:46:59Z",
+            "duration_ms": 567,
+            "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
+            "method": "http_get",
+            "raw_ref": "sha256:d5092e70a8aa6c6c66c1b59fa1fbc4828f10aea15d2a45cff26cc672ef7bb7ce",
+            "raw_truncated": false,
+            "source_id": "seeds"
+          },
+          "status": "OK",
+          "value": {
+            "binaries_checked": [
+              "libmariadb-dev",
+              "libmariadb-dev-compat",
+              "libmariadb3",
+              "libmariadbd-dev",
+              "libmariadbd19t64",
+              "mariadb-backup",
+              "mariadb-client",
+              "mariadb-client-compat",
+              "mariadb-client-core",
+              "mariadb-common",
+              "mariadb-plugin-connect",
+              "mariadb-plugin-connect-jdbc",
+              "mariadb-plugin-cracklib-password-check",
+              "mariadb-plugin-gssapi-client",
+              "mariadb-plugin-gssapi-server",
+              "mariadb-plugin-hashicorp-key-management",
+              "mariadb-plugin-mroonga",
+              "mariadb-plugin-oqgraph",
+              "mariadb-plugin-provider-bzip2",
+              "mariadb-plugin-provider-lz4",
+              "mariadb-plugin-provider-lzma",
+              "mariadb-plugin-provider-lzo",
+              "mariadb-plugin-provider-snappy",
+              "mariadb-plugin-rocksdb",
+              "mariadb-plugin-s3",
+              "mariadb-plugin-spider",
+              "mariadb-server",
+              "mariadb-server-compat",
+              "mariadb-server-core",
+              "mariadb-test",
+              "mariadb-test-data"
+            ],
+            "binaries_seeded": [
+              "libmariadb-dev",
+              "libmariadbd-dev",
+              "libmariadbd19t64"
+            ],
+            "flavours": [
+              "ubuntu",
+              "ubuntu-budgie"
+            ],
+            "images": [
+              [
+                "ubuntu",
+                "supported"
+              ],
+              [
+                "ubuntu-budgie",
+                "supported"
+              ]
+            ],
+            "is_core": true
+          }
+        }
+      },
+      {
+        "archive": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-09-25T21:47:00Z",
+            "duration_ms": 267,
+            "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=mysql-9.7&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
+            "method": "http_get",
+            "raw_ref": "sha256:3948b24d4e57b0d5017a1e4ec131ce87e4f0cbc44fc6aee09265ae731ffb15a8",
+            "raw_truncated": false,
+            "source_id": "launchpad.archive"
+          },
+          "status": "OK",
+          "value": {
+            "binaries": [
+              "libmysqlclient-dev",
+              "libmysqlclient24",
+              "mysql-client",
+              "mysql-client-core",
+              "mysql-router",
+              "mysql-server",
+              "mysql-server-core",
+              "mysql-source",
+              "mysql-testsuite"
+            ],
+            "component": "main",
+            "in_archive": true,
+            "pocket": "Release",
+            "source": "mysql-9.7",
+            "version": "9.7.2-4"
+          }
+        },
+        "build_rdepends": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-09-25T21:47:03Z",
+            "duration_ms": 209,
+            "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:mysql-9.7",
+            "method": "http_get",
+            "raw_ref": "sha256:a91d26ec07376bb4ad228c16f5ab6c0232eec87b1aee4a335bb83a680baac46c",
+            "raw_truncated": false,
+            "source_id": "rdepends.build"
+          },
+          "status": "OK",
+          "value": {
+            "arch": "source",
+            "bucket": "6-20",
+            "kind": "build",
+            "sample": [
+              "apr-util",
+              "cl-sql",
+              "ctn",
+              "isc-kea",
+              "kannel",
+              "mysql-shell",
+              "mythtv",
+              "pdns",
+              "php8.5",
+              "postfix",
+              "postgresql-mysql-fdw",
+              "python-tooz",
+              "tdbcmysql"
+            ],
+            "seeded_rdeps": [],
+            "total": 13
+          }
+        },
+        "name": "mysql-9.7",
+        "rdepends": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-09-25T21:47:03Z",
+            "duration_ms": 361,
+            "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:mysql-9.7",
+            "method": "http_get",
+            "raw_ref": "sha256:c93183fee150d2196598c0e017f665b090b97f3524f4e14ae0e69f5fdf69b620",
+            "raw_truncated": false,
+            "source_id": "rdepends.binary"
+          },
+          "status": "OK",
+          "value": {
+            "arch": "any",
+            "bucket": "21-100",
+            "kind": "binary",
+            "sample": [
+              "anope",
+              "argus-client",
+              "asterisk-mysql",
+              "augustus",
+              "bacula-common-mysql",
+              "cacti-spine",
+              "cl-sql-mysql",
+              "collectd",
+              "coturn",
+              "cvm-mysql",
+              "dbf2mysql",
+              "default-libmysqlclient-dev",
+              "default-mysql-client",
+              "default-mysql-client-core",
+              "default-mysql-server",
+              "default-mysql-server-core",
+              "dovecot-mysql",
+              "gambas3-gb-db-mysql",
+              "gambas3-gb-db2-mysql",
+              "gearman-job-server",
+              "gerbera",
+              "gnokii-smsd-mysql",
+              "gnuais",
+              "hydra",
+              "inspircd"
+            ],
+            "seeded_rdeps": [],
+            "total": 90
+          }
+        },
+        "seeds": {
+          "note": "seed index looks incomplete (index covers only 7 flavours); the listed images are real but there may be more",
+          "provenance": {
+            "cache": "cached",
+            "checked_at": "2026-09-25T21:47:02Z",
+            "duration_ms": 0,
+            "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
+            "method": "http_get",
+            "raw_ref": "sha256:d5092e70a8aa6c6c66c1b59fa1fbc4828f10aea15d2a45cff26cc672ef7bb7ce",
+            "raw_truncated": false,
+            "source_id": "seeds"
+          },
+          "status": "OK",
+          "value": {
+            "binaries_checked": [
+              "libmysqlclient-dev",
+              "libmysqlclient24",
+              "mysql-client",
+              "mysql-client-core",
+              "mysql-router",
+              "mysql-server",
+              "mysql-server-core",
+              "mysql-source",
+              "mysql-testsuite"
+            ],
+            "binaries_seeded": [
+              "libmysqlclient-dev"
+            ],
+            "flavours": [
+              "ubuntu",
+              "ubuntu-budgie"
+            ],
+            "images": [
+              [
+                "ubuntu",
+                "supported"
+              ],
+              [
+                "ubuntu-budgie",
+                "supported"
+              ]
+            ],
+            "is_core": true
+          }
+        }
+      },
+      {
+        "archive": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-09-25T21:47:03Z",
+            "duration_ms": 416,
+            "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=mysql-defaults&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
+            "method": "http_get",
+            "raw_ref": "sha256:74789d47e0170faa18c760e2c2f9624b4484eed24823144a4ec715a02d24ab8d",
+            "raw_truncated": false,
+            "source_id": "launchpad.archive"
+          },
+          "status": "OK",
+          "value": {
+            "binaries": [
+              "default-libmysqlclient-dev",
+              "default-mysql-client",
+              "default-mysql-client-core",
+              "default-mysql-server",
+              "default-mysql-server-core",
+              "mysql-common"
+            ],
+            "component": "main",
+            "in_archive": true,
+            "pocket": "Release",
+            "source": "mysql-defaults",
+            "version": "1.1.1ubuntu2"
+          }
+        },
+        "build_rdepends": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-09-25T21:47:05Z",
+            "duration_ms": 159,
+            "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:mysql-defaults",
+            "method": "http_get",
+            "raw_ref": "sha256:d6bea0471c552c8d04b29844d44ea764fe617716b80bba669e16338dbc38e40f",
+            "raw_truncated": false,
+            "source_id": "rdepends.build"
+          },
+          "status": "OK",
+          "value": {
+            "arch": "source",
+            "bucket": "21-100",
+            "kind": "build",
+            "sample": [
+              "anope",
+              "apophenia",
+              "argus-clients",
+              "asterisk",
+              "bacula",
+              "cacti-spine",
+              "collectd",
+              "coturn",
+              "cppdb",
+              "cvm",
+              "cyrus-sasl2",
+              "dbf2mysql",
+              "dovecot",
+              "embassy-domainatrix",
+              "embassy-domalign",
+              "embassy-domsearch",
+              "gambas3",
+              "gammu",
+              "gearmand",
+              "gentle",
+              "gerbera",
+              "gnokii",
+              "gnuais",
+              "hydra",
+              "inspircd"
+            ],
+            "seeded_rdeps": [],
+            "total": 83
+          }
+        },
+        "name": "mysql-defaults",
+        "rdepends": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-09-25T21:47:05Z",
+            "duration_ms": 327,
+            "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:mysql-defaults",
+            "method": "http_get",
+            "raw_ref": "sha256:3e2b896ff14e5e494cfd5d6bd69fec19780b73795ee077414f84b4713e2aec40",
+            "raw_truncated": false,
+            "source_id": "rdepends.binary"
+          },
+          "status": "OK",
+          "value": {
+            "arch": "any",
+            "bucket": "21-100",
+            "kind": "binary",
+            "sample": [
+              "audiolink",
+              "automysqlbackup",
+              "bacula-director-mysql",
+              "cacti",
+              "dbconfig-mysql",
+              "diaspora-common",
+              "diaspora-installer-mysql",
+              "hipercontracer-dbshell",
+              "kalkun",
+              "kamailio-mysql-modules",
+              "libmysql++-dev",
+              "libmysqlclient24",
+              "libpoco-dev",
+              "libreoffice-canzeley-client",
+              "librust-mysqlclient-sys-dev",
+              "libvtk9-dev",
+              "mariadb-common",
+              "mediawiki",
+              "mysql-client",
+              "mysql-server",
+              "mysqltuner",
+              "mythtv",
+              "mythtv-backend-master",
+              "mythtv-common",
+              "mythtv-database"
+            ],
+            "seeded_rdeps": [],
+            "total": 43
+          }
+        },
+        "seeds": {
+          "note": "seed index looks incomplete (index covers only 7 flavours); the listed images are real but there may be more",
+          "provenance": {
+            "cache": "cached",
+            "checked_at": "2026-09-25T21:47:04Z",
+            "duration_ms": 0,
+            "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
+            "method": "http_get",
+            "raw_ref": "sha256:d5092e70a8aa6c6c66c1b59fa1fbc4828f10aea15d2a45cff26cc672ef7bb7ce",
+            "raw_truncated": false,
+            "source_id": "seeds"
+          },
+          "status": "OK",
+          "value": {
+            "binaries_checked": [
+              "default-libmysqlclient-dev",
+              "default-mysql-client",
+              "default-mysql-client-core",
+              "default-mysql-server",
+              "default-mysql-server-core",
+              "mysql-common"
+            ],
+            "binaries_seeded": [
+              "default-libmysqlclient-dev"
+            ],
+            "flavours": [
+              "ubuntu",
+              "ubuntu-budgie"
+            ],
+            "images": [
+              [
+                "ubuntu",
+                "supported"
+              ],
+              [
+                "ubuntu-budgie",
+                "supported"
+              ]
+            ],
+            "is_core": true
+          }
+        }
+      }
+    ],
+    "release_context": {
+      "note": null,
+      "provenance": {
+        "cache": "fresh",
+        "checked_at": "2026-09-25T21:46:52Z",
+        "duration_ms": 306,
+        "locator": "https://documentation.ubuntu.com/release-notes/26.10/schedule/",
+        "method": "http_get",
+        "raw_ref": "sha256:e8753ae7b2b4c30ac408d551e72fbab5af9dde2f31312751195c5042909f2849",
+        "raw_truncated": false,
+        "source_id": "calendar.schedule"
+      },
+      "status": "OK",
+      "value": {
+        "days_bucket": "28-15",
+        "days_since_feature_freeze": 36,
+        "days_to_release": 20,
+        "derivation": "schedule-page",
+        "feature_freeze": "2026-08-20",
+        "freeze_window_elapsed_pct": 64,
+        "milestones": [
+          {
+            "date": "2026-04-30",
+            "name": "Toolchain Uploaded"
+          },
+          {
+            "date": "2026-07-02",
+            "name": "Ubuntu Testing Week (optional)"
+          },
+          {
+            "date": "2026-08-06",
+            "name": "Expected Glibc 2.44 merge"
+          },
+          {
+            "date": "2026-08-13",
+            "name": "Expected LLVM default transition"
+          },
+          {
+            "date": "2026-08-20",
+            "name": "Debian Import Freeze"
+          },
+          {
+            "date": "2026-08-20",
+            "name": "Feature Freeze"
+          },
+          {
+            "date": "2026-09-10",
+            "name": "UI Freeze"
+          },
+          {
+            "date": "2026-09-17",
+            "name": "Documentation String Freeze"
+          },
+          {
+            "date": "2026-09-17",
+            "name": "Kernel Feature Freeze"
+          },
+          {
+            "date": "2026-09-21",
+            "name": "Beta Freeze"
+          },
+          {
+            "date": "2026-09-21",
+            "name": "Hardware Enablement Freeze"
+          },
+          {
+            "date": "2026-09-24",
+            "name": "Beta"
+          },
+          {
+            "date": "2026-10-01",
+            "name": "Kernel Freeze"
+          },
+          {
+            "date": "2026-10-01",
+            "name": "Non Language Pack Translation Deadline"
+          },
+          {
+            "date": "2026-10-08",
+            "name": "Final Freeze"
+          },
+          {
+            "date": "2026-10-08",
+            "name": "Language Pack Translation Deadline"
+          },
+          {
+            "date": "2026-10-08",
+            "name": "Release Candidate"
+          },
+          {
+            "date": "2026-10-15",
+            "name": "Final Release"
+          }
+        ],
+        "phase": "BETA",
+        "release_date": "2026-10-15",
+        "release_type": "INTERIM",
+        "series": "stonking",
+        "version": "26.10"
+      }
+    },
+    "subject": {
+      "derivation": "packages:bug-tasks; series:mentioned-in-bug-text",
+      "ffe_kind": "merge",
+      "packages": [
+        "mariadb",
+        "mysql-9.7",
+        "mysql-defaults"
+      ],
+      "target_series": "stonking"
+    },
+    "testing": {
+      "autopkgtest": "ABSENT",
+      "build": "ABSENT",
+      "corroborated": true,
+      "items": [
+        {
+          "detail": "PPA ~lvoytek/mariadb-mysql-co-install exists on Launchpad",
+          "kind": "ppa",
+          "locator": "https://launchpad.net/~lvoytek/+archive/ubuntu/mariadb-mysql-co-install",
+          "source": "description",
+          "state": "FOUND_VERIFIED"
+        }
+      ],
+      "ppa": "FOUND_VERIFIED",
+      "test_output": "ABSENT",
+      "unverified_claims": []
+    },
+    "unavailable": []
+  },
+  "human": {
+    "decided": false,
+    "decision": null,
+    "detected_at": null,
+    "final_status": null,
+    "left_queue_at": null
+  },
+  "provenance": {
+    "generated_at": "2026-09-25T21:47:11Z",
+    "harness": null,
+    "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
+    "policy_version": "1.0.0",
+    "review_key": "sha256:a7ff78bd362034f3c1a7098d74e1c5fc3da19bfa55dc0514596e7d4e280ece69",
+    "risk_algorithm_version": "risk/1.2.0",
+    "run_id": "run-20260925T214647Z",
+    "tool_version": "0.1.0"
+  },
+  "record_id": "2167479/52f30223b551a71a",
+  "risk": {
+    "algorithm_version": "risk/1.2.0",
+    "band": "HIGH",
+    "components": [
+      {
+        "evidence_refs": [
+          "/evidence/release_context"
+        ],
+        "max_points": 20,
+        "name": "release_posture",
+        "points": 15,
+        "rationale": "interim release, past beta, 20 days to release, 64% through the freeze window"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/packages"
+        ],
+        "max_points": 25,
+        "name": "seeded_reach",
+        "points": 25,
+        "rationale": "seeded on a core Ubuntu image, so a regression reaches the default install"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/packages"
+        ],
+        "max_points": 25,
+        "name": "dependency_reach",
+        "points": 12,
+        "rationale": "90 reverse dependencies, 83 reverse build-dependencies"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/packages"
+        ],
+        "max_points": 10,
+        "name": "archive_standing",
+        "points": 10,
+        "rationale": "in main or restricted, so it carries a Canonical support commitment"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/subject"
+        ],
+        "max_points": 5,
+        "name": "change_shape",
+        "points": 2,
+        "rationale": "a merge to an existing package"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/testing"
+        ],
+        "max_points": 15,
+        "name": "unvalidated_change",
+        "points": 10,
+        "rationale": "the bug links a PPA"
+      }
+    ],
+    "confidence_ceiling": "HIGH",
+    "decision_floor": null,
+    "gates": [
+      {
+        "effect": "floor_needs_information",
+        "evidence_refs": [
+          "/evidence/subject"
+        ],
+        "id": "no_package_identified",
+        "rationale": "the affected package is identified",
+        "triggered": false
+      },
+      {
+        "effect": "floor_needs_information",
+        "evidence_refs": [
+          "/evidence/testing"
+        ],
+        "id": "no_testing_evidence",
+        "rationale": "a merge that Debian has already built and tested",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/flavours"
+        ],
+        "id": "flavour_ack_outstanding",
+        "rationale": "no cross-flavour acknowledgement is outstanding",
+        "triggered": false
+      },
+      {
+        "effect": "floor_needs_information",
+        "evidence_refs": [
+          "/evidence/release_context"
+        ],
+        "id": "after_final_freeze",
+        "rationale": "the request is within the ordinary freeze window",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/release_context"
+        ],
+        "id": "before_feature_freeze",
+        "rationale": "the target release is past Feature Freeze",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/subject"
+        ],
+        "id": "unrecoverable_failure_mode",
+        "rationale": "a regression here would be fixable by an SRU",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/injection"
+        ],
+        "id": "suspicious_bug_text",
+        "rationale": "nothing in the bug text resembles an attempt to steer the reviewer",
+        "triggered": false
+      },
+      {
+        "effect": "cap_confidence",
+        "evidence_refs": [
+          "/evidence/unavailable"
+        ],
+        "id": "evidence_unavailable",
+        "rationale": "every evidence source was available",
+        "triggered": false
+      }
+    ],
+    "score": 74
+  },
+  "schema_version": "1.0.0",
+  "status": "EVIDENCE_ONLY"
+}
