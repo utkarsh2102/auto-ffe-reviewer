@@ -3,9 +3,9 @@
     {
       "ack_required_from": [],
       "bug_id": 2167636,
-      "build_rdepends": 953,
+      "build_rdepends": 942,
       "confidence": null,
-      "days_to_release": 21,
+      "days_to_release": 20,
       "decision": null,
       "decision_floor": null,
       "ffe_kind": "feature-change",
@@ -19,13 +19,15 @@
         "openssl"
       ],
       "phase": "BETA",
-      "rdepends": 1277,
+      "rdepends": 1270,
       "release_type": "INTERIM",
       "reporter": "ravi-sharma",
-      "reviewed_at": "2026-09-24T18:56:36Z",
+      "reviewed_at": "2026-09-25T13:33:17Z",
       "risk_band": "SEVERE",
       "risk_score": 87,
       "seeded": [
+        "ubuntu",
+        "ubuntu-budgie",
         "ubuntu-core-installer"
       ],
       "series": "stonking",
@@ -33,9 +35,7 @@
       "summary": null,
       "testing_corroborated": true,
       "title": "[FFe] create an openssl3 compat package for stonking",
-      "unavailable": [
-        "seeds"
-      ],
+      "unavailable": [],
       "url": "https://bugs.launchpad.net/bugs/2167636",
       "version": "26.10"
     },
@@ -44,15 +44,15 @@
       "bug_id": 2167863,
       "build_rdepends": 3,
       "confidence": null,
-      "days_to_release": 21,
+      "days_to_release": 20,
       "decision": null,
       "decision_floor": null,
       "ffe_kind": "merge",
       "flags": [],
-      "flavour_impact": "UNSEEDED",
+      "flavour_impact": "CORE",
       "has_assessment": false,
       "injection_signals": 0,
-      "is_core": false,
+      "is_core": true,
       "missing_information": [],
       "packages": [
         "wireplumber"
@@ -61,18 +61,19 @@
       "rdepends": 24,
       "release_type": "INTERIM",
       "reporter": "charles05",
-      "reviewed_at": "2026-09-24T18:56:29Z",
+      "reviewed_at": "2026-09-25T13:33:12Z",
       "risk_band": "HIGH",
-      "risk_score": 54,
-      "seeded": null,
+      "risk_score": 64,
+      "seeded": [
+        "ubuntu",
+        "ubuntu-budgie"
+      ],
       "series": "stonking",
       "status": "EVIDENCE_ONLY",
       "summary": null,
       "testing_corroborated": true,
       "title": "FFe: Please merge 0.5.17-1 into Stonking",
-      "unavailable": [
-        "seeds"
-      ],
+      "unavailable": [],
       "url": "https://bugs.launchpad.net/bugs/2167863",
       "version": "26.10"
     }
@@ -80,7 +81,7 @@
   "counts": {
     "approve": 0,
     "awaiting_flavour_ack": 0,
-    "evidence_incomplete": 2,
+    "evidence_incomplete": 0,
     "high_risk": 2,
     "needs_attention": 2,
     "needs_information": 0,

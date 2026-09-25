@@ -7,6 +7,14 @@
       "generated_at": "2026-09-24T18:56:29Z",
       "risk_score": 54,
       "status": "EVIDENCE_ONLY"
+    },
+    {
+      "confidence": null,
+      "decision": null,
+      "fingerprint": "sha256:b254fb93f4793c962d8ffa0367cd069b280aef652a76a1a920b13d30bc7e05b7",
+      "generated_at": "2026-09-25T13:33:12Z",
+      "risk_score": 64,
+      "status": "EVIDENCE_ONLY"
     }
   ],
   "record": {
@@ -31,22 +39,32 @@
             "date_created": "2026-09-24T18:43:17.256398+00:00",
             "index": 1,
             "url": "https://bugs.launchpad.net/ubuntu/+source/wireplumber/+bug/2167863/comments/1"
+          },
+          {
+            "author": "ubuntu-sponsoring-bot",
+            "author_is_release_team": false,
+            "content": "The fix proposed here is being reviewed on the merge proposal linked to this bug, so there is no need for a separate sponsoring-queue entry for the bug itself. Cleaning up the queue by unsubscribing ~ubuntu-sponsors; the review continues on the merge proposal.\n\n-- \nThis is an automated initial review of sponsoring requests. If this review seems wrong, please report it at https://github.com/canonical/ubuntu-sponsoring-frontdesk/issues",
+            "content_sha": "67654f4027031886a9b559ed0bf5ff18729c78c1163d983d32135408bdf2b380",
+            "date_created": "2026-09-25T08:44:46.013559+00:00",
+            "index": 2,
+            "url": "https://bugs.launchpad.net/ubuntu/+source/wireplumber/+bug/2167863/comments/2"
           }
         ],
         "date_created": "2026-09-21T15:37:07.298431+00:00",
-        "date_last_message": "2026-09-24T18:43:17.256398+00:00",
-        "date_last_updated": "2026-09-24T18:44:09.762662+00:00",
+        "date_last_message": "2026-09-25T08:44:46.013559+00:00",
+        "date_last_updated": "2026-09-25T08:44:46.635012+00:00",
         "description": "## FFe ##\n\n[ Rationale ]\n* Merge target for stonking: 0.5.17-1ubuntu1, matching Debian unstable.\n* 0.5.16 fixes daily-driver bugs: Lua script crashes, monitor device\n  activation, default node selection, state handling. 0.5.17 fixes a\n  regression 0.5.16 introduced (object destruction via WpClientContext,\n  #999). Staying on 0.5.15 ships those bugs all cycle.\n* Delta stays minimal: only the snapd permission prompting module\n  (LP: #2144988), rediffed.\n\n[ Scope ]\n* Upstream 0.5.15 -> 0.5.17. Changelog diff attached. Highlights:\n  - WpClientContext: media objects (loopback, filter-chain, LocalNode,\n    SpaDevice) on a second PipeWire connection, so slow Lua hooks stop\n    stalling their control path. Export core retired.\n  - WpDynamicRules: matching rules with conditions. filter-graph graphs\n    load/unload dynamically.\n  - wpctl: new \"list\" and \"reset\" subcommands, \"--yes\" for reset.\n  - Bluetooth monitor rewritten on event hooks (#916).\n  - New WpPermissionManager and WpStateMetadata APIs.\n  - 0.5.17: fixed factory-created device/node/link ownership regression\n    (#999), default-nodes route ranking, better Lua POD errors.\n* Packaging:\n  - 10 new symbols in libwireplumber-0.5-0. SONAME unchanged, additive\n    only. No rdep rebuilds.\n  - New Build-Dep: libsnapd-glib-dev (>= 1.72), already in main.\n  - Allow lua5.5, matching Debian, now in main (LP: #2155757).\n* No reverse dependency builds against a changed ABI.\n\nseeded-in-ubuntu wireplumber:\nTODO(charles): seeded-in-ubuntu is currently returning 503's or hanging today.\nWill update when the infra is back.\n$ seeded-in-ubuntu wireplumber\nIssue fetching index file: HTTP Error 503: Service Unavailable\nMissing or empty index\n\n[ Regression Potential ]\n* WpClientContext moves media objects to a second connection and thread. If\n  wrong: devices or filters fail to appear, loopback and filter-chain link\n  failures, hangs on node creation. 0.5.17 already fixed the worst of it (#999).\n  This regression was the main reason 0.5.16 was not shipped.\n\n* Bluetooth monitor rewrite could break discovery or profile switching. Shows as\n  BT headsets missing or A2DP/HSP selection failing. Mitigation: I tested BT\n  profile switching on my local hardware.\n\n* Permission-manager refactor could grant or deny access wrongly. Shows as snap\n  apps losing mic access when Permission Prompting is enabled. Mitigation:\n  tested locally that Permission Prompting still works for Mic access.\n\n* Default-nodes ranking changes could pick the wrong device after reconnect.\n  Mitigation: didn't notice any regressions in behaviour during local testing.\n\n* snapd permission prompting module is Ubuntu-specific, no-op unless apparmor\n  prompting is enabled. Small blast radius.\n\n[ Testing ]\n* PPA: https://launchpad.net/~charles05/+archive/ubuntu/merge-wireplumber-lp2167863-stonking\n* Build: https://launchpad.net/~charles05/+archive/ubuntu/merge-wireplumber-lp2167863-stonking/+sourcepub/18747239/+listing-archive-extra\n* Installation:\n$ sudo apt install --reinstall wireplumber libwireplumber-0.5-0\nUpgrading:\n  libwireplumber-0.5-0  wireplumber\n\nSummary:\n  Upgrading: 2, Installing: 0, Removing: 0, Not Upgrading: 0\n  Download size: 0 B / 491 kB\n  Space needed: 57.3 kB / 27.4 GB available\n\n(Reading database… 458384 files and directories currently installed.)\nPreparing to unpack …/wireplumber_0.5.17-1ubuntu1~ppa1_amd64.deb…\nUnpacking wireplumber (0.5.17-1ubuntu1~ppa1) over (0.5.15-1ubuntu2)…\nPreparing to unpack …/libwireplumber-0.5-0_0.5.17-1ubuntu1~ppa1_amd64.deb…\nUnpacking libwireplumber-0.5-0:amd64 (0.5.17-1ubuntu1~ppa1) over (0.5.15-1ubuntu2)…\nSetting up libwireplumber-0.5-0:amd64 (0.5.17-1ubuntu1~ppa1)…\nSetting up wireplumber (0.5.17-1ubuntu1~ppa1)…\nProcessing triggers for libc-bin (2.44-1ubuntu1)…\n* Upgrade: from 0.5.15-1ubuntu2, config and state preserved.\n* Autopkgtest:\n  - amd64: https://autopkgtest.ubuntu.com/results/autopkgtest-stonking-charles05-merge-wireplumber-lp2167863-stonking/stonking/amd64/w/wireplumber/20260924_170834_f6965@/log.gz\n  - arm64: https://autopkgtest.ubuntu.com/results/autopkgtest-stonking-charles05-merge-wireplumber-lp2167863-stonking/stonking/arm64/w/wireplumber/20260924_170847_dcae8@/log.gz\n* Breaks other packages: no. No SONAME change, no rdep rebuilds.\n* Manual: device enumeration, default device switching, BT connect and\n  profile switch, filter-graph load, wpctl list/reset, snap audio\n  permission prompting.\n\n[ Other Info ]\n* Merge from Debian unstable. Delta reduced to the snapd patch plus\n  standard Ubuntu control changes.\n* FFE now avoids a bigger jump later in the cycle.",
         "description_sha": "45c71ec6f26708fd2b2556af3beb0e1c5c8db5bc8adc8250261d5584c69f43de",
         "discovered_via": "release-team-queue",
         "id": 2167863,
-        "message_count": 2,
+        "message_count": 3,
         "release_team_subscribed": true,
         "reporter": "charles05",
         "subscribers": [
           "charles05",
+          "seb128",
           "ubuntu-release",
-          "ubuntu-sponsors"
+          "ubuntu-sponsoring-bot"
         ],
         "tags": [],
         "tasks": [
@@ -60,13 +78,15 @@
         "title": "FFe: Please merge 0.5.17-1 into Stonking",
         "url": "https://bugs.launchpad.net/bugs/2167863"
       },
-      "fingerprint": "sha256:03569b378ed684f707c6a6a8c0e19cf48e29df49e13890df270497fb7e6266d7",
+      "fingerprint": "sha256:b254fb93f4793c962d8ffa0367cd069b280aef652a76a1a920b13d30bc7e05b7",
       "flavours": {
         "ack_required_from": [],
         "acks": [],
-        "affected_flavours": [],
-        "impact": "UNSEEDED",
-        "requester_is_flavour_lead": null,
+        "affected_flavours": [
+          "ubuntu-budgie"
+        ],
+        "impact": "CORE",
+        "requester_is_flavour_lead": false,
         "requesting_flavour": null
       },
       "injection_signals": [],
@@ -76,8 +96,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-24T18:56:26Z",
-              "duration_ms": 247,
+              "checked_at": "2026-09-25T13:32:58Z",
+              "duration_ms": 294,
               "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=wireplumber&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
               "method": "http_get",
               "raw_ref": "sha256:b420cc15507fdebc5b6e6cf7d2f0af3acf72f75b6fb05ea43a608d6b43239f69",
@@ -105,8 +125,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-24T18:56:29Z",
-              "duration_ms": 96,
+              "checked_at": "2026-09-25T13:33:01Z",
+              "duration_ms": 89,
               "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:wireplumber",
               "method": "http_get",
               "raw_ref": "sha256:369d28e6c84d53155a9b2692519962344066ed68ec466926c11a8f264d129fc9",
@@ -132,11 +152,11 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-24T18:56:28Z",
-              "duration_ms": 117,
+              "checked_at": "2026-09-25T13:33:01Z",
+              "duration_ms": 126,
               "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:wireplumber",
               "method": "http_get",
-              "raw_ref": "sha256:b64bcde31d4df7a4bd168bb461fb1f4ed97b3816c606107f8f8e100b726e0781",
+              "raw_ref": "sha256:cc4ca917295600785c5916e290a1746fface8e309ff2cf423346ad69b15269f1",
               "raw_truncated": false,
               "source_id": "rdepends.binary"
             },
@@ -176,19 +196,48 @@
             }
           },
           "seeds": {
-            "note": "none of gir1.2-wp-0.5, libwireplumber-0.5-0, libwireplumber-0.5-dev, wireplumber, wireplumber-doc, wireplumber-system-services appear in the seed index, but the index looks incomplete (index covers only 1 flavours), so this is not evidence that the package is unseeded",
+            "note": "seed index looks incomplete (index covers only 7 flavours); the listed images are real but there may be more",
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-24T18:56:28Z",
-              "duration_ms": 373,
+              "checked_at": "2026-09-25T13:33:01Z",
+              "duration_ms": 644,
               "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
               "method": "http_get",
-              "raw_ref": "sha256:01cbd8d76bb69f9f10e97a9887763389426ddab5e5acfdbf1b5daffb1eac9815",
+              "raw_ref": "sha256:d65449d00b5bb335286101c6d6845a9e556f8ed68256b11eec32d84a0425b4d6",
               "raw_truncated": false,
               "source_id": "seeds"
             },
-            "status": "UNAVAILABLE",
-            "value": null
+            "status": "OK",
+            "value": {
+              "binaries_checked": [
+                "gir1.2-wp-0.5",
+                "libwireplumber-0.5-0",
+                "libwireplumber-0.5-dev",
+                "wireplumber",
+                "wireplumber-doc",
+                "wireplumber-system-services"
+              ],
+              "binaries_seeded": [
+                "gir1.2-wp-0.5",
+                "libwireplumber-0.5-dev",
+                "wireplumber-doc"
+              ],
+              "flavours": [
+                "ubuntu",
+                "ubuntu-budgie"
+              ],
+              "images": [
+                [
+                  "ubuntu",
+                  "supported"
+                ],
+                [
+                  "ubuntu-budgie",
+                  "supported"
+                ]
+              ],
+              "is_core": true
+            }
           }
         }
       ],
@@ -196,22 +245,22 @@
         "note": null,
         "provenance": {
           "cache": "fresh",
-          "checked_at": "2026-09-24T18:56:26Z",
-          "duration_ms": 270,
+          "checked_at": "2026-09-25T13:32:58Z",
+          "duration_ms": 154,
           "locator": "https://documentation.ubuntu.com/release-notes/26.10/schedule/",
           "method": "http_get",
-          "raw_ref": "sha256:a51b44260a65f3d41e87e9067245550b625351237c43bf020348c2afbcff7397",
+          "raw_ref": "sha256:e8753ae7b2b4c30ac408d551e72fbab5af9dde2f31312751195c5042909f2849",
           "raw_truncated": false,
           "source_id": "calendar.schedule"
         },
         "status": "OK",
         "value": {
           "days_bucket": "28-15",
-          "days_since_feature_freeze": 35,
-          "days_to_release": 21,
+          "days_since_feature_freeze": 36,
+          "days_to_release": 20,
           "derivation": "schedule-page",
           "feature_freeze": "2026-08-20",
-          "freeze_window_elapsed_pct": 62,
+          "freeze_window_elapsed_pct": 64,
           "milestones": [
             {
               "date": "2026-04-30",
@@ -356,13 +405,7 @@
           "tested locally that Permission Prompting still works for Mic access"
         ]
       },
-      "unavailable": [
-        {
-          "impact": "cannot tell which Ubuntu images ship this package",
-          "reason": "seed index incomplete: index covers only 1 flavours",
-          "source_id": "seeds"
-        }
-      ]
+      "unavailable": []
     },
     "human": {
       "decided": false,
@@ -372,17 +415,17 @@
       "left_queue_at": null
     },
     "provenance": {
-      "generated_at": "2026-09-24T18:56:29Z",
+      "generated_at": "2026-09-25T13:33:12Z",
       "harness": null,
       "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
       "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
       "policy_version": "1.0.0",
-      "review_key": "sha256:5fa42a5f05bb6937a5a4712188b1945709f277a82a5227fb90bffe355b74f8dc",
+      "review_key": "sha256:804a217c6f6b5209782c47c5d94df04659ace1fbdf10d31e7609d9f55cdba59e",
       "risk_algorithm_version": "risk/1.2.0",
-      "run_id": "run-20260924T185620Z",
+      "run_id": "run-20260925T133253Z",
       "tool_version": "0.1.0"
     },
-    "record_id": "2167863/03569b378ed684f7",
+    "record_id": "2167863/b254fb93f4793c96",
     "risk": {
       "algorithm_version": "risk/1.2.0",
       "band": "HIGH",
@@ -394,7 +437,7 @@
           "max_points": 20,
           "name": "release_posture",
           "points": 15,
-          "rationale": "interim release, past beta, 21 days to release, 62% through the freeze window"
+          "rationale": "interim release, past beta, 20 days to release, 64% through the freeze window"
         },
         {
           "evidence_refs": [
@@ -402,8 +445,8 @@
           ],
           "max_points": 25,
           "name": "seeded_reach",
-          "points": 15,
-          "rationale": "could not establish which images ship this package; scored cautiously rather than as unseeded"
+          "points": 25,
+          "rationale": "seeded on a core Ubuntu image, so a regression reaches the default install"
         },
         {
           "evidence_refs": [
@@ -442,7 +485,7 @@
           "rationale": "the bug links a PPA, test results, pasted test output"
         }
       ],
-      "confidence_ceiling": "MEDIUM",
+      "confidence_ceiling": "HIGH",
       "decision_floor": null,
       "gates": [
         {
@@ -514,11 +557,11 @@
             "/evidence/unavailable"
           ],
           "id": "evidence_unavailable",
-          "rationale": "could not consult seeds, so this assessment rests on incomplete evidence",
-          "triggered": true
+          "rationale": "every evidence source was available",
+          "triggered": false
         }
       ],
-      "score": 54
+      "score": 64
     },
     "schema_version": "1.0.0",
     "status": "EVIDENCE_ONLY"

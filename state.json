@@ -61,33 +61,33 @@
       "date_last_updated": "2026-09-24T16:52:48.324447+00:00",
       "decision": null,
       "discovered_via": "release-team-queue",
-      "fingerprint": "sha256:74e71fb21fc3333dff90484ddc55d5aedc8ce1ce1f7ce84f599b9638205f15ac",
+      "fingerprint": "sha256:30e221fc853284d979b2247325c36ef12e5e48020d6f7d9df08a80fd177f3ad4",
       "in_queue": true,
-      "last_evidence_at": "2026-09-24T18:56:36Z",
+      "last_evidence_at": "2026-09-25T13:33:17Z",
       "last_review_at": "",
-      "last_seen_at": "2026-09-25T07:31:52Z",
+      "last_seen_at": "2026-09-25T13:33:14Z",
       "llm_runs_date": "",
       "llm_runs_today": 0,
       "message_count": 8,
-      "review_key": "sha256:a568abbcf4aabfae8e00f4afc9514e9668a46c83da1fa9f31c8e99215298718f",
+      "review_key": "sha256:562276b475b1bc86dadf48a9481f6f40c26c2c60a044908c85aed3002ee87b20",
       "status": "New"
     },
     "2167863": {
       "bug_id": 2167863,
       "confidence": null,
-      "date_last_message": "2026-09-24T18:43:17.256398+00:00",
-      "date_last_updated": "2026-09-24T18:44:09.762662+00:00",
+      "date_last_message": "2026-09-25T08:44:46.013559+00:00",
+      "date_last_updated": "2026-09-25T08:44:46.635012+00:00",
       "decision": null,
       "discovered_via": "release-team-queue",
-      "fingerprint": "sha256:03569b378ed684f707c6a6a8c0e19cf48e29df49e13890df270497fb7e6266d7",
+      "fingerprint": "sha256:b254fb93f4793c962d8ffa0367cd069b280aef652a76a1a920b13d30bc7e05b7",
       "in_queue": true,
-      "last_evidence_at": "2026-09-24T18:56:29Z",
+      "last_evidence_at": "2026-09-25T13:33:12Z",
       "last_review_at": "",
-      "last_seen_at": "2026-09-25T07:31:47Z",
+      "last_seen_at": "2026-09-25T13:32:58Z",
       "llm_runs_date": "",
       "llm_runs_today": 0,
-      "message_count": 2,
-      "review_key": "sha256:5fa42a5f05bb6937a5a4712188b1945709f277a82a5227fb90bffe355b74f8dc",
+      "message_count": 3,
+      "review_key": "sha256:804a217c6f6b5209782c47c5d94df04659ace1fbdf10d31e7609d9f55cdba59e",
       "status": "New"
     },
     "2167899": {
@@ -127,6 +127,6 @@
       "status": "Triaged"
     }
   },
-  "updated_at": "2026-09-25T07:31:56Z",
+  "updated_at": "2026-09-25T13:33:17Z",
   "version": 1
 }
