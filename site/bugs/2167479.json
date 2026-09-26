@@ -3,17 +3,17 @@
     {
       "confidence": null,
       "decision": null,
-      "fingerprint": "sha256:52f30223b551a71a32524662203d2e5e69739416b84e70523c27bdebf8b7eaf2",
-      "generated_at": "2026-09-25T21:47:11Z",
-      "risk_score": 74,
+      "fingerprint": "sha256:0c65bc61e263e014795ecebe38e54cd2c3826afd428dc7df19a2cc78a876f5e7",
+      "generated_at": "2026-09-26T00:29:02Z",
+      "risk_score": 55,
       "status": "EVIDENCE_ONLY"
     },
     {
       "confidence": null,
       "decision": null,
-      "fingerprint": "sha256:0c65bc61e263e014795ecebe38e54cd2c3826afd428dc7df19a2cc78a876f5e7",
-      "generated_at": "2026-09-26T00:29:02Z",
-      "risk_score": 55,
+      "fingerprint": "sha256:52f30223b551a71a32524662203d2e5e69739416b84e70523c27bdebf8b7eaf2",
+      "generated_at": "2026-09-26T05:24:03Z",
+      "risk_score": 74,
       "status": "EVIDENCE_ONLY"
     }
   ],
@@ -79,7 +79,7 @@
         "title": "[FFE] Allow mysql-server and mariadb-server to be co-installed in stonking",
         "url": "https://bugs.launchpad.net/bugs/2167479"
       },
-      "fingerprint": "sha256:0c65bc61e263e014795ecebe38e54cd2c3826afd428dc7df19a2cc78a876f5e7",
+      "fingerprint": "sha256:52f30223b551a71a32524662203d2e5e69739416b84e70523c27bdebf8b7eaf2",
       "flavours": {
         "ack_required_from": [],
         "acks": [
@@ -93,7 +93,7 @@
         "affected_flavours": [
           "ubuntu-budgie"
         ],
-        "impact": "SINGLE_FLAVOUR",
+        "impact": "CORE",
         "requester_is_flavour_lead": true,
         "requesting_flavour": "ubuntu-budgie"
       },
@@ -104,8 +104,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-26T00:28:43Z",
-              "duration_ms": 492,
+              "checked_at": "2026-09-26T05:23:42Z",
+              "duration_ms": 317,
               "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=mariadb&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
               "method": "http_get",
               "raw_ref": "sha256:01aa15cb5977759654d252ffef914a0d4d80e59d0428cfba40768cd2e0bb2a35",
@@ -158,8 +158,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-26T00:28:51Z",
-              "duration_ms": 331,
+              "checked_at": "2026-09-26T05:23:50Z",
+              "duration_ms": 150,
               "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:mariadb",
               "method": "http_get",
               "raw_ref": "sha256:4ac91f9375f877bcb68931bb1af5839925f0d508cbe4398e33a9390fd079e9bc",
@@ -207,8 +207,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-26T00:28:50Z",
-              "duration_ms": 500,
+              "checked_at": "2026-09-26T05:23:49Z",
+              "duration_ms": 204,
               "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:mariadb",
               "method": "http_get",
               "raw_ref": "sha256:6c63f09405ee285d71c784874ccfb54dba560b1fa24b90952dc18375a86030c8",
@@ -252,14 +252,14 @@
             }
           },
           "seeds": {
-            "note": "seed index looks incomplete (index covers only 6 flavours); the listed images are real but there may be more",
+            "note": "seed index looks incomplete (index covers only 7 flavours); the listed images are real but there may be more",
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-26T00:28:50Z",
-              "duration_ms": 405,
+              "checked_at": "2026-09-26T05:23:49Z",
+              "duration_ms": 603,
               "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
               "method": "http_get",
-              "raw_ref": "sha256:0bf33a4592db721a0a1ea196a1379ab55f4026f2bb9a4191c23aff4b4b261801",
+              "raw_ref": "sha256:abecada519e55e20c8bbca4eeeed7671b20b364ab0c0ad2538eee08ebe9493f5",
               "raw_truncated": false,
               "source_id": "seeds"
             },
@@ -304,15 +304,20 @@
                 "libmariadbd19t64"
               ],
               "flavours": [
+                "ubuntu",
                 "ubuntu-budgie"
               ],
               "images": [
+                [
+                  "ubuntu",
+                  "supported"
+                ],
                 [
                   "ubuntu-budgie",
                   "supported"
                 ]
               ],
-              "is_core": false
+              "is_core": true
             }
           }
         },
@@ -321,8 +326,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-26T00:28:51Z",
-              "duration_ms": 302,
+              "checked_at": "2026-09-26T05:23:51Z",
+              "duration_ms": 748,
               "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=mysql-9.7&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
               "method": "http_get",
               "raw_ref": "sha256:3948b24d4e57b0d5017a1e4ec131ce87e4f0cbc44fc6aee09265ae731ffb15a8",
@@ -353,8 +358,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-26T00:28:54Z",
-              "duration_ms": 93,
+              "checked_at": "2026-09-26T05:23:53Z",
+              "duration_ms": 148,
               "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:mysql-9.7",
               "method": "http_get",
               "raw_ref": "sha256:a91d26ec07376bb4ad228c16f5ab6c0232eec87b1aee4a335bb83a680baac46c",
@@ -390,8 +395,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-26T00:28:53Z",
-              "duration_ms": 220,
+              "checked_at": "2026-09-26T05:23:53Z",
+              "duration_ms": 302,
               "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:mysql-9.7",
               "method": "http_get",
               "raw_ref": "sha256:c93183fee150d2196598c0e017f665b090b97f3524f4e14ae0e69f5fdf69b620",
@@ -435,14 +440,14 @@
             }
           },
           "seeds": {
-            "note": "seed index looks incomplete (index covers only 6 flavours); the listed images are real but there may be more",
+            "note": "seed index looks incomplete (index covers only 7 flavours); the listed images are real but there may be more",
             "provenance": {
               "cache": "cached",
-              "checked_at": "2026-09-26T00:28:53Z",
+              "checked_at": "2026-09-26T05:23:53Z",
               "duration_ms": 0,
               "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
               "method": "http_get",
-              "raw_ref": "sha256:0bf33a4592db721a0a1ea196a1379ab55f4026f2bb9a4191c23aff4b4b261801",
+              "raw_ref": "sha256:abecada519e55e20c8bbca4eeeed7671b20b364ab0c0ad2538eee08ebe9493f5",
               "raw_truncated": false,
               "source_id": "seeds"
             },
@@ -463,15 +468,20 @@
                 "libmysqlclient-dev"
               ],
               "flavours": [
+                "ubuntu",
                 "ubuntu-budgie"
               ],
               "images": [
+                [
+                  "ubuntu",
+                  "supported"
+                ],
                 [
                   "ubuntu-budgie",
                   "supported"
                 ]
               ],
-              "is_core": false
+              "is_core": true
             }
           }
         },
@@ -480,8 +490,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-26T00:28:54Z",
-              "duration_ms": 353,
+              "checked_at": "2026-09-26T05:23:54Z",
+              "duration_ms": 341,
               "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=mysql-defaults&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
               "method": "http_get",
               "raw_ref": "sha256:74789d47e0170faa18c760e2c2f9624b4484eed24823144a4ec715a02d24ab8d",
@@ -509,8 +519,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-26T00:28:56Z",
-              "duration_ms": 94,
+              "checked_at": "2026-09-26T05:23:55Z",
+              "duration_ms": 140,
               "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:mysql-defaults",
               "method": "http_get",
               "raw_ref": "sha256:d6bea0471c552c8d04b29844d44ea764fe617716b80bba669e16338dbc38e40f",
@@ -558,8 +568,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-26T00:28:55Z",
-              "duration_ms": 209,
+              "checked_at": "2026-09-26T05:23:55Z",
+              "duration_ms": 303,
               "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:mysql-defaults",
               "method": "http_get",
               "raw_ref": "sha256:3e2b896ff14e5e494cfd5d6bd69fec19780b73795ee077414f84b4713e2aec40",
@@ -603,14 +613,14 @@
             }
           },
           "seeds": {
-            "note": "seed index looks incomplete (index covers only 6 flavours); the listed images are real but there may be more",
+            "note": "seed index looks incomplete (index covers only 7 flavours); the listed images are real but there may be more",
             "provenance": {
               "cache": "cached",
-              "checked_at": "2026-09-26T00:28:55Z",
+              "checked_at": "2026-09-26T05:23:55Z",
               "duration_ms": 0,
               "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
               "method": "http_get",
-              "raw_ref": "sha256:0bf33a4592db721a0a1ea196a1379ab55f4026f2bb9a4191c23aff4b4b261801",
+              "raw_ref": "sha256:abecada519e55e20c8bbca4eeeed7671b20b364ab0c0ad2538eee08ebe9493f5",
               "raw_truncated": false,
               "source_id": "seeds"
             },
@@ -628,15 +638,20 @@
                 "default-libmysqlclient-dev"
               ],
               "flavours": [
+                "ubuntu",
                 "ubuntu-budgie"
               ],
               "images": [
+                [
+                  "ubuntu",
+                  "supported"
+                ],
                 [
                   "ubuntu-budgie",
                   "supported"
                 ]
               ],
-              "is_core": false
+              "is_core": true
             }
           }
         }
@@ -645,8 +660,8 @@
         "note": null,
         "provenance": {
           "cache": "fresh",
-          "checked_at": "2026-09-26T00:28:43Z",
-          "duration_ms": 576,
+          "checked_at": "2026-09-26T05:23:42Z",
+          "duration_ms": 348,
           "locator": "https://documentation.ubuntu.com/release-notes/26.10/schedule/",
           "method": "http_get",
           "raw_ref": "sha256:e8753ae7b2b4c30ac408d551e72fbab5af9dde2f31312751195c5042909f2849",
@@ -779,17 +794,17 @@
       "left_queue_at": null
     },
     "provenance": {
-      "generated_at": "2026-09-26T00:29:02Z",
+      "generated_at": "2026-09-26T05:24:03Z",
       "harness": null,
       "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
       "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
       "policy_version": "1.0.0",
-      "review_key": "sha256:cbf1cf3fd9dc89f171bcbe3cda0f9550d7a1a267c5dddaeb8116857c820aac05",
+      "review_key": "sha256:a7ff78bd362034f3c1a7098d74e1c5fc3da19bfa55dc0514596e7d4e280ece69",
       "risk_algorithm_version": "risk/1.2.0",
-      "run_id": "run-20260926T002837Z",
+      "run_id": "run-20260926T052337Z",
       "tool_version": "0.1.0"
     },
-    "record_id": "2167479/0c65bc61e263e014",
+    "record_id": "2167479/52f30223b551a71a",
     "risk": {
       "algorithm_version": "risk/1.2.0",
       "band": "HIGH",
@@ -809,8 +824,8 @@
           ],
           "max_points": 25,
           "name": "seeded_reach",
-          "points": 6,
-          "rationale": "seeded only on ubuntu-budgie, whose team owns the image and the consequence"
+          "points": 25,
+          "rationale": "seeded on a core Ubuntu image, so a regression reaches the default install"
         },
         {
           "evidence_refs": [
@@ -925,7 +940,7 @@
           "triggered": false
         }
       ],
-      "score": 55
+      "score": 74
     },
     "schema_version": "1.0.0",
     "status": "EVIDENCE_ONLY"

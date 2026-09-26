@@ -22,10 +22,11 @@
       "rdepends": 1269,
       "release_type": "INTERIM",
       "reporter": "ravi-sharma",
-      "reviewed_at": "2026-09-26T00:29:13Z",
+      "reviewed_at": "2026-09-26T05:24:13Z",
       "risk_band": "SEVERE",
       "risk_score": 87,
       "seeded": [
+        "ubuntu",
         "ubuntu-budgie",
         "ubuntu-core-installer"
       ],
@@ -48,10 +49,10 @@
       "decision_floor": null,
       "ffe_kind": "merge",
       "flags": [],
-      "flavour_impact": "SINGLE_FLAVOUR",
+      "flavour_impact": "CORE",
       "has_assessment": false,
       "injection_signals": 0,
-      "is_core": false,
+      "is_core": true,
       "missing_information": [],
       "packages": [
         "mariadb",
@@ -62,10 +63,11 @@
       "rdepends": 90,
       "release_type": "INTERIM",
       "reporter": "lvoytek",
-      "reviewed_at": "2026-09-26T00:29:02Z",
+      "reviewed_at": "2026-09-26T05:24:03Z",
       "risk_band": "HIGH",
-      "risk_score": 55,
+      "risk_score": 74,
       "seeded": [
+        "ubuntu",
         "ubuntu-budgie"
       ],
       "series": "stonking",
@@ -87,10 +89,10 @@
       "decision_floor": null,
       "ffe_kind": "merge",
       "flags": [],
-      "flavour_impact": "SINGLE_FLAVOUR",
+      "flavour_impact": "CORE",
       "has_assessment": false,
       "injection_signals": 0,
-      "is_core": false,
+      "is_core": true,
       "missing_information": [],
       "packages": [
         "wireplumber"
@@ -99,10 +101,11 @@
       "rdepends": 24,
       "release_type": "INTERIM",
       "reporter": "charles05",
-      "reviewed_at": "2026-09-26T00:29:07Z",
-      "risk_band": "MODERATE",
-      "risk_score": 45,
+      "reviewed_at": "2026-09-26T05:24:07Z",
+      "risk_band": "HIGH",
+      "risk_score": 64,
       "seeded": [
+        "ubuntu",
         "ubuntu-budgie"
       ],
       "series": "stonking",
@@ -119,7 +122,7 @@
     "approve": 0,
     "awaiting_flavour_ack": 0,
     "evidence_incomplete": 0,
-    "high_risk": 2,
+    "high_risk": 3,
     "needs_attention": 3,
     "needs_information": 0,
     "no_recommendation": 3,

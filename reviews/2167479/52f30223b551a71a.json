@@ -85,8 +85,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-25T21:46:52Z",
-            "duration_ms": 341,
+            "checked_at": "2026-09-26T05:23:42Z",
+            "duration_ms": 317,
             "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=mariadb&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
             "method": "http_get",
             "raw_ref": "sha256:01aa15cb5977759654d252ffef914a0d4d80e59d0428cfba40768cd2e0bb2a35",
@@ -139,8 +139,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-25T21:47:00Z",
-            "duration_ms": 164,
+            "checked_at": "2026-09-26T05:23:50Z",
+            "duration_ms": 150,
             "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:mariadb",
             "method": "http_get",
             "raw_ref": "sha256:4ac91f9375f877bcb68931bb1af5839925f0d508cbe4398e33a9390fd079e9bc",
@@ -188,8 +188,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-25T21:46:59Z",
-            "duration_ms": 222,
+            "checked_at": "2026-09-26T05:23:49Z",
+            "duration_ms": 204,
             "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:mariadb",
             "method": "http_get",
             "raw_ref": "sha256:6c63f09405ee285d71c784874ccfb54dba560b1fa24b90952dc18375a86030c8",
@@ -236,11 +236,11 @@
           "note": "seed index looks incomplete (index covers only 7 flavours); the listed images are real but there may be more",
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-25T21:46:59Z",
-            "duration_ms": 567,
+            "checked_at": "2026-09-26T05:23:49Z",
+            "duration_ms": 603,
             "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
             "method": "http_get",
-            "raw_ref": "sha256:d5092e70a8aa6c6c66c1b59fa1fbc4828f10aea15d2a45cff26cc672ef7bb7ce",
+            "raw_ref": "sha256:abecada519e55e20c8bbca4eeeed7671b20b364ab0c0ad2538eee08ebe9493f5",
             "raw_truncated": false,
             "source_id": "seeds"
           },
@@ -307,8 +307,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-25T21:47:00Z",
-            "duration_ms": 267,
+            "checked_at": "2026-09-26T05:23:51Z",
+            "duration_ms": 748,
             "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=mysql-9.7&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
             "method": "http_get",
             "raw_ref": "sha256:3948b24d4e57b0d5017a1e4ec131ce87e4f0cbc44fc6aee09265ae731ffb15a8",
@@ -339,8 +339,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-25T21:47:03Z",
-            "duration_ms": 209,
+            "checked_at": "2026-09-26T05:23:53Z",
+            "duration_ms": 148,
             "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:mysql-9.7",
             "method": "http_get",
             "raw_ref": "sha256:a91d26ec07376bb4ad228c16f5ab6c0232eec87b1aee4a335bb83a680baac46c",
@@ -376,8 +376,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-25T21:47:03Z",
-            "duration_ms": 361,
+            "checked_at": "2026-09-26T05:23:53Z",
+            "duration_ms": 302,
             "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:mysql-9.7",
             "method": "http_get",
             "raw_ref": "sha256:c93183fee150d2196598c0e017f665b090b97f3524f4e14ae0e69f5fdf69b620",
@@ -424,11 +424,11 @@
           "note": "seed index looks incomplete (index covers only 7 flavours); the listed images are real but there may be more",
           "provenance": {
             "cache": "cached",
-            "checked_at": "2026-09-25T21:47:02Z",
+            "checked_at": "2026-09-26T05:23:53Z",
             "duration_ms": 0,
             "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
             "method": "http_get",
-            "raw_ref": "sha256:d5092e70a8aa6c6c66c1b59fa1fbc4828f10aea15d2a45cff26cc672ef7bb7ce",
+            "raw_ref": "sha256:abecada519e55e20c8bbca4eeeed7671b20b364ab0c0ad2538eee08ebe9493f5",
             "raw_truncated": false,
             "source_id": "seeds"
           },
@@ -471,8 +471,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-25T21:47:03Z",
-            "duration_ms": 416,
+            "checked_at": "2026-09-26T05:23:54Z",
+            "duration_ms": 341,
             "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=mysql-defaults&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
             "method": "http_get",
             "raw_ref": "sha256:74789d47e0170faa18c760e2c2f9624b4484eed24823144a4ec715a02d24ab8d",
@@ -500,8 +500,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-25T21:47:05Z",
-            "duration_ms": 159,
+            "checked_at": "2026-09-26T05:23:55Z",
+            "duration_ms": 140,
             "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:mysql-defaults",
             "method": "http_get",
             "raw_ref": "sha256:d6bea0471c552c8d04b29844d44ea764fe617716b80bba669e16338dbc38e40f",
@@ -549,8 +549,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-25T21:47:05Z",
-            "duration_ms": 327,
+            "checked_at": "2026-09-26T05:23:55Z",
+            "duration_ms": 303,
             "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:mysql-defaults",
             "method": "http_get",
             "raw_ref": "sha256:3e2b896ff14e5e494cfd5d6bd69fec19780b73795ee077414f84b4713e2aec40",
@@ -597,11 +597,11 @@
           "note": "seed index looks incomplete (index covers only 7 flavours); the listed images are real but there may be more",
           "provenance": {
             "cache": "cached",
-            "checked_at": "2026-09-25T21:47:04Z",
+            "checked_at": "2026-09-26T05:23:55Z",
             "duration_ms": 0,
             "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
             "method": "http_get",
-            "raw_ref": "sha256:d5092e70a8aa6c6c66c1b59fa1fbc4828f10aea15d2a45cff26cc672ef7bb7ce",
+            "raw_ref": "sha256:abecada519e55e20c8bbca4eeeed7671b20b364ab0c0ad2538eee08ebe9493f5",
             "raw_truncated": false,
             "source_id": "seeds"
           },
@@ -641,8 +641,8 @@
       "note": null,
       "provenance": {
         "cache": "fresh",
-        "checked_at": "2026-09-25T21:46:52Z",
-        "duration_ms": 306,
+        "checked_at": "2026-09-26T05:23:42Z",
+        "duration_ms": 348,
         "locator": "https://documentation.ubuntu.com/release-notes/26.10/schedule/",
         "method": "http_get",
         "raw_ref": "sha256:e8753ae7b2b4c30ac408d551e72fbab5af9dde2f31312751195c5042909f2849",
@@ -652,11 +652,11 @@
       "status": "OK",
       "value": {
         "days_bucket": "28-15",
-        "days_since_feature_freeze": 36,
-        "days_to_release": 20,
+        "days_since_feature_freeze": 37,
+        "days_to_release": 19,
         "derivation": "schedule-page",
         "feature_freeze": "2026-08-20",
-        "freeze_window_elapsed_pct": 64,
+        "freeze_window_elapsed_pct": 66,
         "milestones": [
           {
             "date": "2026-04-30",
@@ -775,14 +775,14 @@
     "left_queue_at": null
   },
   "provenance": {
-    "generated_at": "2026-09-25T21:47:11Z",
+    "generated_at": "2026-09-26T05:24:03Z",
     "harness": null,
     "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
     "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
     "policy_version": "1.0.0",
     "review_key": "sha256:a7ff78bd362034f3c1a7098d74e1c5fc3da19bfa55dc0514596e7d4e280ece69",
     "risk_algorithm_version": "risk/1.2.0",
-    "run_id": "run-20260925T214647Z",
+    "run_id": "run-20260926T052337Z",
     "tool_version": "0.1.0"
   },
   "record_id": "2167479/52f30223b551a71a",
@@ -797,7 +797,7 @@
         "max_points": 20,
         "name": "release_posture",
         "points": 15,
-        "rationale": "interim release, past beta, 20 days to release, 64% through the freeze window"
+        "rationale": "interim release, past beta, 19 days to release, 66% through the freeze window"
       },
       {
         "evidence_refs": [

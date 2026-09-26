@@ -102,7 +102,7 @@
       "title": "[FFe] create an openssl3 compat package for stonking",
       "url": "https://bugs.launchpad.net/bugs/2167636"
     },
-    "fingerprint": "sha256:a8767664c6483ea0f8d405ed022320ceea51be6401ff64b881d90938eb12b0f2",
+    "fingerprint": "sha256:30e221fc853284d979b2247325c36ef12e5e48020d6f7d9df08a80fd177f3ad4",
     "flavours": {
       "ack_required_from": [],
       "acks": [
@@ -133,8 +133,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-26T00:29:09Z",
-            "duration_ms": 295,
+            "checked_at": "2026-09-26T05:24:10Z",
+            "duration_ms": 344,
             "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=openssl&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
             "method": "http_get",
             "raw_ref": "sha256:478c5183f6ba7fc172b00fcd7581acb0a18be28c1005a3028d9393087eb2caae",
@@ -161,8 +161,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-26T00:29:12Z",
-            "duration_ms": 101,
+            "checked_at": "2026-09-26T05:24:13Z",
+            "duration_ms": 144,
             "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:openssl",
             "method": "http_get",
             "raw_ref": "sha256:1c2672610aad46a95bc770994a2e96013546e76dd753f3bca49aaa6f51f6fbbc",
@@ -210,8 +210,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-26T00:29:12Z",
-            "duration_ms": 828,
+            "checked_at": "2026-09-26T05:24:13Z",
+            "duration_ms": 1204,
             "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:openssl",
             "method": "http_get",
             "raw_ref": "sha256:a3e9984aaca6d5e733a55142c935d519f50dee99467542c128605ea6fa6adc94",
@@ -255,14 +255,14 @@
           }
         },
         "seeds": {
-          "note": "seed index looks incomplete (index covers only 6 flavours); the listed images are real but there may be more",
+          "note": "seed index looks incomplete (index covers only 7 flavours); the listed images are real but there may be more",
           "provenance": {
             "cache": "cached",
-            "checked_at": "2026-09-26T00:29:11Z",
+            "checked_at": "2026-09-26T05:24:11Z",
             "duration_ms": 0,
             "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
             "method": "http_get",
-            "raw_ref": "sha256:0bf33a4592db721a0a1ea196a1379ab55f4026f2bb9a4191c23aff4b4b261801",
+            "raw_ref": "sha256:abecada519e55e20c8bbca4eeeed7671b20b364ab0c0ad2538eee08ebe9493f5",
             "raw_truncated": false,
             "source_id": "seeds"
           },
@@ -281,10 +281,15 @@
               "openssl-provider-legacy"
             ],
             "flavours": [
+              "ubuntu",
               "ubuntu-budgie",
               "ubuntu-core-installer"
             ],
             "images": [
+              [
+                "ubuntu",
+                "supported"
+              ],
               [
                 "ubuntu-budgie",
                 "supported"
@@ -303,7 +308,7 @@
       "note": null,
       "provenance": {
         "cache": "cached",
-        "checked_at": "2026-09-26T00:29:09Z",
+        "checked_at": "2026-09-26T05:24:09Z",
         "duration_ms": 0,
         "locator": "https://documentation.ubuntu.com/release-notes/26.10/schedule/",
         "method": "http_get",
@@ -444,17 +449,17 @@
     "left_queue_at": null
   },
   "provenance": {
-    "generated_at": "2026-09-26T00:29:13Z",
+    "generated_at": "2026-09-26T05:24:13Z",
     "harness": null,
     "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
     "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
     "policy_version": "1.0.0",
-    "review_key": "sha256:01d9521b21c6e4522b8cb38f01340360a86c81471ad8144974ab9a93954cb2af",
+    "review_key": "sha256:562276b475b1bc86dadf48a9481f6f40c26c2c60a044908c85aed3002ee87b20",
     "risk_algorithm_version": "risk/1.2.0",
-    "run_id": "run-20260926T002837Z",
+    "run_id": "run-20260926T052337Z",
     "tool_version": "0.1.0"
   },
-  "record_id": "2167636/a8767664c6483ea0",
+  "record_id": "2167636/30e221fc853284d9",
   "risk": {
     "algorithm_version": "risk/1.2.0",
     "band": "SEVERE",

@@ -11,17 +11,17 @@
     {
       "confidence": null,
       "decision": null,
-      "fingerprint": "sha256:b254fb93f4793c962d8ffa0367cd069b280aef652a76a1a920b13d30bc7e05b7",
-      "generated_at": "2026-09-25T13:33:12Z",
-      "risk_score": 64,
+      "fingerprint": "sha256:773176f92bbc88c08b013f2bd29c10135947227938f3c1634e3eb54d7c1539b7",
+      "generated_at": "2026-09-26T00:29:07Z",
+      "risk_score": 45,
       "status": "EVIDENCE_ONLY"
     },
     {
       "confidence": null,
       "decision": null,
-      "fingerprint": "sha256:773176f92bbc88c08b013f2bd29c10135947227938f3c1634e3eb54d7c1539b7",
-      "generated_at": "2026-09-26T00:29:07Z",
-      "risk_score": 45,
+      "fingerprint": "sha256:b254fb93f4793c962d8ffa0367cd069b280aef652a76a1a920b13d30bc7e05b7",
+      "generated_at": "2026-09-26T05:24:07Z",
+      "risk_score": 64,
       "status": "EVIDENCE_ONLY"
     }
   ],
@@ -86,14 +86,14 @@
         "title": "FFe: Please merge 0.5.17-1 into Stonking",
         "url": "https://bugs.launchpad.net/bugs/2167863"
       },
-      "fingerprint": "sha256:773176f92bbc88c08b013f2bd29c10135947227938f3c1634e3eb54d7c1539b7",
+      "fingerprint": "sha256:b254fb93f4793c962d8ffa0367cd069b280aef652a76a1a920b13d30bc7e05b7",
       "flavours": {
         "ack_required_from": [],
         "acks": [],
         "affected_flavours": [
           "ubuntu-budgie"
         ],
-        "impact": "SINGLE_FLAVOUR",
+        "impact": "CORE",
         "requester_is_flavour_lead": false,
         "requesting_flavour": null
       },
@@ -104,8 +104,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-26T00:29:05Z",
-              "duration_ms": 300,
+              "checked_at": "2026-09-26T05:24:06Z",
+              "duration_ms": 335,
               "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=wireplumber&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
               "method": "http_get",
               "raw_ref": "sha256:b420cc15507fdebc5b6e6cf7d2f0af3acf72f75b6fb05ea43a608d6b43239f69",
@@ -133,8 +133,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-26T00:29:07Z",
-              "duration_ms": 90,
+              "checked_at": "2026-09-26T05:24:07Z",
+              "duration_ms": 132,
               "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:wireplumber",
               "method": "http_get",
               "raw_ref": "sha256:369d28e6c84d53155a9b2692519962344066ed68ec466926c11a8f264d129fc9",
@@ -160,8 +160,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-26T00:29:06Z",
-              "duration_ms": 190,
+              "checked_at": "2026-09-26T05:24:07Z",
+              "duration_ms": 276,
               "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:wireplumber",
               "method": "http_get",
               "raw_ref": "sha256:6cc10c74d71096f04e3b720d418329dd6e3ec12a3bfa04484078a6025bbf2171",
@@ -204,14 +204,14 @@
             }
           },
           "seeds": {
-            "note": "seed index looks incomplete (index covers only 6 flavours); the listed images are real but there may be more",
+            "note": "seed index looks incomplete (index covers only 7 flavours); the listed images are real but there may be more",
             "provenance": {
               "cache": "cached",
-              "checked_at": "2026-09-26T00:29:06Z",
+              "checked_at": "2026-09-26T05:24:07Z",
               "duration_ms": 0,
               "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
               "method": "http_get",
-              "raw_ref": "sha256:0bf33a4592db721a0a1ea196a1379ab55f4026f2bb9a4191c23aff4b4b261801",
+              "raw_ref": "sha256:abecada519e55e20c8bbca4eeeed7671b20b364ab0c0ad2538eee08ebe9493f5",
               "raw_truncated": false,
               "source_id": "seeds"
             },
@@ -231,15 +231,20 @@
                 "wireplumber-doc"
               ],
               "flavours": [
+                "ubuntu",
                 "ubuntu-budgie"
               ],
               "images": [
+                [
+                  "ubuntu",
+                  "supported"
+                ],
                 [
                   "ubuntu-budgie",
                   "supported"
                 ]
               ],
-              "is_core": false
+              "is_core": true
             }
           }
         }
@@ -248,7 +253,7 @@
         "note": null,
         "provenance": {
           "cache": "cached",
-          "checked_at": "2026-09-26T00:29:04Z",
+          "checked_at": "2026-09-26T05:24:05Z",
           "duration_ms": 0,
           "locator": "https://documentation.ubuntu.com/release-notes/26.10/schedule/",
           "method": "http_get",
@@ -418,20 +423,20 @@
       "left_queue_at": null
     },
     "provenance": {
-      "generated_at": "2026-09-26T00:29:07Z",
+      "generated_at": "2026-09-26T05:24:07Z",
       "harness": null,
       "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
       "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
       "policy_version": "1.0.0",
-      "review_key": "sha256:79fe7c0b1d8b20a0b7f2eddab3dec6274957db3c5b4d38eb4708428c890aff24",
+      "review_key": "sha256:804a217c6f6b5209782c47c5d94df04659ace1fbdf10d31e7609d9f55cdba59e",
       "risk_algorithm_version": "risk/1.2.0",
-      "run_id": "run-20260926T002837Z",
+      "run_id": "run-20260926T052337Z",
       "tool_version": "0.1.0"
     },
-    "record_id": "2167863/773176f92bbc88c0",
+    "record_id": "2167863/b254fb93f4793c96",
     "risk": {
       "algorithm_version": "risk/1.2.0",
-      "band": "MODERATE",
+      "band": "HIGH",
       "components": [
         {
           "evidence_refs": [
@@ -448,8 +453,8 @@
           ],
           "max_points": 25,
           "name": "seeded_reach",
-          "points": 6,
-          "rationale": "seeded only on ubuntu-budgie, whose team owns the image and the consequence"
+          "points": 25,
+          "rationale": "seeded on a core Ubuntu image, so a regression reaches the default install"
         },
         {
           "evidence_refs": [
@@ -564,7 +569,7 @@
           "triggered": false
         }
       ],
-      "score": 45
+      "score": 64
     },
     "schema_version": "1.0.0",
     "status": "EVIDENCE_ONLY"
