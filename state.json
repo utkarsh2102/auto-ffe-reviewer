@@ -65,7 +65,7 @@
       "in_queue": true,
       "last_evidence_at": "2026-09-26T05:24:03Z",
       "last_review_at": "",
-      "last_seen_at": "2026-09-26T10:08:47Z",
+      "last_seen_at": "2026-09-26T14:41:33Z",
       "llm_runs_date": "",
       "llm_runs_today": 0,
       "message_count": 2,
@@ -83,7 +83,7 @@
       "in_queue": true,
       "last_evidence_at": "2026-09-26T05:24:13Z",
       "last_review_at": "",
-      "last_seen_at": "2026-09-26T10:09:16Z",
+      "last_seen_at": "2026-09-26T14:41:57Z",
       "llm_runs_date": "",
       "llm_runs_today": 0,
       "message_count": 8,
@@ -101,7 +101,7 @@
       "in_queue": true,
       "last_evidence_at": "2026-09-26T05:24:07Z",
       "last_review_at": "",
-      "last_seen_at": "2026-09-26T10:09:11Z",
+      "last_seen_at": "2026-09-26T14:41:53Z",
       "llm_runs_date": "",
       "llm_runs_today": 0,
       "message_count": 3,
@@ -145,6 +145,6 @@
       "status": "Triaged"
     }
   },
-  "updated_at": "2026-09-26T10:09:19Z",
+  "updated_at": "2026-09-26T14:42:00Z",
   "version": 1
 }
