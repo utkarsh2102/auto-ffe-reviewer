@@ -1,9 +1,39 @@
 {
   "agreed": 0,
   "comparable": 0,
-  "decided": 4,
+  "decided": 7,
   "rate": null,
   "recent": [
+    {
+      "agreed": null,
+      "bug_id": 2167863,
+      "decided_at": "2026-09-28T16:41:22Z",
+      "ours": null,
+      "risk_band": "HIGH",
+      "theirs": "APPROVED",
+      "title": "FFe: Please merge 0.5.17-1 into Stonking",
+      "url": "https://bugs.launchpad.net/bugs/2167863"
+    },
+    {
+      "agreed": null,
+      "bug_id": 2167853,
+      "decided_at": "2026-09-28T16:41:18Z",
+      "ours": null,
+      "risk_band": "SEVERE",
+      "theirs": "APPROVED",
+      "title": "[FFE] Update ubuntu-drivers-common to 1:0.10.12 for stonking",
+      "url": "https://bugs.launchpad.net/bugs/2167853"
+    },
+    {
+      "agreed": null,
+      "bug_id": 2167479,
+      "decided_at": "2026-09-28T16:40:49Z",
+      "ours": null,
+      "risk_band": "HIGH",
+      "theirs": "APPROVED",
+      "title": "[FFE] Allow mysql-server and mariadb-server to be co-installed in stonking",
+      "url": "https://bugs.launchpad.net/bugs/2167479"
+    },
     {
       "agreed": null,
       "bug_id": 2168274,
