@@ -161,8 +161,26 @@
       "message_count": 5,
       "review_key": "sha256:2aa30d3302404a1767e47ada3bb8e777d63ee01384d07e12272eeafec4054109",
       "status": "Triaged"
+    },
+    "2168782": {
+      "bug_id": 2168782,
+      "confidence": null,
+      "date_last_message": "2026-09-28T17:02:34.460726+00:00",
+      "date_last_updated": "2026-09-28T17:55:47.359086+00:00",
+      "decision": null,
+      "discovered_via": "release-team-queue",
+      "fingerprint": "sha256:ad8c9bfe31d56344c9a30149430e7e9155ac58fe6d9e2c72870c22d8707a189a",
+      "in_queue": true,
+      "last_evidence_at": "2026-09-28T22:29:40Z",
+      "last_review_at": "",
+      "last_seen_at": "2026-09-28T22:29:16Z",
+      "llm_runs_date": "",
+      "llm_runs_today": 0,
+      "message_count": 1,
+      "review_key": "sha256:5d1f444079c5b8f9a17ec8a6c46cd387007774e5d19a1aa19cfd02bfbe30b60a",
+      "status": "New"
     }
   },
-  "updated_at": "2026-09-28T16:41:24Z",
+  "updated_at": "2026-09-28T22:29:40Z",
   "version": 1
 }
