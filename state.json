@@ -173,7 +173,7 @@
       "in_queue": true,
       "last_evidence_at": "2026-09-28T22:29:40Z",
       "last_review_at": "",
-      "last_seen_at": "2026-09-28T22:29:16Z",
+      "last_seen_at": "2026-09-29T02:16:07Z",
       "llm_runs_date": "",
       "llm_runs_today": 0,
       "message_count": 1,
@@ -181,6 +181,6 @@
       "status": "New"
     }
   },
-  "updated_at": "2026-09-28T22:29:40Z",
+  "updated_at": "2026-09-29T02:16:29Z",
   "version": 1
 }
