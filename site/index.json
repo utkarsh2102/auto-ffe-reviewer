@@ -1,14 +1,49 @@
 {
   "bugs": [
     {
-      "ack_required_from": [
-        "kubuntu",
-        "ubuntu-budgie"
-      ],
-      "bug_id": 2168782,
-      "build_rdepends": 26,
+      "ack_required_from": [],
+      "bug_id": 2168849,
+      "build_rdepends": 0,
       "confidence": null,
-      "days_to_release": 17,
+      "days_to_release": -159,
+      "decision": null,
+      "decision_floor": "NEEDS_INFORMATION",
+      "ffe_kind": "new-package",
+      "flags": [],
+      "flavour_impact": "UNSEEDED",
+      "has_assessment": false,
+      "injection_signals": 0,
+      "is_core": false,
+      "missing_information": [],
+      "packages": [
+        "migraphx"
+      ],
+      "phase": "FINAL_RELEASE",
+      "rdepends": 0,
+      "release_type": "LTS",
+      "reporter": "igorluppi",
+      "reviewed_at": "2026-09-29T15:41:03Z",
+      "risk_band": "HIGH",
+      "risk_score": 68,
+      "seeded": null,
+      "series": "resolute",
+      "status": "EVIDENCE_ONLY",
+      "summary": null,
+      "testing_corroborated": false,
+      "title": "FFe: migraphx - new package, first successful build at 10.0 (Ubuntu, amd64-only, joined the rocm packageset after LP: #2164669 was filed)",
+      "unavailable": [
+        "calendar.schedule",
+        "seeds"
+      ],
+      "url": "https://bugs.launchpad.net/bugs/2168849",
+      "version": "26.04"
+    },
+    {
+      "ack_required_from": [],
+      "bug_id": 2168782,
+      "build_rdepends": 23,
+      "confidence": null,
+      "days_to_release": 16,
       "decision": null,
       "decision_floor": "NEEDS_INFORMATION",
       "ffe_kind": "feature-change",
@@ -21,13 +56,13 @@
       "packages": [
         "llvm-toolchain-22"
       ],
-      "phase": "BETA",
-      "rdepends": 99,
+      "phase": "FEATURE_FREEZE",
+      "rdepends": 97,
       "release_type": "INTERIM",
       "reporter": "karljs",
-      "reviewed_at": "2026-09-28T22:29:40Z",
+      "reviewed_at": "2026-09-29T15:40:57Z",
       "risk_band": "HIGH",
-      "risk_score": 69,
+      "risk_score": 61,
       "seeded": [
         "kubuntu",
         "ubuntu-budgie"
@@ -37,21 +72,23 @@
       "summary": null,
       "testing_corroborated": false,
       "title": "[FFE] Please add llvm-toolchain-23 to Stonking",
-      "unavailable": [],
+      "unavailable": [
+        "calendar.schedule"
+      ],
       "url": "https://bugs.launchpad.net/bugs/2168782",
       "version": "26.10"
     }
   ],
   "counts": {
     "approve": 0,
-    "awaiting_flavour_ack": 1,
-    "evidence_incomplete": 0,
-    "high_risk": 1,
-    "needs_attention": 1,
+    "awaiting_flavour_ack": 0,
+    "evidence_incomplete": 2,
+    "high_risk": 2,
+    "needs_attention": 2,
     "needs_information": 0,
-    "no_recommendation": 1,
-    "no_testing_evidence": 1,
-    "open": 1,
+    "no_recommendation": 2,
+    "no_testing_evidence": 2,
+    "open": 2,
     "reject": 0
   },
   "version": 1

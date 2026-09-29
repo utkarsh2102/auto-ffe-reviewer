@@ -1,0 +1,363 @@
+{
+  "history": [
+    {
+      "confidence": null,
+      "decision": null,
+      "fingerprint": "sha256:e22e2c16ddcb8817e33b085fe3a7629d22f52f92f5a321bc68813f2dce7084ea",
+      "generated_at": "2026-09-29T15:41:03Z",
+      "risk_score": 68,
+      "status": "EVIDENCE_ONLY"
+    }
+  ],
+  "record": {
+    "assessment": null,
+    "evidence": {
+      "bug": {
+        "comments": [
+          {
+            "author": "igorluppi",
+            "author_is_release_team": false,
+            "content": "## FFe ##\n\nRequesting a Feature Freeze exception for `migraphx`, in stonking, to land its\nfirst ever successfully-built version (10.0) in the archive. `migraphx` is now\na member of the \"rocm\" packageset, but it was **not** yet a member at the time\nthe coordinated stack-wide FFe for this transition\n(LP: #2164669, https://bugs.launchpad.net/ubuntu/+source/rocm/+bug/2164669)\nwas filed and scoped to its 39 source packages, so it isn't covered by that\nbug. This is a follow-up/companion exception for the package that joined the\nset afterward, and should be tracked and landed alongside LP: #2164669.\n\n### Scope: single source package (recently added to the rocm packageset)\n\nmigraphx. Confirmed currently in the set via the live Launchpad packageset API:\n\n    $ curl -s \"https://api.launchpad.net/devel/package-sets/ubuntu/stonking/rocm?ws.op=getSourcesIncluded\"\n\nreturns 42 source packages, including `migraphx`, `hipfort`, and `rpp`, all\nthree added to the set after #2164669 was filed against the original\n39-package scope. This FFe covers `migraphx` only; `hipfort` and `rpp` are\naddressed separately if/as needed.\n\n### Current state in the archive, every prior version failed to build\n\n`migraphx` has never had a successful build reach the release pocket:\n\n    Date                       Status      Target     Pocket    Component  Section   Version\n    2026-06-30 22:45:14 -03    Published   Stonking   proposed  universe   libdevel  7.1.1-7\n    2026-06-30 23:14:17 -03    Superseded  Stonking   proposed  universe   libdevel  7.1.1-6\n    2026-05-22 09:02:18 -03    Superseded  Stonking   proposed  universe   libdevel  7.1.1-5\n    2026-05-23 09:10:20 -03    Deleted     Resolute   proposed  universe   libdevel  7.1.1-5\n    2026-03-22 22:43:23 -03    Superseded  Resolute   proposed  universe   libdevel  7.0.2-1\n\nAll of these are Debian-derived 7.x uploads that failed to build and were\nsuperseded/deleted out of -proposed; none ever reached stonking's release\npocket. In practice, no working `migraphx` has ever shipped to users. This\nrequest is to land the first one, directly at upstream 10.0.\n\n### Description of the proposed changes\n\nNew upstream version 10.0 (from 7.1.1), with the GPU backend actually enabled\nagainst the rocm 10.0 stack:\n\n  - Compiler: switched from the distro `clang` to ROCm's own `clang-rocm`\n    (`amdclang++`/`amdclang`), required for HIP device compilation\n  - GPU backend on: MIOpen, rocBLAS, hipBLASLt, and Composable Kernel (CK),\n    the last of which required and drove two upstream-facing fixes in\n    `composable-kernel` itself (an `.install` file conflict between\n    `libcomposable-kernel-dev`/`libcomposable-kernel-host-dev`, and a CMake\n    exported-target bug where `hip::device` leaked HIP device-compile flags\n    into any consumer); both fixed and verified end-to-end with a real\n    migraphx build against the fixed composable-kernel packages\n  - rocMLIR deliberately left OFF: it is not packaged for Debian/Ubuntu\n    (upstream builds it from a pinned source commit at migraphx's own build\n    time, vendoring a full copy of LLVM/MLIR's source, not a system\n    package, and a DFSG concern if ever bundled). Documented as a known,\n    intentional gap in `debian/rules`, not attempted here.\n  - Debhelper compat bumped to 14 and associated packaging cleanups\n  - Fixed several packaging gaps surfaced by the version bump: a missing\n    `rocm_add_version_resource` CMake macro (not provided by Debian's\n    rocm-cmake, guarded with a local patch), missing `.install` entries for\n    upstream's new per-Python-version pybind11 module layout, a stale\n    `libmigraphx-c3.symbols` file regenerated against the real 10.0 ABI, and\n    two missing build-deps (`python3-sphinxcontrib.datatemplates`,\n    `python3-dev`) that a clean chroot needs but a stale local build\n    environment had masked\n\n### Architecture impact, amd64 only (matches the rocm 10.0 stack)\n\n`migraphx` is restricted to `Architecture: amd64` (previous attempts also\nlisted arm64, which never built anyway). This matches the rest of the rocm\n10.0 stack, which is amd64-only on Ubuntu from this transition onward because\nit builds against AMD's LLVM fork (llvm-toolchain-rocm). Since no version of\nmigraphx has ever successfully built or published on any architecture, this\nis not a drop relative to a working state, there is no working arm64 binary\nbeing removed.\n\n### Reverse-dependency analysis, none\n\n    $ reverse-depends src:migraphx\n    Package not published in specified release\n    $ reverse-depends src:migraphx -a source\n    Package not published in specified release\n\nNothing in the archive depends on migraphx, source or binary, expected,\nsince no build of it has ever reached the release pocket. There is zero\nexternal regression risk from this package landing; the only question is\nwhether the new package itself builds and works, which has been verified\n(see Testing performed).\n\nmigraphx itself now build-depends on parts of the rocm 10.0 stack\n(`clang-rocm`, `hipcc-rocm`, `libamdhip64-dev`, `libhipblas-dev`,\n`libhipblaslt-dev`, `libhsa-runtime-dev`, `libmiopen-dev`, `librocblas-dev`,\n`libcomposable-kernel-host-dev`, `rocm-cmake`, `pkg-rocm-tools`, all\n`>= 10.0~`), so this upload is coupled to LP: #2164669 and should land\nalongside or after it, not before.\n\n### Rationale for the exception\n\nGets a previously perpetually-failing package into a working, publishable\nstate for the first time, using the GPU backend it was actually designed to\nuse (MIOpen/rocBLAS/hipBLASLt/Composable Kernel), rather than continuing to\nship no working package at all. Deferring to a future cycle means another\nfull release with no migraphx in the archive.\n\n### Testing performed\n\n- Full builds succeeded, with the GPU backend enabled end-to-end, in\n  `ppa:igorluppi/extra-10.0-exp`, including a build against the real,\n  PPA-published (not hand-patched) fixed `composable-kernel` packages,\n  confirmed via the Launchpad buildlog (`Status: successful`,\n  amd64, ~78 minute build)\n- Verified no undefined symbols, no stray device-compilation leakage\n  (migraphx has its own internal guard, `no_device.cpp`, that hard-errors if\n  HIP device-compile flags leak into the wrong target, confirmed clean),\n  and all 7 binary packages (`migraphx`, `migraphx-dev`, `migraphx-doc`,\n  `migraphx-tools`, `migraphx-tests`, `libmigraphx-c3`, `libmigraphx-c-dev`)\n  produced correctly\n- Also test-built and verified against a local container mirroring the\n  target environment before each PPA upload\n\n### Regression potential\n\nNone to existing users, no working migraphx has ever shipped, so there is\nnothing currently in users' hands that this could regress. Risk is confined\nto whether the new package itself is sound, which has been verified through\nmultiple successful builds as described above.\n\n### Upstream changelog\n\nSee https://github.com/ROCm/AMDMIGraphX/ (this package tracks AMDMIGraphX\nupstream releases directly).",
+            "content_sha": "d892e89da44ccbd188d87bff7de8ad5b867f2e8981fffa47e6dd4f6330f55c1d",
+            "date_created": "2026-09-29T12:29:33.043446+00:00",
+            "index": 0,
+            "url": "https://bugs.launchpad.net/ubuntu/+source/migraphx/+bug/2168849/comments/0"
+          }
+        ],
+        "date_created": "2026-09-29T12:29:33.043446+00:00",
+        "date_last_message": "2026-09-29T12:29:33.043446+00:00",
+        "date_last_updated": "2026-09-29T12:32:14.479868+00:00",
+        "description": "## FFe ##\n\nRequesting a Feature Freeze exception for `migraphx`, in stonking, to land its\nfirst ever successfully-built version (10.0) in the archive. `migraphx` is now\na member of the \"rocm\" packageset, but it was **not** yet a member at the time\nthe coordinated stack-wide FFe for this transition\n(LP: #2164669, https://bugs.launchpad.net/ubuntu/+source/rocm/+bug/2164669)\nwas filed and scoped to its 39 source packages, so it isn't covered by that\nbug. This is a follow-up/companion exception for the package that joined the\nset afterward, and should be tracked and landed alongside LP: #2164669.\n\n### Scope: single source package (recently added to the rocm packageset)\n\nmigraphx. Confirmed currently in the set via the live Launchpad packageset API:\n\n    $ curl -s \"https://api.launchpad.net/devel/package-sets/ubuntu/stonking/rocm?ws.op=getSourcesIncluded\"\n\nreturns 42 source packages, including `migraphx`, `hipfort`, and `rpp`, all\nthree added to the set after #2164669 was filed against the original\n39-package scope. This FFe covers `migraphx` only; `hipfort` and `rpp` are\naddressed separately if/as needed.\n\n### Current state in the archive, every prior version failed to build\n\n`migraphx` has never had a successful build reach the release pocket:\n\n    Date                       Status      Target     Pocket    Component  Section   Version\n    2026-06-30 22:45:14 -03    Published   Stonking   proposed  universe   libdevel  7.1.1-7\n    2026-06-30 23:14:17 -03    Superseded  Stonking   proposed  universe   libdevel  7.1.1-6\n    2026-05-22 09:02:18 -03    Superseded  Stonking   proposed  universe   libdevel  7.1.1-5\n    2026-05-23 09:10:20 -03    Deleted     Resolute   proposed  universe   libdevel  7.1.1-5\n    2026-03-22 22:43:23 -03    Superseded  Resolute   proposed  universe   libdevel  7.0.2-1\n\nAll of these are Debian-derived 7.x uploads that failed to build and were\nsuperseded/deleted out of -proposed; none ever reached stonking's release\npocket. In practice, no working `migraphx` has ever shipped to users. This\nrequest is to land the first one, directly at upstream 10.0.\n\n### Description of the proposed changes\n\nNew upstream version 10.0 (from 7.1.1), with the GPU backend actually enabled\nagainst the rocm 10.0 stack:\n\n  - Compiler: switched from the distro `clang` to ROCm's own `clang-rocm`\n    (`amdclang++`/`amdclang`), required for HIP device compilation\n  - GPU backend on: MIOpen, rocBLAS, hipBLASLt, and Composable Kernel (CK),\n    the last of which required and drove two upstream-facing fixes in\n    `composable-kernel` itself (an `.install` file conflict between\n    `libcomposable-kernel-dev`/`libcomposable-kernel-host-dev`, and a CMake\n    exported-target bug where `hip::device` leaked HIP device-compile flags\n    into any consumer); both fixed and verified end-to-end with a real\n    migraphx build against the fixed composable-kernel packages\n  - rocMLIR deliberately left OFF: it is not packaged for Debian/Ubuntu\n    (upstream builds it from a pinned source commit at migraphx's own build\n    time, vendoring a full copy of LLVM/MLIR's source, not a system\n    package, and a DFSG concern if ever bundled). Documented as a known,\n    intentional gap in `debian/rules`, not attempted here.\n  - Debhelper compat bumped to 14 and associated packaging cleanups\n  - Fixed several packaging gaps surfaced by the version bump: a missing\n    `rocm_add_version_resource` CMake macro (not provided by Debian's\n    rocm-cmake, guarded with a local patch), missing `.install` entries for\n    upstream's new per-Python-version pybind11 module layout, a stale\n    `libmigraphx-c3.symbols` file regenerated against the real 10.0 ABI, and\n    two missing build-deps (`python3-sphinxcontrib.datatemplates`,\n    `python3-dev`) that a clean chroot needs but a stale local build\n    environment had masked\n\n### Architecture impact, amd64 only (matches the rocm 10.0 stack)\n\n`migraphx` is restricted to `Architecture: amd64` (previous attempts also\nlisted arm64, which never built anyway). This matches the rest of the rocm\n10.0 stack, which is amd64-only on Ubuntu from this transition onward because\nit builds against AMD's LLVM fork (llvm-toolchain-rocm). Since no version of\nmigraphx has ever successfully built or published on any architecture, this\nis not a drop relative to a working state, there is no working arm64 binary\nbeing removed.\n\n### Reverse-dependency analysis, none\n\n    $ reverse-depends src:migraphx\n    Package not published in specified release\n    $ reverse-depends src:migraphx -a source\n    Package not published in specified release\n\nNothing in the archive depends on migraphx, source or binary, expected,\nsince no build of it has ever reached the release pocket. There is zero\nexternal regression risk from this package landing; the only question is\nwhether the new package itself builds and works, which has been verified\n(see Testing performed).\n\nmigraphx itself now build-depends on parts of the rocm 10.0 stack\n(`clang-rocm`, `hipcc-rocm`, `libamdhip64-dev`, `libhipblas-dev`,\n`libhipblaslt-dev`, `libhsa-runtime-dev`, `libmiopen-dev`, `librocblas-dev`,\n`libcomposable-kernel-host-dev`, `rocm-cmake`, `pkg-rocm-tools`, all\n`>= 10.0~`), so this upload is coupled to LP: #2164669 and should land\nalongside or after it, not before.\n\n### Rationale for the exception\n\nGets a previously perpetually-failing package into a working, publishable\nstate for the first time, using the GPU backend it was actually designed to\nuse (MIOpen/rocBLAS/hipBLASLt/Composable Kernel), rather than continuing to\nship no working package at all. Deferring to a future cycle means another\nfull release with no migraphx in the archive.\n\n### Testing performed\n\n- Full builds succeeded, with the GPU backend enabled end-to-end, in\n  `ppa:igorluppi/extra-10.0-exp`, including a build against the real,\n  PPA-published (not hand-patched) fixed `composable-kernel` packages,\n  confirmed via the Launchpad buildlog (`Status: successful`,\n  amd64, ~78 minute build)\n- Verified no undefined symbols, no stray device-compilation leakage\n  (migraphx has its own internal guard, `no_device.cpp`, that hard-errors if\n  HIP device-compile flags leak into the wrong target, confirmed clean),\n  and all 7 binary packages (`migraphx`, `migraphx-dev`, `migraphx-doc`,\n  `migraphx-tools`, `migraphx-tests`, `libmigraphx-c3`, `libmigraphx-c-dev`)\n  produced correctly\n- Also test-built and verified against a local container mirroring the\n  target environment before each PPA upload\n\n### Regression potential\n\nNone to existing users, no working migraphx has ever shipped, so there is\nnothing currently in users' hands that this could regress. Risk is confined\nto whether the new package itself is sound, which has been verified through\nmultiple successful builds as described above.\n\n### Upstream changelog\n\nSee https://github.com/ROCm/AMDMIGraphX/ (this package tracks AMDMIGraphX\nupstream releases directly).",
+        "description_sha": "d892e89da44ccbd188d87bff7de8ad5b867f2e8981fffa47e6dd4f6330f55c1d",
+        "discovered_via": "release-team-queue",
+        "id": 2168849,
+        "message_count": 1,
+        "release_team_subscribed": true,
+        "reporter": "igorluppi",
+        "subscribers": [
+          "bullwinkle-team",
+          "igorluppi",
+          "ubuntu-release"
+        ],
+        "tags": [],
+        "tasks": [
+          {
+            "assignee": null,
+            "importance": "Undecided",
+            "status": "New",
+            "target": "migraphx (Ubuntu)"
+          }
+        ],
+        "title": "FFe: migraphx - new package, first successful build at 10.0 (Ubuntu, amd64-only, joined the rocm packageset after LP: #2164669 was filed)",
+        "url": "https://bugs.launchpad.net/bugs/2168849"
+      },
+      "fingerprint": "sha256:e22e2c16ddcb8817e33b085fe3a7629d22f52f92f5a321bc68813f2dce7084ea",
+      "flavours": {
+        "ack_required_from": [],
+        "acks": [],
+        "affected_flavours": [],
+        "impact": "UNSEEDED",
+        "requester_is_flavour_lead": null,
+        "requesting_flavour": null
+      },
+      "injection_signals": [],
+      "packages": [
+        {
+          "archive": {
+            "note": "migraphx has no published source in resolute",
+            "provenance": {
+              "cache": "fresh",
+              "checked_at": "2026-09-29T15:41:03Z",
+              "duration_ms": 229,
+              "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=migraphx&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fresolute&status=Published&order_by_date=true",
+              "method": "http_get",
+              "raw_ref": "sha256:aeccab7ba3548115eac64a023c8f60fa448132b168d09e179f15732ea44e50f7",
+              "raw_truncated": false,
+              "source_id": "launchpad.archive"
+            },
+            "status": "OK",
+            "value": {
+              "binaries": [],
+              "component": "",
+              "in_archive": false,
+              "pocket": "",
+              "source": "migraphx",
+              "version": ""
+            }
+          },
+          "build_rdepends": {
+            "note": "migraphx is not published in resolute",
+            "provenance": {
+              "cache": "none",
+              "checked_at": "2026-09-29T15:41:03Z",
+              "duration_ms": 0,
+              "locator": "migraphx",
+              "method": "computed",
+              "raw_ref": null,
+              "raw_truncated": false,
+              "source_id": "rdepends.build"
+            },
+            "status": "NOT_APPLICABLE",
+            "value": null
+          },
+          "name": "migraphx",
+          "rdepends": {
+            "note": "migraphx is not published in resolute",
+            "provenance": {
+              "cache": "none",
+              "checked_at": "2026-09-29T15:41:03Z",
+              "duration_ms": 0,
+              "locator": "migraphx",
+              "method": "computed",
+              "raw_ref": null,
+              "raw_truncated": false,
+              "source_id": "rdepends.binary"
+            },
+            "status": "NOT_APPLICABLE",
+            "value": null
+          },
+          "seeds": {
+            "note": "none of migraphx appear in the seed index, but the index looks incomplete (index covers only 7 flavours), so this is not evidence that the package is unseeded",
+            "provenance": {
+              "cache": "cached",
+              "checked_at": "2026-09-29T15:41:03Z",
+              "duration_ms": 0,
+              "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
+              "method": "http_get",
+              "raw_ref": "sha256:8f1e7e2c93a4505222ed2ca212cbd65b81a42cc25c213fa2b092a3858f5cbe7c",
+              "raw_truncated": false,
+              "source_id": "seeds"
+            },
+            "status": "UNAVAILABLE",
+            "value": null
+          }
+        }
+      ],
+      "release_context": {
+        "note": "schedule page unavailable; dates approximated as release minus 8 weeks, which has been observed to be up to a week early",
+        "provenance": {
+          "cache": "none",
+          "checked_at": "2026-09-29T15:41:03Z",
+          "duration_ms": 0,
+          "locator": "https://documentation.ubuntu.com/release-notes/26.04/schedule/",
+          "method": "computed",
+          "raw_ref": null,
+          "raw_truncated": false,
+          "source_id": "calendar.schedule"
+        },
+        "status": "OK",
+        "value": {
+          "days_bucket": "post-release",
+          "days_since_feature_freeze": 215,
+          "days_to_release": -159,
+          "derivation": "approximate",
+          "feature_freeze": "2026-02-26",
+          "freeze_window_elapsed_pct": 100,
+          "milestones": [
+            {
+              "date": "2026-02-26",
+              "name": "Feature Freeze"
+            },
+            {
+              "date": "2026-04-23",
+              "name": "Final Release"
+            }
+          ],
+          "phase": "FINAL_RELEASE",
+          "release_date": "2026-04-23",
+          "release_type": "LTS",
+          "series": "resolute",
+          "version": "26.04"
+        }
+      },
+      "subject": {
+        "derivation": "packages:bug-tasks; series:mentioned-in-bug-text",
+        "ffe_kind": "new-package",
+        "packages": [
+          "migraphx"
+        ],
+        "target_series": "resolute"
+      },
+      "testing": {
+        "autopkgtest": "ABSENT",
+        "build": "ABSENT",
+        "corroborated": false,
+        "items": [],
+        "ppa": "ABSENT",
+        "test_output": "ABSENT",
+        "unverified_claims": []
+      },
+      "unavailable": [
+        {
+          "impact": "cannot tell how late in the freeze this request is",
+          "reason": "calendar.schedule: documentation.ubuntu.com rate-limited us",
+          "source_id": "calendar.schedule"
+        },
+        {
+          "impact": "cannot tell which Ubuntu images ship this package",
+          "reason": "seed index incomplete: index covers only 7 flavours",
+          "source_id": "seeds"
+        }
+      ]
+    },
+    "human": {
+      "decided": false,
+      "decision": null,
+      "detected_at": null,
+      "final_status": null,
+      "left_queue_at": null
+    },
+    "provenance": {
+      "generated_at": "2026-09-29T15:41:03Z",
+      "harness": null,
+      "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
+      "policy_version": "1.0.0",
+      "review_key": "sha256:a4998c00fc91a2a7245594de92c6c01875e18c2c1840ec9b60ae57c0fc5fe755",
+      "risk_algorithm_version": "risk/1.2.0",
+      "run_id": "run-20260929T154016Z",
+      "tool_version": "0.1.0"
+    },
+    "record_id": "2168849/e22e2c16ddcb8817",
+    "risk": {
+      "algorithm_version": "risk/1.2.0",
+      "band": "HIGH",
+      "components": [
+        {
+          "evidence_refs": [
+            "/evidence/release_context"
+          ],
+          "max_points": 20,
+          "name": "release_posture",
+          "points": 20,
+          "rationale": "LTS release, past final release, -159 days to release, 100% through the freeze window"
+        },
+        {
+          "evidence_refs": [
+            "/evidence/packages"
+          ],
+          "max_points": 25,
+          "name": "seeded_reach",
+          "points": 15,
+          "rationale": "could not establish which images ship this package; scored cautiously rather than as unseeded"
+        },
+        {
+          "evidence_refs": [
+            "/evidence/packages"
+          ],
+          "max_points": 25,
+          "name": "dependency_reach",
+          "points": 15,
+          "rationale": "reverse dependencies could not be determined; scored cautiously rather than as a leaf"
+        },
+        {
+          "evidence_refs": [
+            "/evidence/packages"
+          ],
+          "max_points": 10,
+          "name": "archive_standing",
+          "points": 3,
+          "rationale": "in universe or multiverse, which is community-supported"
+        },
+        {
+          "evidence_refs": [
+            "/evidence/subject"
+          ],
+          "max_points": 5,
+          "name": "change_shape",
+          "points": 0,
+          "rationale": "a new package, which nothing depends on yet"
+        },
+        {
+          "evidence_refs": [
+            "/evidence/testing"
+          ],
+          "max_points": 15,
+          "name": "unvalidated_change",
+          "points": 15,
+          "rationale": "no PPA, build log or test results are linked from the bug"
+        }
+      ],
+      "confidence_ceiling": "LOW",
+      "decision_floor": "NEEDS_INFORMATION",
+      "gates": [
+        {
+          "effect": "floor_needs_information",
+          "evidence_refs": [
+            "/evidence/subject"
+          ],
+          "id": "no_package_identified",
+          "rationale": "the affected package is identified",
+          "triggered": false
+        },
+        {
+          "effect": "floor_needs_information",
+          "evidence_refs": [
+            "/evidence/testing"
+          ],
+          "id": "no_testing_evidence",
+          "rationale": "nothing in the bug demonstrates the change works: no PPA, build log or test results",
+          "triggered": true
+        },
+        {
+          "effect": "flag",
+          "evidence_refs": [
+            "/evidence/flavours"
+          ],
+          "id": "flavour_ack_outstanding",
+          "rationale": "no cross-flavour acknowledgement is outstanding",
+          "triggered": false
+        },
+        {
+          "effect": "floor_needs_information",
+          "evidence_refs": [
+            "/evidence/release_context"
+          ],
+          "id": "after_final_freeze",
+          "rationale": "the request is past final release, when only release-critical fixes are normally considered",
+          "triggered": true
+        },
+        {
+          "effect": "flag",
+          "evidence_refs": [
+            "/evidence/release_context"
+          ],
+          "id": "before_feature_freeze",
+          "rationale": "the target release is past Feature Freeze",
+          "triggered": false
+        },
+        {
+          "effect": "flag",
+          "evidence_refs": [
+            "/evidence/subject"
+          ],
+          "id": "unrecoverable_failure_mode",
+          "rationale": "a regression here would be fixable by an SRU",
+          "triggered": false
+        },
+        {
+          "effect": "flag",
+          "evidence_refs": [
+            "/evidence/injection"
+          ],
+          "id": "suspicious_bug_text",
+          "rationale": "nothing in the bug text resembles an attempt to steer the reviewer",
+          "triggered": false
+        },
+        {
+          "effect": "cap_confidence",
+          "evidence_refs": [
+            "/evidence/unavailable"
+          ],
+          "id": "evidence_unavailable",
+          "rationale": "could not consult calendar.schedule, seeds, so this assessment rests on incomplete evidence",
+          "triggered": true
+        }
+      ],
+      "score": 68
+    },
+    "schema_version": "1.0.0",
+    "status": "EVIDENCE_ONLY"
+  },
+  "version": 1
+}
