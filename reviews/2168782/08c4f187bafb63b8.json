@@ -185,8 +185,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-29T20:38:46Z",
-            "duration_ms": 603,
+            "checked_at": "2026-09-30T05:52:25Z",
+            "duration_ms": 340,
             "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=llvm-toolchain-22&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
             "method": "http_get",
             "raw_ref": "sha256:f6c4d1ca32239ebfbe8362797bd7194e07ae2a8adfc508239f992e7846f0cb7d",
@@ -265,8 +265,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-29T20:38:59Z",
-            "duration_ms": 166,
+            "checked_at": "2026-09-30T05:52:36Z",
+            "duration_ms": 107,
             "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:llvm-toolchain-22",
             "method": "http_get",
             "raw_ref": "sha256:d79399baa0f86da0a069e481485a9fca768ecd4384a9f2ad80bd82a67eb56d87",
@@ -312,11 +312,11 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-29T20:38:58Z",
-            "duration_ms": 522,
+            "checked_at": "2026-09-30T05:52:36Z",
+            "duration_ms": 365,
             "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:llvm-toolchain-22",
             "method": "http_get",
-            "raw_ref": "sha256:613129582c76df3454e1e5cfd7a10df0d0b0c85061a2b8b00ec2c3b9211b3b94",
+            "raw_ref": "sha256:c07386f5f2df38b85a0e7e7e240eef7685457e8bbee0deee0d603afd3909b003",
             "raw_truncated": false,
             "source_id": "rdepends.binary"
           },
@@ -360,11 +360,11 @@
           "note": "seed index looks incomplete (index covers only 7 flavours); the listed images are real but there may be more",
           "provenance": {
             "cache": "cached",
-            "checked_at": "2026-09-29T20:38:58Z",
+            "checked_at": "2026-09-30T05:52:36Z",
             "duration_ms": 0,
             "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
             "method": "http_get",
-            "raw_ref": "sha256:9322993ede427c5af15228a405725a3b13ce07af2772b48732bcd5e634e1a5b3",
+            "raw_ref": "sha256:cb7d9b4f191deaa1074c4ece588bf4fb768c17ebb321f962880f048bf3e9876d",
             "raw_truncated": false,
             "source_id": "seeds"
           },
@@ -492,7 +492,7 @@
       "note": null,
       "provenance": {
         "cache": "cached",
-        "checked_at": "2026-09-29T20:38:45Z",
+        "checked_at": "2026-09-30T05:52:24Z",
         "duration_ms": 0,
         "locator": "https://documentation.ubuntu.com/release-notes/26.10/schedule/",
         "method": "http_get",
@@ -503,11 +503,11 @@
       "status": "OK",
       "value": {
         "days_bucket": "28-15",
-        "days_since_feature_freeze": 40,
-        "days_to_release": 16,
+        "days_since_feature_freeze": 41,
+        "days_to_release": 15,
         "derivation": "schedule-page",
         "feature_freeze": "2026-08-20",
-        "freeze_window_elapsed_pct": 71,
+        "freeze_window_elapsed_pct": 73,
         "milestones": [
           {
             "date": "2026-04-30",
@@ -622,14 +622,14 @@
     "left_queue_at": null
   },
   "provenance": {
-    "generated_at": "2026-09-29T20:39:08Z",
+    "generated_at": "2026-09-30T05:52:46Z",
     "harness": null,
     "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
     "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
     "policy_version": "1.0.0",
     "review_key": "sha256:2e82dfc87c49fdc37f65da2713c6a9d3df7df86114706116943ba02ad8add1d2",
     "risk_algorithm_version": "risk/1.2.0",
-    "run_id": "run-20260929T203833Z",
+    "run_id": "run-20260930T055213Z",
     "tool_version": "0.1.0"
   },
   "record_id": "2168782/08c4f187bafb63b8",
@@ -644,7 +644,7 @@
         "max_points": 20,
         "name": "release_posture",
         "points": 15,
-        "rationale": "interim release, past beta, 16 days to release, 71% through the freeze window"
+        "rationale": "interim release, past beta, 15 days to release, 73% through the freeze window"
       },
       {
         "evidence_refs": [

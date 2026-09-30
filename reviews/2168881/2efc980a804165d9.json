@@ -57,8 +57,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-29T20:38:39Z",
-            "duration_ms": 300,
+            "checked_at": "2026-09-30T05:52:18Z",
+            "duration_ms": 301,
             "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=rtl-sdr&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
             "method": "http_get",
             "raw_ref": "sha256:d0b5190e7903e37ca034f42134d518928063587a72ce82a4c2a22dffec8d21b0",
@@ -83,8 +83,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-29T20:38:41Z",
-            "duration_ms": 152,
+            "checked_at": "2026-09-30T05:52:20Z",
+            "duration_ms": 116,
             "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:rtl-sdr",
             "method": "http_get",
             "raw_ref": "sha256:5042b9faf9fb309ebf6b46a14f6144c816769c4b45fa05516a25469de6c243e0",
@@ -121,11 +121,11 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-29T20:38:40Z",
-            "duration_ms": 170,
+            "checked_at": "2026-09-30T05:52:20Z",
+            "duration_ms": 129,
             "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:rtl-sdr",
             "method": "http_get",
-            "raw_ref": "sha256:beabdf4fa2a60741fa9b9ce7f9040033f7744ed34b190e9b459e8aa2fc7bc06a",
+            "raw_ref": "sha256:ac68e7466162f37ea5f6be8f174306f2823e8ac57eb91e577514d489e48da01f",
             "raw_truncated": false,
             "source_id": "rdepends.binary"
           },
@@ -160,11 +160,11 @@
           "note": "none of librtlsdr-dev, librtlsdr0, rtl-sdr appear in the seed index, but the index looks incomplete (index covers only 7 flavours), so this is not evidence that the package is unseeded",
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-29T20:38:40Z",
-            "duration_ms": 493,
+            "checked_at": "2026-09-30T05:52:19Z",
+            "duration_ms": 496,
             "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
             "method": "http_get",
-            "raw_ref": "sha256:9322993ede427c5af15228a405725a3b13ce07af2772b48732bcd5e634e1a5b3",
+            "raw_ref": "sha256:cb7d9b4f191deaa1074c4ece588bf4fb768c17ebb321f962880f048bf3e9876d",
             "raw_truncated": false,
             "source_id": "seeds"
           },
@@ -177,8 +177,8 @@
       "note": null,
       "provenance": {
         "cache": "fresh",
-        "checked_at": "2026-09-29T20:38:38Z",
-        "duration_ms": 480,
+        "checked_at": "2026-09-30T05:52:18Z",
+        "duration_ms": 230,
         "locator": "https://documentation.ubuntu.com/release-notes/26.10/schedule/",
         "method": "http_get",
         "raw_ref": "sha256:e8753ae7b2b4c30ac408d551e72fbab5af9dde2f31312751195c5042909f2849",
@@ -188,11 +188,11 @@
       "status": "OK",
       "value": {
         "days_bucket": "28-15",
-        "days_since_feature_freeze": 40,
-        "days_to_release": 16,
+        "days_since_feature_freeze": 41,
+        "days_to_release": 15,
         "derivation": "schedule-page",
         "feature_freeze": "2026-08-20",
-        "freeze_window_elapsed_pct": 71,
+        "freeze_window_elapsed_pct": 73,
         "milestones": [
           {
             "date": "2026-04-30",
@@ -307,14 +307,14 @@
     "left_queue_at": null
   },
   "provenance": {
-    "generated_at": "2026-09-29T20:38:41Z",
+    "generated_at": "2026-09-30T05:52:20Z",
     "harness": null,
     "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
     "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
     "policy_version": "1.0.0",
     "review_key": "sha256:0c6c6a44dc44e9ae4080248c4a95e93786f491fb1ee3f30c285c5c89b48b73aa",
     "risk_algorithm_version": "risk/1.2.0",
-    "run_id": "run-20260929T203833Z",
+    "run_id": "run-20260930T055213Z",
     "tool_version": "0.1.0"
   },
   "record_id": "2168881/2efc980a804165d9",
@@ -329,7 +329,7 @@
         "max_points": 20,
         "name": "release_posture",
         "points": 15,
-        "rationale": "interim release, past beta, 16 days to release, 71% through the freeze window"
+        "rationale": "interim release, past beta, 15 days to release, 73% through the freeze window"
       },
       {
         "evidence_refs": [

@@ -129,7 +129,7 @@
       "title": "[FFE] Please add llvm-toolchain-23 to Stonking",
       "url": "https://bugs.launchpad.net/bugs/2168782"
     },
-    "fingerprint": "sha256:882f132516bc8c098cfae6f1ad2d769eb0707ece1604b442123f407538e7ef71",
+    "fingerprint": "sha256:08c4f187bafb63b8bcad5390aed2ffc8adddb9f1e8fb04f5d6559bc30e8b2f9b",
     "flavours": {
       "ack_required_from": [],
       "acks": [
@@ -185,8 +185,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-30T00:16:51Z",
-            "duration_ms": 364,
+            "checked_at": "2026-09-30T05:52:25Z",
+            "duration_ms": 340,
             "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=llvm-toolchain-22&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
             "method": "http_get",
             "raw_ref": "sha256:f6c4d1ca32239ebfbe8362797bd7194e07ae2a8adfc508239f992e7846f0cb7d",
@@ -265,8 +265,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-30T00:17:04Z",
-            "duration_ms": 148,
+            "checked_at": "2026-09-30T05:52:36Z",
+            "duration_ms": 107,
             "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:llvm-toolchain-22",
             "method": "http_get",
             "raw_ref": "sha256:d79399baa0f86da0a069e481485a9fca768ecd4384a9f2ad80bd82a67eb56d87",
@@ -312,8 +312,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-30T00:17:04Z",
-            "duration_ms": 471,
+            "checked_at": "2026-09-30T05:52:36Z",
+            "duration_ms": 365,
             "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:llvm-toolchain-22",
             "method": "http_get",
             "raw_ref": "sha256:c07386f5f2df38b85a0e7e7e240eef7685457e8bbee0deee0d603afd3909b003",
@@ -357,14 +357,14 @@
           }
         },
         "seeds": {
-          "note": "seed index looks incomplete (index covers only 6 flavours); the listed images are real but there may be more",
+          "note": "seed index looks incomplete (index covers only 7 flavours); the listed images are real but there may be more",
           "provenance": {
             "cache": "cached",
-            "checked_at": "2026-09-30T00:17:03Z",
+            "checked_at": "2026-09-30T05:52:36Z",
             "duration_ms": 0,
             "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
             "method": "http_get",
-            "raw_ref": "sha256:1534d11925564d6a1e40f7efe831bb3df0784054a4c72cd8827cd000f397043c",
+            "raw_ref": "sha256:cb7d9b4f191deaa1074c4ece588bf4fb768c17ebb321f962880f048bf3e9876d",
             "raw_truncated": false,
             "source_id": "seeds"
           },
@@ -489,14 +489,14 @@
       }
     ],
     "release_context": {
-      "note": "schedule page unavailable; dates approximated as release minus 8 weeks, which has been observed to be up to a week early",
+      "note": null,
       "provenance": {
-        "cache": "none",
-        "checked_at": "2026-09-30T00:16:51Z",
+        "cache": "cached",
+        "checked_at": "2026-09-30T05:52:24Z",
         "duration_ms": 0,
         "locator": "https://documentation.ubuntu.com/release-notes/26.10/schedule/",
-        "method": "computed",
-        "raw_ref": null,
+        "method": "http_get",
+        "raw_ref": "sha256:e8753ae7b2b4c30ac408d551e72fbab5af9dde2f31312751195c5042909f2849",
         "raw_truncated": false,
         "source_id": "calendar.schedule"
       },
@@ -505,20 +505,84 @@
         "days_bucket": "28-15",
         "days_since_feature_freeze": 41,
         "days_to_release": 15,
-        "derivation": "approximate",
+        "derivation": "schedule-page",
         "feature_freeze": "2026-08-20",
         "freeze_window_elapsed_pct": 73,
         "milestones": [
           {
+            "date": "2026-04-30",
+            "name": "Toolchain Uploaded"
+          },
+          {
+            "date": "2026-07-02",
+            "name": "Ubuntu Testing Week (optional)"
+          },
+          {
+            "date": "2026-08-06",
+            "name": "Expected Glibc 2.44 merge"
+          },
+          {
+            "date": "2026-08-13",
+            "name": "Expected LLVM default transition"
+          },
+          {
+            "date": "2026-08-20",
+            "name": "Debian Import Freeze"
+          },
+          {
             "date": "2026-08-20",
             "name": "Feature Freeze"
+          },
+          {
+            "date": "2026-09-10",
+            "name": "UI Freeze"
+          },
+          {
+            "date": "2026-09-17",
+            "name": "Documentation String Freeze"
+          },
+          {
+            "date": "2026-09-17",
+            "name": "Kernel Feature Freeze"
+          },
+          {
+            "date": "2026-09-21",
+            "name": "Beta Freeze"
+          },
+          {
+            "date": "2026-09-21",
+            "name": "Hardware Enablement Freeze"
+          },
+          {
+            "date": "2026-09-24",
+            "name": "Beta"
+          },
+          {
+            "date": "2026-10-01",
+            "name": "Kernel Freeze"
+          },
+          {
+            "date": "2026-10-01",
+            "name": "Non Language Pack Translation Deadline"
+          },
+          {
+            "date": "2026-10-08",
+            "name": "Final Freeze"
+          },
+          {
+            "date": "2026-10-08",
+            "name": "Language Pack Translation Deadline"
+          },
+          {
+            "date": "2026-10-08",
+            "name": "Release Candidate"
           },
           {
             "date": "2026-10-15",
             "name": "Final Release"
           }
         ],
-        "phase": "FEATURE_FREEZE",
+        "phase": "BETA",
         "release_date": "2026-10-15",
         "release_type": "INTERIM",
         "series": "stonking",
@@ -544,13 +608,8 @@
     },
     "unavailable": [
       {
-        "impact": "cannot tell how late in the freeze this request is",
-        "reason": "calendar.schedule: documentation.ubuntu.com rate-limited us",
-        "source_id": "calendar.schedule"
-      },
-      {
         "impact": "cannot tell which Ubuntu images ship this package",
-        "reason": "seed index incomplete: index covers only 6 flavours",
+        "reason": "seed index incomplete: index covers only 7 flavours",
         "source_id": "seeds"
       }
     ]
@@ -563,17 +622,17 @@
     "left_queue_at": null
   },
   "provenance": {
-    "generated_at": "2026-09-30T00:17:15Z",
+    "generated_at": "2026-09-30T05:52:46Z",
     "harness": null,
     "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
     "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
     "policy_version": "1.0.0",
-    "review_key": "sha256:e13224fb4e02d3aa4747ef12197f729040e0bb4a34c82413f3cc937e5a388c31",
+    "review_key": "sha256:2e82dfc87c49fdc37f65da2713c6a9d3df7df86114706116943ba02ad8add1d2",
     "risk_algorithm_version": "risk/1.2.0",
-    "run_id": "run-20260930T001627Z",
+    "run_id": "run-20260930T055213Z",
     "tool_version": "0.1.0"
   },
-  "record_id": "2168782/882f132516bc8c09",
+  "record_id": "2168782/08c4f187bafb63b8",
   "risk": {
     "algorithm_version": "risk/1.2.0",
     "band": "HIGH",
@@ -584,8 +643,8 @@
         ],
         "max_points": 20,
         "name": "release_posture",
-        "points": 7,
-        "rationale": "interim release, past feature freeze, 15 days to release, 73% through the freeze window"
+        "points": 15,
+        "rationale": "interim release, past beta, 15 days to release, 73% through the freeze window"
       },
       {
         "evidence_refs": [
@@ -633,7 +692,7 @@
         "rationale": "no PPA, build log or test results are linked from the bug"
       }
     ],
-    "confidence_ceiling": "LOW",
+    "confidence_ceiling": "MEDIUM",
     "decision_floor": "NEEDS_INFORMATION",
     "gates": [
       {
@@ -705,11 +764,11 @@
           "/evidence/unavailable"
         ],
         "id": "evidence_unavailable",
-        "rationale": "could not consult calendar.schedule, seeds, so this assessment rests on incomplete evidence",
+        "rationale": "could not consult seeds, so this assessment rests on incomplete evidence",
         "triggered": true
       }
     ],
-    "score": 61
+    "score": 69
   },
   "schema_version": "1.0.0",
   "status": "EVIDENCE_ONLY"

@@ -56,8 +56,8 @@
           "note": "migraphx has no published source in resolute",
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-09-29T20:38:43Z",
-            "duration_ms": 255,
+            "checked_at": "2026-09-30T05:52:22Z",
+            "duration_ms": 231,
             "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=migraphx&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fresolute&status=Published&order_by_date=true",
             "method": "http_get",
             "raw_ref": "sha256:aeccab7ba3548115eac64a023c8f60fa448132b168d09e179f15732ea44e50f7",
@@ -78,7 +78,7 @@
           "note": "migraphx is not published in resolute",
           "provenance": {
             "cache": "none",
-            "checked_at": "2026-09-29T20:38:43Z",
+            "checked_at": "2026-09-30T05:52:22Z",
             "duration_ms": 0,
             "locator": "migraphx",
             "method": "computed",
@@ -94,7 +94,7 @@
           "note": "migraphx is not published in resolute",
           "provenance": {
             "cache": "none",
-            "checked_at": "2026-09-29T20:38:43Z",
+            "checked_at": "2026-09-30T05:52:22Z",
             "duration_ms": 0,
             "locator": "migraphx",
             "method": "computed",
@@ -109,11 +109,11 @@
           "note": "none of migraphx appear in the seed index, but the index looks incomplete (index covers only 7 flavours), so this is not evidence that the package is unseeded",
           "provenance": {
             "cache": "cached",
-            "checked_at": "2026-09-29T20:38:43Z",
+            "checked_at": "2026-09-30T05:52:22Z",
             "duration_ms": 0,
             "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
             "method": "http_get",
-            "raw_ref": "sha256:9322993ede427c5af15228a405725a3b13ce07af2772b48732bcd5e634e1a5b3",
+            "raw_ref": "sha256:cb7d9b4f191deaa1074c4ece588bf4fb768c17ebb321f962880f048bf3e9876d",
             "raw_truncated": false,
             "source_id": "seeds"
           },
@@ -126,8 +126,8 @@
       "note": null,
       "provenance": {
         "cache": "fresh",
-        "checked_at": "2026-09-29T20:38:43Z",
-        "duration_ms": 141,
+        "checked_at": "2026-09-30T05:52:22Z",
+        "duration_ms": 16,
         "locator": "https://documentation.ubuntu.com/release-notes/26.04/schedule/",
         "method": "http_get",
         "raw_ref": "sha256:792034c456266b44be83364058df5d0ebd7c08d075ed7b1fd466992be698b307",
@@ -137,8 +137,8 @@
       "status": "OK",
       "value": {
         "days_bucket": "post-release",
-        "days_since_feature_freeze": 222,
-        "days_to_release": -159,
+        "days_since_feature_freeze": 223,
+        "days_to_release": -160,
         "derivation": "schedule-page",
         "feature_freeze": "2026-02-19",
         "freeze_window_elapsed_pct": 100,
@@ -312,14 +312,14 @@
     "left_queue_at": null
   },
   "provenance": {
-    "generated_at": "2026-09-29T20:38:43Z",
+    "generated_at": "2026-09-30T05:52:22Z",
     "harness": null,
     "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
     "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
     "policy_version": "1.0.0",
     "review_key": "sha256:2aa808cbf489458979edd9a440f154213379a375d4ef26ae0f724fe97400e4b2",
     "risk_algorithm_version": "risk/1.2.0",
-    "run_id": "run-20260929T203833Z",
+    "run_id": "run-20260930T055213Z",
     "tool_version": "0.1.0"
   },
   "record_id": "2168849/4ff086b038b56d1f",
@@ -334,7 +334,7 @@
         "max_points": 20,
         "name": "release_posture",
         "points": 20,
-        "rationale": "LTS release, past final release, -159 days to release, 100% through the freeze window"
+        "rationale": "LTS release, past final release, -160 days to release, 100% through the freeze window"
       },
       {
         "evidence_refs": [

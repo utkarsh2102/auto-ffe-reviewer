@@ -3,17 +3,17 @@
     {
       "confidence": null,
       "decision": null,
-      "fingerprint": "sha256:2efc980a804165d957d330b3b5ba784d86d208bb160f229de98954cb5e27addb",
-      "generated_at": "2026-09-29T20:38:41Z",
-      "risk_score": 58,
+      "fingerprint": "sha256:75d60d096ca5a49edee796ee351a553ee5d0fb27648afb2449c46cc9737c8cb3",
+      "generated_at": "2026-09-30T00:16:39Z",
+      "risk_score": 50,
       "status": "EVIDENCE_ONLY"
     },
     {
       "confidence": null,
       "decision": null,
-      "fingerprint": "sha256:75d60d096ca5a49edee796ee351a553ee5d0fb27648afb2449c46cc9737c8cb3",
-      "generated_at": "2026-09-30T00:16:39Z",
-      "risk_score": 50,
+      "fingerprint": "sha256:2efc980a804165d957d330b3b5ba784d86d208bb160f229de98954cb5e27addb",
+      "generated_at": "2026-09-30T05:52:20Z",
+      "risk_score": 58,
       "status": "EVIDENCE_ONLY"
     }
   ],
@@ -60,7 +60,7 @@
         "title": "FFe: Sync rtl-sdr 2.0.3-1 from Debian for RTL-SDR Blog V4L hardware support",
         "url": "https://bugs.launchpad.net/bugs/2168881"
       },
-      "fingerprint": "sha256:75d60d096ca5a49edee796ee351a553ee5d0fb27648afb2449c46cc9737c8cb3",
+      "fingerprint": "sha256:2efc980a804165d957d330b3b5ba784d86d208bb160f229de98954cb5e27addb",
       "flavours": {
         "ack_required_from": [],
         "acks": [],
@@ -76,8 +76,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-30T00:16:37Z",
-              "duration_ms": 333,
+              "checked_at": "2026-09-30T05:52:18Z",
+              "duration_ms": 301,
               "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=rtl-sdr&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
               "method": "http_get",
               "raw_ref": "sha256:d0b5190e7903e37ca034f42134d518928063587a72ce82a4c2a22dffec8d21b0",
@@ -102,8 +102,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-30T00:16:39Z",
-              "duration_ms": 534,
+              "checked_at": "2026-09-30T05:52:20Z",
+              "duration_ms": 116,
               "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:rtl-sdr",
               "method": "http_get",
               "raw_ref": "sha256:5042b9faf9fb309ebf6b46a14f6144c816769c4b45fa05516a25469de6c243e0",
@@ -140,8 +140,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-30T00:16:39Z",
-              "duration_ms": 567,
+              "checked_at": "2026-09-30T05:52:20Z",
+              "duration_ms": 129,
               "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:rtl-sdr",
               "method": "http_get",
               "raw_ref": "sha256:ac68e7466162f37ea5f6be8f174306f2823e8ac57eb91e577514d489e48da01f",
@@ -176,14 +176,14 @@
             }
           },
           "seeds": {
-            "note": "none of librtlsdr-dev, librtlsdr0, rtl-sdr appear in the seed index, but the index looks incomplete (index covers only 6 flavours), so this is not evidence that the package is unseeded",
+            "note": "none of librtlsdr-dev, librtlsdr0, rtl-sdr appear in the seed index, but the index looks incomplete (index covers only 7 flavours), so this is not evidence that the package is unseeded",
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-30T00:16:38Z",
-              "duration_ms": 613,
+              "checked_at": "2026-09-30T05:52:19Z",
+              "duration_ms": 496,
               "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
               "method": "http_get",
-              "raw_ref": "sha256:1534d11925564d6a1e40f7efe831bb3df0784054a4c72cd8827cd000f397043c",
+              "raw_ref": "sha256:cb7d9b4f191deaa1074c4ece588bf4fb768c17ebb321f962880f048bf3e9876d",
               "raw_truncated": false,
               "source_id": "seeds"
             },
@@ -193,14 +193,14 @@
         }
       ],
       "release_context": {
-        "note": "schedule page unavailable; dates approximated as release minus 8 weeks, which has been observed to be up to a week early",
+        "note": null,
         "provenance": {
-          "cache": "none",
-          "checked_at": "2026-09-30T00:16:36Z",
-          "duration_ms": 0,
+          "cache": "fresh",
+          "checked_at": "2026-09-30T05:52:18Z",
+          "duration_ms": 230,
           "locator": "https://documentation.ubuntu.com/release-notes/26.10/schedule/",
-          "method": "computed",
-          "raw_ref": null,
+          "method": "http_get",
+          "raw_ref": "sha256:e8753ae7b2b4c30ac408d551e72fbab5af9dde2f31312751195c5042909f2849",
           "raw_truncated": false,
           "source_id": "calendar.schedule"
         },
@@ -209,20 +209,84 @@
           "days_bucket": "28-15",
           "days_since_feature_freeze": 41,
           "days_to_release": 15,
-          "derivation": "approximate",
+          "derivation": "schedule-page",
           "feature_freeze": "2026-08-20",
           "freeze_window_elapsed_pct": 73,
           "milestones": [
             {
+              "date": "2026-04-30",
+              "name": "Toolchain Uploaded"
+            },
+            {
+              "date": "2026-07-02",
+              "name": "Ubuntu Testing Week (optional)"
+            },
+            {
+              "date": "2026-08-06",
+              "name": "Expected Glibc 2.44 merge"
+            },
+            {
+              "date": "2026-08-13",
+              "name": "Expected LLVM default transition"
+            },
+            {
+              "date": "2026-08-20",
+              "name": "Debian Import Freeze"
+            },
+            {
               "date": "2026-08-20",
               "name": "Feature Freeze"
+            },
+            {
+              "date": "2026-09-10",
+              "name": "UI Freeze"
+            },
+            {
+              "date": "2026-09-17",
+              "name": "Documentation String Freeze"
+            },
+            {
+              "date": "2026-09-17",
+              "name": "Kernel Feature Freeze"
+            },
+            {
+              "date": "2026-09-21",
+              "name": "Beta Freeze"
+            },
+            {
+              "date": "2026-09-21",
+              "name": "Hardware Enablement Freeze"
+            },
+            {
+              "date": "2026-09-24",
+              "name": "Beta"
+            },
+            {
+              "date": "2026-10-01",
+              "name": "Kernel Freeze"
+            },
+            {
+              "date": "2026-10-01",
+              "name": "Non Language Pack Translation Deadline"
+            },
+            {
+              "date": "2026-10-08",
+              "name": "Final Freeze"
+            },
+            {
+              "date": "2026-10-08",
+              "name": "Language Pack Translation Deadline"
+            },
+            {
+              "date": "2026-10-08",
+              "name": "Release Candidate"
             },
             {
               "date": "2026-10-15",
               "name": "Final Release"
             }
           ],
-          "phase": "FEATURE_FREEZE",
+          "phase": "BETA",
           "release_date": "2026-10-15",
           "release_type": "INTERIM",
           "series": "stonking",
@@ -248,13 +312,8 @@
       },
       "unavailable": [
         {
-          "impact": "cannot tell how late in the freeze this request is",
-          "reason": "calendar.schedule: documentation.ubuntu.com rate-limited us",
-          "source_id": "calendar.schedule"
-        },
-        {
           "impact": "cannot tell which Ubuntu images ship this package",
-          "reason": "seed index incomplete: index covers only 6 flavours",
+          "reason": "seed index incomplete: index covers only 7 flavours",
           "source_id": "seeds"
         }
       ]
@@ -267,17 +326,17 @@
       "left_queue_at": null
     },
     "provenance": {
-      "generated_at": "2026-09-30T00:16:39Z",
+      "generated_at": "2026-09-30T05:52:20Z",
       "harness": null,
       "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
       "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
       "policy_version": "1.0.0",
-      "review_key": "sha256:cf51b00dd07db95b6e39b212f5ddf222c931d7a947e49a625fef1ec208d8b2e7",
+      "review_key": "sha256:0c6c6a44dc44e9ae4080248c4a95e93786f491fb1ee3f30c285c5c89b48b73aa",
       "risk_algorithm_version": "risk/1.2.0",
-      "run_id": "run-20260930T001627Z",
+      "run_id": "run-20260930T055213Z",
       "tool_version": "0.1.0"
     },
-    "record_id": "2168881/75d60d096ca5a49e",
+    "record_id": "2168881/2efc980a804165d9",
     "risk": {
       "algorithm_version": "risk/1.2.0",
       "band": "HIGH",
@@ -288,8 +347,8 @@
           ],
           "max_points": 20,
           "name": "release_posture",
-          "points": 7,
-          "rationale": "interim release, past feature freeze, 15 days to release, 73% through the freeze window"
+          "points": 15,
+          "rationale": "interim release, past beta, 15 days to release, 73% through the freeze window"
         },
         {
           "evidence_refs": [
@@ -337,7 +396,7 @@
           "rationale": "no PPA, build log or test results are linked from the bug"
         }
       ],
-      "confidence_ceiling": "LOW",
+      "confidence_ceiling": "MEDIUM",
       "decision_floor": null,
       "gates": [
         {
@@ -409,11 +468,11 @@
             "/evidence/unavailable"
           ],
           "id": "evidence_unavailable",
-          "rationale": "could not consult calendar.schedule, seeds, so this assessment rests on incomplete evidence",
+          "rationale": "could not consult seeds, so this assessment rests on incomplete evidence",
           "triggered": true
         }
       ],
-      "score": 50
+      "score": 58
     },
     "schema_version": "1.0.0",
     "status": "EVIDENCE_ONLY"

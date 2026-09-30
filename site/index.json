@@ -2,6 +2,46 @@
   "bugs": [
     {
       "ack_required_from": [],
+      "bug_id": 2168782,
+      "build_rdepends": 23,
+      "confidence": null,
+      "days_to_release": 15,
+      "decision": null,
+      "decision_floor": "NEEDS_INFORMATION",
+      "ffe_kind": "feature-change",
+      "flags": [],
+      "flavour_impact": "MULTI_FLAVOUR",
+      "has_assessment": false,
+      "injection_signals": 0,
+      "is_core": false,
+      "missing_information": [],
+      "packages": [
+        "llvm-toolchain-22"
+      ],
+      "phase": "BETA",
+      "rdepends": 97,
+      "release_type": "INTERIM",
+      "reporter": "karljs",
+      "reviewed_at": "2026-09-30T05:52:46Z",
+      "risk_band": "HIGH",
+      "risk_score": 69,
+      "seeded": [
+        "kubuntu",
+        "ubuntu-budgie"
+      ],
+      "series": "stonking",
+      "status": "EVIDENCE_ONLY",
+      "summary": null,
+      "testing_corroborated": false,
+      "title": "[FFE] Please add llvm-toolchain-23 to Stonking",
+      "unavailable": [
+        "seeds"
+      ],
+      "url": "https://bugs.launchpad.net/bugs/2168782",
+      "version": "26.10"
+    },
+    {
+      "ack_required_from": [],
       "bug_id": 2168849,
       "build_rdepends": 0,
       "confidence": null,
@@ -22,7 +62,7 @@
       "rdepends": 0,
       "release_type": "LTS",
       "reporter": "igorluppi",
-      "reviewed_at": "2026-09-30T00:16:45Z",
+      "reviewed_at": "2026-09-30T05:52:22Z",
       "risk_band": "HIGH",
       "risk_score": 68,
       "seeded": null,
@@ -32,52 +72,10 @@
       "testing_corroborated": false,
       "title": "FFe: migraphx - new package, first successful build at 10.0 (Ubuntu, amd64-only, joined the rocm packageset after LP: #2164669 was filed)",
       "unavailable": [
-        "calendar.schedule",
         "seeds"
       ],
       "url": "https://bugs.launchpad.net/bugs/2168849",
       "version": "26.04"
-    },
-    {
-      "ack_required_from": [],
-      "bug_id": 2168782,
-      "build_rdepends": 23,
-      "confidence": null,
-      "days_to_release": 15,
-      "decision": null,
-      "decision_floor": "NEEDS_INFORMATION",
-      "ffe_kind": "feature-change",
-      "flags": [],
-      "flavour_impact": "MULTI_FLAVOUR",
-      "has_assessment": false,
-      "injection_signals": 0,
-      "is_core": false,
-      "missing_information": [],
-      "packages": [
-        "llvm-toolchain-22"
-      ],
-      "phase": "FEATURE_FREEZE",
-      "rdepends": 97,
-      "release_type": "INTERIM",
-      "reporter": "karljs",
-      "reviewed_at": "2026-09-30T00:17:15Z",
-      "risk_band": "HIGH",
-      "risk_score": 61,
-      "seeded": [
-        "kubuntu",
-        "ubuntu-budgie"
-      ],
-      "series": "stonking",
-      "status": "EVIDENCE_ONLY",
-      "summary": null,
-      "testing_corroborated": false,
-      "title": "[FFE] Please add llvm-toolchain-23 to Stonking",
-      "unavailable": [
-        "calendar.schedule",
-        "seeds"
-      ],
-      "url": "https://bugs.launchpad.net/bugs/2168782",
-      "version": "26.10"
     },
     {
       "ack_required_from": [],
@@ -97,13 +95,13 @@
       "packages": [
         "rtl-sdr"
       ],
-      "phase": "FEATURE_FREEZE",
+      "phase": "BETA",
       "rdepends": 16,
       "release_type": "INTERIM",
       "reporter": "asciiwolf",
-      "reviewed_at": "2026-09-30T00:16:39Z",
+      "reviewed_at": "2026-09-30T05:52:20Z",
       "risk_band": "HIGH",
-      "risk_score": 50,
+      "risk_score": 58,
       "seeded": null,
       "series": "stonking",
       "status": "EVIDENCE_ONLY",
@@ -111,7 +109,6 @@
       "testing_corroborated": false,
       "title": "FFe: Sync rtl-sdr 2.0.3-1 from Debian for RTL-SDR Blog V4L hardware support",
       "unavailable": [
-        "calendar.schedule",
         "seeds"
       ],
       "url": "https://bugs.launchpad.net/bugs/2168881",
