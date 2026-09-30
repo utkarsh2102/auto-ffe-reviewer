@@ -1,15 +1,53 @@
 {
-  "bugs": [],
+  "bugs": [
+    {
+      "ack_required_from": [],
+      "bug_id": 2153838,
+      "build_rdepends": 0,
+      "confidence": null,
+      "days_to_release": 15,
+      "decision": null,
+      "decision_floor": null,
+      "ffe_kind": "seed-change",
+      "flags": [],
+      "flavour_impact": "UNSEEDED",
+      "has_assessment": false,
+      "injection_signals": 0,
+      "is_core": false,
+      "missing_information": [],
+      "packages": [
+        "cwdaemon"
+      ],
+      "phase": "BETA",
+      "rdepends": 1,
+      "release_type": "INTERIM",
+      "reporter": "enr0n",
+      "reviewed_at": "2026-09-30T22:31:48Z",
+      "risk_band": "HIGH",
+      "risk_score": 51,
+      "seeded": null,
+      "series": "stonking",
+      "status": "EVIDENCE_ONLY",
+      "summary": null,
+      "testing_corroborated": true,
+      "title": "FFe: cwdaemon: System V script needs to be migrated to systemd service",
+      "unavailable": [
+        "seeds"
+      ],
+      "url": "https://bugs.launchpad.net/bugs/2153838",
+      "version": "26.10"
+    }
+  ],
   "counts": {
     "approve": 0,
     "awaiting_flavour_ack": 0,
-    "evidence_incomplete": 0,
-    "high_risk": 0,
-    "needs_attention": 0,
+    "evidence_incomplete": 1,
+    "high_risk": 1,
+    "needs_attention": 1,
     "needs_information": 0,
-    "no_recommendation": 0,
+    "no_recommendation": 1,
     "no_testing_evidence": 0,
-    "open": 0,
+    "open": 1,
     "reject": 0
   },
   "version": 1

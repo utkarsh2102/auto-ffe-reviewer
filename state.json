@@ -18,6 +18,24 @@
       "review_key": "sha256:6836f361db291d03ef6b79fe92c68114f0c31db47841f7635a20649e8a395013",
       "status": "Won't Fix"
     },
+    "2153838": {
+      "bug_id": 2153838,
+      "confidence": null,
+      "date_last_message": "2026-09-28T16:15:25.338858+00:00",
+      "date_last_updated": "2026-09-28T16:15:25.988129+00:00",
+      "decision": null,
+      "discovered_via": "release-team-queue",
+      "fingerprint": "sha256:9cdc21338852d02f80b8c2edd45e13c38cfc7b5123e4196916d5ea8a694c6029",
+      "in_queue": true,
+      "last_evidence_at": "2026-09-30T22:31:48Z",
+      "last_review_at": "",
+      "last_seen_at": "2026-09-30T22:31:45Z",
+      "llm_runs_date": "",
+      "llm_runs_today": 0,
+      "message_count": 4,
+      "review_key": "sha256:a2d51ab4b95e9ffdcca2c9cb7d32f1b67b494d27b1d6786bd8cbf25525f6940f",
+      "status": "New"
+    },
     "2167149": {
       "bug_id": 2167149,
       "confidence": null,
@@ -235,6 +253,6 @@
       "status": "Fix Released"
     }
   },
-  "updated_at": "2026-09-30T18:06:10Z",
+  "updated_at": "2026-09-30T22:31:48Z",
   "version": 1
 }
