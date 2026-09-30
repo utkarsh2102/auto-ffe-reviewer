@@ -1,0 +1,793 @@
+{
+  "assessment": null,
+  "evidence": {
+    "bug": {
+      "comments": [
+        {
+          "author": "karljs",
+          "author_is_release_team": false,
+          "content": "## FFE ##\n\nI'm filing this under llvm 22 due to a launchpad issue, but it applies to llvm 23\n\n[Rationale]\n\n* Having LLVM 23 in Stonking would dramatically simplify some ongoing work around the ROCm stack, and related packages. See, for example, the comments in this bug: https://bugs.launchpad.net/ubuntu/+source/ucc/+bug/2166379\n\n* Having the latest LLVM directly available in the archive is always a good thing.\n\n[ Scope ]\n\n* The large majority of the package is entirely new binary packages, and technically do not require an FFE.\n\n* The remaining packages which do require the FFE are libc++1, libc++abi1, libomp5, and llvm-libunwind1. These packages are backwards compatible and having new versions of them means we get fixes and improvements directly from upstream.\n\n* This will not change the default version of LLVM in Stonking, which remains 22\n\n* > seeded-in-ubuntu llvm-toolchain-23\n  The source package 'llvm-toolchain-23' status Superseded not in (Pending,Published) in stonking for pockets Release, Security, Updates, Proposed with status in Pending, Published\n\n[ Regression Potential ]\n\n* Regressions in the four common packages, listed above, are possible. However, if they introduce regressions, those will be directly caused by the upstream code. Since 23 is the currently maintained stable version, any regressions are likely to be fixed more actively by upstream directly.\n\n[ Testing ]\n\n* The autopkgtests for LLVM are thorough, and running them for this package, and for llvm-toolchain-22 will help us identify any regressions.",
+          "content_sha": "b306fd5e6f0d05101b89f0c976e06d9e8347baa3b211cd75021945bbec98f166",
+          "date_created": "2026-09-28T17:02:34.460726+00:00",
+          "index": 0,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/llvm-toolchain-22/+bug/2168782/comments/0"
+        },
+        {
+          "author": "ginggs",
+          "author_is_release_team": true,
+          "content": "The affected binary packages; libc++1, libc++abi1, libomp5, and llvm-libunwind1 are in universe, and don't seen to have many reverse-dependencies outside of other llvm packages.\n\n$ apt-cache show libc++1 libc++abi1 libomp5 llvm-libunwind1 | grep Filename\nFilename: pool/universe/l/llvm-toolchain-22/libc++1_22.1.6-1ubuntu4_amd64.deb\nFilename: pool/universe/l/llvm-toolchain-22/libc++abi1_22.1.6-1ubuntu4_amd64.deb\nFilename: pool/universe/l/llvm-toolchain-22/libomp5_22.1.6-1ubuntu4_amd64.deb\nFilename: pool/universe/l/llvm-toolchain-22/llvm-libunwind1_22.1.6-1ubuntu4_amd64.deb",
+          "content_sha": "8f6afe192483c8e62eefa659ed13e7557c79e1b1569e0141ced427c1d5ad286d",
+          "date_created": "2026-09-29T10:10:58.783582+00:00",
+          "index": 1,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/llvm-toolchain-22/+bug/2168782/comments/1"
+        },
+        {
+          "author": "ginggs",
+          "author_is_release_team": true,
+          "content": "$ reverse-depends libc++1\nReverse-Depends\n===============\n* google-android-extras-google-auto-installer [amd64 amd64v3]\n* libc++-19-dev\n* libc++-20-dev\n* libc++-21-dev\n* libc++-22-dev\n\nPackages without architectures listed are reverse-dependencies in: amd64, amd64v3, arm64, armhf, i386, ppc64el, riscv64, s390x",
+          "content_sha": "7028796da846bf03e1cab8bed82c27425479ee4090232bf7ad5ef80b7fbc49d8",
+          "date_created": "2026-09-29T10:12:11.297005+00:00",
+          "index": 2,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/llvm-toolchain-22/+bug/2168782/comments/2"
+        },
+        {
+          "author": "ginggs",
+          "author_is_release_team": true,
+          "content": "$ reverse-depends libc++abi1\nReverse-Depends\n===============\n* google-android-extras-google-auto-installer [amd64 amd64v3]\n* libc++1\n* libc++abi-19-dev\n* libc++abi-20-dev\n* libc++abi-21-dev\n* libc++abi-22-dev\n\nPackages without architectures listed are reverse-dependencies in: amd64, amd64v3, arm64, armhf, i386, ppc64el, riscv64, s390x\n",
+          "content_sha": "f4bbeec828a505d61ed45c9102119eb4a505f124607d3bc732952184fa81d28e",
+          "date_created": "2026-09-29T10:12:25.968738+00:00",
+          "index": 3,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/llvm-toolchain-22/+bug/2168782/comments/3"
+        },
+        {
+          "author": "ginggs",
+          "author_is_release_team": true,
+          "content": "$ reverse-depends libomp5\nReverse-Depends\n===============\n* hipsparselt-tests [amd64 amd64v3]\n* libeztrace0 [amd64 amd64v3 arm64 ppc64el riscv64]\n* libhipblaslt1-bench [amd64 amd64v3]\n* libhipblaslt1-tests [amd64 amd64v3]\n* liboffload-19 [amd64 amd64v3 arm64 ppc64el]\n* liboffload-19-dev [amd64 amd64v3 arm64 ppc64el]\n* liboffload-20 [amd64 amd64v3 arm64 ppc64el]\n* liboffload-20-dev [amd64 amd64v3 arm64 ppc64el]\n* liboffload-21 [amd64 amd64v3 arm64 ppc64el riscv64]\n* liboffload-21-dev [amd64 amd64v3 arm64 ppc64el riscv64]\n* liboffload-22 [amd64 amd64v3 arm64 ppc64el riscv64]\n* liboffload-22-dev [amd64 amd64v3 arm64 ppc64el riscv64]\n* libomp-19-dev\n* libomp-20-dev\n* libomp-21-dev\n* libomp-22-dev\n* librocwmma-tests [amd64 amd64v3]\n* librocwmma-tests-validate [amd64 amd64v3]\n* starpu-contrib-examples [amd64 amd64v3 arm64 ppc64el]\n* starpu-examples [amd64 amd64v3 arm64 armhf ppc64el riscv64]\n\nPackages without architectures listed are reverse-dependencies in: amd64, amd64v3, arm64, armhf, i386, ppc64el, riscv64\n",
+          "content_sha": "2232001aeb24c209a0afef8cb353472befb20139ccc404723cb0e8b0d42c5f7c",
+          "date_created": "2026-09-29T10:12:46.473271+00:00",
+          "index": 4,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/llvm-toolchain-22/+bug/2168782/comments/4"
+        },
+        {
+          "author": "ginggs",
+          "author_is_release_team": true,
+          "content": "$ reverse-depends llvm-libunwind1\nReverse-Depends\n===============\n* libunwind-19-dev [amd64 amd64v3 arm64 armhf i386 ppc64el riscv64]\n* libunwind-20-dev [amd64 amd64v3 arm64 armhf i386 ppc64el riscv64]\n* libunwind-21-dev\n* libunwind-22-dev\n\nPackages without architectures listed are reverse-dependencies in: amd64, amd64v3, arm64, armhf, i386, ppc64el, riscv64, s390x\n",
+          "content_sha": "788b58238f9846caefa3db29023fc4f0adc01d18cb7d30809bc5c4e0b643294c",
+          "date_created": "2026-09-29T10:13:00.793085+00:00",
+          "index": 5,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/llvm-toolchain-22/+bug/2168782/comments/5"
+        },
+        {
+          "author": "skia",
+          "author_is_release_team": true,
+          "content": "\n❯ seeded-in-ubuntu -b libc++1\nlibc++1 is seeded for stonking in:\n  edubuntu: extra\n  kubuntu: extra\n  lubuntu: extra\n  ubuntu-budgie: supported\n  ubuntu-core: extra\n  ubuntu-mate: extra\n  ubuntu-unity: extra\n  ubuntu: extra\n  ubuntucinnamon: extra\n  ubuntukylin: extra\n  ubuntustudio: extra\n  xubuntu: extra\n\n❯ seeded-in-ubuntu -b libc++abi1\nlibc++abi1 is seeded for stonking in:\n  ubuntu-budgie: supported\n\n❯ seeded-in-ubuntu -b libomp5\nlibomp5 is seeded for stonking in:\n  edubuntu: extra\n  kubuntu: extra\n  lubuntu: extra\n  ubuntu-budgie: supported\n  ubuntu-core: extra\n  ubuntu-mate: extra\n  ubuntu-unity: extra\n  ubuntu: extra\n  ubuntucinnamon: extra\n  ubuntukylin: extra\n  ubuntustudio: extra\n  xubuntu: extra\n\n❯ seeded-in-ubuntu -b llvm-libunwind1\nllvm-libunwind1 is seeded for stonking in:\n  edubuntu: extra\n  kubuntu: extra\n  lubuntu: extra\n  ubuntu-budgie: supported\n  ubuntu-core: extra\n  ubuntu-mate: extra\n  ubuntu-unity: extra\n  ubuntu: extra\n  ubuntucinnamon: extra\n  ubuntukylin: extra\n  ubuntustudio: extra\n  xubuntu: extra\n\nNothing here seems to be affecting any image.",
+          "content_sha": "41e06bcf58d69db892126f60a8705a570ecc8a5d1d8e3986450455739080914e",
+          "date_created": "2026-09-29T10:17:30.942941+00:00",
+          "index": 6,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/llvm-toolchain-22/+bug/2168782/comments/6"
+        },
+        {
+          "author": "ginggs",
+          "author_is_release_team": true,
+          "content": "",
+          "content_sha": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "date_created": "2026-09-29T10:17:57.822876+00:00",
+          "index": 7,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/llvm-toolchain-22/+bug/2168782/comments/7"
+        },
+        {
+          "author": "doko",
+          "author_is_release_team": false,
+          "content": "why are these seeded at all? or is the whole source package seeded?",
+          "content_sha": "0e2447981cdf34dd9595af7a4c50b00e54da9edbe901be85088f8c7a386d1b62",
+          "date_created": "2026-09-29T10:19:59.225459+00:00",
+          "index": 8,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/llvm-toolchain-22/+bug/2168782/comments/8"
+        },
+        {
+          "author": "doko",
+          "author_is_release_team": false,
+          "content": "$ ./edit-acl -S stonking -P kubuntu query | grep llvm\nllvm-toolchain-13\n\npackage set information is hopelessly outdated and shouldn't be relied on.\n",
+          "content_sha": "bc13cbfe33f92c4fd3832fa6b92ce41a3dbdfd949f09f519506ddf95b7849f13",
+          "date_created": "2026-09-29T13:17:42.734560+00:00",
+          "index": 9,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/llvm-toolchain-22/+bug/2168782/comments/9"
+        },
+        {
+          "author": "skia",
+          "author_is_release_team": true,
+          "content": "I've no idea why you mention package set. The source of truth for the `seeded-in-ubuntu` version I've used is `germinate`. See LP: #2160240 for all the context on that.\nWe can find a bit more context on why a package would be included in a seed in the germinate output, like in this file: https://static-reports.ubuntu.com/germinate/flavours/kubuntu/stonking/release/extra_kubuntu_stonking_amd64",
+          "content_sha": "854eb65fd521b12b47d16245b241ac5f42e7f178cb97d99b33bfc403d1c5d096",
+          "date_created": "2026-09-29T15:16:34.863092+00:00",
+          "index": 10,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/llvm-toolchain-22/+bug/2168782/comments/10"
+        },
+        {
+          "author": "ginggs",
+          "author_is_release_team": true,
+          "content": "FFe granted, on the condition that this makes it into -proposed before Final Freeze on 2026-10-08.\n",
+          "content_sha": "f37a339903cbe48ba27aef7bdf353adb96c0c4d61115785bdf1af9d7846af376",
+          "date_created": "2026-09-30T11:49:27.351081+00:00",
+          "index": 11,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/llvm-toolchain-22/+bug/2168782/comments/11"
+        }
+      ],
+      "date_created": "2026-09-28T17:02:34.460726+00:00",
+      "date_last_message": "2026-09-30T11:49:27.351081+00:00",
+      "date_last_updated": "2026-09-30T11:49:40.089397+00:00",
+      "description": "## FFE ##\n\nI'm filing this under llvm 22 due to a launchpad issue, but it applies to llvm 23\n\n[Rationale]\n\n* Having LLVM 23 in Stonking would dramatically simplify some ongoing work around the ROCm stack, and related packages. See, for example, the comments in this bug: https://bugs.launchpad.net/ubuntu/+source/ucc/+bug/2166379\n\n* Providing the most recent LLVM in the distro enables users and developers\n  to work with the most recent LLVM version.  It also makes it easier to\n  get new subminor LLVM 23 releases accepted with SRUs.\n\n[ Scope ]\n\n* The large majority of the package is entirely new binary packages, and technically do not require an FFE.\n\n* The remaining packages which do require the FFE are libc++1, libc++abi1, libomp5, and llvm-libunwind1. All these library packages have symbols files,\nonly adding new symbols.  Starting with LLVM 20, there were no issues seen\nwith this approach, and these packages work with older LLVM versions.  libc++1,\nlibc++abi1 and llvm-linunwind1 are not used by other packages, libomp5 is\nused by a handful of packages.\n\n* This will not change the default version of LLVM in Stonking, which remains 22\n\n* > seeded-in-ubuntu llvm-toolchain-23\n  The source package 'llvm-toolchain-23' status Superseded not in (Pending,Published) in stonking for pockets Release, Security, Updates, Proposed with status in Pending, Published\n\n[ Regression Potential ]\n\n* Regressions in the four common binary packages, listed above, are possible.\nThe presence of symbols files should mitigate these concerns.\n\n[ Testing ]\n\n* The autopkgtests for LLVM are thorough, and running them for this package, and for llvm-toolchain-22 will help us identify any regressions.\n\n[ Upload ]\n* Due to build time constraints, upload is planned as a binary copy from \nppa:karljs/ubuntu/llvm-toolchain-23-stonking, once the package is built on all\narchitectures.\n\n* There is another LLVM 22 upload prepared to stop building the four common\n  binary packages then built by LLVM 23.  If that cannot be done in time for\n  the stonking release, the LLVM 22 upload can also be done safely as a SRU.",
+      "description_sha": "75de551450e695696c7610e6b674ea9ae3b57e940f2c16fc29225c820badaedf",
+      "discovered_via": "release-team-queue",
+      "id": 2168782,
+      "message_count": 12,
+      "release_team_subscribed": false,
+      "reporter": "karljs",
+      "subscribers": [
+        "karljs"
+      ],
+      "tags": [],
+      "tasks": [
+        {
+          "assignee": null,
+          "importance": "Undecided",
+          "status": "Triaged",
+          "target": "llvm-toolchain-22 (Ubuntu)"
+        }
+      ],
+      "title": "[FFE] Please add llvm-toolchain-23 to Stonking",
+      "url": "https://bugs.launchpad.net/bugs/2168782"
+    },
+    "fingerprint": "sha256:08c4f187bafb63b8bcad5390aed2ffc8adddb9f1e8fb04f5d6559bc30e8b2f9b",
+    "flavours": {
+      "ack_required_from": [],
+      "acks": [
+        {
+          "author": "doko",
+          "author_in_flavour_team": true,
+          "flavour": "kubuntu",
+          "message_url": "https://bugs.launchpad.net/ubuntu/+source/llvm-toolchain-22/+bug/2168782/comments/8"
+        },
+        {
+          "author": "ginggs",
+          "author_in_flavour_team": true,
+          "flavour": "kubuntu",
+          "message_url": "https://bugs.launchpad.net/ubuntu/+source/llvm-toolchain-22/+bug/2168782/comments/1"
+        },
+        {
+          "author": "skia",
+          "author_in_flavour_team": true,
+          "flavour": "kubuntu",
+          "message_url": "https://bugs.launchpad.net/ubuntu/+source/llvm-toolchain-22/+bug/2168782/comments/6"
+        },
+        {
+          "author": "doko",
+          "author_in_flavour_team": true,
+          "flavour": "ubuntu-budgie",
+          "message_url": "https://bugs.launchpad.net/ubuntu/+source/llvm-toolchain-22/+bug/2168782/comments/8"
+        },
+        {
+          "author": "ginggs",
+          "author_in_flavour_team": true,
+          "flavour": "ubuntu-budgie",
+          "message_url": "https://bugs.launchpad.net/ubuntu/+source/llvm-toolchain-22/+bug/2168782/comments/1"
+        },
+        {
+          "author": "skia",
+          "author_in_flavour_team": true,
+          "flavour": "ubuntu-budgie",
+          "message_url": "https://bugs.launchpad.net/ubuntu/+source/llvm-toolchain-22/+bug/2168782/comments/6"
+        }
+      ],
+      "affected_flavours": [
+        "kubuntu",
+        "ubuntu-budgie"
+      ],
+      "impact": "MULTI_FLAVOUR",
+      "requester_is_flavour_lead": false,
+      "requesting_flavour": null
+    },
+    "injection_signals": [],
+    "packages": [
+      {
+        "archive": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-09-30T12:22:05Z",
+            "duration_ms": 651,
+            "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=llvm-toolchain-22&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
+            "method": "http_get",
+            "raw_ref": "sha256:f6c4d1ca32239ebfbe8362797bd7194e07ae2a8adfc508239f992e7846f0cb7d",
+            "raw_truncated": false,
+            "source_id": "launchpad.archive"
+          },
+          "status": "OK",
+          "value": {
+            "binaries": [
+              "bolt-22",
+              "clang-22",
+              "clang-22-doc",
+              "clang-22-examples",
+              "clang-format-22",
+              "clang-tidy-22",
+              "clang-tools-22",
+              "clangd-22",
+              "flang-22",
+              "libbolt-22-dev",
+              "libc++-22-dev",
+              "libc++-22-dev-wasm32",
+              "libc++1",
+              "libc++abi-22-dev",
+              "libc++abi-22-dev-wasm32",
+              "libc++abi1",
+              "libclang-22-dev",
+              "libclang-common-22-dev",
+              "libclang-cpp22",
+              "libclang-cpp22-dev",
+              "libclang-rt-22-dev",
+              "libclang-rt-22-dev-wasm32",
+              "libclang-rt-22-dev-wasm64",
+              "libclang-rt-22-dev-win",
+              "libclang1-22",
+              "libclc-22",
+              "libclc-22-dev",
+              "libflang-22-dev",
+              "libfuzzer-22-dev",
+              "liblld-22",
+              "liblld-22-dev",
+              "liblldb-22",
+              "liblldb-22-dev",
+              "libllvm22",
+              "libllvmlibc-22-dev",
+              "libmlir-22",
+              "libmlir-22-dev",
+              "liboffload-22",
+              "liboffload-22-dev",
+              "libomp-22-dev",
+              "libomp-22-doc",
+              "libomp5",
+              "libpolly-22-dev",
+              "libunwind-22-dev",
+              "lld-22",
+              "lldb-22",
+              "llvm-22",
+              "llvm-22-dev",
+              "llvm-22-doc",
+              "llvm-22-examples",
+              "llvm-22-linker-tools",
+              "llvm-22-runtime",
+              "llvm-22-tools",
+              "llvm-libunwind1",
+              "mlir-22-tools",
+              "python3-clang-22",
+              "python3-lldb-22"
+            ],
+            "component": "main",
+            "in_archive": true,
+            "pocket": "Proposed",
+            "source": "llvm-toolchain-22",
+            "version": "1:22.1.8-1ubuntu1"
+          }
+        },
+        "build_rdepends": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-09-30T12:22:20Z",
+            "duration_ms": 126,
+            "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:llvm-toolchain-22",
+            "method": "http_get",
+            "raw_ref": "sha256:9f83e8fdfdd427d90964f38371bcf64ae551293a8948a4e668fc4b3b40d49bad",
+            "raw_truncated": false,
+            "source_id": "rdepends.build"
+          },
+          "status": "OK",
+          "value": {
+            "arch": "source",
+            "bucket": "21-100",
+            "kind": "build",
+            "sample": [
+              "amdgcn-tools-22",
+              "eccodes",
+              "fortran-toml",
+              "gasnet",
+              "hipblaslt",
+              "hipify",
+              "hipsparselt",
+              "lace",
+              "lfortran",
+              "linux",
+              "linux-riscv",
+              "llvm-defaults",
+              "llvm-toolchain-19",
+              "llvm-toolchain-20",
+              "llvm-toolchain-21",
+              "opencl-clang-22",
+              "pytorch-rocm",
+              "rocm-llvm",
+              "rocwmma",
+              "rustc-1.96",
+              "rustc-1.97",
+              "spirv-llvm-translator-22",
+              "webkit2gtk"
+            ],
+            "seeded_rdeps": [],
+            "total": 23
+          }
+        },
+        "name": "llvm-toolchain-22",
+        "rdepends": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-09-30T12:22:20Z",
+            "duration_ms": 422,
+            "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:llvm-toolchain-22",
+            "method": "http_get",
+            "raw_ref": "sha256:335c6001cd893ad8ac92cfc40714bbc5662a13292ef25ebbf7dfbd00aab3bdf5",
+            "raw_truncated": false,
+            "source_id": "rdepends.binary"
+          },
+          "status": "OK",
+          "value": {
+            "arch": "any",
+            "bucket": "21-100",
+            "kind": "binary",
+            "sample": [
+              "amdgcn-tools-22",
+              "bpftrace",
+              "ccls",
+              "clang",
+              "clang-format",
+              "clang-tidy",
+              "clang-tools",
+              "clangd",
+              "clazy",
+              "clazy-tests",
+              "doxygen",
+              "doxygen-doxyparse",
+              "flang",
+              "ghdl-llvm",
+              "gnome-builder",
+              "google-android-extras-google-auto-installer",
+              "hipcc",
+              "hipify-clang",
+              "hipsparselt-tests",
+              "ispc",
+              "kdevelop",
+              "lfortran",
+              "libamd-comgr3",
+              "libbolt-dev",
+              "libbpfcc"
+            ],
+            "seeded_rdeps": [],
+            "total": 97
+          }
+        },
+        "seeds": {
+          "note": "seed index looks incomplete (index covers only 7 flavours); the listed images are real but there may be more",
+          "provenance": {
+            "cache": "cached",
+            "checked_at": "2026-09-30T12:22:20Z",
+            "duration_ms": 0,
+            "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
+            "method": "http_get",
+            "raw_ref": "sha256:493b8c3ad4ff1fb19add0141179f0f0d6b5529717d065dc475f879d9ce7ed4ef",
+            "raw_truncated": false,
+            "source_id": "seeds"
+          },
+          "status": "OK",
+          "value": {
+            "binaries_checked": [
+              "bolt-22",
+              "clang-22",
+              "clang-22-doc",
+              "clang-22-examples",
+              "clang-format-22",
+              "clang-tidy-22",
+              "clang-tools-22",
+              "clangd-22",
+              "flang-22",
+              "libbolt-22-dev",
+              "libc++-22-dev",
+              "libc++-22-dev-wasm32",
+              "libc++1",
+              "libc++abi-22-dev",
+              "libc++abi-22-dev-wasm32",
+              "libc++abi1",
+              "libclang-22-dev",
+              "libclang-common-22-dev",
+              "libclang-cpp22",
+              "libclang-cpp22-dev",
+              "libclang-rt-22-dev",
+              "libclang-rt-22-dev-wasm32",
+              "libclang-rt-22-dev-wasm64",
+              "libclang-rt-22-dev-win",
+              "libclang1-22",
+              "libclc-22",
+              "libclc-22-dev",
+              "libflang-22-dev",
+              "libfuzzer-22-dev",
+              "liblld-22",
+              "liblld-22-dev",
+              "liblldb-22",
+              "liblldb-22-dev",
+              "libllvm22",
+              "libllvmlibc-22-dev",
+              "libmlir-22",
+              "libmlir-22-dev",
+              "liboffload-22",
+              "liboffload-22-dev",
+              "libomp-22-dev",
+              "libomp-22-doc",
+              "libomp5",
+              "libpolly-22-dev",
+              "libunwind-22-dev",
+              "lld-22",
+              "lldb-22",
+              "llvm-22",
+              "llvm-22-dev",
+              "llvm-22-doc",
+              "llvm-22-examples",
+              "llvm-22-linker-tools",
+              "llvm-22-runtime",
+              "llvm-22-tools",
+              "llvm-libunwind1",
+              "mlir-22-tools",
+              "python3-clang-22",
+              "python3-lldb-22"
+            ],
+            "binaries_seeded": [
+              "clang-22",
+              "clang-tidy-22",
+              "clang-tools-22",
+              "libbolt-22-dev",
+              "libc++-22-dev",
+              "libc++1",
+              "libc++abi-22-dev",
+              "libc++abi1",
+              "libclang-common-22-dev",
+              "libclang-rt-22-dev",
+              "libclc-22-dev",
+              "libflang-22-dev",
+              "libfuzzer-22-dev",
+              "liblld-22",
+              "liblld-22-dev",
+              "liblldb-22",
+              "liblldb-22-dev",
+              "libllvmlibc-22-dev",
+              "libmlir-22",
+              "libmlir-22-dev",
+              "liboffload-22",
+              "liboffload-22-dev",
+              "libomp-22-dev",
+              "libomp-22-doc",
+              "libomp5",
+              "libpolly-22-dev",
+              "libunwind-22-dev",
+              "lld-22",
+              "lldb-22",
+              "llvm-22",
+              "llvm-22-dev",
+              "llvm-22-doc",
+              "llvm-22-examples",
+              "llvm-22-linker-tools",
+              "llvm-22-runtime",
+              "llvm-22-tools",
+              "llvm-libunwind1",
+              "python3-lldb-22"
+            ],
+            "flavours": [
+              "kubuntu",
+              "ubuntu-budgie"
+            ],
+            "images": [
+              [
+                "kubuntu",
+                "supported"
+              ],
+              [
+                "ubuntu-budgie",
+                "supported"
+              ]
+            ],
+            "is_core": false
+          }
+        }
+      }
+    ],
+    "release_context": {
+      "note": null,
+      "provenance": {
+        "cache": "cached",
+        "checked_at": "2026-09-30T12:22:04Z",
+        "duration_ms": 0,
+        "locator": "https://documentation.ubuntu.com/release-notes/26.10/schedule/",
+        "method": "http_get",
+        "raw_ref": "sha256:e8753ae7b2b4c30ac408d551e72fbab5af9dde2f31312751195c5042909f2849",
+        "raw_truncated": false,
+        "source_id": "calendar.schedule"
+      },
+      "status": "OK",
+      "value": {
+        "days_bucket": "28-15",
+        "days_since_feature_freeze": 41,
+        "days_to_release": 15,
+        "derivation": "schedule-page",
+        "feature_freeze": "2026-08-20",
+        "freeze_window_elapsed_pct": 73,
+        "milestones": [
+          {
+            "date": "2026-04-30",
+            "name": "Toolchain Uploaded"
+          },
+          {
+            "date": "2026-07-02",
+            "name": "Ubuntu Testing Week (optional)"
+          },
+          {
+            "date": "2026-08-06",
+            "name": "Expected Glibc 2.44 merge"
+          },
+          {
+            "date": "2026-08-13",
+            "name": "Expected LLVM default transition"
+          },
+          {
+            "date": "2026-08-20",
+            "name": "Debian Import Freeze"
+          },
+          {
+            "date": "2026-08-20",
+            "name": "Feature Freeze"
+          },
+          {
+            "date": "2026-09-10",
+            "name": "UI Freeze"
+          },
+          {
+            "date": "2026-09-17",
+            "name": "Documentation String Freeze"
+          },
+          {
+            "date": "2026-09-17",
+            "name": "Kernel Feature Freeze"
+          },
+          {
+            "date": "2026-09-21",
+            "name": "Beta Freeze"
+          },
+          {
+            "date": "2026-09-21",
+            "name": "Hardware Enablement Freeze"
+          },
+          {
+            "date": "2026-09-24",
+            "name": "Beta"
+          },
+          {
+            "date": "2026-10-01",
+            "name": "Kernel Freeze"
+          },
+          {
+            "date": "2026-10-01",
+            "name": "Non Language Pack Translation Deadline"
+          },
+          {
+            "date": "2026-10-08",
+            "name": "Final Freeze"
+          },
+          {
+            "date": "2026-10-08",
+            "name": "Language Pack Translation Deadline"
+          },
+          {
+            "date": "2026-10-08",
+            "name": "Release Candidate"
+          },
+          {
+            "date": "2026-10-15",
+            "name": "Final Release"
+          }
+        ],
+        "phase": "BETA",
+        "release_date": "2026-10-15",
+        "release_type": "INTERIM",
+        "series": "stonking",
+        "version": "26.10"
+      }
+    },
+    "subject": {
+      "derivation": "packages:bug-tasks; series:assumed-development-series",
+      "ffe_kind": "feature-change",
+      "packages": [
+        "llvm-toolchain-22"
+      ],
+      "target_series": null
+    },
+    "testing": {
+      "autopkgtest": "ABSENT",
+      "build": "ABSENT",
+      "corroborated": false,
+      "items": [],
+      "ppa": "ABSENT",
+      "test_output": "ABSENT",
+      "unverified_claims": []
+    },
+    "unavailable": [
+      {
+        "impact": "cannot tell which Ubuntu images ship this package",
+        "reason": "seed index incomplete: index covers only 7 flavours",
+        "source_id": "seeds"
+      }
+    ]
+  },
+  "human": {
+    "decided": true,
+    "decision": "APPROVED",
+    "detected_at": "2026-09-30T12:22:04Z",
+    "final_status": "Triaged",
+    "left_queue_at": "2026-09-30T05:52:24Z"
+  },
+  "our_last_assessment": null,
+  "our_last_risk": {
+    "algorithm_version": "risk/1.2.0",
+    "band": "HIGH",
+    "components": [
+      {
+        "evidence_refs": [
+          "/evidence/release_context"
+        ],
+        "max_points": 20,
+        "name": "release_posture",
+        "points": 15,
+        "rationale": "interim release, past beta, 15 days to release, 73% through the freeze window"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/packages"
+        ],
+        "max_points": 25,
+        "name": "seeded_reach",
+        "points": 15,
+        "rationale": "seeded on 2 flavours (kubuntu, ubuntu-budgie), so no single flavour owns the outcome"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/packages"
+        ],
+        "max_points": 25,
+        "name": "dependency_reach",
+        "points": 12,
+        "rationale": "97 reverse dependencies, 23 reverse build-dependencies"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/packages"
+        ],
+        "max_points": 10,
+        "name": "archive_standing",
+        "points": 10,
+        "rationale": "in main or restricted, so it carries a Canonical support commitment"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/subject"
+        ],
+        "max_points": 5,
+        "name": "change_shape",
+        "points": 2,
+        "rationale": "a feature change to an existing package"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/testing"
+        ],
+        "max_points": 15,
+        "name": "unvalidated_change",
+        "points": 15,
+        "rationale": "no PPA, build log or test results are linked from the bug"
+      }
+    ],
+    "confidence_ceiling": "MEDIUM",
+    "decision_floor": "NEEDS_INFORMATION",
+    "gates": [
+      {
+        "effect": "floor_needs_information",
+        "evidence_refs": [
+          "/evidence/subject"
+        ],
+        "id": "no_package_identified",
+        "rationale": "the affected package is identified",
+        "triggered": false
+      },
+      {
+        "effect": "floor_needs_information",
+        "evidence_refs": [
+          "/evidence/testing"
+        ],
+        "id": "no_testing_evidence",
+        "rationale": "nothing in the bug demonstrates the change works: no PPA, build log or test results",
+        "triggered": true
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/flavours"
+        ],
+        "id": "flavour_ack_outstanding",
+        "rationale": "no cross-flavour acknowledgement is outstanding",
+        "triggered": false
+      },
+      {
+        "effect": "floor_needs_information",
+        "evidence_refs": [
+          "/evidence/release_context"
+        ],
+        "id": "after_final_freeze",
+        "rationale": "the request is within the ordinary freeze window",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/release_context"
+        ],
+        "id": "before_feature_freeze",
+        "rationale": "the target release is past Feature Freeze",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/subject"
+        ],
+        "id": "unrecoverable_failure_mode",
+        "rationale": "a regression here would be fixable by an SRU",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/injection"
+        ],
+        "id": "suspicious_bug_text",
+        "rationale": "nothing in the bug text resembles an attempt to steer the reviewer",
+        "triggered": false
+      },
+      {
+        "effect": "cap_confidence",
+        "evidence_refs": [
+          "/evidence/unavailable"
+        ],
+        "id": "evidence_unavailable",
+        "rationale": "could not consult seeds, so this assessment rests on incomplete evidence",
+        "triggered": true
+      }
+    ],
+    "score": 69
+  },
+  "provenance": {
+    "generated_at": "2026-09-30T12:22:36Z",
+    "harness": null,
+    "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
+    "policy_version": "1.0.0",
+    "review_key": "sha256:2e82dfc87c49fdc37f65da2713c6a9d3df7df86114706116943ba02ad8add1d2",
+    "risk_algorithm_version": "risk/1.2.0",
+    "run_id": "run-20260930T122153Z",
+    "tool_version": "0.1.0"
+  },
+  "record_id": "2168782/decided",
+  "risk": {
+    "algorithm_version": "risk/1.2.0",
+    "band": "LOW",
+    "components": [],
+    "confidence_ceiling": "HIGH",
+    "decision_floor": null,
+    "gates": [],
+    "score": 0
+  },
+  "schema_version": "1.0.0",
+  "status": "SUPERSEDED_BY_HUMAN"
+}
