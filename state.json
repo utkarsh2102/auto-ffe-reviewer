@@ -224,7 +224,7 @@
       "decision": null,
       "discovered_via": "release-team-queue",
       "fingerprint": "sha256:80858b614ea8c2a2390dc688188e9adbe2a26f12f83d6873c3f66d4170b2347e",
-      "in_queue": true,
+      "in_queue": false,
       "last_evidence_at": "2026-09-30T12:22:02Z",
       "last_review_at": "",
       "last_seen_at": "2026-09-30T12:21:58Z",
@@ -232,9 +232,9 @@
       "llm_runs_today": 0,
       "message_count": 2,
       "review_key": "sha256:7bd7feb64ddabcbec86343806dc45ba9eb042695b426577125ef2d45742fed64",
-      "status": "New"
+      "status": "Fix Released"
     }
   },
-  "updated_at": "2026-09-30T12:22:45Z",
+  "updated_at": "2026-09-30T18:06:10Z",
   "version": 1
 }

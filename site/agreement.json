@@ -1,9 +1,19 @@
 {
   "agreed": 0,
   "comparable": 0,
-  "decided": 10,
+  "decided": 11,
   "rate": null,
   "recent": [
+    {
+      "agreed": null,
+      "bug_id": 2169008,
+      "decided_at": "2026-09-30T18:06:06Z",
+      "ours": null,
+      "risk_band": "MODERATE",
+      "theirs": "APPROVED",
+      "title": "FFe: sync sabnzbdplus 5.1.3+dfsg-1 (multiverse) from Debian unstable (contrib)",
+      "url": "https://bugs.launchpad.net/bugs/2169008"
+    },
     {
       "agreed": null,
       "bug_id": 2168881,

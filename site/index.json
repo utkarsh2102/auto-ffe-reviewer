@@ -1,53 +1,15 @@
 {
-  "bugs": [
-    {
-      "ack_required_from": [],
-      "bug_id": 2169008,
-      "build_rdepends": 0,
-      "confidence": null,
-      "days_to_release": 15,
-      "decision": null,
-      "decision_floor": null,
-      "ffe_kind": "sync",
-      "flags": [],
-      "flavour_impact": "UNSEEDED",
-      "has_assessment": false,
-      "injection_signals": 0,
-      "is_core": false,
-      "missing_information": [],
-      "packages": [
-        "sabnzbdplus"
-      ],
-      "phase": "BETA",
-      "rdepends": 0,
-      "release_type": "INTERIM",
-      "reporter": "jcfp",
-      "reviewed_at": "2026-09-30T12:22:02Z",
-      "risk_band": "MODERATE",
-      "risk_score": 35,
-      "seeded": null,
-      "series": "stonking",
-      "status": "EVIDENCE_ONLY",
-      "summary": null,
-      "testing_corroborated": true,
-      "title": "FFe: sync 5.1.3+dfsg-1 (multiverse) from Debian unstable (contrib)",
-      "unavailable": [
-        "seeds"
-      ],
-      "url": "https://bugs.launchpad.net/bugs/2169008",
-      "version": "26.10"
-    }
-  ],
+  "bugs": [],
   "counts": {
     "approve": 0,
     "awaiting_flavour_ack": 0,
-    "evidence_incomplete": 1,
+    "evidence_incomplete": 0,
     "high_risk": 0,
-    "needs_attention": 1,
+    "needs_attention": 0,
     "needs_information": 0,
-    "no_recommendation": 1,
+    "no_recommendation": 0,
     "no_testing_evidence": 0,
-    "open": 1,
+    "open": 0,
     "reject": 0
   },
   "version": 1

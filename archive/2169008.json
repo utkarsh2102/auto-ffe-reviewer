@@ -1,0 +1,487 @@
+{
+  "assessment": null,
+  "evidence": {
+    "bug": {
+      "comments": [
+        {
+          "author": "jcfp",
+          "author_is_release_team": false,
+          "content": "## FFE ##\n\n[Rationale]\n\n* Upstream micro-releases 5.1.2 and 5.1.3 fix multiple serious security issues. See the developers' summary at https://sabnzbd.org/wiki/extra/5.1-vulnerabilities.html\n\n[ Scope ]\n\n* Security fixes and related changes to the upstream testsuite only. The sabnzbdplus package has no reverse dependencies.\n\n* $ seeded-in-ubuntu sabnzbdplus\n  sabnzbdplus's binaries are not seeded.\n\n* Diff of the upstream changelog since the version included in the archive is attached in changelog.diff.\n\n[ Regression Potential ]\n\n* Low. Targeted upstream changes only, no significant packaging changes. Version 5.1.3 has been packaged in Debian for over two weeks, as well as on my PPA (ppa:jcfp/ppa resp. ppa:jcfp/nobetas) which is advertised upstream, with no issues reported. There are no API changes and no changes in the package's dependencies. The sabnzbdplus package has no reverse dependencies.\n\n[ Testing ]\n\n* Smoke test:\n  - PPA: https://launchpad.net/~jcfp/+archive/ubuntu/private/+sourcepub/18806883/+listing-archive-extra\n  - Build: https://launchpad.net/~jcfp/+archive/ubuntu/private/+build/33802500/+files/buildlog_ubuntu-stonking-amd64.sabnzbdplus_5.1.3+dfsg-1ubuntu1_BUILDING.txt.gz\n  - Installation: https://paste.debian.net/hidden/97c894c3\n  - Upgrade: https://paste.debian.net/hidden/94ca2b86\n  - Autopkgtest: https://ci.debian.net/data/autopkgtest/testing/amd64/s/sabnzbdplus/76162808/log.gz\n  - Does it break other packages: nope",
+          "content_sha": "1fd92f14b3a3d4762ce64425c306211f32d6c5d6870c360f55732524da6a7eed",
+          "date_created": "2026-09-30T11:51:14.590316+00:00",
+          "index": 0,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/sabnzbdplus/+bug/2169008/comments/0"
+        },
+        {
+          "author": "jcfp",
+          "author_is_release_team": false,
+          "content": "",
+          "content_sha": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "date_created": "2026-09-30T11:51:14.590316+00:00",
+          "index": 1,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/sabnzbdplus/+bug/2169008/comments/1"
+        },
+        {
+          "author": "paride",
+          "author_is_release_team": true,
+          "content": "The new microreleases are essentially bugfix only. The package has no reverse (build-)depends. FFe approved.",
+          "content_sha": "523920524d2f3af05c5b46da76053dc0a486e62dfddad6d9fe97db50330ee496",
+          "date_created": "2026-09-30T17:04:00.825319+00:00",
+          "index": 2,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/sabnzbdplus/+bug/2169008/comments/2"
+        },
+        {
+          "author": "paride",
+          "author_is_release_team": true,
+          "content": "This bug was fixed in the package sabnzbdplus - 5.1.3+dfsg-1\n\n---------------\nsabnzbdplus (5.1.3+dfsg-1) unstable; urgency=medium\n\n  * New upstream release:\n    + fixes a further two vulnerabilities. (Closes: #1147154)\n  * Patches: refresh 02.\n  * Patches: add 90 to avoid an error on the salsa CI.\n\n -- Jeroen Ploemen <email address hidden>  Tue, 08 Sep 2026 13:33:24 +0000\n\nsabnzbdplus (5.1.2+dfsg-1) unstable; urgency=medium\n\n  * New upstream release:\n    + fixes two vulnerabilities. (Closes: #1145563)\n  * Patches: refresh 02, 08, and 10.\n\n -- Jeroen Ploemen <email address hidden>  Tue, 25 Aug 2026 16:07:23 +0000",
+          "content_sha": "1a41e68d06f5ec520b480a7b876659aab0999f381d4fef49e7524dcf884846fc",
+          "date_created": "2026-09-30T17:09:49.444293+00:00",
+          "index": 3,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/sabnzbdplus/+bug/2169008/comments/3"
+        }
+      ],
+      "date_created": "2026-09-30T11:51:14.590316+00:00",
+      "date_last_message": "2026-09-30T17:09:49.444293+00:00",
+      "date_last_updated": "2026-09-30T17:09:49.936816+00:00",
+      "description": "## FFE ##\n\n[Rationale]\n\n* Upstream micro-releases 5.1.2 and 5.1.3 fix multiple serious security issues. See the developers' summary at https://sabnzbd.org/wiki/extra/5.1-vulnerabilities.html\n\n[ Scope ]\n\n* Security fixes and related changes to the upstream testsuite only. The sabnzbdplus package has no reverse dependencies.\n\n* $ seeded-in-ubuntu sabnzbdplus\n  sabnzbdplus's binaries are not seeded.\n\n* Diff of the upstream changelog since the version included in the archive is attached in changelog.diff.\n\n[ Regression Potential ]\n\n* Low. Targeted upstream changes only, no significant packaging changes. Version 5.1.3 has been packaged in Debian for over two weeks, as well as on my PPA (ppa:jcfp/ppa resp. ppa:jcfp/nobetas) which is advertised upstream, with no issues reported. There are no API changes and no changes in the package's dependencies. The sabnzbdplus package has no reverse dependencies.\n\n[ Testing ]\n\n* Smoke test:\n  - PPA: https://launchpad.net/~jcfp/+archive/ubuntu/private/+sourcepub/18806883/+listing-archive-extra\n  - Build: https://launchpad.net/~jcfp/+archive/ubuntu/private/+build/33802500/+files/buildlog_ubuntu-stonking-amd64.sabnzbdplus_5.1.3+dfsg-1ubuntu1_BUILDING.txt.gz\n  - Installation: https://paste.debian.net/hidden/97c894c3\n  - Upgrade: https://paste.debian.net/hidden/94ca2b86\n  - Autopkgtest: https://ci.debian.net/data/autopkgtest/testing/amd64/s/sabnzbdplus/76162808/log.gz\n  - Does it break other packages: nope",
+      "description_sha": "1fd92f14b3a3d4762ce64425c306211f32d6c5d6870c360f55732524da6a7eed",
+      "discovered_via": "release-team-queue",
+      "id": 2169008,
+      "message_count": 4,
+      "release_team_subscribed": false,
+      "reporter": "jcfp",
+      "subscribers": [
+        "jcfp"
+      ],
+      "tags": [],
+      "tasks": [
+        {
+          "assignee": null,
+          "importance": "Undecided",
+          "status": "Fix Released",
+          "target": "sabnzbdplus (Ubuntu)"
+        }
+      ],
+      "title": "FFe: sync sabnzbdplus 5.1.3+dfsg-1 (multiverse) from Debian unstable (contrib)",
+      "url": "https://bugs.launchpad.net/bugs/2169008"
+    },
+    "fingerprint": "sha256:80858b614ea8c2a2390dc688188e9adbe2a26f12f83d6873c3f66d4170b2347e",
+    "flavours": {
+      "ack_required_from": [],
+      "acks": [],
+      "affected_flavours": [],
+      "impact": "UNSEEDED",
+      "requester_is_flavour_lead": null,
+      "requesting_flavour": null
+    },
+    "injection_signals": [],
+    "packages": [
+      {
+        "archive": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-09-30T18:06:07Z",
+            "duration_ms": 512,
+            "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=sabnzbdplus&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
+            "method": "http_get",
+            "raw_ref": "sha256:d68cceced22becb355b9f6fabc26a1dc9041354120e532550554738ec49f78b9",
+            "raw_truncated": false,
+            "source_id": "launchpad.archive"
+          },
+          "status": "OK",
+          "value": {
+            "binaries": [],
+            "component": "multiverse",
+            "in_archive": true,
+            "pocket": "Proposed",
+            "source": "sabnzbdplus",
+            "version": "5.1.3+dfsg-1"
+          }
+        },
+        "build_rdepends": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-09-30T18:06:09Z",
+            "duration_ms": 123,
+            "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:sabnzbdplus",
+            "method": "http_get",
+            "raw_ref": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "raw_truncated": false,
+            "source_id": "rdepends.build"
+          },
+          "status": "OK",
+          "value": {
+            "arch": "source",
+            "bucket": "0",
+            "kind": "build",
+            "sample": [],
+            "seeded_rdeps": [],
+            "total": 0
+          }
+        },
+        "name": "sabnzbdplus",
+        "rdepends": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-09-30T18:06:08Z",
+            "duration_ms": 124,
+            "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:sabnzbdplus",
+            "method": "http_get",
+            "raw_ref": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "raw_truncated": false,
+            "source_id": "rdepends.binary"
+          },
+          "status": "OK",
+          "value": {
+            "arch": "any",
+            "bucket": "0",
+            "kind": "binary",
+            "sample": [],
+            "seeded_rdeps": [],
+            "total": 0
+          }
+        },
+        "seeds": {
+          "note": "none of sabnzbdplus appear in the seed index, but the index looks incomplete (index covers only 7 flavours), so this is not evidence that the package is unseeded",
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-09-30T18:06:08Z",
+            "duration_ms": 438,
+            "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
+            "method": "http_get",
+            "raw_ref": "sha256:c2f89ccecf806550b64ed3eaa2525bbfe78d987a2009fc7662f4939e2c4424e5",
+            "raw_truncated": false,
+            "source_id": "seeds"
+          },
+          "status": "UNAVAILABLE",
+          "value": null
+        }
+      }
+    ],
+    "release_context": {
+      "note": null,
+      "provenance": {
+        "cache": "fresh",
+        "checked_at": "2026-09-30T18:06:07Z",
+        "duration_ms": 865,
+        "locator": "https://documentation.ubuntu.com/release-notes/26.10/schedule/",
+        "method": "http_get",
+        "raw_ref": "sha256:d786507749c6a228b1eb6cf01e05a82e68ba4734fccd14f6f0df4063e26e00c7",
+        "raw_truncated": false,
+        "source_id": "calendar.schedule"
+      },
+      "status": "OK",
+      "value": {
+        "days_bucket": "28-15",
+        "days_since_feature_freeze": 41,
+        "days_to_release": 15,
+        "derivation": "schedule-page",
+        "feature_freeze": "2026-08-20",
+        "freeze_window_elapsed_pct": 73,
+        "milestones": [
+          {
+            "date": "2026-04-30",
+            "name": "Toolchain Uploaded"
+          },
+          {
+            "date": "2026-07-02",
+            "name": "Ubuntu Testing Week (optional)"
+          },
+          {
+            "date": "2026-08-06",
+            "name": "Expected Glibc 2.44 merge"
+          },
+          {
+            "date": "2026-08-13",
+            "name": "Expected LLVM default transition"
+          },
+          {
+            "date": "2026-08-20",
+            "name": "Debian Import Freeze"
+          },
+          {
+            "date": "2026-08-20",
+            "name": "Feature Freeze"
+          },
+          {
+            "date": "2026-09-10",
+            "name": "UI Freeze"
+          },
+          {
+            "date": "2026-09-17",
+            "name": "Documentation String Freeze"
+          },
+          {
+            "date": "2026-09-17",
+            "name": "Kernel Feature Freeze"
+          },
+          {
+            "date": "2026-09-21",
+            "name": "Beta Freeze"
+          },
+          {
+            "date": "2026-09-21",
+            "name": "Hardware Enablement Freeze"
+          },
+          {
+            "date": "2026-09-24",
+            "name": "Beta"
+          },
+          {
+            "date": "2026-10-01",
+            "name": "Kernel Freeze"
+          },
+          {
+            "date": "2026-10-01",
+            "name": "Non Language Pack Translation Deadline"
+          },
+          {
+            "date": "2026-10-08",
+            "name": "Final Freeze"
+          },
+          {
+            "date": "2026-10-08",
+            "name": "Language Pack Translation Deadline"
+          },
+          {
+            "date": "2026-10-08",
+            "name": "Release Candidate"
+          },
+          {
+            "date": "2026-10-15",
+            "name": "Final Release"
+          }
+        ],
+        "phase": "BETA",
+        "release_date": "2026-10-15",
+        "release_type": "INTERIM",
+        "series": "stonking",
+        "version": "26.10"
+      }
+    },
+    "subject": {
+      "derivation": "packages:bug-tasks; series:assumed-development-series",
+      "ffe_kind": "sync",
+      "packages": [
+        "sabnzbdplus"
+      ],
+      "target_series": null
+    },
+    "testing": {
+      "autopkgtest": "FOUND_UNVERIFIED",
+      "build": "FOUND_UNVERIFIED",
+      "corroborated": true,
+      "items": [
+        {
+          "detail": "PPA ~jcfp/private exists on Launchpad",
+          "kind": "ppa",
+          "locator": "https://launchpad.net/~jcfp/+archive/ubuntu/private",
+          "source": "description",
+          "state": "FOUND_VERIFIED"
+        },
+        {
+          "detail": "linked build log",
+          "kind": "build_log",
+          "locator": "https://launchpad.net/~jcfp/+archive/ubuntu/private/+build/33802500/+files/buildlog_ubuntu-stonking-amd64.sabnzbdplus_5.1.3+dfsg-1ubuntu1_BUILDING.txt.gz",
+          "source": "description",
+          "state": "FOUND_UNVERIFIED"
+        },
+        {
+          "detail": "linked CI run",
+          "kind": "ci",
+          "locator": "https://ci.debian.net/data/autopkgtest/testing/amd64/s/sabnzbdplus/76162808/log.gz",
+          "source": "description",
+          "state": "FOUND_UNVERIFIED"
+        },
+        {
+          "detail": "pasted output (contains 'Autopkgtest')",
+          "kind": "test_output",
+          "locator": null,
+          "source": "description",
+          "state": "FOUND_UNVERIFIED"
+        }
+      ],
+      "ppa": "FOUND_VERIFIED",
+      "test_output": "FOUND_UNVERIFIED",
+      "unverified_claims": []
+    },
+    "unavailable": [
+      {
+        "impact": "cannot tell which Ubuntu images ship this package",
+        "reason": "seed index incomplete: index covers only 7 flavours",
+        "source_id": "seeds"
+      }
+    ]
+  },
+  "human": {
+    "decided": true,
+    "decision": "APPROVED",
+    "detected_at": "2026-09-30T18:06:06Z",
+    "final_status": "Fix Released",
+    "left_queue_at": "2026-09-30T12:21:58Z"
+  },
+  "our_last_assessment": null,
+  "our_last_risk": {
+    "algorithm_version": "risk/1.2.0",
+    "band": "MODERATE",
+    "components": [
+      {
+        "evidence_refs": [
+          "/evidence/release_context"
+        ],
+        "max_points": 20,
+        "name": "release_posture",
+        "points": 15,
+        "rationale": "interim release, past beta, 15 days to release, 73% through the freeze window"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/packages"
+        ],
+        "max_points": 25,
+        "name": "seeded_reach",
+        "points": 15,
+        "rationale": "could not establish which images ship this package; scored cautiously rather than as unseeded"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/packages"
+        ],
+        "max_points": 25,
+        "name": "dependency_reach",
+        "points": 0,
+        "rationale": "nothing in the archive depends on this package"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/packages"
+        ],
+        "max_points": 10,
+        "name": "archive_standing",
+        "points": 3,
+        "rationale": "in universe or multiverse, which is community-supported"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/subject"
+        ],
+        "max_points": 5,
+        "name": "change_shape",
+        "points": 2,
+        "rationale": "a sync to an existing package"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/testing"
+        ],
+        "max_points": 15,
+        "name": "unvalidated_change",
+        "points": 0,
+        "rationale": "the bug links a PPA, a build log, test results, pasted test output"
+      }
+    ],
+    "confidence_ceiling": "MEDIUM",
+    "decision_floor": null,
+    "gates": [
+      {
+        "effect": "floor_needs_information",
+        "evidence_refs": [
+          "/evidence/subject"
+        ],
+        "id": "no_package_identified",
+        "rationale": "the affected package is identified",
+        "triggered": false
+      },
+      {
+        "effect": "floor_needs_information",
+        "evidence_refs": [
+          "/evidence/testing"
+        ],
+        "id": "no_testing_evidence",
+        "rationale": "a sync that Debian has already built and tested",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/flavours"
+        ],
+        "id": "flavour_ack_outstanding",
+        "rationale": "no cross-flavour acknowledgement is outstanding",
+        "triggered": false
+      },
+      {
+        "effect": "floor_needs_information",
+        "evidence_refs": [
+          "/evidence/release_context"
+        ],
+        "id": "after_final_freeze",
+        "rationale": "the request is within the ordinary freeze window",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/release_context"
+        ],
+        "id": "before_feature_freeze",
+        "rationale": "the target release is past Feature Freeze",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/subject"
+        ],
+        "id": "unrecoverable_failure_mode",
+        "rationale": "a regression here would be fixable by an SRU",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/injection"
+        ],
+        "id": "suspicious_bug_text",
+        "rationale": "nothing in the bug text resembles an attempt to steer the reviewer",
+        "triggered": false
+      },
+      {
+        "effect": "cap_confidence",
+        "evidence_refs": [
+          "/evidence/unavailable"
+        ],
+        "id": "evidence_unavailable",
+        "rationale": "could not consult seeds, so this assessment rests on incomplete evidence",
+        "triggered": true
+      }
+    ],
+    "score": 35
+  },
+  "provenance": {
+    "generated_at": "2026-09-30T18:06:10Z",
+    "harness": null,
+    "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
+    "policy_version": "1.0.0",
+    "review_key": "sha256:7bd7feb64ddabcbec86343806dc45ba9eb042695b426577125ef2d45742fed64",
+    "risk_algorithm_version": "risk/1.2.0",
+    "run_id": "run-20260930T180557Z",
+    "tool_version": "0.1.0"
+  },
+  "record_id": "2169008/decided",
+  "risk": {
+    "algorithm_version": "risk/1.2.0",
+    "band": "LOW",
+    "components": [],
+    "confidence_ceiling": "HIGH",
+    "decision_floor": null,
+    "gates": [],
+    "score": 0
+  },
+  "schema_version": "1.0.0",
+  "status": "SUPERSEDED_BY_HUMAN"
+}
