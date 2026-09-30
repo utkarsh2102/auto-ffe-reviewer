@@ -3,16 +3,16 @@
     {
       "confidence": null,
       "decision": null,
-      "fingerprint": "sha256:e22e2c16ddcb8817e33b085fe3a7629d22f52f92f5a321bc68813f2dce7084ea",
-      "generated_at": "2026-09-29T15:41:03Z",
+      "fingerprint": "sha256:4ff086b038b56d1f388b162e2fbae6eecb34145457799e7a2a9f0739a89baf07",
+      "generated_at": "2026-09-29T20:38:43Z",
       "risk_score": 68,
       "status": "EVIDENCE_ONLY"
     },
     {
       "confidence": null,
       "decision": null,
-      "fingerprint": "sha256:4ff086b038b56d1f388b162e2fbae6eecb34145457799e7a2a9f0739a89baf07",
-      "generated_at": "2026-09-29T20:38:43Z",
+      "fingerprint": "sha256:e22e2c16ddcb8817e33b085fe3a7629d22f52f92f5a321bc68813f2dce7084ea",
+      "generated_at": "2026-09-30T00:16:45Z",
       "risk_score": 68,
       "status": "EVIDENCE_ONLY"
     }
@@ -59,7 +59,7 @@
         "title": "FFe: migraphx - new package, first successful build at 10.0 (Ubuntu, amd64-only, joined the rocm packageset after LP: #2164669 was filed)",
         "url": "https://bugs.launchpad.net/bugs/2168849"
       },
-      "fingerprint": "sha256:4ff086b038b56d1f388b162e2fbae6eecb34145457799e7a2a9f0739a89baf07",
+      "fingerprint": "sha256:e22e2c16ddcb8817e33b085fe3a7629d22f52f92f5a321bc68813f2dce7084ea",
       "flavours": {
         "ack_required_from": [],
         "acks": [],
@@ -75,8 +75,8 @@
             "note": "migraphx has no published source in resolute",
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-09-29T20:38:43Z",
-              "duration_ms": 255,
+              "checked_at": "2026-09-30T00:16:45Z",
+              "duration_ms": 268,
               "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=migraphx&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fresolute&status=Published&order_by_date=true",
               "method": "http_get",
               "raw_ref": "sha256:aeccab7ba3548115eac64a023c8f60fa448132b168d09e179f15732ea44e50f7",
@@ -97,7 +97,7 @@
             "note": "migraphx is not published in resolute",
             "provenance": {
               "cache": "none",
-              "checked_at": "2026-09-29T20:38:43Z",
+              "checked_at": "2026-09-30T00:16:45Z",
               "duration_ms": 0,
               "locator": "migraphx",
               "method": "computed",
@@ -113,7 +113,7 @@
             "note": "migraphx is not published in resolute",
             "provenance": {
               "cache": "none",
-              "checked_at": "2026-09-29T20:38:43Z",
+              "checked_at": "2026-09-30T00:16:45Z",
               "duration_ms": 0,
               "locator": "migraphx",
               "method": "computed",
@@ -125,14 +125,14 @@
             "value": null
           },
           "seeds": {
-            "note": "none of migraphx appear in the seed index, but the index looks incomplete (index covers only 7 flavours), so this is not evidence that the package is unseeded",
+            "note": "none of migraphx appear in the seed index, but the index looks incomplete (index covers only 6 flavours), so this is not evidence that the package is unseeded",
             "provenance": {
               "cache": "cached",
-              "checked_at": "2026-09-29T20:38:43Z",
+              "checked_at": "2026-09-30T00:16:45Z",
               "duration_ms": 0,
               "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
               "method": "http_get",
-              "raw_ref": "sha256:9322993ede427c5af15228a405725a3b13ce07af2772b48732bcd5e634e1a5b3",
+              "raw_ref": "sha256:1534d11925564d6a1e40f7efe831bb3df0784054a4c72cd8827cd000f397043c",
               "raw_truncated": false,
               "source_id": "seeds"
             },
@@ -142,153 +142,33 @@
         }
       ],
       "release_context": {
-        "note": null,
+        "note": "schedule page unavailable; dates approximated as release minus 8 weeks, which has been observed to be up to a week early",
         "provenance": {
-          "cache": "fresh",
-          "checked_at": "2026-09-29T20:38:43Z",
-          "duration_ms": 141,
+          "cache": "none",
+          "checked_at": "2026-09-30T00:16:45Z",
+          "duration_ms": 0,
           "locator": "https://documentation.ubuntu.com/release-notes/26.04/schedule/",
-          "method": "http_get",
-          "raw_ref": "sha256:792034c456266b44be83364058df5d0ebd7c08d075ed7b1fd466992be698b307",
+          "method": "computed",
+          "raw_ref": null,
           "raw_truncated": false,
           "source_id": "calendar.schedule"
         },
         "status": "OK",
         "value": {
           "days_bucket": "post-release",
-          "days_since_feature_freeze": 222,
-          "days_to_release": -159,
-          "derivation": "schedule-page",
-          "feature_freeze": "2026-02-19",
+          "days_since_feature_freeze": 216,
+          "days_to_release": -160,
+          "derivation": "approximate",
+          "feature_freeze": "2026-02-26",
           "freeze_window_elapsed_pct": 100,
           "milestones": [
             {
-              "date": "2025-10-16",
-              "name": "Python 3.14 as a supported version"
-            },
-            {
-              "date": "2025-10-16",
-              "name": "Toolchain Uploaded"
-            },
-            {
-              "date": "2025-10-23",
-              "name": "enable autosync from Debian"
-            },
-            {
-              "date": "2025-10-30",
-              "name": "Golang 1.25 transition"
-            },
-            {
-              "date": "2025-11-27",
-              "name": "Resolute Snapshot 1"
-            },
-            {
-              "date": "2025-12-11",
-              "name": "Resolute Snapshot 2"
-            },
-            {
-              "date": "2025-12-18",
-              "name": "binutils 2.46"
-            },
-            {
-              "date": "2026-01-01",
-              "name": "GNOME 50 alpha"
-            },
-            {
-              "date": "2026-01-08",
-              "name": "Python 3.14 as the default version"
-            },
-            {
-              "date": "2026-01-22",
-              "name": "PHP 8.5"
-            },
-            {
-              "date": "2026-01-29",
-              "name": "GNOME 50 beta"
-            },
-            {
-              "date": "2026-01-29",
-              "name": "Resolute Snapshot 3"
-            },
-            {
-              "date": "2026-02-12",
-              "name": "GCC 16 as optional"
-            },
-            {
-              "date": "2026-02-12",
-              "name": "Java 25 default (tentative)"
-            },
-            {
-              "date": "2026-02-12",
-              "name": "Rust 1.93 transition (tentative)"
-            },
-            {
-              "date": "2026-02-19",
-              "name": "Debian Import Freeze"
-            },
-            {
-              "date": "2026-02-19",
-              "name": "Feature Freeze"
-            },
-            {
               "date": "2026-02-26",
-              "name": "Resolute Snapshot 4"
-            },
-            {
-              "date": "2026-03-12",
-              "name": "UI Freeze"
-            },
-            {
-              "date": "2026-03-19",
-              "name": "Documentation String Freeze"
-            },
-            {
-              "date": "2026-03-19",
-              "name": "Kernel Feature Freeze"
-            },
-            {
-              "date": "2026-03-23",
-              "name": "Beta Freeze"
-            },
-            {
-              "date": "2026-03-23",
-              "name": "Hardware Enablement Freeze"
-            },
-            {
-              "date": "2026-03-23",
-              "name": "ISO Testing Week (mandatory)"
-            },
-            {
-              "date": "2026-03-26",
-              "name": "Beta"
-            },
-            {
-              "date": "2026-04-09",
-              "name": "Kernel Freeze"
-            },
-            {
-              "date": "2026-04-09",
-              "name": "Non Language Pack Translation Deadline"
-            },
-            {
-              "date": "2026-04-16",
-              "name": "Final Freeze"
-            },
-            {
-              "date": "2026-04-16",
-              "name": "Language Pack Translation Deadline"
-            },
-            {
-              "date": "2026-04-16",
-              "name": "Release Candidate"
+              "name": "Feature Freeze"
             },
             {
               "date": "2026-04-23",
               "name": "Final Release"
-            },
-            {
-              "date": "2026-08-27",
-              "name": "26.04.1 Point Release"
             }
           ],
           "phase": "FINAL_RELEASE",
@@ -317,8 +197,13 @@
       },
       "unavailable": [
         {
+          "impact": "cannot tell how late in the freeze this request is",
+          "reason": "calendar.schedule: documentation.ubuntu.com rate-limited us",
+          "source_id": "calendar.schedule"
+        },
+        {
           "impact": "cannot tell which Ubuntu images ship this package",
-          "reason": "seed index incomplete: index covers only 7 flavours",
+          "reason": "seed index incomplete: index covers only 6 flavours",
           "source_id": "seeds"
         }
       ]
@@ -331,17 +216,17 @@
       "left_queue_at": null
     },
     "provenance": {
-      "generated_at": "2026-09-29T20:38:43Z",
+      "generated_at": "2026-09-30T00:16:45Z",
       "harness": null,
       "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
       "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
       "policy_version": "1.0.0",
-      "review_key": "sha256:2aa808cbf489458979edd9a440f154213379a375d4ef26ae0f724fe97400e4b2",
+      "review_key": "sha256:a4998c00fc91a2a7245594de92c6c01875e18c2c1840ec9b60ae57c0fc5fe755",
       "risk_algorithm_version": "risk/1.2.0",
-      "run_id": "run-20260929T203833Z",
+      "run_id": "run-20260930T001627Z",
       "tool_version": "0.1.0"
     },
-    "record_id": "2168849/4ff086b038b56d1f",
+    "record_id": "2168849/e22e2c16ddcb8817",
     "risk": {
       "algorithm_version": "risk/1.2.0",
       "band": "HIGH",
@@ -353,7 +238,7 @@
           "max_points": 20,
           "name": "release_posture",
           "points": 20,
-          "rationale": "LTS release, past final release, -159 days to release, 100% through the freeze window"
+          "rationale": "LTS release, past final release, -160 days to release, 100% through the freeze window"
         },
         {
           "evidence_refs": [
@@ -401,7 +286,7 @@
           "rationale": "no PPA, build log or test results are linked from the bug"
         }
       ],
-      "confidence_ceiling": "MEDIUM",
+      "confidence_ceiling": "LOW",
       "decision_floor": "NEEDS_INFORMATION",
       "gates": [
         {
@@ -473,7 +358,7 @@
             "/evidence/unavailable"
           ],
           "id": "evidence_unavailable",
-          "rationale": "could not consult seeds, so this assessment rests on incomplete evidence",
+          "rationale": "could not consult calendar.schedule, seeds, so this assessment rests on incomplete evidence",
           "triggered": true
         }
       ],
