@@ -29,7 +29,7 @@
       "in_queue": true,
       "last_evidence_at": "2026-10-01T01:57:30Z",
       "last_review_at": "",
-      "last_seen_at": "2026-10-01T08:44:28Z",
+      "last_seen_at": "2026-10-01T16:15:00Z",
       "llm_runs_date": "",
       "llm_runs_today": 0,
       "message_count": 4,
@@ -253,6 +253,6 @@
       "status": "Fix Released"
     }
   },
-  "updated_at": "2026-10-01T08:44:31Z",
+  "updated_at": "2026-10-01T16:15:05Z",
   "version": 1
 }
