@@ -26,7 +26,7 @@
       "decision": null,
       "discovered_via": "release-team-queue",
       "fingerprint": "sha256:772874427dc93dd8cf238a2cee97f47b8f2482c6edcf64a19c4651efbf69a505",
-      "in_queue": true,
+      "in_queue": false,
       "last_evidence_at": "2026-10-01T01:57:30Z",
       "last_review_at": "",
       "last_seen_at": "2026-10-02T01:03:15Z",
@@ -34,7 +34,7 @@
       "llm_runs_today": 0,
       "message_count": 4,
       "review_key": "sha256:6a0edd800c5a9e588306912a8485cfdd3d2664cc66cc034d6d267333075f1ac0",
-      "status": "New"
+      "status": "Triaged"
     },
     "2167149": {
       "bug_id": 2167149,
@@ -253,6 +253,6 @@
       "status": "Fix Released"
     }
   },
-  "updated_at": "2026-10-02T01:03:22Z",
+  "updated_at": "2026-10-02T07:27:23Z",
   "version": 1
 }

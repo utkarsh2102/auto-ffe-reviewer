@@ -1,0 +1,488 @@
+{
+  "assessment": null,
+  "evidence": {
+    "bug": {
+      "comments": [
+        {
+          "author": "enr0n",
+          "author_is_release_team": false,
+          "content": "\nThis package ships at least one init script in /etc/init.d that needs to be migrated to a systemd service.\n\nUp to and including Ubuntu 26.04 LTS, the systemd package shipped systemd-sysv-generator which generated\nbasic systemd services from System V scripts on the fly. This generator was removed from upstream systemd\nin version v260, and will not be shipped in Ubuntu 26.10.\n\nDebian bug: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1039160\n\nSee also: https://udd.debian.org/lintian-tag/missing-systemd-service-for-init.d-script?affected=yes\n",
+          "content_sha": "30f76fff8247ef11fdf5608455c7eb7a10c830e931d0913af188f0e70f79f59e",
+          "date_created": "2026-05-21T19:58:20.848160+00:00",
+          "index": 0,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/cwdaemon/+bug/2153838/comments/0"
+        },
+        {
+          "author": "simpoir",
+          "author_is_release_team": false,
+          "content": "This will be fixed by a sync.\nI've checked the current pkg/debian/sid branch and it builds against stonking and does include the systemd unit.",
+          "content_sha": "c03e753e303dcb284da753416993abbafb19282c52330215b42e5b858d64dcfa",
+          "date_created": "2026-09-24T16:10:20.392136+00:00",
+          "index": 1,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/cwdaemon/+bug/2153838/comments/1"
+        },
+        {
+          "author": "enr0n",
+          "author_is_release_team": false,
+          "content": "If you want to sync, can you write a quick FFe for completeness? We would be bumping upstream versions here.\n\nOr, we could just cherry pick the service additions for now. WDYT?",
+          "content_sha": "ee769962d2b1aaf7763e0dc8f7652ec9acc378fd02937ba7b5984bd4d6252da9",
+          "date_created": "2026-09-25T15:15:10.436808+00:00",
+          "index": 2,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/cwdaemon/+bug/2153838/comments/2"
+        },
+        {
+          "author": "simpoir",
+          "author_is_release_team": false,
+          "content": "New changelog entries:\n\ncwdaemon (0.13.0-1) unstable; urgency=medium\n\n  [ Christoph Berg ]\n  * New upstream version 0.13.0 from GitHub. (Closes: #1104161)\n  * Add system and user systemd service units. See README.Debian for details.\n    (Closes: #1039160)\n  * Move example files to /usr/share/doc/cwdaemon/examples/.\n  * Take over as uploader.\n\n  [ Debian Janitor ]\n  * Drop unnecessary dependency on dh-autoreconf.\n  * Fix day-of-week for changelog entry 0.9.\n  * Remove constraints unnecessary since buster (oldstable):\n    + Build-Depends: Drop dependency on essential package dpkg-dev (>= 1.16.1~).\n",
+          "content_sha": "1ddde6ba013b7dc6779043269c19ff43822c1aa980825c8a01e3c2df20573256",
+          "date_created": "2026-09-28T16:15:25.338858+00:00",
+          "index": 3,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/cwdaemon/+bug/2153838/comments/3"
+        },
+        {
+          "author": "skia",
+          "author_is_release_team": true,
+          "content": "I don't see an issue with that. FFe granted, thanks for checking.",
+          "content_sha": "3e7b360666b4b07fd3b2d978b915b01978aca356ab47a60d74d32a2de4aa638e",
+          "date_created": "2026-10-02T07:23:59.645162+00:00",
+          "index": 4,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/cwdaemon/+bug/2153838/comments/4"
+        }
+      ],
+      "date_created": "2026-05-21T19:58:20.848160+00:00",
+      "date_last_message": "2026-10-02T07:23:59.645162+00:00",
+      "date_last_updated": "2026-10-02T07:24:14.911258+00:00",
+      "description": "\n## FFE ##\n\n[Rationale]\n\n* The new version includes a log of bugfixes, new tests, and systemd unit,\n  thus resolving the need to migrate sysv init script to systemd units.\n\n[ Scope ]\n\n* List of changes: https://github.com/acerion/cwdaemon/blob/v0.13.0/NEWS\n\n* This package is part of hamradio tools.\n\n* cwdaemon's binaries are not seeded.\n\n* cwdaemon is a leaf package with only metapackage rdepends.\n\n* The service unit needs configuration, covered in README.Debian\n\n\n[ Regression Potential ]\n\n* The service already required manual configuration. The service does not\n  auto-start. Any existing sysvinit script won't automatically translate to\n  systemd unit.\n\n* Some of the argument parsing in the new release has been made more strict.\n  Although the change affects mostly flags added after the current Ubuntu\n  release, this might break existing launching the daemon manually.\n\n\n[ Testing ]\n\n* Smoke test:\n  - PPA: ppa:simpoir/proposed\n  - Build: https://launchpad.net/~simpoir/+archive/ubuntu/proposed/+sourcepub/18796670/+listing-archive-extra\n  - Installation: In local VM with \n    Environment=ARGS=\"-x n --cwdevice null\"\n\n\n[ Original Description ]\n\nThis package ships at least one init script in /etc/init.d that needs to be migrated to a systemd service.\n\nUp to and including Ubuntu 26.04 LTS, the systemd package shipped systemd-sysv-generator which generated\nbasic systemd services from System V scripts on the fly. This generator was removed from upstream systemd\nin version v260, and will not be shipped in Ubuntu 26.10.\n\nDebian bug: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1039160\n\nSee also: https://udd.debian.org/lintian-tag/missing-systemd-service-for-init.d-script?affected=yes",
+      "description_sha": "9593ab626b9a03899f54e99d2050a0e5cb7b3bb99bd020ee968daaa45b62844b",
+      "discovered_via": "release-team-queue",
+      "id": 2153838,
+      "message_count": 5,
+      "release_team_subscribed": false,
+      "reporter": "enr0n",
+      "subscribers": [
+        "enr0n"
+      ],
+      "tags": [
+        "dcr-sync",
+        "missing-systemd-service"
+      ],
+      "tasks": [
+        {
+          "assignee": "simpoir",
+          "importance": "Undecided",
+          "status": "Triaged",
+          "target": "cwdaemon (Ubuntu)"
+        },
+        {
+          "assignee": null,
+          "importance": "Unknown",
+          "status": "Fix Released",
+          "target": "cwdaemon (Debian)"
+        }
+      ],
+      "title": "FFe: cwdaemon: System V script needs to be migrated to systemd service",
+      "url": "https://bugs.launchpad.net/bugs/2153838"
+    },
+    "fingerprint": "sha256:772874427dc93dd8cf238a2cee97f47b8f2482c6edcf64a19c4651efbf69a505",
+    "flavours": {
+      "ack_required_from": [],
+      "acks": [],
+      "affected_flavours": [],
+      "impact": "UNSEEDED",
+      "requester_is_flavour_lead": null,
+      "requesting_flavour": null
+    },
+    "injection_signals": [],
+    "packages": [
+      {
+        "archive": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-10-02T07:27:20Z",
+            "duration_ms": 314,
+            "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=cwdaemon&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
+            "method": "http_get",
+            "raw_ref": "sha256:4ca2509cfab80eff285fe83f38323574b439528d825cc1a4029bca8e03f55d8e",
+            "raw_truncated": false,
+            "source_id": "launchpad.archive"
+          },
+          "status": "OK",
+          "value": {
+            "binaries": [
+              "cwdaemon"
+            ],
+            "component": "universe",
+            "in_archive": true,
+            "pocket": "Release",
+            "source": "cwdaemon",
+            "version": "0.10.2-3build3"
+          }
+        },
+        "build_rdepends": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-10-02T07:27:22Z",
+            "duration_ms": 159,
+            "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:cwdaemon",
+            "method": "http_get",
+            "raw_ref": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "raw_truncated": false,
+            "source_id": "rdepends.build"
+          },
+          "status": "OK",
+          "value": {
+            "arch": "source",
+            "bucket": "0",
+            "kind": "build",
+            "sample": [],
+            "seeded_rdeps": [],
+            "total": 0
+          }
+        },
+        "name": "cwdaemon",
+        "rdepends": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-10-02T07:27:22Z",
+            "duration_ms": 165,
+            "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:cwdaemon",
+            "method": "http_get",
+            "raw_ref": "sha256:d77abad57af9a69fdf89e82dc33af5d9f2423f5ca16c1ba865688a22dc6036ed",
+            "raw_truncated": false,
+            "source_id": "rdepends.binary"
+          },
+          "status": "OK",
+          "value": {
+            "arch": "any",
+            "bucket": "1-5",
+            "kind": "binary",
+            "sample": [
+              "hamradio-morse"
+            ],
+            "seeded_rdeps": [],
+            "total": 1
+          }
+        },
+        "seeds": {
+          "note": "none of cwdaemon appear in the seed index, but the index looks incomplete (index covers only 7 flavours), so this is not evidence that the package is unseeded",
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-10-02T07:27:22Z",
+            "duration_ms": 657,
+            "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
+            "method": "http_get",
+            "raw_ref": "sha256:b4f4fdf99cdf5750b03cbcebade0734474ca243dd8b502c8655953d8dac65fb4",
+            "raw_truncated": false,
+            "source_id": "seeds"
+          },
+          "status": "UNAVAILABLE",
+          "value": null
+        }
+      }
+    ],
+    "release_context": {
+      "note": null,
+      "provenance": {
+        "cache": "fresh",
+        "checked_at": "2026-10-02T07:27:20Z",
+        "duration_ms": 341,
+        "locator": "https://documentation.ubuntu.com/release-notes/26.10/schedule/",
+        "method": "http_get",
+        "raw_ref": "sha256:d786507749c6a228b1eb6cf01e05a82e68ba4734fccd14f6f0df4063e26e00c7",
+        "raw_truncated": false,
+        "source_id": "calendar.schedule"
+      },
+      "status": "OK",
+      "value": {
+        "days_bucket": "14-8",
+        "days_since_feature_freeze": 43,
+        "days_to_release": 13,
+        "derivation": "schedule-page",
+        "feature_freeze": "2026-08-20",
+        "freeze_window_elapsed_pct": 77,
+        "milestones": [
+          {
+            "date": "2026-04-30",
+            "name": "Toolchain Uploaded"
+          },
+          {
+            "date": "2026-07-02",
+            "name": "Ubuntu Testing Week (optional)"
+          },
+          {
+            "date": "2026-08-06",
+            "name": "Expected Glibc 2.44 merge"
+          },
+          {
+            "date": "2026-08-13",
+            "name": "Expected LLVM default transition"
+          },
+          {
+            "date": "2026-08-20",
+            "name": "Debian Import Freeze"
+          },
+          {
+            "date": "2026-08-20",
+            "name": "Feature Freeze"
+          },
+          {
+            "date": "2026-09-10",
+            "name": "UI Freeze"
+          },
+          {
+            "date": "2026-09-17",
+            "name": "Documentation String Freeze"
+          },
+          {
+            "date": "2026-09-17",
+            "name": "Kernel Feature Freeze"
+          },
+          {
+            "date": "2026-09-21",
+            "name": "Beta Freeze"
+          },
+          {
+            "date": "2026-09-21",
+            "name": "Hardware Enablement Freeze"
+          },
+          {
+            "date": "2026-09-24",
+            "name": "Beta"
+          },
+          {
+            "date": "2026-10-01",
+            "name": "Kernel Freeze"
+          },
+          {
+            "date": "2026-10-01",
+            "name": "Non Language Pack Translation Deadline"
+          },
+          {
+            "date": "2026-10-08",
+            "name": "Final Freeze"
+          },
+          {
+            "date": "2026-10-08",
+            "name": "Language Pack Translation Deadline"
+          },
+          {
+            "date": "2026-10-08",
+            "name": "Release Candidate"
+          },
+          {
+            "date": "2026-10-15",
+            "name": "Final Release"
+          }
+        ],
+        "phase": "KERNEL_FREEZE",
+        "release_date": "2026-10-15",
+        "release_type": "INTERIM",
+        "series": "stonking",
+        "version": "26.10"
+      }
+    },
+    "subject": {
+      "derivation": "packages:bug-tasks; series:assumed-development-series",
+      "ffe_kind": "seed-change",
+      "packages": [
+        "cwdaemon"
+      ],
+      "target_series": null
+    },
+    "testing": {
+      "autopkgtest": "ABSENT",
+      "build": "ABSENT",
+      "corroborated": true,
+      "items": [
+        {
+          "detail": "PPA ~simpoir/proposed exists on Launchpad",
+          "kind": "ppa",
+          "locator": "https://launchpad.net/~simpoir/+archive/ubuntu/proposed",
+          "source": "description",
+          "state": "FOUND_VERIFIED"
+        }
+      ],
+      "ppa": "FOUND_VERIFIED",
+      "test_output": "ABSENT",
+      "unverified_claims": []
+    },
+    "unavailable": [
+      {
+        "impact": "cannot tell which Ubuntu images ship this package",
+        "reason": "seed index incomplete: index covers only 7 flavours",
+        "source_id": "seeds"
+      }
+    ]
+  },
+  "human": {
+    "decided": true,
+    "decision": "APPROVED",
+    "detected_at": "2026-10-02T07:27:19Z",
+    "final_status": "Triaged",
+    "left_queue_at": "2026-10-02T01:03:15Z"
+  },
+  "our_last_assessment": null,
+  "our_last_risk": {
+    "algorithm_version": "risk/1.2.0",
+    "band": "HIGH",
+    "components": [
+      {
+        "evidence_refs": [
+          "/evidence/release_context"
+        ],
+        "max_points": 20,
+        "name": "release_posture",
+        "points": 17,
+        "rationale": "interim release, past kernel freeze, 14 days to release, 75% through the freeze window"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/packages"
+        ],
+        "max_points": 25,
+        "name": "seeded_reach",
+        "points": 15,
+        "rationale": "could not establish which images ship this package; scored cautiously rather than as unseeded"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/packages"
+        ],
+        "max_points": 25,
+        "name": "dependency_reach",
+        "points": 4,
+        "rationale": "1 reverse dependencies, 0 reverse build-dependencies"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/packages"
+        ],
+        "max_points": 10,
+        "name": "archive_standing",
+        "points": 3,
+        "rationale": "in universe or multiverse, which is community-supported"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/subject"
+        ],
+        "max_points": 5,
+        "name": "change_shape",
+        "points": 4,
+        "rationale": "changes what lands on an image, so it affects users who never install the package directly"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/testing"
+        ],
+        "max_points": 15,
+        "name": "unvalidated_change",
+        "points": 10,
+        "rationale": "the bug links a PPA"
+      }
+    ],
+    "confidence_ceiling": "MEDIUM",
+    "decision_floor": null,
+    "gates": [
+      {
+        "effect": "floor_needs_information",
+        "evidence_refs": [
+          "/evidence/subject"
+        ],
+        "id": "no_package_identified",
+        "rationale": "the affected package is identified",
+        "triggered": false
+      },
+      {
+        "effect": "floor_needs_information",
+        "evidence_refs": [
+          "/evidence/testing"
+        ],
+        "id": "no_testing_evidence",
+        "rationale": "the bug links testing evidence",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/flavours"
+        ],
+        "id": "flavour_ack_outstanding",
+        "rationale": "no cross-flavour acknowledgement is outstanding",
+        "triggered": false
+      },
+      {
+        "effect": "floor_needs_information",
+        "evidence_refs": [
+          "/evidence/release_context"
+        ],
+        "id": "after_final_freeze",
+        "rationale": "the request is within the ordinary freeze window",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/release_context"
+        ],
+        "id": "before_feature_freeze",
+        "rationale": "the target release is past Feature Freeze",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/subject"
+        ],
+        "id": "unrecoverable_failure_mode",
+        "rationale": "a regression here would be fixable by an SRU",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/injection"
+        ],
+        "id": "suspicious_bug_text",
+        "rationale": "nothing in the bug text resembles an attempt to steer the reviewer",
+        "triggered": false
+      },
+      {
+        "effect": "cap_confidence",
+        "evidence_refs": [
+          "/evidence/unavailable"
+        ],
+        "id": "evidence_unavailable",
+        "rationale": "could not consult seeds, so this assessment rests on incomplete evidence",
+        "triggered": true
+      }
+    ],
+    "score": 53
+  },
+  "provenance": {
+    "generated_at": "2026-10-02T07:27:23Z",
+    "harness": null,
+    "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
+    "policy_version": "1.0.0",
+    "review_key": "sha256:6a0edd800c5a9e588306912a8485cfdd3d2664cc66cc034d6d267333075f1ac0",
+    "risk_algorithm_version": "risk/1.2.0",
+    "run_id": "run-20261002T072713Z",
+    "tool_version": "0.1.0"
+  },
+  "record_id": "2153838/decided",
+  "risk": {
+    "algorithm_version": "risk/1.2.0",
+    "band": "LOW",
+    "components": [],
+    "confidence_ceiling": "HIGH",
+    "decision_floor": null,
+    "gates": [],
+    "score": 0
+  },
+  "schema_version": "1.0.0",
+  "status": "SUPERSEDED_BY_HUMAN"
+}

@@ -1,9 +1,19 @@
 {
   "agreed": 0,
   "comparable": 0,
-  "decided": 11,
+  "decided": 12,
   "rate": null,
   "recent": [
+    {
+      "agreed": null,
+      "bug_id": 2153838,
+      "decided_at": "2026-10-02T07:27:19Z",
+      "ours": null,
+      "risk_band": "HIGH",
+      "theirs": "APPROVED",
+      "title": "FFe: cwdaemon: System V script needs to be migrated to systemd service",
+      "url": "https://bugs.launchpad.net/bugs/2153838"
+    },
     {
       "agreed": null,
       "bug_id": 2169008,
