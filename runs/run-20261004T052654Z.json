@@ -1,0 +1,24 @@
+{
+  "archived": [],
+  "deferred_budget": [],
+  "errors": [],
+  "finished_at": "2026-10-04T05:27:01Z",
+  "lessons_learned": [],
+  "llm_calls": 0,
+  "process_gaps": [
+    2167482,
+    2167484,
+    2167636,
+    2168149
+  ],
+  "queue_size": 1,
+  "reviewed": [],
+  "run_id": "run-20261004T052654Z",
+  "skipped_unchanged": [
+    2169312
+  ],
+  "started_at": "2026-10-04T05:26:54Z",
+  "unavailable_sources": [
+    "seeds"
+  ]
+}
