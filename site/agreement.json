@@ -1,9 +1,19 @@
 {
   "agreed": 0,
   "comparable": 0,
-  "decided": 12,
+  "decided": 13,
   "rate": null,
   "recent": [
+    {
+      "agreed": null,
+      "bug_id": 2169312,
+      "decided_at": "2026-10-05T08:46:49Z",
+      "ours": null,
+      "risk_band": "HIGH",
+      "theirs": "APPROVED",
+      "title": "FFe: Sync tempest 1:47.0.0-2 (universe) from Debian unstable (main)",
+      "url": "https://bugs.launchpad.net/bugs/2169312"
+    },
     {
       "agreed": null,
       "bug_id": 2153838,
