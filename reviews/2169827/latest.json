@@ -1,0 +1,459 @@
+{
+  "assessment": null,
+  "evidence": {
+    "bug": {
+      "comments": [
+        {
+          "author": "justdenis",
+          "author_is_release_team": false,
+          "content": "## FFE ##\n\nRelease 0.17.0 of adsys includes bug fixes, quality-of-life changes, and new features customers requested and are already using through PPAs. To avoid users relying on PPAs as their source (and to avoid multiple versions across PPAs), we'd like to request an FFE for this release.\n\nThe most notable change in this version is the addition of a new certificate auto-enrollment method through LDAP and MS-ICPR, implemented fully in Go. Although this is a big diff, this feature requires a Pro subscription, so it won't have any effect for any users in Stonking.\n\nSome features of this release, such as supporting dynamic values when configuring GPOs, asset normalization (e.g., replacing CRLF with LF in text files), and querying the global catalog when fetching GPOs, are already being used by customers in a custom release made for field engineering.\n\nThis release also contains very important bug fixes that we intend to SRU to our LTS releases later in the cycle, such as the fix for the gdm greeter sessions.\n\nAdsys is not a seeded package, so this release will not impact Stonking's iso at all. Also, this is an enterprise-focused package, so it's very unlikely that any of its users would be running an interim release (and most of adsys' features require an active Pro subscription).\n\nHere's the full changelog of the release\n\nadsys (0.17.0) stonking; urgency=medium\n\n  * New upstream release\n  * Add native certificate enrollment against AD CS over LDAP and MS-ICPR,\n    removing the need for python3-cepces:\n    - Let AD decide which certificate templates the machine may enroll\n    - Bootstrap trust only against CAs adsys installed\n    - Manage enrolled certificates with the new adsysctl certificate\n      commands\n    - Default fresh installs to the native backend, leaving existing\n      installations on their current configuration\n  * Add support for dynamic values in policy entries\n  * Query the Global Catalog when fetching GPOs, fixing policy refresh for\n    users belonging to groups from another domain of the forest\n  * Normalize downloaded assets to Unix format, so scripts and AppArmor\n    profiles authored on Windows are no longer rejected because of CRLF\n    line endings or a UTF-8 BOM\n  * Normalize the end of the generated sudoers file\n  * Fix GDM integration issues:\n    - Stop denying greeter sessions running as a dynamic user, as\n      introduced in GDM 49\n    - Seed generated dconf profiles from the matching system profile, so\n      the greeter no longer loses its vendor defaults\n  * Fix dconf policies not being applied, and user settings not being\n    saved, for users logging in with their short name: the PAM module now\n    uses the dconf profile name normalized by adsysd, and no longer points\n    DCONF_PROFILE to a profile that does not exist (LP: #2107971)\n  * Report dconf update failures leaving the ADSys databases missing or\n    stale instead of treating the policies as applied, and only warn when\n    unrelated databases fail so they cannot block logins\n  * Match certificate auto-enrollment registry keys case-insensitively, so\n    settings from GPOs storing them with a different casing are no longer\n    silently ignored (LP: #2169074)\n  * Fix GPO lookup failures when the SSSD ad_server option lists several\n    servers, falling back to the next one if a domain controller is\n    unreachable\n  * Reject unsupported Kerberos credential cache types, such as KCM: or\n    KEYRING:, instead of treating them as file paths or falling back to a\n    stale ticket cache\n  * Retry policy scripts the kernel still reports as busy, so they are no\n    longer occasionally skipped\n  * Fix a deadlock that could hang adsysctl service cat along with the\n    daemon output forwarding\n  * Add missing python3-requests dependency\n  * Install binaries, systemd units and the PAM module in their canonical\n    /usr locations instead of the aliased /sbin and /lib directories, as\n    required by DEP-17 (LP: #2139162)\n  * Migrate the adwatchd TUI to Bubble Tea v2\n  * Bump Go version to 1.26\n  * Refresh policy definition files\n  * Documentation updates:\n    - Added explanation of dynamic policy values\n    - Added meta descriptions to documentation pages\n    - Clarified language on network shares\n    - Documented native certificate enrollment and its commands\n    - Documented that only file-backed Kerberos caches are supported\n    - Dropped packagekit-tools from the getting started tutorial\n    - Fixed broken links and sitemap generation\n    - Implemented new homepage structure\n    - Migrated documentation tooling to Starter Pack v2\n    - Removed in-docs release notes\n    - Restructured certificates documentation\n    - Updated configuration for the documentation URL migration\n  * CI and quality of life changes not impacting package functionality:\n    - Added AGENTS.md instructions\n    - Allowed labeled pull requests to run the end-to-end tests\n    - Got the end-to-end suite running again and made it validate the\n      certificate backend actually under test\n    - Fixed the TICS report action\n    - Fixed d/copyright with helper script\n    - Fixed typos and grammar errors in code comments and messages\n    - Improved test stability on CI\n    - Properly disable Kerberos usage in AD tests\n    - Skipped the patches tests when no debian directory exists\n  * Bump dependencies to latest:\n    - charm.land/bubbles/v2 v2.2.1\n    - charm.land/bubbletea/v2 v2.0.10\n    - charm.land/lipgloss/v2 v2.0.6\n    - github.com/charmbracelet/glamour v1.0.0\n    - github.com/coreos/go-systemd/v22 v22.7.0\n    - github.com/fatih/color v1.19.0\n    - github.com/fsnotify/fsnotify v1.10.1\n    - github.com/godbus/dbus/v5 v5.2.2\n    - github.com/kardianos/service v1.3.0\n    - github.com/maruel/natural v1.3.0\n    - github.com/oiweiwei/go-msrpc v1.6.4\n    - github.com/oiweiwei/gokrb5.fork/v9 v9.0.8\n    - github.com/pkg/sftp v1.13.11\n    - github.com/sirupsen/logrus v1.10.2\n    - github.com/spf13/cobra v1.10.2\n    - github.com/stretchr/testify v1.12.1\n    - golang.org/x/crypto v0.57.0\n    - golang.org/x/exp v0.0.0-20231006140011-7918f672742d\n    - golang.org/x/sync v0.23.0\n    - golang.org/x/sys v0.48.0\n    - golang.org/x/text v0.42.0\n    - google.golang.org/grpc v1.83.2\n    - google.golang.org/grpc/cmd/protoc-gen-go-grpc v1.6.2\n    - google.golang.org/protobuf v1.36.12\n    - gopkg.in/ini.v1 v1.67.3\n    - github.com/golangci/golangci-lint/v2 v2.14.0\n    - actions/checkout v7\n    - actions/download-artifact v8\n    - actions/setup-go v7\n    - actions/upload-artifact v7\n    - azure/login v3\n    - codecov/codecov-action v7\n    - jidicula/clang-format-action v4.18.0\n    - peter-evans/create-pull-request v8\n    - softprops/action-gh-release v3\n    - tiobe/tics-github-action v4\n\n -- Denison Barbosa <email address hidden>  Tue, 06 Oct 2026 11:19:20 -0400\n \n\nOur changes are covered by both unit and integration tests, and we have over 90% test coverage. CI results can be checked at: https://github.com/ubuntu/adsys/actions/runs/37459942591/job/112282638180 and https://github.com/ubuntu/adsys/actions/runs/37485916018/job/112346579890. The latest e2e failures are not related to the changes introduced by this release.\n \nBuilds can be checked at: https://launchpad.net/~justdenis/+archive/ubuntu/adsys-candidate/+packages",
+          "content_sha": "a98dfa60100522e67ac35d041351ceb8a7f17b3daf07fd346df557a11c8f8abe",
+          "date_created": "2026-10-07T10:36:45.754756+00:00",
+          "index": 0,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/adsys/+bug/2169827/comments/0"
+        }
+      ],
+      "date_created": "2026-10-07T10:36:45.754756+00:00",
+      "date_last_message": "2026-10-07T10:36:45.754756+00:00",
+      "date_last_updated": "2026-10-07T10:58:18.674497+00:00",
+      "description": "## FFE ##\n\nRelease 0.17.0 of adsys includes bug fixes, quality-of-life changes, and new features customers requested and are already using through PPAs. To avoid users relying on PPAs as their source (and to avoid multiple versions across PPAs), we'd like to request an FFE for this release.\n\nThe most notable change in this version is the addition of a new certificate auto-enrollment method through LDAP and MS-ICPR, implemented fully in Go. Although this is a big diff, this feature requires a Pro subscription, so it won't have any effect for any users in Stonking. This is an opt-in feature, so it won't impact any existing installations of adsys itself unless the user manually switches to it through adsys' configuration files.\n\nSome features of this release, such as supporting dynamic values when configuring GPOs, asset normalization (e.g., replacing CRLF with LF in text files), and querying the global catalog when fetching GPOs, are already being used by customers in a custom release made for field engineering.\n\nThis release also contains very important bug fixes that we intend to SRU to our LTS releases later in the cycle, such as the fix for the gdm greeter sessions.\n\nAdsys is not a seeded package, so this release will not impact Stonking's iso at all. Also, this is an enterprise-focused package, so it's very unlikely that any of its users would be running an interim release (and most of adsys' features require an active Pro subscription).\n\nHere's the full changelog of the release\n\nadsys (0.17.0) stonking; urgency=medium\n\n  * New upstream release\n  * Add native certificate enrollment against AD CS over LDAP and MS-ICPR,\n    removing the need for python3-cepces:\n    - Let AD decide which certificate templates the machine may enroll\n    - Bootstrap trust only against CAs adsys installed\n    - Manage enrolled certificates with the new adsysctl certificate\n      commands\n    - Default fresh installs to the native backend, leaving existing\n      installations on their current configuration\n  * Add support for dynamic values in policy entries\n  * Query the Global Catalog when fetching GPOs, fixing policy refresh for\n    users belonging to groups from another domain of the forest\n  * Normalize downloaded assets to Unix format, so scripts and AppArmor\n    profiles authored on Windows are no longer rejected because of CRLF\n    line endings or a UTF-8 BOM\n  * Normalize the end of the generated sudoers file\n  * Fix GDM integration issues:\n    - Stop denying greeter sessions running as a dynamic user, as\n      introduced in GDM 49\n    - Seed generated dconf profiles from the matching system profile, so\n      the greeter no longer loses its vendor defaults\n  * Fix dconf policies not being applied, and user settings not being\n    saved, for users logging in with their short name: the PAM module now\n    uses the dconf profile name normalized by adsysd, and no longer points\n    DCONF_PROFILE to a profile that does not exist (LP: #2107971)\n  * Report dconf update failures leaving the ADSys databases missing or\n    stale instead of treating the policies as applied, and only warn when\n    unrelated databases fail so they cannot block logins\n  * Match certificate auto-enrollment registry keys case-insensitively, so\n    settings from GPOs storing them with a different casing are no longer\n    silently ignored (LP: #2169074)\n  * Fix GPO lookup failures when the SSSD ad_server option lists several\n    servers, falling back to the next one if a domain controller is\n    unreachable\n  * Reject unsupported Kerberos credential cache types, such as KCM: or\n    KEYRING:, instead of treating them as file paths or falling back to a\n    stale ticket cache\n  * Retry policy scripts the kernel still reports as busy, so they are no\n    longer occasionally skipped\n  * Fix a deadlock that could hang adsysctl service cat along with the\n    daemon output forwarding\n  * Add missing python3-requests dependency\n  * Install binaries, systemd units and the PAM module in their canonical\n    /usr locations instead of the aliased /sbin and /lib directories, as\n    required by DEP-17 (LP: #2139162)\n  * Migrate the adwatchd TUI to Bubble Tea v2\n  * Bump Go version to 1.26\n  * Refresh policy definition files\n  * Documentation updates:\n    - Added explanation of dynamic policy values\n    - Added meta descriptions to documentation pages\n    - Clarified language on network shares\n    - Documented native certificate enrollment and its commands\n    - Documented that only file-backed Kerberos caches are supported\n    - Dropped packagekit-tools from the getting started tutorial\n    - Fixed broken links and sitemap generation\n    - Implemented new homepage structure\n    - Migrated documentation tooling to Starter Pack v2\n    - Removed in-docs release notes\n    - Restructured certificates documentation\n    - Updated configuration for the documentation URL migration\n  * CI and quality of life changes not impacting package functionality:\n    - Added AGENTS.md instructions\n    - Allowed labeled pull requests to run the end-to-end tests\n    - Got the end-to-end suite running again and made it validate the\n      certificate backend actually under test\n    - Fixed the TICS report action\n    - Fixed d/copyright with helper script\n    - Fixed typos and grammar errors in code comments and messages\n    - Improved test stability on CI\n    - Properly disable Kerberos usage in AD tests\n    - Skipped the patches tests when no debian directory exists\n  * Bump dependencies to latest:\n    - charm.land/bubbles/v2 v2.2.1\n    - charm.land/bubbletea/v2 v2.0.10\n    - charm.land/lipgloss/v2 v2.0.6\n    - github.com/charmbracelet/glamour v1.0.0\n    - github.com/coreos/go-systemd/v22 v22.7.0\n    - github.com/fatih/color v1.19.0\n    - github.com/fsnotify/fsnotify v1.10.1\n    - github.com/godbus/dbus/v5 v5.2.2\n    - github.com/kardianos/service v1.3.0\n    - github.com/maruel/natural v1.3.0\n    - github.com/oiweiwei/go-msrpc v1.6.4\n    - github.com/oiweiwei/gokrb5.fork/v9 v9.0.8\n    - github.com/pkg/sftp v1.13.11\n    - github.com/sirupsen/logrus v1.10.2\n    - github.com/spf13/cobra v1.10.2\n    - github.com/stretchr/testify v1.12.1\n    - golang.org/x/crypto v0.57.0\n    - golang.org/x/exp v0.0.0-20231006140011-7918f672742d\n    - golang.org/x/sync v0.23.0\n    - golang.org/x/sys v0.48.0\n    - golang.org/x/text v0.42.0\n    - google.golang.org/grpc v1.83.2\n    - google.golang.org/grpc/cmd/protoc-gen-go-grpc v1.6.2\n    - google.golang.org/protobuf v1.36.12\n    - gopkg.in/ini.v1 v1.67.3\n    - github.com/golangci/golangci-lint/v2 v2.14.0\n    - actions/checkout v7\n    - actions/download-artifact v8\n    - actions/setup-go v7\n    - actions/upload-artifact v7\n    - azure/login v3\n    - codecov/codecov-action v7\n    - jidicula/clang-format-action v4.18.0\n    - peter-evans/create-pull-request v8\n    - softprops/action-gh-release v3\n    - tiobe/tics-github-action v4\n\n -- Denison Barbosa <email address hidden>  Tue, 06 Oct 2026 11:19:20 -0400\n\nOur changes are covered by both unit and integration tests, and we have over 90% test coverage. CI results can be checked at: https://github.com/ubuntu/adsys/actions/runs/37459942591/job/112282638180 and https://github.com/ubuntu/adsys/actions/runs/37485916018/job/112346579890. The latest e2e failures are not related to the changes introduced by this release.\n\nBuilds can be checked at: https://launchpad.net/~justdenis/+archive/ubuntu/adsys-candidate/+packages",
+      "description_sha": "23ae783a90cca5d5e1ccaf489ec2612c8a7dcc15f95e5bbd450f86a7ff12adb2",
+      "discovered_via": "release-team-queue",
+      "id": 2169827,
+      "message_count": 1,
+      "release_team_subscribed": true,
+      "reporter": "justdenis",
+      "subscribers": [
+        "justdenis",
+        "ubuntu-release"
+      ],
+      "tags": [],
+      "tasks": [
+        {
+          "assignee": null,
+          "importance": "Undecided",
+          "status": "New",
+          "target": "adsys (Ubuntu)"
+        }
+      ],
+      "title": "[FFE] Release adsys 0.17.0",
+      "url": "https://bugs.launchpad.net/bugs/2169827"
+    },
+    "fingerprint": "sha256:35a251450fea839203ef75a8b68f684a940b7bf916de8e16befd75029af9edf9",
+    "flavours": {
+      "ack_required_from": [],
+      "acks": [],
+      "affected_flavours": [],
+      "impact": "CORE",
+      "requester_is_flavour_lead": null,
+      "requesting_flavour": null
+    },
+    "injection_signals": [],
+    "packages": [
+      {
+        "archive": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-10-07T11:58:49Z",
+            "duration_ms": 299,
+            "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=adsys&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fstonking&status=Published&order_by_date=true",
+            "method": "http_get",
+            "raw_ref": "sha256:06b402cae9004447788c3d69f4ab24585ce1f875f73aa753438b5581b2ca5d91",
+            "raw_truncated": false,
+            "source_id": "launchpad.archive"
+          },
+          "status": "OK",
+          "value": {
+            "binaries": [
+              "adsys",
+              "adsys-windows"
+            ],
+            "component": "main",
+            "in_archive": true,
+            "pocket": "Release",
+            "source": "adsys",
+            "version": "0.16.4ubuntu2"
+          }
+        },
+        "build_rdepends": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-10-07T11:58:51Z",
+            "duration_ms": 113,
+            "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/source/src:adsys",
+            "method": "http_get",
+            "raw_ref": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "raw_truncated": false,
+            "source_id": "rdepends.build"
+          },
+          "status": "OK",
+          "value": {
+            "arch": "source",
+            "bucket": "0",
+            "kind": "build",
+            "sample": [],
+            "seeded_rdeps": [],
+            "total": 0
+          }
+        },
+        "name": "adsys",
+        "rdepends": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-10-07T11:58:50Z",
+            "duration_ms": 122,
+            "locator": "http://qa.ubuntuwire.org/rdepends/v1/stonking/any/src:adsys",
+            "method": "http_get",
+            "raw_ref": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "raw_truncated": false,
+            "source_id": "rdepends.binary"
+          },
+          "status": "OK",
+          "value": {
+            "arch": "any",
+            "bucket": "0",
+            "kind": "binary",
+            "sample": [],
+            "seeded_rdeps": [],
+            "total": 0
+          }
+        },
+        "seeds": {
+          "note": "seed index looks incomplete (index covers only 7 flavours); the listed images are real but there may be more",
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-10-07T11:58:50Z",
+            "duration_ms": 493,
+            "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
+            "method": "http_get",
+            "raw_ref": "sha256:1791a41d6cfd32ac089adb16019ee3ff72b6447018cbbc350918a4e344f3ba3d",
+            "raw_truncated": false,
+            "source_id": "seeds"
+          },
+          "status": "OK",
+          "value": {
+            "binaries_checked": [
+              "adsys",
+              "adsys-windows"
+            ],
+            "binaries_seeded": [
+              "adsys"
+            ],
+            "flavours": [
+              "ubuntu"
+            ],
+            "images": [
+              [
+                "ubuntu",
+                "supported"
+              ]
+            ],
+            "is_core": true
+          }
+        }
+      }
+    ],
+    "release_context": {
+      "note": null,
+      "provenance": {
+        "cache": "fresh",
+        "checked_at": "2026-10-07T11:58:49Z",
+        "duration_ms": 312,
+        "locator": "https://documentation.ubuntu.com/release-notes/26.10/schedule/",
+        "method": "http_get",
+        "raw_ref": "sha256:8d4bea525b411c0da764446ecbedc3184874eb58013c124cb9a1bf7a49e73562",
+        "raw_truncated": false,
+        "source_id": "calendar.schedule"
+      },
+      "status": "OK",
+      "value": {
+        "days_bucket": "14-8",
+        "days_since_feature_freeze": 48,
+        "days_to_release": 8,
+        "derivation": "schedule-page",
+        "feature_freeze": "2026-08-20",
+        "freeze_window_elapsed_pct": 86,
+        "milestones": [
+          {
+            "date": "2026-04-30",
+            "name": "Toolchain Uploaded"
+          },
+          {
+            "date": "2026-07-02",
+            "name": "Ubuntu Testing Week (optional)"
+          },
+          {
+            "date": "2026-08-06",
+            "name": "Expected Glibc 2.44 merge"
+          },
+          {
+            "date": "2026-08-13",
+            "name": "Expected LLVM default transition"
+          },
+          {
+            "date": "2026-08-20",
+            "name": "Debian Import Freeze"
+          },
+          {
+            "date": "2026-08-20",
+            "name": "Feature Freeze"
+          },
+          {
+            "date": "2026-09-10",
+            "name": "UI Freeze"
+          },
+          {
+            "date": "2026-09-17",
+            "name": "Documentation String Freeze"
+          },
+          {
+            "date": "2026-09-17",
+            "name": "Kernel Feature Freeze"
+          },
+          {
+            "date": "2026-09-21",
+            "name": "Beta Freeze"
+          },
+          {
+            "date": "2026-09-21",
+            "name": "Hardware Enablement Freeze"
+          },
+          {
+            "date": "2026-09-24",
+            "name": "Beta"
+          },
+          {
+            "date": "2026-10-01",
+            "name": "Kernel Freeze"
+          },
+          {
+            "date": "2026-10-01",
+            "name": "Non Language Pack Translation Deadline"
+          },
+          {
+            "date": "2026-10-08",
+            "name": "Final Freeze"
+          },
+          {
+            "date": "2026-10-08",
+            "name": "Language Pack Translation Deadline"
+          },
+          {
+            "date": "2026-10-08",
+            "name": "Release Candidate"
+          },
+          {
+            "date": "2026-10-15",
+            "name": "Final Release"
+          }
+        ],
+        "phase": "KERNEL_FREEZE",
+        "release_date": "2026-10-15",
+        "release_type": "INTERIM",
+        "series": "stonking",
+        "version": "26.10"
+      }
+    },
+    "subject": {
+      "derivation": "packages:bug-tasks; series:mentioned-in-bug-text",
+      "ffe_kind": "new-upstream",
+      "packages": [
+        "adsys"
+      ],
+      "target_series": "stonking"
+    },
+    "testing": {
+      "autopkgtest": "FOUND_UNVERIFIED",
+      "build": "ABSENT",
+      "corroborated": true,
+      "items": [
+        {
+          "detail": "PPA ~justdenis/adsys-candidate exists on Launchpad",
+          "kind": "ppa",
+          "locator": "https://launchpad.net/~justdenis/+archive/ubuntu/adsys-candidate",
+          "source": "description",
+          "state": "FOUND_VERIFIED"
+        },
+        {
+          "detail": "linked CI run",
+          "kind": "ci",
+          "locator": "https://github.com/ubuntu/adsys/actions/runs/37459942591/job/112282638180",
+          "source": "description",
+          "state": "FOUND_UNVERIFIED"
+        },
+        {
+          "detail": "linked CI run",
+          "kind": "ci",
+          "locator": "https://github.com/ubuntu/adsys/actions/runs/37485916018/job/112346579890.",
+          "source": "description",
+          "state": "FOUND_UNVERIFIED"
+        }
+      ],
+      "ppa": "FOUND_VERIFIED",
+      "test_output": "ABSENT",
+      "unverified_claims": []
+    },
+    "unavailable": []
+  },
+  "human": {
+    "decided": false,
+    "decision": null,
+    "detected_at": null,
+    "final_status": null,
+    "left_queue_at": null
+  },
+  "provenance": {
+    "generated_at": "2026-10-07T11:58:51Z",
+    "harness": null,
+    "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
+    "policy_version": "1.0.0",
+    "review_key": "sha256:2c898cc3d6fa6d634267b9347e90f5fada35b9f360618f68725bc5d1c50b13ba",
+    "risk_algorithm_version": "risk/1.2.0",
+    "run_id": "run-20261007T115843Z",
+    "tool_version": "0.1.0"
+  },
+  "record_id": "2169827/35a251450fea8392",
+  "risk": {
+    "algorithm_version": "risk/1.2.0",
+    "band": "HIGH",
+    "components": [
+      {
+        "evidence_refs": [
+          "/evidence/release_context"
+        ],
+        "max_points": 20,
+        "name": "release_posture",
+        "points": 17,
+        "rationale": "interim release, past kernel freeze, 8 days to release, 86% through the freeze window"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/packages"
+        ],
+        "max_points": 25,
+        "name": "seeded_reach",
+        "points": 25,
+        "rationale": "seeded on a core Ubuntu image, so a regression reaches the default install"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/packages"
+        ],
+        "max_points": 25,
+        "name": "dependency_reach",
+        "points": 0,
+        "rationale": "nothing in the archive depends on this package"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/packages"
+        ],
+        "max_points": 10,
+        "name": "archive_standing",
+        "points": 10,
+        "rationale": "in main or restricted, so it carries a Canonical support commitment"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/subject"
+        ],
+        "max_points": 5,
+        "name": "change_shape",
+        "points": 2,
+        "rationale": "a new upstream to an existing package"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/testing"
+        ],
+        "max_points": 15,
+        "name": "unvalidated_change",
+        "points": 5,
+        "rationale": "the bug links a PPA, test results"
+      }
+    ],
+    "confidence_ceiling": "HIGH",
+    "decision_floor": null,
+    "gates": [
+      {
+        "effect": "floor_needs_information",
+        "evidence_refs": [
+          "/evidence/subject"
+        ],
+        "id": "no_package_identified",
+        "rationale": "the affected package is identified",
+        "triggered": false
+      },
+      {
+        "effect": "floor_needs_information",
+        "evidence_refs": [
+          "/evidence/testing"
+        ],
+        "id": "no_testing_evidence",
+        "rationale": "the bug links testing evidence",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/flavours"
+        ],
+        "id": "flavour_ack_outstanding",
+        "rationale": "no cross-flavour acknowledgement is outstanding",
+        "triggered": false
+      },
+      {
+        "effect": "floor_needs_information",
+        "evidence_refs": [
+          "/evidence/release_context"
+        ],
+        "id": "after_final_freeze",
+        "rationale": "the request is within the ordinary freeze window",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/release_context"
+        ],
+        "id": "before_feature_freeze",
+        "rationale": "the target release is past Feature Freeze",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/subject"
+        ],
+        "id": "unrecoverable_failure_mode",
+        "rationale": "a regression here would be fixable by an SRU",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/injection"
+        ],
+        "id": "suspicious_bug_text",
+        "rationale": "nothing in the bug text resembles an attempt to steer the reviewer",
+        "triggered": false
+      },
+      {
+        "effect": "cap_confidence",
+        "evidence_refs": [
+          "/evidence/unavailable"
+        ],
+        "id": "evidence_unavailable",
+        "rationale": "every evidence source was available",
+        "triggered": false
+      }
+    ],
+    "score": 59
+  },
+  "schema_version": "1.0.0",
+  "status": "EVIDENCE_ONLY"
+}

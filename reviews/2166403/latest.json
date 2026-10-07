@@ -1,0 +1,606 @@
+{
+  "assessment": null,
+  "evidence": {
+    "bug": {
+      "comments": [
+        {
+          "author": "katie-may",
+          "author_is_release_team": false,
+          "content": "New Snapd release 2.78 is required for jammy, noble, resolute, stonking.\n\nSnapd 2.78 is the latest upstream release. It follows the previous Ubuntu release snapd <previous release version>.\n\nThe Snapd package deviates from the standard SRU process. The following special SRU process was followed: <link to relevant SRU process doc>\n\nRelease preparation: <link to release PR>\nRelease preparation test results: <link to test workflow results in GitHub>\nFailure analysis: <link to comment on PR explaining failures>\n\nRelease notes: <link to NEWS.md file from PR>\n\nPlease refer to snapd release notes documentation (https://github.com/canonical/snapd/blob/master/RELEASE.md) for details on how this is assembled.\n\nLaunchpad bugs addressed: https://launchpad.net/snapd/+milestone/2.78\n\nContent overview: <summary list of release content>\n\nAreas of potential regressions: <only include if necessary>\n\nSource packages on ppa:snappy-dev/image for upload to -proposed:\n<list short name releases and the link for their deb packages>\n\nValidation already completed:\n\n- Release preparation test results: <link to release PR run results>\n- QA Beta validation <link to beta validation Jira ticket>\n- Certification validation: <link to test observer results> (need VPN)\n\nVerification required:\n\n- Verify LP bugs for jammy, noble, resolute, stonking\n- Perform release upgrades from <short name of earliest supported target release> to <short name of latest supported release>\n",
+          "content_sha": "b336031ec021f0464c2bc924d2ee9d2f0006fddee32fd8f4c79ef168e84ad2be",
+          "date_created": "2026-09-03T16:57:34.768798+00:00",
+          "index": 0,
+          "url": "https://bugs.launchpad.net/ubuntu/+source/snapd/+bug/2166403/comments/0"
+        }
+      ],
+      "date_created": "2026-09-03T16:57:34.768798+00:00",
+      "date_last_message": "2026-09-03T16:57:34.768798+00:00",
+      "date_last_updated": "2026-10-07T09:06:38.661501+00:00",
+      "description": "New Snapd release 2.78 is required for jammy, noble, resolute, stonking.\n\nSnapd 2.78 is the latest upstream release. It follows the previous Ubuntu release snapd 2.77.1\n\nThe Snapd package deviates from the standard SRU process. The following special SRU process was followed: https://github.com/ubuntu/ubuntu-project-docs/pull/542\n\nRelease preparation: https://github.com/canonical/snapd/pull/17585\nRelease preparation test results: https://github.com/canonical/snapd/actions/runs/33890426609\nFailure analysis: https://github.com/canonical/snapd/pull/17585#issuecomment-5568882382\n\nRelease notes: https://github.com/canonical/snapd/pull/17585/changes#diff-51920e95310ebfbc1ae31709f3b95f89afffbf4f1a6e38e8b2b406e2fb6197ea\n\nPlease refer to snapd release notes documentation (https://github.com/canonical/snapd/blob/master/RELEASE.md) for details on how this is assembled.\n\nLaunchpad bugs addressed: https://launchpad.net/snapd/+milestone/2.78\n\nContent overview:\n\npackaging:\n- introduce a downstream version suffix to manipulate rather than the full version\n- workaround dh_golang, drop prepare-debian-build-tree\n\nother:\n- FDE reprovisioning\n- confdb and remote device management\n- graduating quota-groups features\n- enabling by default refresh-app-awareness-ux\n- improve disk space checks and add disk-reservation.size option\n- snap removal improvements\n- component improvements\n- security logging\n- merge more tools into multi-entry binary\n- fix an issue with little kernel bootloader\n- fix various hybrid remodeling issues\n- improve robustness of seed refresh prerequisites\n- various interface fixes and improvements and added the new ubuntu-drivers-observe interface\n\nSource packages on ppa:snappy-dev/image for upload to -proposed:\n\nstonking https://launchpad.net/~snappy-dev/+archive/ubuntu/image/+sourcepub/18721810/+listing-archive-extra\n\nresolute https://launchpad.net/~snappy-dev/+archive/ubuntu/image/+sourcepub/18721809/+listing-archive-extra\n\nnoble https://launchpad.net/~snappy-dev/+archive/ubuntu/image/+sourcepub/18721808/+listing-archive-extra\n\njammy https://launchpad.net/~snappy-dev/+archive/ubuntu/image/+sourcepub/18721807/+listing-archive-extra\n\nValidation already completed:\n\n- Release preparation test results: https://github.com/canonical/snapd/actions/runs/33890426609\n\nVerification required:\n\n- QA Beta validation https://warthogs.atlassian.net/browse/SNAPDENG-37484\n- Certification validation: https://test-observer.canonical.com/#/snaps/412660 (need VPN)\n- Verify LP bugs for jammy, noble, resolute, stonking\n- Perform release upgrades from jammy to stonking",
+      "description_sha": "0ca3e7ac93f7538721c8a0d88a8abffbf0598133ff25ce3cda1ccbcb6d206368",
+      "discovered_via": "release-team-queue",
+      "id": 2166403,
+      "message_count": 1,
+      "release_team_subscribed": true,
+      "reporter": "katie-may",
+      "subscribers": [
+        "katie-may",
+        "sru-verification-interest-group-snapd",
+        "ubuntu-release",
+        "ubuntu-sru"
+      ],
+      "tags": [],
+      "tasks": [
+        {
+          "assignee": null,
+          "importance": "Undecided",
+          "status": "In Progress",
+          "target": "snapd (Ubuntu)"
+        },
+        {
+          "assignee": null,
+          "importance": "Undecided",
+          "status": "In Progress",
+          "target": "snapd (Ubuntu Jammy)"
+        },
+        {
+          "assignee": null,
+          "importance": "Undecided",
+          "status": "In Progress",
+          "target": "snapd (Ubuntu Noble)"
+        },
+        {
+          "assignee": null,
+          "importance": "Undecided",
+          "status": "In Progress",
+          "target": "snapd (Ubuntu Resolute)"
+        },
+        {
+          "assignee": null,
+          "importance": "Undecided",
+          "status": "In Progress",
+          "target": "snapd (Ubuntu Stonking)"
+        }
+      ],
+      "title": "[FFe] [SRU] 2.78",
+      "url": "https://bugs.launchpad.net/bugs/2166403"
+    },
+    "fingerprint": "sha256:c6e9f38a2bff0c1d01a047be9e73163b9269819b0dc3fc0e51b05d344faea3a5",
+    "flavours": {
+      "ack_required_from": [],
+      "acks": [],
+      "affected_flavours": [
+        "ubuntu-budgie"
+      ],
+      "impact": "CORE",
+      "requester_is_flavour_lead": false,
+      "requesting_flavour": null
+    },
+    "injection_signals": [],
+    "packages": [
+      {
+        "archive": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-10-07T11:58:54Z",
+            "duration_ms": 286,
+            "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=snapd&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fjammy&status=Published&order_by_date=true",
+            "method": "http_get",
+            "raw_ref": "sha256:d01bf5cdf4dab08db0d3096fedc65f20ed014f28104980b4a4c7d6e39c3768d7",
+            "raw_truncated": false,
+            "source_id": "launchpad.archive"
+          },
+          "status": "OK",
+          "value": {
+            "binaries": [
+              "golang-github-snapcore-snapd-dev",
+              "golang-github-ubuntu-core-snappy-dev",
+              "snap-confine",
+              "snapd",
+              "snapd-xdg-open",
+              "ubuntu-core-launcher",
+              "ubuntu-core-snapd-units",
+              "ubuntu-snappy",
+              "ubuntu-snappy-cli"
+            ],
+            "component": "main",
+            "in_archive": true,
+            "pocket": "Updates",
+            "source": "snapd",
+            "version": "2.76.3+ubuntu22.04"
+          }
+        },
+        "build_rdepends": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-10-07T11:58:55Z",
+            "duration_ms": 112,
+            "locator": "http://qa.ubuntuwire.org/rdepends/v1/jammy/source/src:snapd",
+            "method": "http_get",
+            "raw_ref": "sha256:6db5bd16ac663e09b7ec6a87becf52217eb154b06b6cdabbd473be5670cba481",
+            "raw_truncated": false,
+            "source_id": "rdepends.build"
+          },
+          "status": "OK",
+          "value": {
+            "arch": "source",
+            "bucket": "1-5",
+            "kind": "build",
+            "sample": [
+              "ubuntu-image"
+            ],
+            "seeded_rdeps": [],
+            "total": 1
+          }
+        },
+        "name": "snapd",
+        "rdepends": {
+          "note": null,
+          "provenance": {
+            "cache": "fresh",
+            "checked_at": "2026-10-07T11:58:55Z",
+            "duration_ms": 125,
+            "locator": "http://qa.ubuntuwire.org/rdepends/v1/jammy/any/src:snapd",
+            "method": "http_get",
+            "raw_ref": "sha256:fefa2a180ce3196a53e4b6a39afa3b3d4766dd6a6b288ef8b7c526d2ff1a7c10",
+            "raw_truncated": false,
+            "source_id": "rdepends.binary"
+          },
+          "status": "OK",
+          "value": {
+            "arch": "any",
+            "bucket": "21-100",
+            "kind": "binary",
+            "sample": [
+              "gnome-software-plugin-snap",
+              "kubuntu-desktop",
+              "livecd-rootfs",
+              "lubuntu-desktop",
+              "plasma-discover-backend-snap",
+              "ubuntu-budgie-desktop",
+              "ubuntu-budgie-desktop-raspi",
+              "ubuntu-desktop",
+              "ubuntu-desktop-minimal",
+              "ubuntu-desktop-raspi",
+              "ubuntu-image",
+              "ubuntu-mate-core",
+              "ubuntu-mate-desktop",
+              "ubuntu-server",
+              "ubuntu-server-minimal",
+              "ubuntu-server-raspi",
+              "ubuntu-unity-desktop",
+              "ubuntu-wsl",
+              "ubuntukylin-desktop",
+              "ubuntustudio-desktop",
+              "vanilla-gnome-desktop",
+              "xubuntu-core",
+              "xubuntu-desktop"
+            ],
+            "seeded_rdeps": [],
+            "total": 23
+          }
+        },
+        "seeds": {
+          "note": "seed index looks incomplete (index covers only 7 flavours); the listed images are real but there may be more",
+          "provenance": {
+            "cache": "cached",
+            "checked_at": "2026-10-07T11:58:55Z",
+            "duration_ms": 0,
+            "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
+            "method": "http_get",
+            "raw_ref": "sha256:1791a41d6cfd32ac089adb16019ee3ff72b6447018cbbc350918a4e344f3ba3d",
+            "raw_truncated": false,
+            "source_id": "seeds"
+          },
+          "status": "OK",
+          "value": {
+            "binaries_checked": [
+              "golang-github-snapcore-snapd-dev",
+              "golang-github-ubuntu-core-snappy-dev",
+              "snap-confine",
+              "snapd",
+              "snapd-xdg-open",
+              "ubuntu-core-launcher",
+              "ubuntu-core-snapd-units",
+              "ubuntu-snappy",
+              "ubuntu-snappy-cli"
+            ],
+            "binaries_seeded": [
+              "golang-github-snapcore-snapd-dev",
+              "snapd"
+            ],
+            "flavours": [
+              "ubuntu-budgie",
+              "ubuntu-core-installer"
+            ],
+            "images": [
+              [
+                "ubuntu-budgie",
+                "supported"
+              ],
+              [
+                "ubuntu-core-installer",
+                "daily-live"
+              ]
+            ],
+            "is_core": true
+          }
+        }
+      }
+    ],
+    "release_context": {
+      "note": null,
+      "provenance": {
+        "cache": "fresh",
+        "checked_at": "2026-10-07T11:58:53Z",
+        "duration_ms": 52,
+        "locator": "https://documentation.ubuntu.com/release-notes/22.04/schedule/",
+        "method": "http_get",
+        "raw_ref": "sha256:f62ba208afa0acddf404d72028e9b00f706640035204e917261db4a3102cf32c",
+        "raw_truncated": false,
+        "source_id": "calendar.schedule"
+      },
+      "status": "OK",
+      "value": {
+        "days_bucket": "post-release",
+        "days_since_feature_freeze": 1686,
+        "days_to_release": -1630,
+        "derivation": "schedule-page",
+        "feature_freeze": "2022-02-24",
+        "freeze_window_elapsed_pct": 100,
+        "milestones": [
+          {
+            "date": "2021-10-21",
+            "name": "Toolchain Uploaded"
+          },
+          {
+            "date": "2021-10-28",
+            "name": "php8.1"
+          },
+          {
+            "date": "2021-11-04",
+            "name": "OpenSSL3"
+          },
+          {
+            "date": "2021-11-18",
+            "name": "Ruby 3.0"
+          },
+          {
+            "date": "2021-12-02",
+            "name": "systemd v249"
+          },
+          {
+            "date": "2021-12-09",
+            "name": "DPDK 21.11"
+          },
+          {
+            "date": "2021-12-16",
+            "name": "binutils 2.38"
+          },
+          {
+            "date": "2021-12-23",
+            "name": "Ubuntu Testing Week (optional)"
+          },
+          {
+            "date": "2022-01-13",
+            "name": "Python 3.10"
+          },
+          {
+            "date": "2022-01-20",
+            "name": "see  this comment"
+          },
+          {
+            "date": "2022-01-20",
+            "name": "~~OpenLDAP 2.6 (tentative; depends on upstream release schedule)~~ – Cancelled"
+          },
+          {
+            "date": "2022-02-03",
+            "name": "Chinese New Year week"
+          },
+          {
+            "date": "2022-02-03",
+            "name": "Glibc 2.35"
+          },
+          {
+            "date": "2022-02-17",
+            "name": "GNOME 42 Beta"
+          },
+          {
+            "date": "2022-02-17",
+            "name": "Golang 1.18"
+          },
+          {
+            "date": "2022-02-24",
+            "name": "20.04.4 Point Release"
+          },
+          {
+            "date": "2022-02-24",
+            "name": "Debian Import Freeze"
+          },
+          {
+            "date": "2022-02-24",
+            "name": "Feature Freeze"
+          },
+          {
+            "date": "2022-03-17",
+            "name": "LLVM 14"
+          },
+          {
+            "date": "2022-03-17",
+            "name": "UI Freeze"
+          },
+          {
+            "date": "2022-03-24",
+            "name": "Documentation String Freeze"
+          },
+          {
+            "date": "2022-03-24",
+            "name": "GNOME 42.0"
+          },
+          {
+            "date": "2022-03-24",
+            "name": "Kernel Feature Freeze"
+          },
+          {
+            "date": "2022-03-28",
+            "name": "Beta Freeze"
+          },
+          {
+            "date": "2022-03-28",
+            "name": "Hardware Enablement Freeze"
+          },
+          {
+            "date": "2022-03-31",
+            "name": "Beta"
+          },
+          {
+            "date": "2022-03-31",
+            "name": "Openstack Yoga"
+          },
+          {
+            "date": "2022-04-07",
+            "name": "Kernel Freeze"
+          },
+          {
+            "date": "2022-04-07",
+            "name": "Non Language Pack Translation Deadline"
+          },
+          {
+            "date": "2022-04-14",
+            "name": "Final Freeze"
+          },
+          {
+            "date": "2022-04-14",
+            "name": "Language Pack Translation Deadline"
+          },
+          {
+            "date": "2022-04-14",
+            "name": "Release Candidate"
+          },
+          {
+            "date": "2022-04-21",
+            "name": "Final Release"
+          },
+          {
+            "date": "2022-08-04",
+            "name": "22.04.1 Point Release"
+          },
+          {
+            "date": "2023-02-23",
+            "name": "22.04.2 Point Release"
+          },
+          {
+            "date": "2023-08-10",
+            "name": "22.04.3 Point Release"
+          },
+          {
+            "date": "2024-02-22",
+            "name": "22.04.4 Point Release"
+          },
+          {
+            "date": "2024-09-12",
+            "name": "22.04.5 Point Release"
+          }
+        ],
+        "phase": "FINAL_RELEASE",
+        "release_date": "2022-04-21",
+        "release_type": "LTS",
+        "series": "jammy",
+        "version": "22.04"
+      }
+    },
+    "subject": {
+      "derivation": "packages:bug-tasks; series:bug-task-series",
+      "ffe_kind": "new-upstream",
+      "packages": [
+        "snapd"
+      ],
+      "target_series": "jammy"
+    },
+    "testing": {
+      "autopkgtest": "FOUND_UNVERIFIED",
+      "build": "ABSENT",
+      "corroborated": true,
+      "items": [
+        {
+          "detail": "PPA ~snappy-dev/image exists on Launchpad",
+          "kind": "ppa",
+          "locator": "https://launchpad.net/~snappy-dev/+archive/ubuntu/image",
+          "source": "description",
+          "state": "FOUND_VERIFIED"
+        },
+        {
+          "detail": "linked CI run",
+          "kind": "ci",
+          "locator": "https://github.com/canonical/snapd/actions/runs/33890426609",
+          "source": "description",
+          "state": "FOUND_UNVERIFIED"
+        }
+      ],
+      "ppa": "FOUND_VERIFIED",
+      "test_output": "ABSENT",
+      "unverified_claims": []
+    },
+    "unavailable": []
+  },
+  "human": {
+    "decided": false,
+    "decision": null,
+    "detected_at": null,
+    "final_status": null,
+    "left_queue_at": null
+  },
+  "provenance": {
+    "generated_at": "2026-10-07T11:59:02Z",
+    "harness": null,
+    "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
+    "policy_version": "1.0.0",
+    "review_key": "sha256:caf1a3de1adf6c11cdd23b1249a6fc9d9a5254d9a3aad88ac0e0a747e53b7479",
+    "risk_algorithm_version": "risk/1.2.0",
+    "run_id": "run-20261007T115843Z",
+    "tool_version": "0.1.0"
+  },
+  "record_id": "2166403/c6e9f38a2bff0c1d",
+  "risk": {
+    "algorithm_version": "risk/1.2.0",
+    "band": "HIGH",
+    "components": [
+      {
+        "evidence_refs": [
+          "/evidence/release_context"
+        ],
+        "max_points": 20,
+        "name": "release_posture",
+        "points": 20,
+        "rationale": "LTS release, past final release, -1630 days to release, 100% through the freeze window"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/packages"
+        ],
+        "max_points": 25,
+        "name": "seeded_reach",
+        "points": 25,
+        "rationale": "seeded on a core Ubuntu image, so a regression reaches the default install"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/packages"
+        ],
+        "max_points": 25,
+        "name": "dependency_reach",
+        "points": 12,
+        "rationale": "23 reverse dependencies, 1 reverse build-dependencies"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/packages"
+        ],
+        "max_points": 10,
+        "name": "archive_standing",
+        "points": 10,
+        "rationale": "in main or restricted, so it carries a Canonical support commitment"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/subject"
+        ],
+        "max_points": 5,
+        "name": "change_shape",
+        "points": 2,
+        "rationale": "a new upstream to an existing package"
+      },
+      {
+        "evidence_refs": [
+          "/evidence/testing"
+        ],
+        "max_points": 15,
+        "name": "unvalidated_change",
+        "points": 5,
+        "rationale": "the bug links a PPA, test results"
+      }
+    ],
+    "confidence_ceiling": "HIGH",
+    "decision_floor": "NEEDS_INFORMATION",
+    "gates": [
+      {
+        "effect": "floor_needs_information",
+        "evidence_refs": [
+          "/evidence/subject"
+        ],
+        "id": "no_package_identified",
+        "rationale": "the affected package is identified",
+        "triggered": false
+      },
+      {
+        "effect": "floor_needs_information",
+        "evidence_refs": [
+          "/evidence/testing"
+        ],
+        "id": "no_testing_evidence",
+        "rationale": "the bug links testing evidence",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/flavours"
+        ],
+        "id": "flavour_ack_outstanding",
+        "rationale": "no cross-flavour acknowledgement is outstanding",
+        "triggered": false
+      },
+      {
+        "effect": "floor_needs_information",
+        "evidence_refs": [
+          "/evidence/release_context"
+        ],
+        "id": "after_final_freeze",
+        "rationale": "the request is past final release, when only release-critical fixes are normally considered",
+        "triggered": true
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/release_context"
+        ],
+        "id": "before_feature_freeze",
+        "rationale": "the target release is past Feature Freeze",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/subject"
+        ],
+        "id": "unrecoverable_failure_mode",
+        "rationale": "a regression here would be fixable by an SRU",
+        "triggered": false
+      },
+      {
+        "effect": "flag",
+        "evidence_refs": [
+          "/evidence/injection"
+        ],
+        "id": "suspicious_bug_text",
+        "rationale": "nothing in the bug text resembles an attempt to steer the reviewer",
+        "triggered": false
+      },
+      {
+        "effect": "cap_confidence",
+        "evidence_refs": [
+          "/evidence/unavailable"
+        ],
+        "id": "evidence_unavailable",
+        "rationale": "every evidence source was available",
+        "triggered": false
+      }
+    ],
+    "score": 74
+  },
+  "schema_version": "1.0.0",
+  "status": "EVIDENCE_ONLY"
+}
