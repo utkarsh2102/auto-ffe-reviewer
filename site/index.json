@@ -1,91 +1,15 @@
 {
-  "bugs": [
-    {
-      "ack_required_from": [],
-      "bug_id": 2166403,
-      "build_rdepends": 1,
-      "confidence": null,
-      "days_to_release": -1630,
-      "decision": null,
-      "decision_floor": "NEEDS_INFORMATION",
-      "ffe_kind": "new-upstream",
-      "flags": [],
-      "flavour_impact": "CORE",
-      "has_assessment": false,
-      "injection_signals": 0,
-      "is_core": true,
-      "missing_information": [],
-      "packages": [
-        "snapd"
-      ],
-      "phase": "FINAL_RELEASE",
-      "rdepends": 23,
-      "release_type": "LTS",
-      "reporter": "katie-may",
-      "reviewed_at": "2026-10-07T11:59:02Z",
-      "risk_band": "HIGH",
-      "risk_score": 74,
-      "seeded": [
-        "ubuntu-budgie",
-        "ubuntu-core-installer"
-      ],
-      "series": "jammy",
-      "status": "EVIDENCE_ONLY",
-      "summary": null,
-      "testing_corroborated": true,
-      "title": "[FFe] [SRU] 2.78",
-      "unavailable": [],
-      "url": "https://bugs.launchpad.net/bugs/2166403",
-      "version": "22.04"
-    },
-    {
-      "ack_required_from": [],
-      "bug_id": 2169827,
-      "build_rdepends": 0,
-      "confidence": null,
-      "days_to_release": 8,
-      "decision": null,
-      "decision_floor": null,
-      "ffe_kind": "new-upstream",
-      "flags": [],
-      "flavour_impact": "CORE",
-      "has_assessment": false,
-      "injection_signals": 0,
-      "is_core": true,
-      "missing_information": [],
-      "packages": [
-        "adsys"
-      ],
-      "phase": "KERNEL_FREEZE",
-      "rdepends": 0,
-      "release_type": "INTERIM",
-      "reporter": "justdenis",
-      "reviewed_at": "2026-10-07T11:58:51Z",
-      "risk_band": "HIGH",
-      "risk_score": 59,
-      "seeded": [
-        "ubuntu"
-      ],
-      "series": "stonking",
-      "status": "EVIDENCE_ONLY",
-      "summary": null,
-      "testing_corroborated": true,
-      "title": "[FFE] Release adsys 0.17.0",
-      "unavailable": [],
-      "url": "https://bugs.launchpad.net/bugs/2169827",
-      "version": "26.10"
-    }
-  ],
+  "bugs": [],
   "counts": {
     "approve": 0,
     "awaiting_flavour_ack": 0,
     "evidence_incomplete": 0,
-    "high_risk": 2,
-    "needs_attention": 2,
+    "high_risk": 0,
+    "needs_attention": 0,
     "needs_information": 0,
-    "no_recommendation": 2,
+    "no_recommendation": 0,
     "no_testing_evidence": 0,
-    "open": 2,
+    "open": 0,
     "reject": 0
   },
   "version": 1

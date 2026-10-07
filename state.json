@@ -44,7 +44,7 @@
       "decision": null,
       "discovered_via": "release-team-queue",
       "fingerprint": "sha256:c6e9f38a2bff0c1d01a047be9e73163b9269819b0dc3fc0e51b05d344faea3a5",
-      "in_queue": true,
+      "in_queue": false,
       "last_evidence_at": "2026-10-07T11:59:02Z",
       "last_review_at": "",
       "last_seen_at": "2026-10-07T11:58:53Z",
@@ -296,7 +296,7 @@
       "decision": null,
       "discovered_via": "release-team-queue",
       "fingerprint": "sha256:35a251450fea839203ef75a8b68f684a940b7bf916de8e16befd75029af9edf9",
-      "in_queue": true,
+      "in_queue": false,
       "last_evidence_at": "2026-10-07T11:58:51Z",
       "last_review_at": "",
       "last_seen_at": "2026-10-07T11:58:48Z",
@@ -304,9 +304,9 @@
       "llm_runs_today": 0,
       "message_count": 1,
       "review_key": "sha256:2c898cc3d6fa6d634267b9347e90f5fada35b9f360618f68725bc5d1c50b13ba",
-      "status": "New"
+      "status": "Triaged"
     }
   },
-  "updated_at": "2026-10-07T11:59:02Z",
+  "updated_at": "2026-10-07T18:55:26Z",
   "version": 1
 }

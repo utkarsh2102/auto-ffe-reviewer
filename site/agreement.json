@@ -1,9 +1,29 @@
 {
   "agreed": 0,
   "comparable": 0,
-  "decided": 13,
+  "decided": 15,
   "rate": null,
   "recent": [
+    {
+      "agreed": null,
+      "bug_id": 2169827,
+      "decided_at": "2026-10-07T18:55:23Z",
+      "ours": null,
+      "risk_band": "HIGH",
+      "theirs": "APPROVED",
+      "title": "[FFE] Release adsys 0.17.0",
+      "url": "https://bugs.launchpad.net/bugs/2169827"
+    },
+    {
+      "agreed": null,
+      "bug_id": 2166403,
+      "decided_at": "2026-10-07T18:55:09Z",
+      "ours": null,
+      "risk_band": "HIGH",
+      "theirs": "APPROVED",
+      "title": "[SRU] 2.78",
+      "url": "https://bugs.launchpad.net/bugs/2166403"
+    },
     {
       "agreed": null,
       "bug_id": 2169312,
