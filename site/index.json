@@ -1,15 +1,54 @@
 {
-  "bugs": [],
+  "bugs": [
+    {
+      "ack_required_from": [],
+      "bug_id": 2169298,
+      "build_rdepends": 0,
+      "confidence": null,
+      "days_to_release": -168,
+      "decision": null,
+      "decision_floor": "NEEDS_INFORMATION",
+      "ffe_kind": "feature-change",
+      "flags": [],
+      "flavour_impact": "UNSEEDED",
+      "has_assessment": false,
+      "injection_signals": 0,
+      "is_core": false,
+      "missing_information": [],
+      "packages": [
+        "dnsmasq"
+      ],
+      "phase": "FINAL_RELEASE",
+      "rdepends": 16,
+      "release_type": "LTS",
+      "reporter": "aallennnn",
+      "reviewed_at": "2026-10-08T19:23:27Z",
+      "risk_band": "HIGH",
+      "risk_score": 65,
+      "seeded": null,
+      "series": "resolute",
+      "status": "EVIDENCE_ONLY",
+      "summary": null,
+      "testing_corroborated": true,
+      "title": "Strange hiden config file with private ip address as dns server",
+      "unavailable": [
+        "calendar.schedule",
+        "seeds"
+      ],
+      "url": "https://bugs.launchpad.net/bugs/2169298",
+      "version": "26.04"
+    }
+  ],
   "counts": {
     "approve": 0,
     "awaiting_flavour_ack": 0,
-    "evidence_incomplete": 0,
-    "high_risk": 0,
-    "needs_attention": 0,
+    "evidence_incomplete": 1,
+    "high_risk": 1,
+    "needs_attention": 1,
     "needs_information": 0,
-    "no_recommendation": 0,
+    "no_recommendation": 1,
     "no_testing_evidence": 0,
-    "open": 0,
+    "open": 1,
     "reject": 0
   },
   "version": 1

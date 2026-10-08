@@ -1,0 +1,508 @@
+{
+  "history": [
+    {
+      "confidence": null,
+      "decision": null,
+      "fingerprint": "sha256:1d04547bdcf09dbe94d642d0a05d518795b580f69fa3a27420f1e8221bee9cb7",
+      "generated_at": "2026-10-08T19:23:27Z",
+      "risk_score": 65,
+      "status": "EVIDENCE_ONLY"
+    }
+  ],
+  "record": {
+    "assessment": null,
+    "evidence": {
+      "bug": {
+        "comments": [
+          {
+            "author": "aallennnn",
+            "author_is_release_team": false,
+            "content": "This issue is having multiple stages. First stage is where tor browser blocked ubuntu.com from downloading some suspicious file in the same time when Ubuntu 26.04.1 LTS iso file downloading is initiated. After download is done, hash signature verification was successful. After installation, suspicious hidden file is found at location /etc/.resolv.conf.systemd-resolved.bak. File is including dns records which are pointing to private ip addresses: nameserver 10.131.53.11, nameserver 10.131.53.12, nameserver 10.131.53.13 and domain search ppa openstack.prodstack5.lan. These ip addresses are not some kind of loopback ip addresses like 127.0.0.53:53 which are known as part of dns configuration. I wasn't able to find this file in available Ubuntu documentation.\n\nProblemType: Bug\nDistroRelease: Ubuntu 26.04\nPackage: dnsmasq (not installed)\nProcVersionSignature: Ubuntu 7.0.0-38.38-generic 7.0.14\nUname: Linux 7.0.0-38-generic x86_64\nApportVersion: 2.34.1-0ubuntu0.1\nArchitecture: amd64\nCasperMD5CheckResult: pass\nCurrentDesktop: ubuntu:GNOME\nDate: Fri Oct  2 15:32:18 2026\nInstallationDate: Installed on 2026-09-30 (2 days ago)\nInstallationMedia: Ubuntu 26.04.1 LTS \"Resolute Raccoon\" - Release amd64 (20260826)\nProcEnviron:\n LANG=en_US.UTF-8\n PATH=(custom, no username)\n SHELL=/bin/bash\n XDG_RUNTIME_DIR=<set>\nSourcePackage: dnsmasq\nUpgradeStatus: No upgrade log present (probably fresh install)",
+            "content_sha": "8f99c03773a034650d83ea9f32ac63078dafdc3ce9094f40cb0ed70fecb282e9",
+            "date_created": "2026-10-02T14:01:18.448827+00:00",
+            "index": 0,
+            "url": "https://bugs.launchpad.net/ubuntu/+source/dnsmasq/+bug/2169298/comments/0"
+          },
+          {
+            "author": "aallennnn",
+            "author_is_release_team": false,
+            "content": "",
+            "content_sha": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_created": "2026-10-02T14:01:18.448827+00:00",
+            "index": 1,
+            "url": "https://bugs.launchpad.net/ubuntu/+source/dnsmasq/+bug/2169298/comments/1"
+          },
+          {
+            "author": "aallennnn",
+            "author_is_release_team": false,
+            "content": "",
+            "content_sha": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_created": "2026-10-02T14:02:18.721093+00:00",
+            "index": 2,
+            "url": "https://bugs.launchpad.net/ubuntu/+source/dnsmasq/+bug/2169298/comments/2"
+          },
+          {
+            "author": "aallennnn",
+            "author_is_release_team": false,
+            "content": "",
+            "content_sha": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "date_created": "2026-10-02T14:02:40.539623+00:00",
+            "index": 3,
+            "url": "https://bugs.launchpad.net/ubuntu/+source/dnsmasq/+bug/2169298/comments/3"
+          },
+          {
+            "author": "xypron",
+            "author_is_release_team": false,
+            "content": "Hello Alen,\n\nCould you, please, indicate if you installed a server image or a desktop image?\nWas the entry on the installed system or on the system where you did the download?\nWas the target system a virtual machine?\n\nThe artifact might be from cloud init which on VMs looks for initialzation data from predefined addresses.\n\nBest regards\n\nHeinrich\n\n",
+            "content_sha": "cb529f2e18bca2fcc9181926acdae49425a841655ac0d392d0850aca5231c027",
+            "date_created": "2026-10-02T14:51:30.641942+00:00",
+            "index": 4,
+            "url": "https://bugs.launchpad.net/ubuntu/+source/dnsmasq/+bug/2169298/comments/4"
+          },
+          {
+            "author": "aallennnn",
+            "author_is_release_team": false,
+            "content": "Hello,\n\nThis is desktop version downloaded from Ubuntu web site https://ubuntu.com/desktop. It's deployed on my laptop without virtualisation.\n\nEntry is on new image I downloaded and it's used for reinstallation of my system. After system is downloaded and reinstalled I spot the suspicious file.\n\nIf you need more info please let me know.\n\nBest regards,\nAlen\n\n\n-------- Original Message --------\nOn Friday, 10/02/26 at 17:00 Heinrich Schuchardt <email address hidden> wrote:\nHello Alen,\n\nCould you, please, indicate if you installed a server image or a desktop image?\nWas the entry on the installed system or on the system where you did the download?\nWas the target system a virtual machine?\n\nThe artifact might be from cloud init which on VMs looks for\ninitialzation data from predefined addresses.\n\nBest regards\n\nHeinrich\n\n--\nYou received this bug notification because you are subscribed to the bug\nreport.\nhttps://bugs.launchpad.net/bugs/2169298\n\nTitle:\n  Strange hiden config file with private ip address as dns server\n\nStatus in dnsmasq package in Ubuntu:\n  New\n\nBug description:\n  This issue is having multiple stages. First stage is where tor browser\n  blocked ubuntu.com from downloading some suspicious file in the same\n  time when Ubuntu 26.04.1 LTS iso file downloading is initiated. After\n  download is done, hash signature verification was successful. After\n  installation, suspicious hidden file is found at location\n  /etc/.resolv.conf.systemd-resolved.bak. File is including dns records\n  which are pointing to private ip addresses: nameserver 10.131.53.11,\n  nameserver 10.131.53.12, nameserver 10.131.53.13 and domain search ppa\n  openstack.prodstack5.lan. These ip addresses are not some kind of\n  loopback ip addresses like 127.0.0.53:53 which are known as part of\n  dns configuration. I wasn't able to find this file in available Ubuntu\n  documentation.\n\n  ProblemType: Bug\n  DistroRelease: Ubuntu 26.04\n  Package: dnsmasq (not installed)\n  ProcVersionSignature: Ubuntu 7.0.0-38.38-generic 7.0.14\n  Uname: Linux 7.0.0-38-generic x86_64\n  ApportVersion: 2.34.1-0ubuntu0.1\n  Architecture: amd64\n  CasperMD5CheckResult: pass\n  CurrentDesktop: ubuntu:GNOME\n  Date: Fri Oct  2 15:32:18 2026\n  InstallationDate: Installed on 2026-09-30 (2 days ago)\n  InstallationMedia: Ubuntu 26.04.1 LTS \"Resolute Raccoon\" - Release amd64 (20260826)\n  ProcEnviron:\n   LANG=en_US.UTF-8\n   PATH=(custom, no username)\n   SHELL=/bin/bash\n   XDG_RUNTIME_DIR=<set>\n  SourcePackage: dnsmasq\n  UpgradeStatus: No upgrade log present (probably fresh install)\n\nTo manage notifications about this bug go to:\nhttps://bugs.launchpad.net/ubuntu/+source/dnsmasq/+bug/2169298/+subscriptions\n\n",
+            "content_sha": "dd8f0cf9192e47ecdab3cfe7c0024ef5dff2b030121c01a0b9e17c75bc758592",
+            "date_created": "2026-10-02T15:12:48+00:00",
+            "index": 5,
+            "url": "https://bugs.launchpad.net/ubuntu/+source/dnsmasq/+bug/2169298/comments/5"
+          },
+          {
+            "author": "jj",
+            "author_is_release_team": false,
+            "content": "Could you run `sudo dpkg -S /etc/.resolv.conf.systemd-resolved.bak` please?\n\nAlso, is this file in the live environment, or in the fresh installation afterwards?",
+            "content_sha": "71683c0b61c92ae5d63ad114f857fc7b150dbdc9f9f9c952e9071dbd33a843e7",
+            "date_created": "2026-10-06T17:25:14.520600+00:00",
+            "index": 6,
+            "url": "https://bugs.launchpad.net/ubuntu/+source/dnsmasq/+bug/2169298/comments/6"
+          },
+          {
+            "author": "aallennnn",
+            "author_is_release_team": false,
+            "content": "I did it, however, nothing is found. Dpkg is probably looking for package. Screen shot is in attachment. I'm still able to locate and open file in nano. I made comments of all functional lines to prevent execution.\n\nThis is fresh installation. To avoid any confusion, file which was blocked by tor browser is not associated with this one. First problem is that one extra file download is attempted in the same time when Ubuntu ISO image download is started and only Tor browser is able to block it, there is no notifications by other browsers.\n\nSecond problem is this hidden file /etc/.resolv.conf.systemd-resolved.bak.\n\nThere is one more hidden file which is also unknown to me: etc/.updated . Content can be found on screen shot in attachment. I tried this command you sent me on this another file as well and I'm getting same result.\n\nI have my third party DNS configured in /etc/systemd/resolved.conf and in this file there is no issues. I'm using DNS over TLS.\n\nThis file can be very dangerous if someone would connect host with same private IP address like from file. \n\n\nSent with Proton Mail secure email.\n\nOn Tuesday, October 6th, 2026 at 7:30 PM, Jonas Jelten <email address hidden> wrote:\n\n> Could you run `sudo dpkg -S /etc/.resolv.conf.systemd-resolved.bak`\n> please?\n> \n> Also, is this file in the live environment, or in the fresh installation\n> afterwards?\n> \n> ** Changed in: dnsmasq (Ubuntu)\n>        Status: New => Incomplete\n> \n> --\n> You received this bug notification because you are subscribed to the bug\n> report.\n> https://bugs.launchpad.net/bugs/2169298\n> \n> Title:\n>   Strange hiden config file with private ip address as dns server\n> \n> Status in dnsmasq package in Ubuntu:\n>   Incomplete\n> \n> Bug description:\n>   This issue is having multiple stages. First stage is where tor browser\n>   blocked ubuntu.com from downloading some suspicious file in the same\n>   time when Ubuntu 26.04.1 LTS iso file downloading is initiated. After\n>   download is done, hash signature verification was successful. After\n>   installation, suspicious hidden file is found at location\n>   /etc/.resolv.conf.systemd-resolved.bak. File is including dns records\n>   which are pointing to private ip addresses: nameserver 10.131.53.11,\n>   nameserver 10.131.53.12, nameserver 10.131.53.13 and domain search ppa\n>   openstack.prodstack5.lan. These ip addresses are not some kind of\n>   loopback ip addresses like 127.0.0.53:53 which are known as part of\n>   dns configuration. I wasn't able to find this file in available Ubuntu\n>   documentation.\n> \n>   ProblemType: Bug\n>   DistroRelease: Ubuntu 26.04\n>   Package: dnsmasq (not installed)\n>   ProcVersionSignature: Ubuntu 7.0.0-38.38-generic 7.0.14\n>   Uname: Linux 7.0.0-38-generic x86_64\n>   ApportVersion: 2.34.1-0ubuntu0.1\n>   Architecture: amd64\n>   CasperMD5CheckResult: pass\n>   CurrentDesktop: ubuntu:GNOME\n>   Date: Fri Oct  2 15:32:18 2026\n>   InstallationDate: Installed on 2026-09-30 (2 days ago)\n>   InstallationMedia: Ubuntu 26.04.1 LTS \"Resolute Raccoon\" - Release amd64 (20260826)\n>   ProcEnviron:\n>    LANG=en_US.UTF-8\n>    PATH=(custom, no username)\n>    SHELL=/bin/bash\n>    XDG_RUNTIME_DIR=<set>\n>   SourcePackage: dnsmasq\n>   UpgradeStatus: No upgrade log present (probably fresh install)\n> \n> To manage notifications about this bug go to:\n> https://bugs.launchpad.net/ubuntu/+source/dnsmasq/+bug/2169298/+subscriptions\n> \n> ",
+            "content_sha": "f32563f80476b49b3848ad0a4557c4116bf9247f5dd2c2fec6f2216d4f629ebf",
+            "date_created": "2026-10-06T19:17:33+00:00",
+            "index": 7,
+            "url": "https://bugs.launchpad.net/ubuntu/+source/dnsmasq/+bug/2169298/comments/7"
+          },
+          {
+            "author": "puida",
+            "author_is_release_team": false,
+            "content": "I think this file is somehow a leftover artifact of the image building process. I downloaded the ubuntu-26.04.1-desktop-amd64.iso and mounted the inner minimal.squashfs\n\n% ls -la /tmp/iso/squash/etc/.resolv.conf.systemd-resolved.bak\n-rw-r--r-- 1 root root 862 Aug 26 02:27 /tmp/iso/squash/etc/.resolv.conf.systemd-resolved.bak\n\n% cat /tmp/iso/squash/etc/.resolv.conf.systemd-resolved.bak\n# This is /run/systemd/resolve/resolv.conf managed by man:systemd-resolved(8).\n# Do not edit.\n#\n# This file might be symlinked as /etc/resolv.conf. If you're looking at\n# /etc/resolv.conf and seeing this text, you have followed the symlink.\n#\n# This is a dynamic resolv.conf file for connecting local clients directly to\n# all known uplink DNS servers. This file lists all configured search domains.\n#\n# Third party programs should typically not access this file directly, but only\n# through the symlink at /etc/resolv.conf. To manage man:resolv.conf(5) in a\n# different way, replace this symlink by a static file or a different symlink.\n#\n# See man:systemd-resolved.service(8) for details about the supported modes of\n# operation for /etc/resolv.conf.\n\nnameserver 10.131.53.11\nnameserver 10.131.53.12\nnameserver 10.131.53.13\nsearch ppa openstack.prodstack5.lan\n\nI don't think this is a dnsmasq bug at all. Should this be a task in livecd-rootfs? Unsure what actually generate those images.",
+            "content_sha": "26505d8e043fb4f4435bf6c33d975ce14319e62a9f4c9a0c5ffba6d4d18f0888",
+            "date_created": "2026-10-07T16:47:48.437403+00:00",
+            "index": 8,
+            "url": "https://bugs.launchpad.net/ubuntu/+source/dnsmasq/+bug/2169298/comments/8"
+          },
+          {
+            "author": "aallennnn",
+            "author_is_release_team": false,
+            "content": "It may be. I was installing Ubuntu using full image, not net install.\n\nMaybe first Ubuntu web site should be checked because it's trigering some extra file download, second thing, this /etc/.resolv% file can do harm and it's not standard part of the system.\n\nI choose dnamask because that's the closest category to choose. There is no option to report a problem.\n\n\nSent from Proton Mail for iOS.\n\n-------- Original Message --------\nOn Wednesday, 10/07/26 at 18:55 Guilherme Puida Moreira <email address hidden> wrote:\nI think this file is somehow a leftover artifact of the image building\nprocess. I downloaded the ubuntu-26.04.1-desktop-amd64.iso and mounted\nthe inner minimal.squashfs\n\n% ls -la /tmp/iso/squash/etc/.resolv.conf.systemd-resolved.bak\n-rw-r--r-- 1 root root 862 Aug 26 02:27 /tmp/iso/squash/etc/.resolv.conf.systemd-resolved.bak\n\n% cat /tmp/iso/squash/etc/.resolv.conf.systemd-resolved.bak\n# This is /run/systemd/resolve/resolv.conf managed by man:systemd-resolved(8).\n# Do not edit.\n#\n# This file might be symlinked as /etc/resolv.conf. If you're looking at\n# /etc/resolv.conf and seeing this text, you have followed the symlink.\n#\n# This is a dynamic resolv.conf file for connecting local clients directly to\n# all known uplink DNS servers. This file lists all configured search domains.\n#\n# Third party programs should typically not access this file directly, but only\n# through the symlink at /etc/resolv.conf. To manage man:resolv.conf(5) in a\n# different way, replace this symlink by a static file or a different symlink.\n#\n# See man:systemd-resolved.service(8) for details about the supported modes of\n# operation for /etc/resolv.conf.\n\nnameserver 10.131.53.11\nnameserver 10.131.53.12\nnameserver 10.131.53.13\nsearch ppa openstack.prodstack5.lan\n\nI don't think this is a dnsmasq bug at all. Should this be a task in\nlivecd-rootfs? Unsure what actually generate those images.\n\n** Tags added: server-triage-discuss\n\n--\nYou received this bug notification because you are subscribed to the bug\nreport.\nhttps://bugs.launchpad.net/bugs/2169298\n\nTitle:\n  Strange hiden config file with private ip address as dns server\n\nStatus in dnsmasq package in Ubuntu:\n  Incomplete\n\nBug description:\n  This issue is having multiple stages. First stage is where tor browser\n  blocked ubuntu.com from downloading some suspicious file in the same\n  time when Ubuntu 26.04.1 LTS iso file downloading is initiated. After\n  download is done, hash signature verification was successful. After\n  installation, suspicious hidden file is found at location\n  /etc/.resolv.conf.systemd-resolved.bak. File is including dns records\n  which are pointing to private ip addresses: nameserver 10.131.53.11,\n  nameserver 10.131.53.12, nameserver 10.131.53.13 and domain search ppa\n  openstack.prodstack5.lan. These ip addresses are not some kind of\n  loopback ip addresses like 127.0.0.53:53 which are known as part of\n  dns configuration. I wasn't able to find this file in available Ubuntu\n  documentation.\n\n  ProblemType: Bug\n  DistroRelease: Ubuntu 26.04\n  Package: dnsmasq (not installed)\n  ProcVersionSignature: Ubuntu 7.0.0-38.38-generic 7.0.14\n  Uname: Linux 7.0.0-38-generic x86_64\n  ApportVersion: 2.34.1-0ubuntu0.1\n  Architecture: amd64\n  CasperMD5CheckResult: pass\n  CurrentDesktop: ubuntu:GNOME\n  Date: Fri Oct  2 15:32:18 2026\n  InstallationDate: Installed on 2026-09-30 (2 days ago)\n  InstallationMedia: Ubuntu 26.04.1 LTS \"Resolute Raccoon\" - Release amd64 (20260826)\n  ProcEnviron:\n   LANG=en_US.UTF-8\n   PATH=(custom, no username)\n   SHELL=/bin/bash\n   XDG_RUNTIME_DIR=<set>\n  SourcePackage: dnsmasq\n  UpgradeStatus: No upgrade log present (probably fresh install)\n\nTo manage notifications about this bug go to:\nhttps://bugs.launchpad.net/ubuntu/+source/dnsmasq/+bug/2169298/+subscriptions\n\n",
+            "content_sha": "bd7937e45bc7f216b3afe1b04f56271b4ae2776a547ca43761b3a0c2d9be2aed",
+            "date_created": "2026-10-07T17:08:42+00:00",
+            "index": 9,
+            "url": "https://bugs.launchpad.net/ubuntu/+source/dnsmasq/+bug/2169298/comments/9"
+          },
+          {
+            "author": "puida",
+            "author_is_release_team": false,
+            "content": "Hello release team,\n\nThis /etc/.resolv.conf.systemd-resolved.bak file seems like a leftover artifact from the image build process. See comment #8.\n\nI'm not sure if you are the ones responsible for this, but subscribing for awareness.",
+            "content_sha": "04aa70e68a4ce92194d3cce29cd421b35c31997b97a2a6ade25fc0b6899bbf90",
+            "date_created": "2026-10-08T15:58:19.337460+00:00",
+            "index": 10,
+            "url": "https://bugs.launchpad.net/ubuntu/+source/dnsmasq/+bug/2169298/comments/10"
+          }
+        ],
+        "date_created": "2026-10-02T14:01:18.448827+00:00",
+        "date_last_message": "2026-10-08T15:58:19.337460+00:00",
+        "date_last_updated": "2026-10-08T15:58:30.801160+00:00",
+        "description": "This issue is having multiple stages. First stage is where tor browser blocked ubuntu.com from downloading some suspicious file in the same time when Ubuntu 26.04.1 LTS iso file downloading is initiated. After download is done, hash signature verification was successful. After installation, suspicious hidden file is found at location /etc/.resolv.conf.systemd-resolved.bak. File is including dns records which are pointing to private ip addresses: nameserver 10.131.53.11, nameserver 10.131.53.12, nameserver 10.131.53.13 and domain search ppa openstack.prodstack5.lan. These ip addresses are not some kind of loopback ip addresses like 127.0.0.53:53 which are known as part of dns configuration. I wasn't able to find this file in available Ubuntu documentation.\n\nProblemType: Bug\nDistroRelease: Ubuntu 26.04\nPackage: dnsmasq (not installed)\nProcVersionSignature: Ubuntu 7.0.0-38.38-generic 7.0.14\nUname: Linux 7.0.0-38-generic x86_64\nApportVersion: 2.34.1-0ubuntu0.1\nArchitecture: amd64\nCasperMD5CheckResult: pass\nCurrentDesktop: ubuntu:GNOME\nDate: Fri Oct  2 15:32:18 2026\nInstallationDate: Installed on 2026-09-30 (2 days ago)\nInstallationMedia: Ubuntu 26.04.1 LTS \"Resolute Raccoon\" - Release amd64 (20260826)\nProcEnviron:\n LANG=en_US.UTF-8\n PATH=(custom, no username)\n SHELL=/bin/bash\n XDG_RUNTIME_DIR=<set>\nSourcePackage: dnsmasq\nUpgradeStatus: No upgrade log present (probably fresh install)",
+        "description_sha": "8f99c03773a034650d83ea9f32ac63078dafdc3ce9094f40cb0ed70fecb282e9",
+        "discovered_via": "release-team-queue",
+        "id": 2169298,
+        "message_count": 11,
+        "release_team_subscribed": true,
+        "reporter": "aallennnn",
+        "subscribers": [
+          "aallennnn",
+          "ubuntu-release"
+        ],
+        "tags": [
+          "amd64",
+          "apport-bug",
+          "resolute",
+          "wayland-session"
+        ],
+        "tasks": [
+          {
+            "assignee": null,
+            "importance": "Undecided",
+            "status": "Incomplete",
+            "target": "dnsmasq (Ubuntu)"
+          }
+        ],
+        "title": "Strange hiden config file with private ip address as dns server",
+        "url": "https://bugs.launchpad.net/bugs/2169298"
+      },
+      "fingerprint": "sha256:1d04547bdcf09dbe94d642d0a05d518795b580f69fa3a27420f1e8221bee9cb7",
+      "flavours": {
+        "ack_required_from": [],
+        "acks": [],
+        "affected_flavours": [],
+        "impact": "UNSEEDED",
+        "requester_is_flavour_lead": null,
+        "requesting_flavour": null
+      },
+      "injection_signals": [],
+      "packages": [
+        {
+          "archive": {
+            "note": null,
+            "provenance": {
+              "cache": "fresh",
+              "checked_at": "2026-10-08T19:23:25Z",
+              "duration_ms": 302,
+              "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=dnsmasq&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fresolute&status=Published&order_by_date=true",
+              "method": "http_get",
+              "raw_ref": "sha256:38975e951597f6ada2b53bc71450aa991e6e5af1a5fc3054ab85445ae2a17aac",
+              "raw_truncated": false,
+              "source_id": "launchpad.archive"
+            },
+            "status": "OK",
+            "value": {
+              "binaries": [
+                "dnsmasq",
+                "dnsmasq-base",
+                "dnsmasq-base-lua",
+                "dnsmasq-utils"
+              ],
+              "component": "main",
+              "in_archive": true,
+              "pocket": "Updates",
+              "source": "dnsmasq",
+              "version": "2.92-1ubuntu0.5"
+            }
+          },
+          "build_rdepends": {
+            "note": null,
+            "provenance": {
+              "cache": "fresh",
+              "checked_at": "2026-10-08T19:23:27Z",
+              "duration_ms": 130,
+              "locator": "http://qa.ubuntuwire.org/rdepends/v1/resolute/source/src:dnsmasq",
+              "method": "http_get",
+              "raw_ref": "sha256:df7a9fd3cbc616d212f63e81356fb92dc3d70e26adff16ea58b00d9557a5172f",
+              "raw_truncated": false,
+              "source_id": "rdepends.build"
+            },
+            "status": "OK",
+            "value": {
+              "arch": "source",
+              "bucket": "0",
+              "kind": "build",
+              "sample": [],
+              "seeded_rdeps": [],
+              "total": 0
+            }
+          },
+          "name": "dnsmasq",
+          "rdepends": {
+            "note": null,
+            "provenance": {
+              "cache": "fresh",
+              "checked_at": "2026-10-08T19:23:27Z",
+              "duration_ms": 145,
+              "locator": "http://qa.ubuntuwire.org/rdepends/v1/resolute/any/src:dnsmasq",
+              "method": "http_get",
+              "raw_ref": "sha256:973d4f2a5ad0caad2d1a07009233d12be75dc587de0d5fcab2089e2596d04db0",
+              "raw_truncated": false,
+              "source_id": "rdepends.binary"
+            },
+            "status": "OK",
+            "value": {
+              "arch": "any",
+              "bucket": "6-20",
+              "kind": "binary",
+              "sample": [
+                "comitup",
+                "concordance-common",
+                "dbab",
+                "debian-edu-router-config",
+                "di-netboot-assistant",
+                "golang-github-containernetworking-plugin-dnsname",
+                "incus-base",
+                "libvirt-daemon-driver-network",
+                "libvirt-daemon-driver-network-hwe",
+                "lxc",
+                "network-manager",
+                "neutron-dhcp-agent",
+                "ocserv",
+                "qemu-web-desktop",
+                "ubuntu-boot-test",
+                "ubuntu-fan"
+              ],
+              "seeded_rdeps": [],
+              "total": 16
+            }
+          },
+          "seeds": {
+            "note": "none of dnsmasq, dnsmasq-base, dnsmasq-base-lua, dnsmasq-utils appear in the seed index, but the index looks incomplete (index covers only 7 flavours), so this is not evidence that the package is unseeded",
+            "provenance": {
+              "cache": "fresh",
+              "checked_at": "2026-10-08T19:23:27Z",
+              "duration_ms": 762,
+              "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
+              "method": "http_get",
+              "raw_ref": "sha256:e02f245b0cb54e8a3ef02f23154126b19c98c2cb3a477a3c92f5653a73bfb51c",
+              "raw_truncated": false,
+              "source_id": "seeds"
+            },
+            "status": "UNAVAILABLE",
+            "value": null
+          }
+        }
+      ],
+      "release_context": {
+        "note": "schedule page unavailable; dates approximated as release minus 8 weeks, which has been observed to be up to a week early",
+        "provenance": {
+          "cache": "none",
+          "checked_at": "2026-10-08T19:23:24Z",
+          "duration_ms": 0,
+          "locator": "https://documentation.ubuntu.com/release-notes/26.04/schedule/",
+          "method": "computed",
+          "raw_ref": null,
+          "raw_truncated": false,
+          "source_id": "calendar.schedule"
+        },
+        "status": "OK",
+        "value": {
+          "days_bucket": "post-release",
+          "days_since_feature_freeze": 224,
+          "days_to_release": -168,
+          "derivation": "approximate",
+          "feature_freeze": "2026-02-26",
+          "freeze_window_elapsed_pct": 100,
+          "milestones": [
+            {
+              "date": "2026-02-26",
+              "name": "Feature Freeze"
+            },
+            {
+              "date": "2026-04-23",
+              "name": "Final Release"
+            }
+          ],
+          "phase": "FINAL_RELEASE",
+          "release_date": "2026-04-23",
+          "release_type": "LTS",
+          "series": "resolute",
+          "version": "26.04"
+        }
+      },
+      "subject": {
+        "derivation": "packages:bug-tasks; series:mentioned-in-bug-text",
+        "ffe_kind": "feature-change",
+        "packages": [
+          "dnsmasq"
+        ],
+        "target_series": "resolute"
+      },
+      "testing": {
+        "autopkgtest": "ABSENT",
+        "build": "ABSENT",
+        "corroborated": true,
+        "items": [
+          {
+            "detail": "pasted output (contains 'pass')",
+            "kind": "test_output",
+            "locator": null,
+            "source": "comment #5",
+            "state": "FOUND_UNVERIFIED"
+          },
+          {
+            "detail": "pasted output (contains 'pass')",
+            "kind": "test_output",
+            "locator": null,
+            "source": "comment #9",
+            "state": "FOUND_UNVERIFIED"
+          }
+        ],
+        "ppa": "ABSENT",
+        "test_output": "FOUND_UNVERIFIED",
+        "unverified_claims": []
+      },
+      "unavailable": [
+        {
+          "impact": "cannot tell how late in the freeze this request is",
+          "reason": "calendar.schedule: documentation.ubuntu.com rate-limited us",
+          "source_id": "calendar.schedule"
+        },
+        {
+          "impact": "cannot tell which Ubuntu images ship this package",
+          "reason": "seed index incomplete: index covers only 7 flavours",
+          "source_id": "seeds"
+        }
+      ]
+    },
+    "human": {
+      "decided": false,
+      "decision": null,
+      "detected_at": null,
+      "final_status": null,
+      "left_queue_at": null
+    },
+    "provenance": {
+      "generated_at": "2026-10-08T19:23:27Z",
+      "harness": null,
+      "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
+      "policy_version": "1.0.0",
+      "review_key": "sha256:ce49786f921adfe2b699ad517634eca438f91ad9e95c2321d671a064ff7c1f30",
+      "risk_algorithm_version": "risk/1.2.0",
+      "run_id": "run-20261008T192316Z",
+      "tool_version": "0.1.0"
+    },
+    "record_id": "2169298/1d04547bdcf09dbe",
+    "risk": {
+      "algorithm_version": "risk/1.2.0",
+      "band": "HIGH",
+      "components": [
+        {
+          "evidence_refs": [
+            "/evidence/release_context"
+          ],
+          "max_points": 20,
+          "name": "release_posture",
+          "points": 20,
+          "rationale": "LTS release, past final release, -168 days to release, 100% through the freeze window"
+        },
+        {
+          "evidence_refs": [
+            "/evidence/packages"
+          ],
+          "max_points": 25,
+          "name": "seeded_reach",
+          "points": 15,
+          "rationale": "could not establish which images ship this package; scored cautiously rather than as unseeded"
+        },
+        {
+          "evidence_refs": [
+            "/evidence/packages"
+          ],
+          "max_points": 25,
+          "name": "dependency_reach",
+          "points": 8,
+          "rationale": "16 reverse dependencies, 0 reverse build-dependencies"
+        },
+        {
+          "evidence_refs": [
+            "/evidence/packages"
+          ],
+          "max_points": 10,
+          "name": "archive_standing",
+          "points": 10,
+          "rationale": "in main or restricted, so it carries a Canonical support commitment"
+        },
+        {
+          "evidence_refs": [
+            "/evidence/subject"
+          ],
+          "max_points": 5,
+          "name": "change_shape",
+          "points": 2,
+          "rationale": "a feature change to an existing package"
+        },
+        {
+          "evidence_refs": [
+            "/evidence/testing"
+          ],
+          "max_points": 15,
+          "name": "unvalidated_change",
+          "points": 10,
+          "rationale": "the bug links pasted test output"
+        }
+      ],
+      "confidence_ceiling": "LOW",
+      "decision_floor": "NEEDS_INFORMATION",
+      "gates": [
+        {
+          "effect": "floor_needs_information",
+          "evidence_refs": [
+            "/evidence/subject"
+          ],
+          "id": "no_package_identified",
+          "rationale": "the affected package is identified",
+          "triggered": false
+        },
+        {
+          "effect": "floor_needs_information",
+          "evidence_refs": [
+            "/evidence/testing"
+          ],
+          "id": "no_testing_evidence",
+          "rationale": "the bug links testing evidence",
+          "triggered": false
+        },
+        {
+          "effect": "flag",
+          "evidence_refs": [
+            "/evidence/flavours"
+          ],
+          "id": "flavour_ack_outstanding",
+          "rationale": "no cross-flavour acknowledgement is outstanding",
+          "triggered": false
+        },
+        {
+          "effect": "floor_needs_information",
+          "evidence_refs": [
+            "/evidence/release_context"
+          ],
+          "id": "after_final_freeze",
+          "rationale": "the request is past final release, when only release-critical fixes are normally considered",
+          "triggered": true
+        },
+        {
+          "effect": "flag",
+          "evidence_refs": [
+            "/evidence/release_context"
+          ],
+          "id": "before_feature_freeze",
+          "rationale": "the target release is past Feature Freeze",
+          "triggered": false
+        },
+        {
+          "effect": "flag",
+          "evidence_refs": [
+            "/evidence/subject"
+          ],
+          "id": "unrecoverable_failure_mode",
+          "rationale": "a regression here would be fixable by an SRU",
+          "triggered": false
+        },
+        {
+          "effect": "flag",
+          "evidence_refs": [
+            "/evidence/injection"
+          ],
+          "id": "suspicious_bug_text",
+          "rationale": "nothing in the bug text resembles an attempt to steer the reviewer",
+          "triggered": false
+        },
+        {
+          "effect": "cap_confidence",
+          "evidence_refs": [
+            "/evidence/unavailable"
+          ],
+          "id": "evidence_unavailable",
+          "rationale": "could not consult calendar.schedule, seeds, so this assessment rests on incomplete evidence",
+          "triggered": true
+        }
+      ],
+      "score": 65
+    },
+    "schema_version": "1.0.0",
+    "status": "EVIDENCE_ONLY"
+  },
+  "version": 1
+}
