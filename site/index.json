@@ -22,7 +22,7 @@
       "rdepends": 16,
       "release_type": "LTS",
       "reporter": "aallennnn",
-      "reviewed_at": "2026-10-08T19:23:27Z",
+      "reviewed_at": "2026-10-08T23:52:55Z",
       "risk_band": "HIGH",
       "risk_score": 65,
       "seeded": null,
@@ -32,7 +32,6 @@
       "testing_corroborated": true,
       "title": "Strange hiden config file with private ip address as dns server",
       "unavailable": [
-        "calendar.schedule",
         "seeds"
       ],
       "url": "https://bugs.launchpad.net/bugs/2169298",
