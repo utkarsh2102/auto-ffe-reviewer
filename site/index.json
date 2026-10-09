@@ -5,7 +5,7 @@
       "bug_id": 2169298,
       "build_rdepends": 0,
       "confidence": null,
-      "days_to_release": -168,
+      "days_to_release": -169,
       "decision": null,
       "decision_floor": "NEEDS_INFORMATION",
       "ffe_kind": "feature-change",
@@ -22,7 +22,7 @@
       "rdepends": 16,
       "release_type": "LTS",
       "reporter": "aallennnn",
-      "reviewed_at": "2026-10-08T23:52:55Z",
+      "reviewed_at": "2026-10-09T12:59:57Z",
       "risk_band": "HIGH",
       "risk_score": 65,
       "seeded": null,
@@ -32,6 +32,7 @@
       "testing_corroborated": true,
       "title": "Strange hiden config file with private ip address as dns server",
       "unavailable": [
+        "calendar.schedule",
         "seeds"
       ],
       "url": "https://bugs.launchpad.net/bugs/2169298",
