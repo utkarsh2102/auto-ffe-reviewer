@@ -3,16 +3,16 @@
     {
       "confidence": null,
       "decision": null,
-      "fingerprint": "sha256:1d04547bdcf09dbe94d642d0a05d518795b580f69fa3a27420f1e8221bee9cb7",
-      "generated_at": "2026-10-09T12:59:57Z",
+      "fingerprint": "sha256:62a1761ca93d886936f87b7739838c2d6e78015b376c0d98decc2adf5a75ab4d",
+      "generated_at": "2026-10-09T18:45:57Z",
       "risk_score": 65,
       "status": "EVIDENCE_ONLY"
     },
     {
       "confidence": null,
       "decision": null,
-      "fingerprint": "sha256:62a1761ca93d886936f87b7739838c2d6e78015b376c0d98decc2adf5a75ab4d",
-      "generated_at": "2026-10-09T18:45:57Z",
+      "fingerprint": "sha256:1d04547bdcf09dbe94d642d0a05d518795b580f69fa3a27420f1e8221bee9cb7",
+      "generated_at": "2026-10-10T02:38:19Z",
       "risk_score": 65,
       "status": "EVIDENCE_ONLY"
     }
@@ -153,7 +153,7 @@
         "title": "Strange hiden config file with private ip address as dns server",
         "url": "https://bugs.launchpad.net/bugs/2169298"
       },
-      "fingerprint": "sha256:62a1761ca93d886936f87b7739838c2d6e78015b376c0d98decc2adf5a75ab4d",
+      "fingerprint": "sha256:1d04547bdcf09dbe94d642d0a05d518795b580f69fa3a27420f1e8221bee9cb7",
       "flavours": {
         "ack_required_from": [],
         "acks": [],
@@ -169,8 +169,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-10-09T18:45:55Z",
-              "duration_ms": 478,
+              "checked_at": "2026-10-10T02:38:17Z",
+              "duration_ms": 685,
               "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=dnsmasq&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fresolute&status=Published&order_by_date=true",
               "method": "http_get",
               "raw_ref": "sha256:38975e951597f6ada2b53bc71450aa991e6e5af1a5fc3054ab85445ae2a17aac",
@@ -196,8 +196,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-10-09T18:45:57Z",
-              "duration_ms": 121,
+              "checked_at": "2026-10-10T02:38:19Z",
+              "duration_ms": 141,
               "locator": "http://qa.ubuntuwire.org/rdepends/v1/resolute/source/src:dnsmasq",
               "method": "http_get",
               "raw_ref": "sha256:df7a9fd3cbc616d212f63e81356fb92dc3d70e26adff16ea58b00d9557a5172f",
@@ -219,11 +219,11 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-10-09T18:45:57Z",
-              "duration_ms": 138,
+              "checked_at": "2026-10-10T02:38:19Z",
+              "duration_ms": 165,
               "locator": "http://qa.ubuntuwire.org/rdepends/v1/resolute/any/src:dnsmasq",
               "method": "http_get",
-              "raw_ref": "sha256:7cb201f9216e56ba1bdafe1f98983f5aacf42eb863861831640b92c716ad0bc1",
+              "raw_ref": "sha256:2238aaefd53d5720c4b2a44dc693a474f88962e9a319b7ca6b2b68952b56c239",
               "raw_truncated": false,
               "source_id": "rdepends.binary"
             },
@@ -258,11 +258,11 @@
             "note": "none of dnsmasq, dnsmasq-base, dnsmasq-base-lua, dnsmasq-utils appear in the seed index, but the index looks incomplete (index covers only 7 flavours), so this is not evidence that the package is unseeded",
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-10-09T18:45:57Z",
-              "duration_ms": 443,
+              "checked_at": "2026-10-10T02:38:19Z",
+              "duration_ms": 570,
               "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
               "method": "http_get",
-              "raw_ref": "sha256:570ed56d917be60bc05840b25b98b5c447ea31da0cda116920fd9a7c9016feef",
+              "raw_ref": "sha256:340d4bcfbec0aea625367a7f037a9929277e92712a45a1577fcdc5a905a8cadf",
               "raw_truncated": false,
               "source_id": "seeds"
             },
@@ -272,153 +272,33 @@
         }
       ],
       "release_context": {
-        "note": null,
+        "note": "schedule page unavailable; dates approximated as release minus 8 weeks, which has been observed to be up to a week early",
         "provenance": {
-          "cache": "fresh",
-          "checked_at": "2026-10-09T18:45:55Z",
-          "duration_ms": 411,
+          "cache": "none",
+          "checked_at": "2026-10-10T02:38:16Z",
+          "duration_ms": 0,
           "locator": "https://documentation.ubuntu.com/release-notes/26.04/schedule/",
-          "method": "http_get",
-          "raw_ref": "sha256:388466d7c6eef524d55182c2cbfe85f6b4956ca72edb271081cc2a620f615a9f",
+          "method": "computed",
+          "raw_ref": null,
           "raw_truncated": false,
           "source_id": "calendar.schedule"
         },
         "status": "OK",
         "value": {
           "days_bucket": "post-release",
-          "days_since_feature_freeze": 232,
-          "days_to_release": -169,
-          "derivation": "schedule-page",
-          "feature_freeze": "2026-02-19",
+          "days_since_feature_freeze": 226,
+          "days_to_release": -170,
+          "derivation": "approximate",
+          "feature_freeze": "2026-02-26",
           "freeze_window_elapsed_pct": 100,
           "milestones": [
             {
-              "date": "2025-10-16",
-              "name": "Python 3.14 as a supported version"
-            },
-            {
-              "date": "2025-10-16",
-              "name": "Toolchain Uploaded"
-            },
-            {
-              "date": "2025-10-23",
-              "name": "enable autosync from Debian"
-            },
-            {
-              "date": "2025-10-30",
-              "name": "Golang 1.25 transition"
-            },
-            {
-              "date": "2025-11-27",
-              "name": "Resolute Snapshot 1"
-            },
-            {
-              "date": "2025-12-11",
-              "name": "Resolute Snapshot 2"
-            },
-            {
-              "date": "2025-12-18",
-              "name": "binutils 2.46"
-            },
-            {
-              "date": "2026-01-01",
-              "name": "GNOME 50 alpha"
-            },
-            {
-              "date": "2026-01-08",
-              "name": "Python 3.14 as the default version"
-            },
-            {
-              "date": "2026-01-22",
-              "name": "PHP 8.5"
-            },
-            {
-              "date": "2026-01-29",
-              "name": "GNOME 50 beta"
-            },
-            {
-              "date": "2026-01-29",
-              "name": "Resolute Snapshot 3"
-            },
-            {
-              "date": "2026-02-12",
-              "name": "GCC 16 as optional"
-            },
-            {
-              "date": "2026-02-12",
-              "name": "Java 25 default (tentative)"
-            },
-            {
-              "date": "2026-02-12",
-              "name": "Rust 1.93 transition (tentative)"
-            },
-            {
-              "date": "2026-02-19",
-              "name": "Debian Import Freeze"
-            },
-            {
-              "date": "2026-02-19",
-              "name": "Feature Freeze"
-            },
-            {
               "date": "2026-02-26",
-              "name": "Resolute Snapshot 4"
-            },
-            {
-              "date": "2026-03-12",
-              "name": "UI Freeze"
-            },
-            {
-              "date": "2026-03-19",
-              "name": "Documentation String Freeze"
-            },
-            {
-              "date": "2026-03-19",
-              "name": "Kernel Feature Freeze"
-            },
-            {
-              "date": "2026-03-23",
-              "name": "Beta Freeze"
-            },
-            {
-              "date": "2026-03-23",
-              "name": "Hardware Enablement Freeze"
-            },
-            {
-              "date": "2026-03-23",
-              "name": "ISO Testing Week (mandatory)"
-            },
-            {
-              "date": "2026-03-26",
-              "name": "Beta"
-            },
-            {
-              "date": "2026-04-09",
-              "name": "Kernel Freeze"
-            },
-            {
-              "date": "2026-04-09",
-              "name": "Non Language Pack Translation Deadline"
-            },
-            {
-              "date": "2026-04-16",
-              "name": "Final Freeze"
-            },
-            {
-              "date": "2026-04-16",
-              "name": "Language Pack Translation Deadline"
-            },
-            {
-              "date": "2026-04-16",
-              "name": "Release Candidate"
+              "name": "Feature Freeze"
             },
             {
               "date": "2026-04-23",
               "name": "Final Release"
-            },
-            {
-              "date": "2026-08-27",
-              "name": "26.04.1 Point Release"
             }
           ],
           "phase": "FINAL_RELEASE",
@@ -462,6 +342,11 @@
       },
       "unavailable": [
         {
+          "impact": "cannot tell how late in the freeze this request is",
+          "reason": "calendar.schedule: documentation.ubuntu.com rate-limited us",
+          "source_id": "calendar.schedule"
+        },
+        {
           "impact": "cannot tell which Ubuntu images ship this package",
           "reason": "seed index incomplete: index covers only 7 flavours",
           "source_id": "seeds"
@@ -476,17 +361,17 @@
       "left_queue_at": null
     },
     "provenance": {
-      "generated_at": "2026-10-09T18:45:57Z",
+      "generated_at": "2026-10-10T02:38:19Z",
       "harness": null,
       "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
       "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
       "policy_version": "1.0.0",
-      "review_key": "sha256:12ce8759ce130c47550644e4551ff246f78caeb15f4cf8d3ffd637e93da7af19",
+      "review_key": "sha256:ce49786f921adfe2b699ad517634eca438f91ad9e95c2321d671a064ff7c1f30",
       "risk_algorithm_version": "risk/1.2.0",
-      "run_id": "run-20261009T184550Z",
+      "run_id": "run-20261010T023808Z",
       "tool_version": "0.1.0"
     },
-    "record_id": "2169298/62a1761ca93d8869",
+    "record_id": "2169298/1d04547bdcf09dbe",
     "risk": {
       "algorithm_version": "risk/1.2.0",
       "band": "HIGH",
@@ -498,7 +383,7 @@
           "max_points": 20,
           "name": "release_posture",
           "points": 20,
-          "rationale": "LTS release, past final release, -169 days to release, 100% through the freeze window"
+          "rationale": "LTS release, past final release, -170 days to release, 100% through the freeze window"
         },
         {
           "evidence_refs": [
@@ -546,7 +431,7 @@
           "rationale": "the bug links pasted test output"
         }
       ],
-      "confidence_ceiling": "MEDIUM",
+      "confidence_ceiling": "LOW",
       "decision_floor": "NEEDS_INFORMATION",
       "gates": [
         {
@@ -618,7 +503,7 @@
             "/evidence/unavailable"
           ],
           "id": "evidence_unavailable",
-          "rationale": "could not consult seeds, so this assessment rests on incomplete evidence",
+          "rationale": "could not consult calendar.schedule, seeds, so this assessment rests on incomplete evidence",
           "triggered": true
         }
       ],
