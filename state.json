@@ -281,7 +281,7 @@
       "in_queue": true,
       "last_evidence_at": "2026-10-24T14:49:36Z",
       "last_review_at": "",
-      "last_seen_at": "2026-10-26T00:38:01Z",
+      "last_seen_at": "2026-10-26T05:55:24Z",
       "llm_runs_date": "",
       "llm_runs_today": 0,
       "message_count": 11,
@@ -325,6 +325,6 @@
       "status": "Triaged"
     }
   },
-  "updated_at": "2026-10-26T00:38:05Z",
+  "updated_at": "2026-10-26T05:55:27Z",
   "version": 1
 }
