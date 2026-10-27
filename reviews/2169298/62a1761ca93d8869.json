@@ -150,8 +150,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-10-24T14:49:33Z",
-            "duration_ms": 1081,
+            "checked_at": "2026-10-27T14:52:50Z",
+            "duration_ms": 7286,
             "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=dnsmasq&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fresolute&status=Published&order_by_date=true",
             "method": "http_get",
             "raw_ref": "sha256:75b52b77bf8f6eedb50a885f27eb9016595630f67f7396816038eb6ef368350d",
@@ -177,8 +177,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-10-24T14:49:36Z",
-            "duration_ms": 152,
+            "checked_at": "2026-10-27T14:53:01Z",
+            "duration_ms": 133,
             "locator": "http://qa.ubuntuwire.org/rdepends/v1/resolute/source/src:dnsmasq",
             "method": "http_get",
             "raw_ref": "sha256:df7a9fd3cbc616d212f63e81356fb92dc3d70e26adff16ea58b00d9557a5172f",
@@ -200,8 +200,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-10-24T14:49:35Z",
-            "duration_ms": 174,
+            "checked_at": "2026-10-27T14:53:00Z",
+            "duration_ms": 191,
             "locator": "http://qa.ubuntuwire.org/rdepends/v1/resolute/any/src:dnsmasq",
             "method": "http_get",
             "raw_ref": "sha256:1ebf41f39b624223ae8f585e649fb5dd8238196cfb281a4972ae7e6c1e1bb597",
@@ -239,8 +239,8 @@
           "note": "none of dnsmasq, dnsmasq-base, dnsmasq-base-lua, dnsmasq-utils appear in the seed index, but the index looks incomplete (index covers only 7 flavours), so this is not evidence that the package is unseeded",
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-10-24T14:49:35Z",
-            "duration_ms": 587,
+            "checked_at": "2026-10-27T14:53:00Z",
+            "duration_ms": 446,
             "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
             "method": "http_get",
             "raw_ref": "sha256:e80a851a4bc9263decb7c6ab5362291daa6dcf9d3cd2a4c9221f4e0e4ebab561",
@@ -256,8 +256,8 @@
       "note": null,
       "provenance": {
         "cache": "fresh",
-        "checked_at": "2026-10-24T14:49:32Z",
-        "duration_ms": 410,
+        "checked_at": "2026-10-27T14:52:43Z",
+        "duration_ms": 713,
         "locator": "https://documentation.ubuntu.com/release-notes/26.04/schedule/",
         "method": "http_get",
         "raw_ref": "sha256:0ccd7422b1a548ce867bda8da0d9a6e848ed4c1a5967a8f7f2762968e75839c8",
@@ -267,8 +267,8 @@
       "status": "OK",
       "value": {
         "days_bucket": "post-release",
-        "days_since_feature_freeze": 247,
-        "days_to_release": -184,
+        "days_since_feature_freeze": 250,
+        "days_to_release": -187,
         "derivation": "schedule-page",
         "feature_freeze": "2026-02-19",
         "freeze_window_elapsed_pct": 100,
@@ -473,14 +473,14 @@
     "left_queue_at": null
   },
   "provenance": {
-    "generated_at": "2026-10-24T14:49:36Z",
+    "generated_at": "2026-10-27T14:53:01Z",
     "harness": null,
     "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
     "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
     "policy_version": "1.0.0",
     "review_key": "sha256:12ce8759ce130c47550644e4551ff246f78caeb15f4cf8d3ffd637e93da7af19",
     "risk_algorithm_version": "risk/1.2.0",
-    "run_id": "run-20261024T144928Z",
+    "run_id": "run-20261027T145135Z",
     "tool_version": "0.1.0"
   },
   "record_id": "2169298/62a1761ca93d8869",
@@ -495,7 +495,7 @@
         "max_points": 20,
         "name": "release_posture",
         "points": 20,
-        "rationale": "LTS release, past final release, -184 days to release, 100% through the freeze window"
+        "rationale": "LTS release, past final release, -187 days to release, 100% through the freeze window"
       },
       {
         "evidence_refs": [
