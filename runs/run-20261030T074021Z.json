@@ -1,0 +1,19 @@
+{
+  "archived": [],
+  "deferred_budget": [],
+  "errors": [
+    "bug 2169298: launchpad.bug: api.launchpad.net rate-limited us"
+  ],
+  "finished_at": "2026-10-30T07:43:15Z",
+  "lessons_learned": [],
+  "llm_calls": 0,
+  "process_gaps": [],
+  "queue_size": 1,
+  "reviewed": [],
+  "run_id": "run-20261030T074021Z",
+  "skipped_unchanged": [],
+  "started_at": "2026-10-30T07:40:21Z",
+  "unavailable_sources": [
+    "launchpad.bug"
+  ]
+}
