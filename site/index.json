@@ -22,9 +22,9 @@
       "rdepends": 16,
       "release_type": "LTS",
       "reporter": "aallennnn",
-      "reviewed_at": "2026-11-02T09:21:05Z",
+      "reviewed_at": "2026-11-02T19:42:29Z",
       "risk_band": "HIGH",
-      "risk_score": 60,
+      "risk_score": 65,
       "seeded": null,
       "series": "resolute",
       "status": "EVIDENCE_ONLY",
@@ -32,8 +32,6 @@
       "testing_corroborated": true,
       "title": "Strange hiden config file with private ip address as dns server",
       "unavailable": [
-        "launchpad.sweep",
-        "launchpad.archive",
         "seeds"
       ],
       "url": "https://bugs.launchpad.net/bugs/2169298",
