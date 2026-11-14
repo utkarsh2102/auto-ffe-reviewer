@@ -150,8 +150,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-11-13T17:04:44Z",
-            "duration_ms": 2266,
+            "checked_at": "2026-11-14T10:08:33Z",
+            "duration_ms": 607,
             "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=dnsmasq&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fresolute&status=Published&order_by_date=true",
             "method": "http_get",
             "raw_ref": "sha256:75b52b77bf8f6eedb50a885f27eb9016595630f67f7396816038eb6ef368350d",
@@ -177,8 +177,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-11-13T17:04:48Z",
-            "duration_ms": 102,
+            "checked_at": "2026-11-14T10:08:35Z",
+            "duration_ms": 115,
             "locator": "http://qa.ubuntuwire.org/rdepends/v1/resolute/source/src:dnsmasq",
             "method": "http_get",
             "raw_ref": "sha256:df7a9fd3cbc616d212f63e81356fb92dc3d70e26adff16ea58b00d9557a5172f",
@@ -200,11 +200,11 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-11-13T17:04:47Z",
-            "duration_ms": 118,
+            "checked_at": "2026-11-14T10:08:34Z",
+            "duration_ms": 106,
             "locator": "http://qa.ubuntuwire.org/rdepends/v1/resolute/any/src:dnsmasq",
             "method": "http_get",
-            "raw_ref": "sha256:4007c7acb710b903c1773c10d642fa4d01ea818d8be1529edb390d6642ee764c",
+            "raw_ref": "sha256:b83caf743df6729efb4815035dd71213008c42996b6a451e966bb360cc5c04dd",
             "raw_truncated": false,
             "source_id": "rdepends.binary"
           },
@@ -239,11 +239,11 @@
           "note": "none of dnsmasq, dnsmasq-base, dnsmasq-base-lua, dnsmasq-utils appear in the seed index, but the index looks incomplete (index omits bash, coreutils, libc6, dpkg, which are on every Ubuntu image), so this is not evidence that the package is unseeded",
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-11-13T17:04:47Z",
-            "duration_ms": 495,
+            "checked_at": "2026-11-14T10:08:34Z",
+            "duration_ms": 468,
             "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
             "method": "http_get",
-            "raw_ref": "sha256:fec86f497a2b7042d215fa8554d432d2b37645eea1546f4a96da1fab94210203",
+            "raw_ref": "sha256:4dba30941bc9a79a324b90585ce2663750f875923d73dccdd35002f47f494f02",
             "raw_truncated": false,
             "source_id": "seeds"
           },
@@ -256,7 +256,7 @@
       "note": "schedule page unavailable; dates approximated as release minus 8 weeks, which has been observed to be up to a week early",
       "provenance": {
         "cache": "none",
-        "checked_at": "2026-11-13T17:04:42Z",
+        "checked_at": "2026-11-14T10:08:32Z",
         "duration_ms": 0,
         "locator": "https://documentation.ubuntu.com/release-notes/26.04/schedule/",
         "method": "computed",
@@ -267,8 +267,8 @@
       "status": "OK",
       "value": {
         "days_bucket": "post-release",
-        "days_since_feature_freeze": 260,
-        "days_to_release": -204,
+        "days_since_feature_freeze": 261,
+        "days_to_release": -205,
         "derivation": "approximate",
         "feature_freeze": "2026-02-26",
         "freeze_window_elapsed_pct": 100,
@@ -342,14 +342,14 @@
     "left_queue_at": null
   },
   "provenance": {
-    "generated_at": "2026-11-13T17:04:48Z",
+    "generated_at": "2026-11-14T10:08:35Z",
     "harness": null,
     "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
     "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
     "policy_version": "1.0.0",
     "review_key": "sha256:ce49786f921adfe2b699ad517634eca438f91ad9e95c2321d671a064ff7c1f30",
     "risk_algorithm_version": "risk/1.2.0",
-    "run_id": "run-20261113T170433Z",
+    "run_id": "run-20261114T100824Z",
     "tool_version": "0.1.0"
   },
   "record_id": "2169298/1d04547bdcf09dbe",
@@ -364,7 +364,7 @@
         "max_points": 20,
         "name": "release_posture",
         "points": 20,
-        "rationale": "LTS release, past final release, -204 days to release, 100% through the freeze window"
+        "rationale": "LTS release, past final release, -205 days to release, 100% through the freeze window"
       },
       {
         "evidence_refs": [
