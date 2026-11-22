@@ -281,7 +281,7 @@
       "in_queue": true,
       "last_evidence_at": "2026-11-21T21:01:47Z",
       "last_review_at": "",
-      "last_seen_at": "2026-11-22T01:30:47Z",
+      "last_seen_at": "2026-11-22T09:36:17Z",
       "llm_runs_date": "",
       "llm_runs_today": 0,
       "message_count": 11,
@@ -323,8 +323,26 @@
       "message_count": 1,
       "review_key": "sha256:2c898cc3d6fa6d634267b9347e90f5fada35b9f360618f68725bc5d1c50b13ba",
       "status": "Triaged"
+    },
+    "2175507": {
+      "bug_id": 2175507,
+      "confidence": null,
+      "date_last_message": "2026-11-22T07:39:33.144151+00:00",
+      "date_last_updated": "2026-11-22T07:48:42.897282+00:00",
+      "decision": null,
+      "discovered_via": "release-team-queue",
+      "fingerprint": "sha256:d624bd38f3ea22247b8e3d991df09a9fe0fdc67817087ae8a9547cded549f492",
+      "in_queue": true,
+      "last_evidence_at": "2026-11-22T09:36:15Z",
+      "last_review_at": "",
+      "last_seen_at": "2026-11-22T09:36:03Z",
+      "llm_runs_date": "",
+      "llm_runs_today": 0,
+      "message_count": 1,
+      "review_key": "sha256:1de09f3fb706b316dce6dd51b664a0180f1d46247a113ee5a7b1ce50da85a0aa",
+      "status": "New"
     }
   },
-  "updated_at": "2026-11-22T01:30:50Z",
+  "updated_at": "2026-11-22T09:36:28Z",
   "version": 1
 }

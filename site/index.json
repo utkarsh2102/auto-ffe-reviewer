@@ -36,18 +36,55 @@
       ],
       "url": "https://bugs.launchpad.net/bugs/2169298",
       "version": "26.04"
+    },
+    {
+      "ack_required_from": [],
+      "bug_id": 2175507,
+      "build_rdepends": 0,
+      "confidence": null,
+      "days_to_release": -1676,
+      "decision": null,
+      "decision_floor": "NEEDS_INFORMATION",
+      "ffe_kind": "new-upstream",
+      "flags": [],
+      "flavour_impact": "SINGLE_FLAVOUR",
+      "has_assessment": false,
+      "injection_signals": 0,
+      "is_core": false,
+      "missing_information": [],
+      "packages": [
+        "casper"
+      ],
+      "phase": "FINAL_RELEASE",
+      "rdepends": 3,
+      "release_type": "LTS",
+      "reporter": "kms2026",
+      "reviewed_at": "2026-11-22T09:36:15Z",
+      "risk_band": "HIGH",
+      "risk_score": 57,
+      "seeded": [
+        "ubuntu-budgie"
+      ],
+      "series": "jammy",
+      "status": "EVIDENCE_ONLY",
+      "summary": null,
+      "testing_corroborated": false,
+      "title": "Rebuild LTS installation media (22.04, 24.04, 26.04) to mitigate CVE-2026-109518 during initial boot",
+      "unavailable": [],
+      "url": "https://bugs.launchpad.net/bugs/2175507",
+      "version": "22.04"
     }
   ],
   "counts": {
     "approve": 0,
     "awaiting_flavour_ack": 0,
     "evidence_incomplete": 1,
-    "high_risk": 1,
-    "needs_attention": 1,
+    "high_risk": 2,
+    "needs_attention": 2,
     "needs_information": 0,
-    "no_recommendation": 1,
-    "no_testing_evidence": 0,
-    "open": 1,
+    "no_recommendation": 2,
+    "no_testing_evidence": 1,
+    "open": 2,
     "reject": 0
   },
   "version": 1
