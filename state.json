@@ -281,7 +281,7 @@
       "in_queue": true,
       "last_evidence_at": "2026-11-21T21:01:47Z",
       "last_review_at": "",
-      "last_seen_at": "2026-11-22T09:36:17Z",
+      "last_seen_at": "2026-11-22T17:43:10Z",
       "llm_runs_date": "",
       "llm_runs_today": 0,
       "message_count": 11,
@@ -335,7 +335,7 @@
       "in_queue": true,
       "last_evidence_at": "2026-11-22T09:36:15Z",
       "last_review_at": "",
-      "last_seen_at": "2026-11-22T09:36:03Z",
+      "last_seen_at": "2026-11-22T17:42:59Z",
       "llm_runs_date": "",
       "llm_runs_today": 0,
       "message_count": 1,
@@ -343,6 +343,6 @@
       "status": "New"
     }
   },
-  "updated_at": "2026-11-22T09:36:28Z",
+  "updated_at": "2026-11-22T17:43:13Z",
   "version": 1
 }
