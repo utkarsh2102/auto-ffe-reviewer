@@ -71,8 +71,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-11-22T09:36:03Z",
-            "duration_ms": 634,
+            "checked_at": "2026-11-25T05:20:07Z",
+            "duration_ms": 326,
             "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=casper&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fjammy&status=Published&order_by_date=true",
             "method": "http_get",
             "raw_ref": "sha256:ed31a1e30ae1586a5f8fececfa3253a31f8f2060d71d6f58ad2a317ee5df9bad",
@@ -96,8 +96,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-11-22T09:36:05Z",
-            "duration_ms": 97,
+            "checked_at": "2026-11-25T05:20:09Z",
+            "duration_ms": 138,
             "locator": "http://qa.ubuntuwire.org/rdepends/v1/jammy/source/src:casper",
             "method": "http_get",
             "raw_ref": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
@@ -119,11 +119,11 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-11-22T09:36:05Z",
-            "duration_ms": 115,
+            "checked_at": "2026-11-25T05:20:08Z",
+            "duration_ms": 621,
             "locator": "http://qa.ubuntuwire.org/rdepends/v1/jammy/any/src:casper",
             "method": "http_get",
-            "raw_ref": "sha256:41402195b5e145e634de1f60879b7f7928b4cd405eb30b15d513305121600f9b",
+            "raw_ref": "sha256:bf3171f3831076c645f7b10c8f164fd658e0c21cc5254e86a587dd3939a928df",
             "raw_truncated": false,
             "source_id": "rdepends.binary"
           },
@@ -145,11 +145,11 @@
           "note": "seed index looks incomplete (index omits bash, coreutils, libc6, dpkg, which are on every Ubuntu image); the listed images are real but there may be more",
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-11-22T09:36:04Z",
-            "duration_ms": 294,
+            "checked_at": "2026-11-25T05:20:08Z",
+            "duration_ms": 490,
             "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
             "method": "http_get",
-            "raw_ref": "sha256:ba6a91dae44b58c3dee856d1c8cefc4c32740b4b1dcd08f6aadc5e42bca7c3ab",
+            "raw_ref": "sha256:7a4bf31e5988c29d1a743108634bd4efe8b1b932609419abc15e446a04b83738",
             "raw_truncated": false,
             "source_id": "seeds"
           },
@@ -180,8 +180,8 @@
       "note": null,
       "provenance": {
         "cache": "fresh",
-        "checked_at": "2026-11-22T09:36:03Z",
-        "duration_ms": 168,
+        "checked_at": "2026-11-25T05:20:06Z",
+        "duration_ms": 593,
         "locator": "https://documentation.ubuntu.com/release-notes/22.04/schedule/",
         "method": "http_get",
         "raw_ref": "sha256:c1de4f4ab431457e276e377993c4af62904be0826262f2bc90278a94ac8be9e4",
@@ -191,8 +191,8 @@
       "status": "OK",
       "value": {
         "days_bucket": "post-release",
-        "days_since_feature_freeze": 1732,
-        "days_to_release": -1676,
+        "days_since_feature_freeze": 1735,
+        "days_to_release": -1679,
         "derivation": "schedule-page",
         "feature_freeze": "2022-02-24",
         "freeze_window_elapsed_pct": 100,
@@ -384,14 +384,14 @@
     "left_queue_at": null
   },
   "provenance": {
-    "generated_at": "2026-11-22T09:36:15Z",
+    "generated_at": "2026-11-25T05:20:15Z",
     "harness": null,
     "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
     "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
     "policy_version": "1.0.0",
     "review_key": "sha256:1de09f3fb706b316dce6dd51b664a0180f1d46247a113ee5a7b1ce50da85a0aa",
     "risk_algorithm_version": "risk/1.2.0",
-    "run_id": "run-20261122T093555Z",
+    "run_id": "run-20261125T052002Z",
     "tool_version": "0.1.0"
   },
   "record_id": "2175507/d624bd38f3ea2224",
@@ -406,7 +406,7 @@
         "max_points": 20,
         "name": "release_posture",
         "points": 20,
-        "rationale": "LTS release, past final release, -1676 days to release, 100% through the freeze window"
+        "rationale": "LTS release, past final release, -1679 days to release, 100% through the freeze window"
       },
       {
         "evidence_refs": [

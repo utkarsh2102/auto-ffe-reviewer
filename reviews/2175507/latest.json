@@ -53,7 +53,7 @@
       "title": "Rebuild LTS installation media (22.04, 24.04, 26.04) to mitigate CVE-2026-109518 during initial boot",
       "url": "https://bugs.launchpad.net/bugs/2175507"
     },
-    "fingerprint": "sha256:720a324409f7ce6f3bf88bbaca5cbbb3276b6e63146c29a5185d4047b3eca89b",
+    "fingerprint": "sha256:d624bd38f3ea22247b8e3d991df09a9fe0fdc67817087ae8a9547cded549f492",
     "flavours": {
       "ack_required_from": [],
       "acks": [],
@@ -71,8 +71,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-11-24T22:42:43Z",
-            "duration_ms": 506,
+            "checked_at": "2026-11-25T05:20:07Z",
+            "duration_ms": 326,
             "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=casper&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fjammy&status=Published&order_by_date=true",
             "method": "http_get",
             "raw_ref": "sha256:ed31a1e30ae1586a5f8fececfa3253a31f8f2060d71d6f58ad2a317ee5df9bad",
@@ -96,8 +96,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-11-24T22:42:45Z",
-            "duration_ms": 115,
+            "checked_at": "2026-11-25T05:20:09Z",
+            "duration_ms": 138,
             "locator": "http://qa.ubuntuwire.org/rdepends/v1/jammy/source/src:casper",
             "method": "http_get",
             "raw_ref": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
@@ -119,8 +119,8 @@
           "note": null,
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-11-24T22:42:44Z",
-            "duration_ms": 119,
+            "checked_at": "2026-11-25T05:20:08Z",
+            "duration_ms": 621,
             "locator": "http://qa.ubuntuwire.org/rdepends/v1/jammy/any/src:casper",
             "method": "http_get",
             "raw_ref": "sha256:bf3171f3831076c645f7b10c8f164fd658e0c21cc5254e86a587dd3939a928df",
@@ -145,11 +145,11 @@
           "note": "seed index looks incomplete (index omits bash, coreutils, libc6, dpkg, which are on every Ubuntu image); the listed images are real but there may be more",
           "provenance": {
             "cache": "fresh",
-            "checked_at": "2026-11-24T22:42:44Z",
-            "duration_ms": 428,
+            "checked_at": "2026-11-25T05:20:08Z",
+            "duration_ms": 490,
             "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
             "method": "http_get",
-            "raw_ref": "sha256:6f2182a788c5ac88bbb40977f9d0e68eca87a367781271e93f8a71cb91cf0fd1",
+            "raw_ref": "sha256:7a4bf31e5988c29d1a743108634bd4efe8b1b932609419abc15e446a04b83738",
             "raw_truncated": false,
             "source_id": "seeds"
           },
@@ -177,33 +177,177 @@
       }
     ],
     "release_context": {
-      "note": "schedule page unavailable; dates approximated as release minus 8 weeks, which has been observed to be up to a week early",
+      "note": null,
       "provenance": {
-        "cache": "none",
-        "checked_at": "2026-11-24T22:42:43Z",
-        "duration_ms": 0,
+        "cache": "fresh",
+        "checked_at": "2026-11-25T05:20:06Z",
+        "duration_ms": 593,
         "locator": "https://documentation.ubuntu.com/release-notes/22.04/schedule/",
-        "method": "computed",
-        "raw_ref": null,
+        "method": "http_get",
+        "raw_ref": "sha256:c1de4f4ab431457e276e377993c4af62904be0826262f2bc90278a94ac8be9e4",
         "raw_truncated": false,
         "source_id": "calendar.schedule"
       },
       "status": "OK",
       "value": {
         "days_bucket": "post-release",
-        "days_since_feature_freeze": 1734,
-        "days_to_release": -1678,
-        "derivation": "approximate",
+        "days_since_feature_freeze": 1735,
+        "days_to_release": -1679,
+        "derivation": "schedule-page",
         "feature_freeze": "2022-02-24",
         "freeze_window_elapsed_pct": 100,
         "milestones": [
+          {
+            "date": "2021-10-21",
+            "name": "Toolchain Uploaded"
+          },
+          {
+            "date": "2021-10-28",
+            "name": "php8.1"
+          },
+          {
+            "date": "2021-11-04",
+            "name": "OpenSSL3"
+          },
+          {
+            "date": "2021-11-18",
+            "name": "Ruby 3.0"
+          },
+          {
+            "date": "2021-12-02",
+            "name": "systemd v249"
+          },
+          {
+            "date": "2021-12-09",
+            "name": "DPDK 21.11"
+          },
+          {
+            "date": "2021-12-16",
+            "name": "binutils 2.38"
+          },
+          {
+            "date": "2021-12-23",
+            "name": "Ubuntu Testing Week (optional)"
+          },
+          {
+            "date": "2022-01-13",
+            "name": "Python 3.10"
+          },
+          {
+            "date": "2022-01-20",
+            "name": "see  this comment"
+          },
+          {
+            "date": "2022-01-20",
+            "name": "~~OpenLDAP 2.6 (tentative; depends on upstream release schedule)~~ – Cancelled"
+          },
+          {
+            "date": "2022-02-03",
+            "name": "Chinese New Year week"
+          },
+          {
+            "date": "2022-02-03",
+            "name": "Glibc 2.35"
+          },
+          {
+            "date": "2022-02-17",
+            "name": "GNOME 42 Beta"
+          },
+          {
+            "date": "2022-02-17",
+            "name": "Golang 1.18"
+          },
+          {
+            "date": "2022-02-24",
+            "name": "20.04.4 Point Release"
+          },
+          {
+            "date": "2022-02-24",
+            "name": "Debian Import Freeze"
+          },
           {
             "date": "2022-02-24",
             "name": "Feature Freeze"
           },
           {
+            "date": "2022-03-17",
+            "name": "LLVM 14"
+          },
+          {
+            "date": "2022-03-17",
+            "name": "UI Freeze"
+          },
+          {
+            "date": "2022-03-24",
+            "name": "Documentation String Freeze"
+          },
+          {
+            "date": "2022-03-24",
+            "name": "GNOME 42.0"
+          },
+          {
+            "date": "2022-03-24",
+            "name": "Kernel Feature Freeze"
+          },
+          {
+            "date": "2022-03-28",
+            "name": "Beta Freeze"
+          },
+          {
+            "date": "2022-03-28",
+            "name": "Hardware Enablement Freeze"
+          },
+          {
+            "date": "2022-03-31",
+            "name": "Beta"
+          },
+          {
+            "date": "2022-03-31",
+            "name": "Openstack Yoga"
+          },
+          {
+            "date": "2022-04-07",
+            "name": "Kernel Freeze"
+          },
+          {
+            "date": "2022-04-07",
+            "name": "Non Language Pack Translation Deadline"
+          },
+          {
+            "date": "2022-04-14",
+            "name": "Final Freeze"
+          },
+          {
+            "date": "2022-04-14",
+            "name": "Language Pack Translation Deadline"
+          },
+          {
+            "date": "2022-04-14",
+            "name": "Release Candidate"
+          },
+          {
             "date": "2022-04-21",
             "name": "Final Release"
+          },
+          {
+            "date": "2022-08-04",
+            "name": "22.04.1 Point Release"
+          },
+          {
+            "date": "2023-02-23",
+            "name": "22.04.2 Point Release"
+          },
+          {
+            "date": "2023-08-10",
+            "name": "22.04.3 Point Release"
+          },
+          {
+            "date": "2024-02-22",
+            "name": "22.04.4 Point Release"
+          },
+          {
+            "date": "2024-09-12",
+            "name": "22.04.5 Point Release"
           }
         ],
         "phase": "FINAL_RELEASE",
@@ -230,13 +374,7 @@
       "test_output": "ABSENT",
       "unverified_claims": []
     },
-    "unavailable": [
-      {
-        "impact": "cannot tell how late in the freeze this request is",
-        "reason": "calendar.schedule: documentation.ubuntu.com rate-limited us",
-        "source_id": "calendar.schedule"
-      }
-    ]
+    "unavailable": []
   },
   "human": {
     "decided": false,
@@ -246,17 +384,17 @@
     "left_queue_at": null
   },
   "provenance": {
-    "generated_at": "2026-11-24T22:42:50Z",
+    "generated_at": "2026-11-25T05:20:15Z",
     "harness": null,
     "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
     "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
     "policy_version": "1.0.0",
-    "review_key": "sha256:3f31323df70e8e3c5d4b09254b6d5c13e8a96d7fc8a930ac18e6b4ce70cae95f",
+    "review_key": "sha256:1de09f3fb706b316dce6dd51b664a0180f1d46247a113ee5a7b1ce50da85a0aa",
     "risk_algorithm_version": "risk/1.2.0",
-    "run_id": "run-20261124T224234Z",
+    "run_id": "run-20261125T052002Z",
     "tool_version": "0.1.0"
   },
-  "record_id": "2175507/720a324409f7ce6f",
+  "record_id": "2175507/d624bd38f3ea2224",
   "risk": {
     "algorithm_version": "risk/1.2.0",
     "band": "HIGH",
@@ -268,7 +406,7 @@
         "max_points": 20,
         "name": "release_posture",
         "points": 20,
-        "rationale": "LTS release, past final release, -1678 days to release, 100% through the freeze window"
+        "rationale": "LTS release, past final release, -1679 days to release, 100% through the freeze window"
       },
       {
         "evidence_refs": [
@@ -388,8 +526,8 @@
           "/evidence/unavailable"
         ],
         "id": "evidence_unavailable",
-        "rationale": "could not consult calendar.schedule, so this assessment rests on incomplete evidence",
-        "triggered": true
+        "rationale": "every evidence source was available",
+        "triggered": false
       }
     ],
     "score": 57
