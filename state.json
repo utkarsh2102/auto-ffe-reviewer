@@ -277,15 +277,15 @@
       "date_last_updated": "2026-10-08T15:58:30.801160+00:00",
       "decision": null,
       "discovered_via": "release-team-queue",
-      "fingerprint": "sha256:62a1761ca93d886936f87b7739838c2d6e78015b376c0d98decc2adf5a75ab4d",
+      "fingerprint": "sha256:1d04547bdcf09dbe94d642d0a05d518795b580f69fa3a27420f1e8221bee9cb7",
       "in_queue": true,
-      "last_evidence_at": "2026-11-25T05:20:20Z",
+      "last_evidence_at": "2026-11-26T00:11:02Z",
       "last_review_at": "",
-      "last_seen_at": "2026-11-25T15:57:41Z",
+      "last_seen_at": "2026-11-26T00:10:55Z",
       "llm_runs_date": "",
       "llm_runs_today": 0,
       "message_count": 11,
-      "review_key": "sha256:12ce8759ce130c47550644e4551ff246f78caeb15f4cf8d3ffd637e93da7af19",
+      "review_key": "sha256:ce49786f921adfe2b699ad517634eca438f91ad9e95c2321d671a064ff7c1f30",
       "status": "Incomplete"
     },
     "2169312": {
@@ -331,18 +331,18 @@
       "date_last_updated": "2026-11-22T07:48:42.897282+00:00",
       "decision": null,
       "discovered_via": "release-team-queue",
-      "fingerprint": "sha256:d624bd38f3ea22247b8e3d991df09a9fe0fdc67817087ae8a9547cded549f492",
+      "fingerprint": "sha256:720a324409f7ce6f3bf88bbaca5cbbb3276b6e63146c29a5185d4047b3eca89b",
       "in_queue": true,
-      "last_evidence_at": "2026-11-25T05:20:15Z",
+      "last_evidence_at": "2026-11-26T00:10:54Z",
       "last_review_at": "",
-      "last_seen_at": "2026-11-25T15:57:28Z",
+      "last_seen_at": "2026-11-26T00:10:41Z",
       "llm_runs_date": "",
       "llm_runs_today": 0,
       "message_count": 1,
-      "review_key": "sha256:1de09f3fb706b316dce6dd51b664a0180f1d46247a113ee5a7b1ce50da85a0aa",
+      "review_key": "sha256:3f31323df70e8e3c5d4b09254b6d5c13e8a96d7fc8a930ac18e6b4ce70cae95f",
       "status": "New"
     }
   },
-  "updated_at": "2026-11-25T15:57:45Z",
+  "updated_at": "2026-11-26T00:11:02Z",
   "version": 1
 }

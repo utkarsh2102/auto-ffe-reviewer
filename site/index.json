@@ -5,7 +5,7 @@
       "bug_id": 2169298,
       "build_rdepends": 0,
       "confidence": null,
-      "days_to_release": -216,
+      "days_to_release": -217,
       "decision": null,
       "decision_floor": "NEEDS_INFORMATION",
       "ffe_kind": "feature-change",
@@ -22,7 +22,7 @@
       "rdepends": 16,
       "release_type": "LTS",
       "reporter": "aallennnn",
-      "reviewed_at": "2026-11-25T05:20:20Z",
+      "reviewed_at": "2026-11-26T00:11:02Z",
       "risk_band": "HIGH",
       "risk_score": 65,
       "seeded": null,
@@ -32,6 +32,7 @@
       "testing_corroborated": true,
       "title": "Strange hiden config file with private ip address as dns server",
       "unavailable": [
+        "calendar.schedule",
         "seeds"
       ],
       "url": "https://bugs.launchpad.net/bugs/2169298",
@@ -42,7 +43,7 @@
       "bug_id": 2175507,
       "build_rdepends": 0,
       "confidence": null,
-      "days_to_release": -1679,
+      "days_to_release": -1680,
       "decision": null,
       "decision_floor": "NEEDS_INFORMATION",
       "ffe_kind": "new-upstream",
@@ -59,7 +60,7 @@
       "rdepends": 3,
       "release_type": "LTS",
       "reporter": "kms2026",
-      "reviewed_at": "2026-11-25T05:20:15Z",
+      "reviewed_at": "2026-11-26T00:10:54Z",
       "risk_band": "HIGH",
       "risk_score": 57,
       "seeded": [
@@ -70,7 +71,9 @@
       "summary": null,
       "testing_corroborated": false,
       "title": "Rebuild LTS installation media (22.04, 24.04, 26.04) to mitigate CVE-2026-109518 during initial boot",
-      "unavailable": [],
+      "unavailable": [
+        "calendar.schedule"
+      ],
       "url": "https://bugs.launchpad.net/bugs/2175507",
       "version": "22.04"
     }
@@ -78,7 +81,7 @@
   "counts": {
     "approve": 0,
     "awaiting_flavour_ack": 0,
-    "evidence_incomplete": 1,
+    "evidence_incomplete": 2,
     "high_risk": 2,
     "needs_attention": 2,
     "needs_information": 0,
