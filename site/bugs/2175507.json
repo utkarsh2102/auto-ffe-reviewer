@@ -23,6 +23,14 @@
       "generated_at": "2026-11-26T08:49:42Z",
       "risk_score": 57,
       "status": "EVIDENCE_ONLY"
+    },
+    {
+      "confidence": null,
+      "decision": null,
+      "fingerprint": "sha256:f2c3100dda37a11459dee7436cf96dfde9a9db748e70283244881eb0909bbf0e",
+      "generated_at": "2026-11-26T18:55:55Z",
+      "risk_score": 57,
+      "status": "EVIDENCE_ONLY"
     }
   ],
   "record": {
@@ -47,16 +55,25 @@
             "date_created": "2026-11-26T08:43:38.338145+00:00",
             "index": 1,
             "url": "https://bugs.launchpad.net/ubuntu-cdimage/+bug/2175507/comments/1"
+          },
+          {
+            "author": "kms2026",
+            "author_is_release_team": false,
+            "content": "Thank you for the quick response and for re-enabling the daily builds for Jammy and Noble so promptly. Having immediate access to patched artifacts is a huge help for teams currently blocked on deployments.\nHowever, I would like to gently emphasize to the management team why official, signed point-release ISOs for 22.04 and 24.04 are still critical:\n1. Compliance & Governance: Many enterprise and regulated environments strictly prohibit deploying unvalidated daily builds into production, leaving air-gapped manual patching as their only compliant option.\n2. Lifecycle Reality: While 26.04.2 is scheduled for February, 22.04 and 24.04 still have years of standard support remaining and remain the primary deployment targets for many infrastructures.\n3. Default Security Posture: Users downloading the primary LTS images from ubuntu.com shouldn't be exposed to a known MITM vector on first boot by default.\nWe appreciate the team looking into this and look forward to management's decision on official respins.\n",
+            "content_sha": "5d84bc6bba73f93c1c6242ef6764e5f800780cdb3ea699a21a1bc511b4c8cf81",
+            "date_created": "2026-11-26T09:52:10.424789+00:00",
+            "index": 2,
+            "url": "https://bugs.launchpad.net/ubuntu-cdimage/+bug/2175507/comments/2"
           }
         ],
         "date_created": "2026-11-22T07:39:33.144151+00:00",
-        "date_last_message": "2026-11-26T08:43:38.338145+00:00",
-        "date_last_updated": "2026-11-26T08:43:39.187863+00:00",
+        "date_last_message": "2026-11-26T09:52:10.424789+00:00",
+        "date_last_updated": "2026-11-26T09:52:11.514389+00:00",
         "description": "[Impact]\nWhile CVE-2026-109518 has been patched in the archive for all supported Ubuntu releases, official installation and Live ISO images for actively supported LTS releases (22.04 Jammy, 24.04 Noble, and 26.04 Resolute) still ship with the vulnerable `apt` binary.\n\nThis creates a critical chicken-and-egg race condition during fresh deployments:\n1. Modern Ubuntu installations immediately initiate background network activity upon boot via `cloud-init`, `unattended-upgrades`, `apt-daily.timer`, or desktop update managers (`update-notifier` / PackageKit).\n2. These services reach out to repositories before an administrator reaches a login prompt or has an opportunity to manually apply the security update.\n3. In untrusted networks or bare-metal datacenter rollouts without custom pre-patched golden images, machines are exposed to potential MITM package substitution during the initial boot window.\n\n[Workaround]\nMitigating this vulnerability with current official media requires severe operational workarounds in bare-metal environments: physically disconnecting network cables, scripting switch port isolation, or keeping machines air-gapped during installation until a patched `apt` `.deb` package is sideloaded manually prior to bringing network interfaces up.\n\n[Proposal]\nFollowing the approach taken in the recent Debian 13.8 point release (which rebuilt installation and Live media to eliminate this initial deployment vector), please consider prioritizing updated point-release ISOs (e.g., 22.04.6, 24.04.6, 26.04.x) or respinning current LTS media to include the patched `apt` package out of the box.",
         "description_sha": "27f55f047ec6474c721400755080a737fa8fcac7f10d81de1dcee9d4696b9474",
         "discovered_via": "release-team-queue",
         "id": 2175507,
-        "message_count": 2,
+        "message_count": 3,
         "release_team_subscribed": true,
         "reporter": "kms2026",
         "subscribers": [
@@ -89,7 +106,7 @@
         "title": "Rebuild LTS installation media (22.04, 24.04, 26.04) to mitigate CVE-2026-109518 during initial boot",
         "url": "https://bugs.launchpad.net/bugs/2175507"
       },
-      "fingerprint": "sha256:784bc20c885004a46056fabfc9575e52dd4fe97f479d1dd7d16bceb6a63ecc66",
+      "fingerprint": "sha256:f2c3100dda37a11459dee7436cf96dfde9a9db748e70283244881eb0909bbf0e",
       "flavours": {
         "ack_required_from": [],
         "acks": [
@@ -114,8 +131,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-11-26T08:48:51Z",
-              "duration_ms": 654,
+              "checked_at": "2026-11-26T18:55:47Z",
+              "duration_ms": 264,
               "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=casper&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fjammy&status=Published&order_by_date=true",
               "method": "http_get",
               "raw_ref": "sha256:ed31a1e30ae1586a5f8fececfa3253a31f8f2060d71d6f58ad2a317ee5df9bad",
@@ -139,8 +156,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-11-26T08:48:53Z",
-              "duration_ms": 134,
+              "checked_at": "2026-11-26T18:55:48Z",
+              "duration_ms": 91,
               "locator": "http://qa.ubuntuwire.org/rdepends/v1/jammy/source/src:casper",
               "method": "http_get",
               "raw_ref": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
@@ -162,11 +179,11 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-11-26T08:48:52Z",
-              "duration_ms": 138,
+              "checked_at": "2026-11-26T18:55:48Z",
+              "duration_ms": 102,
               "locator": "http://qa.ubuntuwire.org/rdepends/v1/jammy/any/src:casper",
               "method": "http_get",
-              "raw_ref": "sha256:968e80ac8c2f652b930ff6545384ff8cd698905f30989f0f3c5a9b37d84ae94a",
+              "raw_ref": "sha256:db64398bc402945d3c755a3d5eb5ef605a3fcc9f3260839ec06bc07de5b033ce",
               "raw_truncated": false,
               "source_id": "rdepends.binary"
             },
@@ -188,11 +205,11 @@
             "note": "seed index looks incomplete (index omits bash, coreutils, libc6, dpkg, which are on every Ubuntu image); the listed images are real but there may be more",
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-11-26T08:48:52Z",
-              "duration_ms": 584,
+              "checked_at": "2026-11-26T18:55:48Z",
+              "duration_ms": 334,
               "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
               "method": "http_get",
-              "raw_ref": "sha256:a5ec83b0ef044133be83456d4f7f8089d6aa43658559e37de04dfdecb472dcb4",
+              "raw_ref": "sha256:1f950b994427e2e316a08e1eb3179531b45f7e9a886076109d81153958eedcac",
               "raw_truncated": false,
               "source_id": "seeds"
             },
@@ -220,14 +237,14 @@
         }
       ],
       "release_context": {
-        "note": "schedule page unavailable; dates approximated as release minus 8 weeks, which has been observed to be up to a week early",
+        "note": null,
         "provenance": {
-          "cache": "none",
-          "checked_at": "2026-11-26T08:48:50Z",
-          "duration_ms": 0,
+          "cache": "fresh",
+          "checked_at": "2026-11-26T18:55:46Z",
+          "duration_ms": 149,
           "locator": "https://documentation.ubuntu.com/release-notes/22.04/schedule/",
-          "method": "computed",
-          "raw_ref": null,
+          "method": "http_get",
+          "raw_ref": "sha256:c1de4f4ab431457e276e377993c4af62904be0826262f2bc90278a94ac8be9e4",
           "raw_truncated": false,
           "source_id": "calendar.schedule"
         },
@@ -236,17 +253,161 @@
           "days_bucket": "post-release",
           "days_since_feature_freeze": 1736,
           "days_to_release": -1680,
-          "derivation": "approximate",
+          "derivation": "schedule-page",
           "feature_freeze": "2022-02-24",
           "freeze_window_elapsed_pct": 100,
           "milestones": [
+            {
+              "date": "2021-10-21",
+              "name": "Toolchain Uploaded"
+            },
+            {
+              "date": "2021-10-28",
+              "name": "php8.1"
+            },
+            {
+              "date": "2021-11-04",
+              "name": "OpenSSL3"
+            },
+            {
+              "date": "2021-11-18",
+              "name": "Ruby 3.0"
+            },
+            {
+              "date": "2021-12-02",
+              "name": "systemd v249"
+            },
+            {
+              "date": "2021-12-09",
+              "name": "DPDK 21.11"
+            },
+            {
+              "date": "2021-12-16",
+              "name": "binutils 2.38"
+            },
+            {
+              "date": "2021-12-23",
+              "name": "Ubuntu Testing Week (optional)"
+            },
+            {
+              "date": "2022-01-13",
+              "name": "Python 3.10"
+            },
+            {
+              "date": "2022-01-20",
+              "name": "see  this comment"
+            },
+            {
+              "date": "2022-01-20",
+              "name": "~~OpenLDAP 2.6 (tentative; depends on upstream release schedule)~~ – Cancelled"
+            },
+            {
+              "date": "2022-02-03",
+              "name": "Chinese New Year week"
+            },
+            {
+              "date": "2022-02-03",
+              "name": "Glibc 2.35"
+            },
+            {
+              "date": "2022-02-17",
+              "name": "GNOME 42 Beta"
+            },
+            {
+              "date": "2022-02-17",
+              "name": "Golang 1.18"
+            },
+            {
+              "date": "2022-02-24",
+              "name": "20.04.4 Point Release"
+            },
+            {
+              "date": "2022-02-24",
+              "name": "Debian Import Freeze"
+            },
             {
               "date": "2022-02-24",
               "name": "Feature Freeze"
             },
             {
+              "date": "2022-03-17",
+              "name": "LLVM 14"
+            },
+            {
+              "date": "2022-03-17",
+              "name": "UI Freeze"
+            },
+            {
+              "date": "2022-03-24",
+              "name": "Documentation String Freeze"
+            },
+            {
+              "date": "2022-03-24",
+              "name": "GNOME 42.0"
+            },
+            {
+              "date": "2022-03-24",
+              "name": "Kernel Feature Freeze"
+            },
+            {
+              "date": "2022-03-28",
+              "name": "Beta Freeze"
+            },
+            {
+              "date": "2022-03-28",
+              "name": "Hardware Enablement Freeze"
+            },
+            {
+              "date": "2022-03-31",
+              "name": "Beta"
+            },
+            {
+              "date": "2022-03-31",
+              "name": "Openstack Yoga"
+            },
+            {
+              "date": "2022-04-07",
+              "name": "Kernel Freeze"
+            },
+            {
+              "date": "2022-04-07",
+              "name": "Non Language Pack Translation Deadline"
+            },
+            {
+              "date": "2022-04-14",
+              "name": "Final Freeze"
+            },
+            {
+              "date": "2022-04-14",
+              "name": "Language Pack Translation Deadline"
+            },
+            {
+              "date": "2022-04-14",
+              "name": "Release Candidate"
+            },
+            {
               "date": "2022-04-21",
               "name": "Final Release"
+            },
+            {
+              "date": "2022-08-04",
+              "name": "22.04.1 Point Release"
+            },
+            {
+              "date": "2023-02-23",
+              "name": "22.04.2 Point Release"
+            },
+            {
+              "date": "2023-08-10",
+              "name": "22.04.3 Point Release"
+            },
+            {
+              "date": "2024-02-22",
+              "name": "22.04.4 Point Release"
+            },
+            {
+              "date": "2024-09-12",
+              "name": "22.04.5 Point Release"
             }
           ],
           "phase": "FINAL_RELEASE",
@@ -273,13 +434,7 @@
         "test_output": "ABSENT",
         "unverified_claims": []
       },
-      "unavailable": [
-        {
-          "impact": "cannot tell how late in the freeze this request is",
-          "reason": "calendar.schedule: documentation.ubuntu.com rate-limited us",
-          "source_id": "calendar.schedule"
-        }
-      ]
+      "unavailable": []
     },
     "human": {
       "decided": false,
@@ -289,17 +444,17 @@
       "left_queue_at": null
     },
     "provenance": {
-      "generated_at": "2026-11-26T08:49:42Z",
+      "generated_at": "2026-11-26T18:55:55Z",
       "harness": null,
       "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
       "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
       "policy_version": "1.0.0",
-      "review_key": "sha256:bcb103d9f23719929d4e560ae70a3a2ea53089b571197a3032676fc9efc7d0d2",
+      "review_key": "sha256:df47d7b811a063d31253cff865b9d65701d1819fd58e5010b4e4df2dddddc37e",
       "risk_algorithm_version": "risk/1.2.0",
-      "run_id": "run-20261126T084838Z",
+      "run_id": "run-20261126T185542Z",
       "tool_version": "0.1.0"
     },
-    "record_id": "2175507/784bc20c885004a4",
+    "record_id": "2175507/f2c3100dda37a114",
     "risk": {
       "algorithm_version": "risk/1.2.0",
       "band": "HIGH",
@@ -431,8 +586,8 @@
             "/evidence/unavailable"
           ],
           "id": "evidence_unavailable",
-          "rationale": "could not consult calendar.schedule, so this assessment rests on incomplete evidence",
-          "triggered": true
+          "rationale": "every evidence source was available",
+          "triggered": false
         }
       ],
       "score": 57
