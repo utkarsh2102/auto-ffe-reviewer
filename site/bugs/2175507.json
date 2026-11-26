@@ -15,6 +15,14 @@
       "generated_at": "2026-11-26T00:10:54Z",
       "risk_score": 57,
       "status": "EVIDENCE_ONLY"
+    },
+    {
+      "confidence": null,
+      "decision": null,
+      "fingerprint": "sha256:784bc20c885004a46056fabfc9575e52dd4fe97f479d1dd7d16bceb6a63ecc66",
+      "generated_at": "2026-11-26T08:49:42Z",
+      "risk_score": 57,
+      "status": "EVIDENCE_ONLY"
     }
   ],
   "record": {
@@ -30,16 +38,25 @@
             "date_created": "2026-11-22T07:39:33.144151+00:00",
             "index": 0,
             "url": "https://bugs.launchpad.net/ubuntu-cdimage/+bug/2175507/comments/0"
+          },
+          {
+            "author": "skia",
+            "author_is_release_team": true,
+            "content": "Just coming back to this with two things:\n* Whether or not Canonical will commit to releasing images for Jammy and Noble is still being discussed by higher management, and we'll come back to you shortly.\n* In the meantime, I've already re-enabled daily builds for Jammy Ubuntu and Ubuntu Server, as well as all images for Noble. That means that people that are really stuck can already grab a build from cdimage:\n  e.g:\n  - https://cdimage.ubuntu.com/ubuntu/jammy/daily-live/\n  - https://cdimage.ubuntu.com/ubuntu-server/noble/\n  Please keep in mind that these artifacts are daily builds, and have in no way been validated by anyone either in Canonical or in the Community. Us them at your own risk!\n  Note: for Resolute, it's the same situation, you can grab daily builds, but since we still expect to release 26.04.2, the situation is slightly different, because you already had daily builds, and the next official one is in any case coming out in February.",
+            "content_sha": "0ff5a5fb4afde28b8b8680b43854203f6106e267884e3462279f372879e35e10",
+            "date_created": "2026-11-26T08:43:38.338145+00:00",
+            "index": 1,
+            "url": "https://bugs.launchpad.net/ubuntu-cdimage/+bug/2175507/comments/1"
           }
         ],
         "date_created": "2026-11-22T07:39:33.144151+00:00",
-        "date_last_message": "2026-11-22T07:39:33.144151+00:00",
-        "date_last_updated": "2026-11-22T07:48:42.897282+00:00",
+        "date_last_message": "2026-11-26T08:43:38.338145+00:00",
+        "date_last_updated": "2026-11-26T08:43:39.187863+00:00",
         "description": "[Impact]\nWhile CVE-2026-109518 has been patched in the archive for all supported Ubuntu releases, official installation and Live ISO images for actively supported LTS releases (22.04 Jammy, 24.04 Noble, and 26.04 Resolute) still ship with the vulnerable `apt` binary.\n\nThis creates a critical chicken-and-egg race condition during fresh deployments:\n1. Modern Ubuntu installations immediately initiate background network activity upon boot via `cloud-init`, `unattended-upgrades`, `apt-daily.timer`, or desktop update managers (`update-notifier` / PackageKit).\n2. These services reach out to repositories before an administrator reaches a login prompt or has an opportunity to manually apply the security update.\n3. In untrusted networks or bare-metal datacenter rollouts without custom pre-patched golden images, machines are exposed to potential MITM package substitution during the initial boot window.\n\n[Workaround]\nMitigating this vulnerability with current official media requires severe operational workarounds in bare-metal environments: physically disconnecting network cables, scripting switch port isolation, or keeping machines air-gapped during installation until a patched `apt` `.deb` package is sideloaded manually prior to bringing network interfaces up.\n\n[Proposal]\nFollowing the approach taken in the recent Debian 13.8 point release (which rebuilt installation and Live media to eliminate this initial deployment vector), please consider prioritizing updated point-release ISOs (e.g., 22.04.6, 24.04.6, 26.04.x) or respinning current LTS media to include the patched `apt` package out of the box.",
         "description_sha": "27f55f047ec6474c721400755080a737fa8fcac7f10d81de1dcee9d4696b9474",
         "discovered_via": "release-team-queue",
         "id": 2175507,
-        "message_count": 1,
+        "message_count": 2,
         "release_team_subscribed": true,
         "reporter": "kms2026",
         "subscribers": [
@@ -72,10 +89,17 @@
         "title": "Rebuild LTS installation media (22.04, 24.04, 26.04) to mitigate CVE-2026-109518 during initial boot",
         "url": "https://bugs.launchpad.net/bugs/2175507"
       },
-      "fingerprint": "sha256:720a324409f7ce6f3bf88bbaca5cbbb3276b6e63146c29a5185d4047b3eca89b",
+      "fingerprint": "sha256:784bc20c885004a46056fabfc9575e52dd4fe97f479d1dd7d16bceb6a63ecc66",
       "flavours": {
         "ack_required_from": [],
-        "acks": [],
+        "acks": [
+          {
+            "author": "skia",
+            "author_in_flavour_team": true,
+            "flavour": "ubuntu-budgie",
+            "message_url": "https://bugs.launchpad.net/ubuntu-cdimage/+bug/2175507/comments/1"
+          }
+        ],
         "affected_flavours": [
           "ubuntu-budgie"
         ],
@@ -90,8 +114,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-11-26T00:10:45Z",
-              "duration_ms": 585,
+              "checked_at": "2026-11-26T08:48:51Z",
+              "duration_ms": 654,
               "locator": "https://api.launchpad.net/devel/ubuntu/+archive/primary?ws.op=getPublishedSources&source_name=casper&exact_match=true&distro_series=https%3A%2F%2Fapi.launchpad.net%2Fdevel%2Fubuntu%2Fjammy&status=Published&order_by_date=true",
               "method": "http_get",
               "raw_ref": "sha256:ed31a1e30ae1586a5f8fececfa3253a31f8f2060d71d6f58ad2a317ee5df9bad",
@@ -115,8 +139,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-11-26T00:10:47Z",
-              "duration_ms": 314,
+              "checked_at": "2026-11-26T08:48:53Z",
+              "duration_ms": 134,
               "locator": "http://qa.ubuntuwire.org/rdepends/v1/jammy/source/src:casper",
               "method": "http_get",
               "raw_ref": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
@@ -138,8 +162,8 @@
             "note": null,
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-11-26T00:10:47Z",
-              "duration_ms": 355,
+              "checked_at": "2026-11-26T08:48:52Z",
+              "duration_ms": 138,
               "locator": "http://qa.ubuntuwire.org/rdepends/v1/jammy/any/src:casper",
               "method": "http_get",
               "raw_ref": "sha256:968e80ac8c2f652b930ff6545384ff8cd698905f30989f0f3c5a9b37d84ae94a",
@@ -164,11 +188,11 @@
             "note": "seed index looks incomplete (index omits bash, coreutils, libc6, dpkg, which are on every Ubuntu image); the listed images are real but there may be more",
             "provenance": {
               "cache": "fresh",
-              "checked_at": "2026-11-26T00:10:46Z",
-              "duration_ms": 494,
+              "checked_at": "2026-11-26T08:48:52Z",
+              "duration_ms": 584,
               "locator": "http://qa.ubuntuwire.org/ubuntu-seeded-packages/seeded.json.gz",
               "method": "http_get",
-              "raw_ref": "sha256:fe759b292b19f7ae6acf81dd5eceaaa09d084db9da56385424ebffc0d2dbf29c",
+              "raw_ref": "sha256:a5ec83b0ef044133be83456d4f7f8089d6aa43658559e37de04dfdecb472dcb4",
               "raw_truncated": false,
               "source_id": "seeds"
             },
@@ -199,7 +223,7 @@
         "note": "schedule page unavailable; dates approximated as release minus 8 weeks, which has been observed to be up to a week early",
         "provenance": {
           "cache": "none",
-          "checked_at": "2026-11-26T00:10:45Z",
+          "checked_at": "2026-11-26T08:48:50Z",
           "duration_ms": 0,
           "locator": "https://documentation.ubuntu.com/release-notes/22.04/schedule/",
           "method": "computed",
@@ -265,17 +289,17 @@
       "left_queue_at": null
     },
     "provenance": {
-      "generated_at": "2026-11-26T00:10:54Z",
+      "generated_at": "2026-11-26T08:49:42Z",
       "harness": null,
       "lessons_hash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
       "policy_hash": "sha256:b41aa8d294e09f3f2d49fab9cd306b8c8c8046be901a9260b3e4c407802d38ea",
       "policy_version": "1.0.0",
-      "review_key": "sha256:3f31323df70e8e3c5d4b09254b6d5c13e8a96d7fc8a930ac18e6b4ce70cae95f",
+      "review_key": "sha256:bcb103d9f23719929d4e560ae70a3a2ea53089b571197a3032676fc9efc7d0d2",
       "risk_algorithm_version": "risk/1.2.0",
-      "run_id": "run-20261126T001036Z",
+      "run_id": "run-20261126T084838Z",
       "tool_version": "0.1.0"
     },
-    "record_id": "2175507/720a324409f7ce6f",
+    "record_id": "2175507/784bc20c885004a4",
     "risk": {
       "algorithm_version": "risk/1.2.0",
       "band": "HIGH",
